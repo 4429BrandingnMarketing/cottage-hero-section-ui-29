@@ -1,42 +1,48 @@
-import { Palette, Zap, Music, Film, Gamepad2, Brain } from 'lucide-react';
+import { Music, Video, Radio, Cpu, Shirt, FileText } from 'lucide-react';
 
 const DivisionsSection = () => {
   const divisions = [
     {
-      name: "AI Fashion",
-      icon: Palette,
-      description: "Revolutionary fashion design powered by artificial intelligence, creating unique styles that blend technology with haute couture.",
-      color: "from-primary to-accent"
-    },
-    {
-      name: "Digital Entertainment",
-      icon: Film,
-      description: "Immersive digital experiences that push the boundaries of storytelling through cutting-edge technology.",
-      color: "from-accent to-gold"
-    },
-    {
-      name: "Interactive Media",
-      icon: Gamepad2,
-      description: "Next-generation interactive content that responds and adapts to user engagement in real-time.",
-      color: "from-gold to-primary"
-    },
-    {
-      name: "AI Music Production",
+      name: "Red Vision Music",
       icon: Music,
-      description: "Algorithmic composition and sound design that creates emotionally resonant musical experiences.",
-      color: "from-primary to-gold"
+      description: "Grammy-affiliated AI record label featuring Diamond-selling producer My Guy Mars, City High's Ryan Toby, and songwriter James Fauntleroy. True artist partnerships with AI-enhanced production.",
+      color: "from-primary to-red-600",
+      highlights: ["Grammy-winning artists", "AI-enhanced marketing", "True partnerships"]
     },
     {
-      name: "Neural Networks",
-      icon: Brain,
-      description: "Advanced AI systems that learn and evolve, powering all our creative and technological innovations.",
-      color: "from-accent to-primary"
+      name: "Red Vision TV",
+      icon: Video,
+      description: "Premium content creation platform specializing in 4K/8K video production, music videos, documentaries, and exclusive interviews with AI-enhanced post-production.",
+      color: "from-accent to-blue-600",
+      highlights: ["4K/8K Production", "Music Videos", "Documentary Projects"]
     },
     {
-      name: "Future Tech",
-      icon: Zap,
-      description: "Experimental technologies and research into the next frontier of human-AI collaborative creativity.",
-      color: "from-gold to-accent"
+      name: "Red Vision Radio",
+      icon: Radio,
+      description: "Podcast and audio content division featuring thought-provoking discussions, industry insights, and cultural commentary with AI-powered editing and distribution.",
+      color: "from-gold to-yellow-600",
+      highlights: ["Multi-platform presence", "Real-time transcription", "Community building"]
+    },
+    {
+      name: "Red Vision AI",
+      icon: Cpu,
+      description: "Technology services division offering AI integration consulting, marketing automation, content optimization, and predictive analytics for creative businesses.",
+      color: "from-primary to-purple-600",
+      highlights: ["Content strategy automation", "Audience targeting systems", "Creative enhancement tools"]
+    },
+    {
+      name: "GiFTD N' PrVLGD",
+      icon: Shirt,
+      description: "Fashion and lifestyle brand creating tech-integrated apparel and limited edition collections that reflect music culture, technological innovation, and social consciousness.",
+      color: "from-accent to-green-600",
+      highlights: ["Limited edition releases", "Tech-integrated apparel", "Sustainable production"]
+    },
+    {
+      name: "A Tragic Mulatto",
+      icon: FileText,
+      description: "Blog and media platform providing cultural commentary, artist spotlights, and storytelling that bridges traditional media with AI-enhanced content creation.",
+      color: "from-gold to-orange-600",
+      highlights: ["Cultural analysis", "Artist spotlights", "AI-enhanced content"]
     }
   ];
 
@@ -55,8 +61,8 @@ const DivisionsSection = () => {
             </span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Explore the convergence of artificial intelligence and human creativity across our specialized divisions, 
-            each pushing the boundaries of what's possible in the digital realm.
+            Six integrated divisions leveraging AI to amplify human creativity across music, fashion, technology, 
+            and cultural storytelling while maintaining authentic artist partnerships and industry-leading quality.
           </p>
         </div>
 
@@ -90,9 +96,19 @@ const DivisionsSection = () => {
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                  <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300 mb-4">
                     {division.description}
                   </p>
+                  
+                  {/* Highlights */}
+                  <div className="space-y-2 mb-4">
+                    {division.highlights.map((highlight, highlightIndex) => (
+                      <div key={highlightIndex} className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-red-glow"></div>
+                        <span className="text-sm text-white/70">{highlight}</span>
+                      </div>
+                    ))}
+                  </div>
                   
                   {/* Hover arrow */}
                   <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

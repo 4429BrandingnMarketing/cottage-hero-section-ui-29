@@ -8,7 +8,7 @@ const GallerySection = () => {
             Gallery
           </div>
           <div className="w-full max-w-[480px] text-center text-black text-2xl lg:text-3xl xl:text-[48px] font-space-grotesk font-normal uppercase leading-tight lg:leading-tight xl:leading-[51.84px]">
-            Explore Digital Property Assets
+            Creative Excellence Gallery
           </div>
         </div>
 
@@ -33,11 +33,11 @@ const GallerySection = () => {
                 <div className="w-full text-center text-white/65 text-xs font-dm-mono font-medium uppercase tracking-wider-2 leading-[16.32px]">
                   Live Demo
                 </div>
-                <div className="w-full max-w-[400px] lg:max-w-[480px] text-center text-white text-2xl lg:text-3xl xl:text-[48px] font-space-grotesk font-normal uppercase leading-tight lg:leading-tight xl:leading-[51.84px]">TRY OUR PLATFORM </div>
+                <div className="w-full max-w-[400px] lg:max-w-[480px] text-center text-white text-2xl lg:text-3xl xl:text-[48px] font-space-grotesk font-normal uppercase leading-tight lg:leading-tight xl:leading-[51.84px]">Experience Our Universe</div>
               </div>
               <button className="px-3 py-2 bg-white shadow-[0px_16px_24px_rgba(0,0,0,0.03)] rounded-full backdrop-blur-[7.5px] flex justify-center items-center gap-1.5">
                 <div className="text-center text-black text-xs font-dm-mono font-medium uppercase tracking-wider-2 leading-[16.32px]">
-                  Launch Demo
+                  Explore Now
                 </div>
               </button>
             </div>

@@ -1,5 +1,5 @@
 
-import { Home, Building2, Waves, Sun, Car, TreePine } from 'lucide-react';
+import { Music, Mic, Brain, Users, Zap, Star } from 'lucide-react';
 
 const OverviewSection = () => {
   return (
@@ -21,10 +21,10 @@ const OverviewSection = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="max-w-[328px] text-white text-sm font-space-grotesk font-medium leading-[19.04px]">
-                "This platform represents the future of property ownership. We're proud to pioneer digital real estate that offers security and transparency for all."
+                "AI amplifies human stories rather than replacing human creativity. We're creating the future where technology enhances authentic cultural narratives."
               </div>
               <div className="text-white/65 text-sm font-space-grotesk font-medium leading-[19.04px]">
-                Sarah Chen, Platform Director
+                Jason Salvador, Founder & Visionary
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@ const OverviewSection = () => {
               Overview
             </div>
             <div className="max-w-[640px] text-black text-3xl md:text-[48px] font-space-grotesk font-normal uppercase leading-tight md:leading-[51.84px]">
-              Revolutionary blockchain platform enabling secure digital property ownership with smart contracts and global accessibility now available
+              Revolutionary AI-powered entertainment studio amplifying human creativity across music, fashion, and digital experiences
             </div>
           </div>
 
@@ -47,21 +47,21 @@ const OverviewSection = () => {
             {/* First row */}
             <div className="flex gap-px">
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Home className="w-6 h-6 text-black/50" />
+                <Music className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  Smart Contracts
+                  Grammy-Affiliated
                 </div>
               </div>
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Building2 className="w-6 h-6 text-black/50" />
+                <Brain className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  Decentralized
+                  AI-Enhanced
                 </div>
               </div>
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Waves className="w-6 h-6 text-black/50" />
+                <Users className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  Global Access
+                  Artist Partnerships
                 </div>
               </div>
             </div>
@@ -69,21 +69,21 @@ const OverviewSection = () => {
             {/* Second row */}
             <div className="flex gap-px">
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Sun className="w-6 h-6 text-black/50" />
+                <Zap className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  24/7 Trading
+                  Tech Innovation
                 </div>
               </div>
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Car className="w-6 h-6 text-black/50" />
+                <Mic className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  Instant Transfer
+                  Content Creation
                 </div>
               </div>
               <div className="flex-1 px-6 py-12 bg-white flex flex-col items-center gap-2.5">
-                <Sun className="w-6 h-6 text-black/50" />
+                <Star className="w-6 h-6 text-primary" />
                 <div className="text-center text-black text-sm font-space-grotesk font-medium leading-[19.04px]">
-                  Transparent
+                  Cultural Impact
                 </div>
               </div>
             </div>

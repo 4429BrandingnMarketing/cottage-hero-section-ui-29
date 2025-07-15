@@ -11,24 +11,24 @@ const AboutSection = () => {
 
   const accordionItems = [
     {
-      title: "Built with Blockchain and Innovation",
-      content: "We didn't start this platform just to digitize – we started it to help people truly own and control their digital assets. Secure ownership creates peace of mind, and we're here for that."
+      title: "Jason Salvador: The Visionary Founder",
+      content: "From music producer to AI-entertainment pioneer, Jason's journey began at Will Smith's Overbrook Entertainment, rising from intern to executive at age 18. His Grammy-nominated work with Lupe Fiasco and collaborations with 1500 or Nothin shaped his industry credentials before the pandemic catalyzed his revolutionary vision."
     },
     {
-      title: "We Put Security First, Always",
-      content: "Every transaction on our platform is secured by smart contracts and blockchain technology, ensuring your digital property ownership is transparent and immutable."
+      title: "Grammy-Affiliated Music Excellence",
+      content: "Red Vision Music features Diamond-selling Grammy-winner My Guy Mars (1500 or Nothin founding member), City High's Ryan Toby, prolific songwriter James Fauntleroy, and emerging stars like Dat Boi H.O.P. We create true artist partnerships, not traditional contracts."
     },
     {
-      title: "Building a Future That's Decentralized",
-      content: "Our vision extends beyond traditional ownership models, creating a global ecosystem where digital property rights are accessible to everyone, everywhere."
+      title: "AI Amplifies Human Stories",
+      content: "Our core philosophy centers on AI as an amplification tool that enhances artistic expression rather than replacing human creativity. We maintain authentic cultural narratives while leveraging technology for enhanced efficiency and reach."
     },
     {
-      title: "We Take Pride in Every Transaction",
-      content: "From smart contract deployment to ownership verification, every detail matters in creating the most reliable digital property platform available today."
+      title: "Six Integrated Creative Divisions",
+      content: "From Red Vision Music's Grammy-affiliated record label to GiFTD N' PrVLGD's tech-integrated fashion, each division leverages AI to enhance human creativity while preserving cultural authenticity and independent artistry."
     },
     {
-      title: "Rooted in the Digital Community",
-      content: "We're building more than a platform – we're fostering a community of forward-thinking individuals who believe in the power of decentralized ownership."
+      title: "Pioneering Partnership-Centric Model",
+      content: "Unlike traditional labels that sign artists, we make them true partners with shared creative control and financial success. Our AI-enhanced approach delivers major-label quality while preserving independent vision and cultural authenticity."
     }
   ];
 
@@ -41,7 +41,7 @@ const AboutSection = () => {
               ABOUT US
             </div>
             <div className="w-full lg:w-[402px] text-black text-3xl lg:text-[48px] font-space-grotesk font-normal uppercase leading-[36px] lg:leading-[51.84px]">
-              Who We Are. Why We Innovate
+              Redefining Entertainment Through AI-Human Collaboration
             </div>
           </div>
           
