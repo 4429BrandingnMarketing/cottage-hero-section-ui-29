@@ -43,13 +43,16 @@ const DivisionsSection = () => {
   return (
     <section id="divisions" className="py-24 bg-secondary relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-accent/5"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold text-gold mb-6 drop-shadow-gold-glow">
-            Our Creative Divisions
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent drop-shadow-red-glow">
+              Our Creative Divisions
+            </span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             Explore the convergence of artificial intelligence and human creativity across our specialized divisions, 

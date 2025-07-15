@@ -75,8 +75,10 @@ const FashionSection = () => {
               />
               <div className="w-px h-16 bg-gradient-to-b from-transparent via-gold to-transparent"></div>
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gold mb-2 drop-shadow-gold-glow">
-                  Fashion Division
+                <h2 className="text-4xl md:text-5xl font-bold mb-2">
+                  <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent drop-shadow-red-glow">
+                    Fashion Division
+                  </span>
                 </h2>
                 <p className="text-accent font-medium">AI × Haute Couture</p>
               </div>
@@ -206,7 +208,7 @@ const FashionSection = () => {
         </div>
 
         {/* Product Gallery Preview */}
-        <div className="mt-24 p-12 bg-primary/5 rounded-3xl border border-primary/20 backdrop-blur-sm relative overflow-hidden">
+        <div className="mt-24 p-12 bg-primary/5 rounded-3xl border border-primary/30 backdrop-blur-sm relative overflow-hidden shadow-red-glow/20">
           {/* Background decoration */}
           <div className="absolute top-4 right-4 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl"></div>
           

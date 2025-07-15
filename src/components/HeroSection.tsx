@@ -21,10 +21,12 @@ const HeroSection = () => {
         </div>
         
         {/* Floating particles */}
-        <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-float opacity-60"></div>
-        <div className="absolute top-40 right-20 w-1 h-1 bg-accent rounded-full animate-float opacity-40" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-gold rounded-full animate-float opacity-50" style={{animationDelay: '4s'}}></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-primary rounded-full animate-float opacity-30" style={{animationDelay: '6s'}}></div>
+        <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-float opacity-60 shadow-red-glow"></div>
+        <div className="absolute top-40 right-20 w-1 h-1 bg-primary rounded-full animate-float opacity-40 shadow-red-glow" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50 shadow-red-glow" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-primary rounded-full animate-float opacity-30 shadow-red-glow" style={{animationDelay: '6s'}}></div>
+        <div className="absolute top-60 left-1/2 w-3 h-3 bg-primary rounded-full animate-float opacity-70 shadow-red-glow" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-2 h-2 bg-primary rounded-full animate-float opacity-50 shadow-red-glow" style={{animationDelay: '3s'}}></div>
       </div>
       
       {/* Navigation */}
@@ -34,7 +36,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 md:px-6 pt-20">
         <div className="max-w-7xl mx-auto text-center">
           {/* Hero Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-8 backdrop-blur-sm shadow-red-glow">
             <Sparkles className="w-4 h-4 text-primary animate-pulse-glow" />
             <span className="text-primary text-sm font-medium">AI-Powered Entertainment Studio</span>
           </div>
