@@ -1,120 +1,97 @@
-import { Home, Bed, Bath, Globe, Users, Shield, Zap } from 'lucide-react';
+import { Zap, Star, Cpu, Sparkles } from 'lucide-react';
+import Navbar from './Navbar';
+
 const HeroSection = () => {
-  return <div className="relative w-full h-screen min-h-[900px] flex flex-col">
-      {/* Background Video */}
-      <video src="https://res.cloudinary.com/da7s1izqw/video/upload/v1751203261/Animate_this_image_202506291709_ckpej_p2yjqa.mp4" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline />
-      
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/25"></div>
-      
-      {/* Navigation Header */}
-      <div className="relative z-10 w-full pt-4 md:pt-6 px-4 md:px-6">
-        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-          {/* Logo */}
-          <div className="flex items-center gap-3 order-1 md:order-1">
-            <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center">
-              <Globe className="w-2.5 h-2.5 md:w-3 md:h-3 text-black" />
-            </div>
-            <div className="text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2">
-              Digital Ownership Platform
-            </div>
-          </div>
-
-          {/* Navigation - Hidden on mobile, visible on md+ */}
-          <div className="hidden md:flex items-center gap-0 order-2">
-            <button className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2 hover:bg-white/20 transition-all">
-              Overview
-            </button>
-            <button className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2 hover:bg-white/20 transition-all">
-              Features
-            </button>
-            <button className="px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/10 text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2 hover:bg-white/20 transition-all">
-              Technology
-            </button>
-          </div>
-
-          {/* Contact Button */}
-          <button className="px-3 py-2 bg-white rounded-full shadow-lg backdrop-blur-sm text-black text-xs font-dm-mono font-medium uppercase tracking-wider-2 hover:bg-gray-100 transition-all order-3">
-            Get Started
-          </button>
+  return (
+    <div className="relative w-full h-screen min-h-[900px] flex flex-col overflow-hidden">
+      {/* Background with animated gradient */}
+      <div className="absolute inset-0 bg-secondary">
+        <div className="absolute inset-0 bg-red-vision-gradient animate-gradient-shift opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+        
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-[0.02]" 
+             style={{
+               backgroundImage: `
+                 linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                 linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+               `,
+               backgroundSize: '50px 50px'
+             }}>
         </div>
+        
+        {/* Floating particles */}
+        <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-float opacity-60"></div>
+        <div className="absolute top-40 right-20 w-1 h-1 bg-accent rounded-full animate-float opacity-40" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-gold rounded-full animate-float opacity-50" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-primary rounded-full animate-float opacity-30" style={{animationDelay: '6s'}}></div>
       </div>
-
+      
+      {/* Navigation */}
+      <Navbar />
+      
       {/* Main Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-end px-4 md:px-6 pb-4 md:pb-6 pt-20 md:pt-40">
-        <div className="max-w-[1600px] mx-auto w-full flex flex-col gap-8 md:gap-14">
-          {/* Hero Title and Features */}
-          <div className="flex flex-col gap-6 md:gap-8">
-            {/* Main Title */}
-            <div className="max-w-full md:max-w-[476px]">
-              <h1 className="text-white font-space-grotesk text-4xl md:text-[88px] font-normal uppercase leading-tight md:leading-[84.48px] tracking-tight">A NEW ERA OF DIGITAL OWNERSHIP</h1>
-            </div>
-
-            {/* Feature Pills */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 justify-center sm:justify-start">
-              <div className="w-full sm:w-auto min-w-[160px] px-4 md:px-6 py-4 md:py-5 bg-glass-gradient backdrop-blur-sm rounded-full border border-white/20 shadow-lg flex flex-col items-center gap-2.5">
-                <Globe className="w-5 h-5 md:w-6 md:h-6 text-white/65" />
-                <div className="text-white text-sm font-space-grotesk font-medium text-center">
-                  Global Access
-                </div>
-              </div>
-              
-              <div className="w-full sm:w-auto min-w-[160px] px-4 md:px-6 py-4 md:py-5 bg-glass-gradient backdrop-blur-sm rounded-full border border-white/20 shadow-lg flex flex-col items-center gap-2.5">
-                <Shield className="w-5 h-5 md:w-6 md:h-6 text-white/65" />
-                <div className="text-white text-sm font-space-grotesk font-medium text-center">
-                  Secure
-                </div>
-              </div>
-              
-              <div className="w-full sm:w-auto min-w-[160px] px-4 md:px-6 py-4 md:py-5 bg-glass-gradient backdrop-blur-sm rounded-full border border-white/20 shadow-lg flex flex-col items-center gap-2.5">
-                <Zap className="w-5 h-5 md:w-6 md:h-6 text-white/65" />
-                <div className="text-white text-sm font-space-grotesk font-medium text-center">
-                  Instant
-                </div>
-              </div>
-            </div>
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 md:px-6 pt-20">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Hero Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8 backdrop-blur-sm">
+            <Sparkles className="w-4 h-4 text-primary animate-pulse-glow" />
+            <span className="text-primary text-sm font-medium">AI-Powered Entertainment Studio</span>
           </div>
-
-          {/* Digital Platform Details */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="flex flex-col gap-1.5 text-center md:text-left">
-              <div className="text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2">
-                Platform Type
-              </div>
-              <div className="text-white text-2xl md:text-[40px] font-space-grotesk font-normal uppercase leading-tight md:leading-[38.40px]">
-                Blockchain
-              </div>
-            </div>
+          
+          {/* Main Title */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent drop-shadow-red-glow">
+              RED VISION
+            </span>
+            <br />
+            <span className="text-white drop-shadow-lg">
+              CREATIVE STUDIO
+            </span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-4xl mx-auto leading-relaxed">
+            Where artificial intelligence meets human creativity to craft the future of entertainment, fashion, and digital experiences.
+          </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <button className="px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+              <span className="relative z-10">Explore Our Universe</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
             
-            <div className="flex flex-col gap-1.5 text-center">
-              <div className="text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2">
-                Network
-              </div>
-              <div className="text-white text-2xl md:text-[40px] font-space-grotesk font-normal uppercase leading-tight md:leading-[38.40px]">
-                Ethereum
-              </div>
+            <button className="px-8 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold text-lg hover:bg-accent hover:text-secondary hover:shadow-cyan-glow hover:-translate-y-1 transition-all duration-300">
+              Watch Our Story
+            </button>
+          </div>
+          
+          {/* Feature Pills */}
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
+              <Zap className="w-4 h-4 text-accent" />
+              <span className="text-white text-sm">AI Fashion</span>
             </div>
-            
-            <div className="flex flex-col gap-1.5 text-center">
-              <div className="text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2">
-                Launch Date
-              </div>
-              <div className="text-white text-2xl md:text-[40px] font-space-grotesk font-normal uppercase leading-tight md:leading-[38.40px]">
-                2024
-              </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
+              <Star className="w-4 h-4 text-gold" />
+              <span className="text-white text-sm">Digital Entertainment</span>
             </div>
-            
-            <div className="flex flex-col gap-1.5 text-center md:text-right">
-              <div className="text-white text-xs font-dm-mono font-medium uppercase tracking-wider-2">
-                Status
-              </div>
-              <div className="text-white text-2xl md:text-[40px] font-space-grotesk font-normal uppercase leading-tight md:leading-[38.40px]">
-                Live
-              </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
+              <Cpu className="w-4 h-4 text-primary" />
+              <span className="text-white text-sm">Tech Innovation</span>
             </div>
           </div>
         </div>
       </div>
-    </div>;
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default HeroSection;
