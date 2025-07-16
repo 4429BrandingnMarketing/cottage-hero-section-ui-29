@@ -4,13 +4,26 @@ import Navbar from './Navbar';
 const HeroSection = () => {
   return (
     <div className="relative w-full h-screen min-h-[900px] flex flex-col overflow-hidden">
-      {/* Background with animated gradient */}
-      <div className="absolute inset-0 bg-secondary">
-        <div className="absolute inset-0 bg-red-vision-gradient animate-gradient-shift opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+      {/* Large Video Background */}
+      <div className="absolute inset-0 z-0">
+        <iframe
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://www.youtube.com/embed/YpdAMwl8Kls?autoplay=1&mute=1&loop=1&playlist=YpdAMwl8Kls&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+          title="Red Vision Creative Studio Showcase"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+        
+        {/* Video Overlay for Content Readability */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 z-10"></div>
+        
+        {/* Enhanced gradient overlay */}
+        <div className="absolute inset-0 bg-red-vision-gradient animate-gradient-shift opacity-20 z-10"></div>
         
         {/* Grid overlay */}
-        <div className="absolute inset-0 opacity-[0.02]" 
+        <div className="absolute inset-0 opacity-[0.05] z-10" 
              style={{
                backgroundImage: `
                  linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -20,13 +33,13 @@ const HeroSection = () => {
              }}>
         </div>
         
-        {/* Floating particles */}
-        <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-float opacity-60 shadow-red-glow"></div>
-        <div className="absolute top-40 right-20 w-1 h-1 bg-primary rounded-full animate-float opacity-40 shadow-red-glow" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50 shadow-red-glow" style={{animationDelay: '4s'}}></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-primary rounded-full animate-float opacity-30 shadow-red-glow" style={{animationDelay: '6s'}}></div>
-        <div className="absolute top-60 left-1/2 w-3 h-3 bg-primary rounded-full animate-float opacity-70 shadow-red-glow" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-1/4 right-1/4 w-2 h-2 bg-primary rounded-full animate-float opacity-50 shadow-red-glow" style={{animationDelay: '3s'}}></div>
+        {/* Enhanced floating particles */}
+        <div className="absolute top-20 left-10 w-3 h-3 bg-primary rounded-full animate-float opacity-80 shadow-red-glow z-10"></div>
+        <div className="absolute top-40 right-20 w-2 h-2 bg-primary rounded-full animate-float opacity-60 shadow-red-glow z-10" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-primary rounded-full animate-float opacity-70 shadow-red-glow z-10" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50 shadow-red-glow z-10" style={{animationDelay: '6s'}}></div>
+        <div className="absolute top-60 left-1/2 w-4 h-4 bg-primary rounded-full animate-float opacity-90 shadow-red-glow z-10" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-3 h-3 bg-primary rounded-full animate-float opacity-70 shadow-red-glow z-10" style={{animationDelay: '3s'}}></div>
       </div>
       
       {/* Navigation */}
