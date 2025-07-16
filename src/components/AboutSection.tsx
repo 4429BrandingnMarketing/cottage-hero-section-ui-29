@@ -11,24 +11,24 @@ const AboutSection = () => {
 
   const accordionItems = [
     {
-      title: "Jason Salvador: The Visionary Founder",
-      content: "From music producer to AI-entertainment pioneer, Jason's journey began at Will Smith's Overbrook Entertainment, rising from intern to executive at age 18. His Grammy-nominated work with Lupe Fiasco and collaborations with 1500 or Nothin shaped his industry credentials before the pandemic catalyzed his revolutionary vision."
+      title: "Grammy-Winning Production Legacy",
+      content: "Our roster includes Diamond-selling Grammy-winner My Guy Mars, founding member of 1500 or Nothin, whose production credits span Jay-Z, Kanye West, Drake, and Nipsey Hussle. Collaborating with City High's Ryan Toby and prolific songwriter James Fauntleroy, we bring decades of chart-topping expertise to every project."
     },
     {
-      title: "Grammy-Affiliated Music Excellence",
-      content: "Red Vision Music features Diamond-selling Grammy-winner My Guy Mars (1500 or Nothin founding member), City High's Ryan Toby, prolific songwriter James Fauntleroy, and emerging stars like Dat Boi H.O.P. We create true artist partnerships, not traditional contracts."
+      title: "Revolutionary Artist Partnership Model",
+      content: "We've redefined the record label paradigm by creating true partnerships instead of traditional contracts. Artists like Dat Boi H.O.P, King Fatz, and TRUZY X TRUZY maintain creative control while benefiting from our major-label quality production, AI-enhanced marketing, and industry-veteran guidance from executives like Shorty Capone."
     },
     {
-      title: "AI Amplifies Human Stories",
-      content: "Our core philosophy centers on AI as an amplification tool that enhances artistic expression rather than replacing human creativity. We maintain authentic cultural narratives while leveraging technology for enhanced efficiency and reach."
+      title: "Multi-Platform Entertainment Ecosystem",
+      content: "Beyond music production, Red Vision TV creates premium visual content, Red Vision Radio hosts thought-provoking podcasts, and our AI division develops cutting-edge tools for content optimization. This integrated approach ensures artists reach audiences across every digital touchpoint with consistent, high-quality experiences."
     },
     {
-      title: "Six Integrated Creative Divisions",
-      content: "From Red Vision Music's Grammy-affiliated record label to GiFTD N' PrVLGD's tech-integrated fashion, each division leverages AI to enhance human creativity while preserving cultural authenticity and independent artistry."
+      title: "AI-Enhanced Creative Processes",
+      content: "Our proprietary AI tools amplify human creativity without replacing artistic vision. From intelligent A&R scouting and data-driven audience targeting to AI-assisted mixing and automated content distribution, we deliver major-label results while preserving the authentic cultural narratives that make independent artistry powerful."
     },
     {
-      title: "Pioneering Partnership-Centric Model",
-      content: "Unlike traditional labels that sign artists, we make them true partners with shared creative control and financial success. Our AI-enhanced approach delivers major-label quality while preserving independent vision and cultural authenticity."
+      title: "Cultural Impact Through Innovation",
+      content: "Jason Salvador's journey from Will Smith's Overbrook Entertainment executive to AI-entertainment pioneer reflects our commitment to bridging traditional industry excellence with technological innovation. We're not just creating music—we're shaping the future of how authentic cultural stories reach and impact global audiences."
     }
   ];
 
