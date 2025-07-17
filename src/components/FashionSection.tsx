@@ -1,66 +1,55 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Zap, Star } from 'lucide-react';
-
 const FashionSection = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
-
-  const seasons = [
-    {
-      id: 0,
-      title: "AI Genesis Collection",
-      season: "Spring 2024",
-      description: "The birth of AI-human collaborative fashion design, featuring garments that adapt to environmental conditions.",
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      badge: "PIONEER",
-      tech: "Neural fabric adaptation"
-    },
-    {
-      id: 1,
-      title: "Digital Metamorphosis",
-      season: "Summer 2024",
-      description: "Transformative pieces that blur the line between physical and digital fashion experiences.",
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      badge: "EVOLUTION",
-      tech: "Holographic textile integration"
-    },
-    {
-      id: 2,
-      title: "Quantum Couture",
-      season: "Fall 2024",
-      description: "Luxury fashion meets quantum computing, creating patterns that exist in multiple dimensions.",
-      image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      badge: "LUXURY",
-      tech: "Quantum pattern generation"
-    },
-    {
-      id: 3,
-      title: "Cyber Elegance",
-      season: "Winter 2024",
-      description: "Sophisticated cyberpunk aesthetics with embedded smart technology for the modern digital nomad.",
-      image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      badge: "SMART",
-      tech: "Embedded sensor networks"
-    },
-    {
-      id: 4,
-      title: "Bio-Synthetic Fusion",
-      season: "Spring 2025",
-      description: "The future of sustainable fashion through bio-engineered materials and AI-optimized production.",
-      image: "https://images.unsplash.com/photo-1558618047-5c50224d0b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      badge: "FUTURE",
-      tech: "Bio-synthetic materials"
-    }
-  ];
-
+  const seasons = [{
+    id: 0,
+    title: "AI Genesis Collection",
+    season: "Spring 2024",
+    description: "The birth of AI-human collaborative fashion design, featuring garments that adapt to environmental conditions.",
+    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "PIONEER",
+    tech: "Neural fabric adaptation"
+  }, {
+    id: 1,
+    title: "Digital Metamorphosis",
+    season: "Summer 2024",
+    description: "Transformative pieces that blur the line between physical and digital fashion experiences.",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "EVOLUTION",
+    tech: "Holographic textile integration"
+  }, {
+    id: 2,
+    title: "Quantum Couture",
+    season: "Fall 2024",
+    description: "Luxury fashion meets quantum computing, creating patterns that exist in multiple dimensions.",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "LUXURY",
+    tech: "Quantum pattern generation"
+  }, {
+    id: 3,
+    title: "Cyber Elegance",
+    season: "Winter 2024",
+    description: "Sophisticated cyberpunk aesthetics with embedded smart technology for the modern digital nomad.",
+    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "SMART",
+    tech: "Embedded sensor networks"
+  }, {
+    id: 4,
+    title: "Bio-Synthetic Fusion",
+    season: "Spring 2025",
+    description: "The future of sustainable fashion through bio-engineered materials and AI-optimized production.",
+    image: "https://images.unsplash.com/photo-1558618047-5c50224d0b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "FUTURE",
+    tech: "Bio-synthetic materials"
+  }];
   const currentSeason = seasons[activeTimeline];
-
-  return (
-    <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
+  return <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -68,11 +57,7 @@ const FashionSection = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12 mb-16">
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-6">
-              <img 
-                src="/src/assets/red-vision-logo.png" 
-                alt="Red Vision Fashion" 
-                className="h-16 w-auto filter drop-shadow-gold-glow"
-              />
+              
               <div className="w-px h-16 bg-gradient-to-b from-transparent via-gold to-transparent"></div>
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-2">
@@ -93,28 +78,15 @@ const FashionSection = () => {
         {/* Timeline Navigation */}
         <div className="flex justify-center mb-12">
           <div className="relative flex items-center gap-8 px-8 py-4 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
-            {seasons.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTimeline(index)}
-                className={`relative w-4 h-4 rounded-full transition-all duration-500 ${
-                  activeTimeline === index 
-                    ? 'bg-primary shadow-red-glow scale-150' 
-                    : 'bg-white/20 hover:bg-white/40'
-                }`}
-              >
-                {activeTimeline === index && (
-                  <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"></div>
-                )}
-              </button>
-            ))}
+            {seasons.map((_, index) => <button key={index} onClick={() => setActiveTimeline(index)} className={`relative w-4 h-4 rounded-full transition-all duration-500 ${activeTimeline === index ? 'bg-primary shadow-red-glow scale-150' : 'bg-white/20 hover:bg-white/40'}`}>
+                {activeTimeline === index && <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"></div>}
+              </button>)}
             
             {/* Progress line */}
             <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-white/10 -translate-y-1/2">
-              <div 
-                className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
-                style={{ width: `${(activeTimeline / (seasons.length - 1)) * 100}%` }}
-              ></div>
+              <div className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500" style={{
+              width: `${activeTimeline / (seasons.length - 1) * 100}%`
+            }}></div>
             </div>
           </div>
         </div>
@@ -124,14 +96,10 @@ const FashionSection = () => {
           {/* Collection Image */}
           <div className="relative group">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
-              <img 
-                src={currentSeason.image}
-                alt={currentSeason.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={currentSeason.image} alt={currentSeason.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              
               
               {/* Badge */}
               <div className="absolute top-6 right-6">
@@ -182,11 +150,7 @@ const FashionSection = () => {
 
             {/* Navigation */}
             <div className="flex items-center justify-between pt-6">
-              <button 
-                onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))}
-                disabled={activeTimeline === 0}
-                className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
+              <button onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))} disabled={activeTimeline === 0} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
                 <ChevronLeft className="w-4 h-4" />
                 Previous
               </button>
@@ -195,11 +159,7 @@ const FashionSection = () => {
                 {activeTimeline + 1} / {seasons.length}
               </div>
               
-              <button 
-                onClick={() => setActiveTimeline(Math.min(seasons.length - 1, activeTimeline + 1))}
-                disabled={activeTimeline === seasons.length - 1}
-                className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-              >
+              <button onClick={() => setActiveTimeline(Math.min(seasons.length - 1, activeTimeline + 1))} disabled={activeTimeline === seasons.length - 1} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
                 Next
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -233,8 +193,6 @@ const FashionSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default FashionSection;
