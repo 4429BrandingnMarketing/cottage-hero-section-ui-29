@@ -36,6 +36,10 @@ const Navbar = () => {
               Divisions
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </a>
+            <a href="/music" className="text-white hover:text-primary transition-all duration-300 relative group">
+              Music
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+            </a>
             <a href="#fashion" className="text-white hover:text-primary transition-all duration-300 relative group">
               Fashion
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
@@ -44,9 +48,9 @@ const Navbar = () => {
               Technology
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#contact" className="text-white hover:text-gold transition-all duration-300 relative group">
+            <a href="#contact" className="text-white hover:text-primary transition-all duration-300 relative group">
               Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
 
@@ -75,13 +79,16 @@ const Navbar = () => {
               <a href="#divisions" className="block px-3 py-2 text-white hover:text-primary transition-colors">
                 Divisions
               </a>
+              <a href="/music" className="block px-3 py-2 text-white hover:text-primary transition-colors">
+                Music
+              </a>
               <a href="#fashion" className="block px-3 py-2 text-white hover:text-primary transition-colors">
                 Fashion
               </a>
               <a href="#technology" className="block px-3 py-2 text-white hover:text-accent transition-colors">
                 Technology
               </a>
-              <a href="#contact" className="block px-3 py-2 text-white hover:text-gold transition-colors">
+              <a href="#contact" className="block px-3 py-2 text-white hover:text-primary transition-colors">
                 Contact
               </a>
               <button className="w-full mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors">
