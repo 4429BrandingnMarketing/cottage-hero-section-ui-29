@@ -1,47 +1,52 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Zap, Star } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import vintageNewsletter from '@/assets/vintage-newsletter.png';
+import page2 from '@/assets/page-2.png';
+import page3 from '@/assets/page-3.png';
+import page4 from '@/assets/page-4.png';
+import page5 from '@/assets/page-5.png';
 const FashionSection = () => {
   const seasons = [{
     id: 0,
-    title: "AI Genesis Collection",
-    season: "Spring 2024",
-    description: "The birth of AI-human collaborative fashion design, featuring garments that adapt to environmental conditions.",
-    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    badge: "PIONEER",
-    tech: "Neural fabric adaptation"
+    title: "Harlem Renaissance Edition",
+    season: "Heritage Collection",
+    description: "A cinematic tribute to 1920s Harlem, blending vintage elegance, jazz culture, and the birth of modern Black artistry with luxury streetwear.",
+    image: vintageNewsletter,
+    badge: "HERITAGE",
+    tech: "Cultural storytelling through fashion"
   }, {
     id: 1,
-    title: "Digital Metamorphosis",
-    season: "Summer 2024",
-    description: "Transformative pieces that blur the line between physical and digital fashion experiences.",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    badge: "EVOLUTION",
-    tech: "Holographic textile integration"
+    title: "Giftd 'n Privlgd",
+    season: "Classic Collection",
+    description: "Made by yours truly - culturally conscious crafted fine clothing that celebrates African American excellence and sophistication.",
+    image: page2,
+    badge: "CLASSIC",
+    tech: "Premium tailoring and heritage"
   }, {
     id: 2,
-    title: "Quantum Couture",
-    season: "Fall 2024",
-    description: "Luxury fashion meets quantum computing, creating patterns that exist in multiple dimensions.",
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    badge: "LUXURY",
-    tech: "Quantum pattern generation"
+    title: "Burning Fashion",
+    season: "Street Couture",
+    description: "Own that runway with style on a budget. Trends that you should try - modern streetwear meets cultural authenticity.",
+    image: page3,
+    badge: "STREET",
+    tech: "Accessible luxury design"
   }, {
     id: 3,
-    title: "Cyber Elegance",
-    season: "Winter 2024",
-    description: "Sophisticated cyberpunk aesthetics with embedded smart technology for the modern digital nomad.",
-    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    badge: "SMART",
-    tech: "Embedded sensor networks"
+    title: "Industry First",
+    season: "Mission Collection",
+    description: "A forward-thinking fashion house dedicated to reframing the narrative of African American excellence through luxury streetwear and cultural storytelling.",
+    image: page4,
+    badge: "VISION",
+    tech: "Cultural empowerment through design"
   }, {
     id: 4,
-    title: "Bio-Synthetic Fusion",
-    season: "Spring 2025",
-    description: "The future of sustainable fashion through bio-engineered materials and AI-optimized production.",
-    image: "https://images.unsplash.com/photo-1558618047-5c50224d0b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    badge: "FUTURE",
-    tech: "Bio-synthetic materials"
+    title: "The Burning Fashion",
+    season: "Legacy Collection",
+    description: "Always dress like you're going to see your worst enemy. Heritage meets innovation in designs that amplify the richness of Black identity.",
+    image: page5,
+    badge: "LEGACY",
+    tech: "Storytelling through premium garments"
   }];
   return <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
       {/* Background pattern */}
