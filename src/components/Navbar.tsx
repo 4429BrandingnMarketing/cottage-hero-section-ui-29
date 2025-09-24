@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import redVisionLogo from "@/assets/red-vision-logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +25,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/src/assets/red-vision-logo.png" 
+              src={redVisionLogo} 
               alt="Red Vision Creative Studio" 
               className="h-12 w-auto filter drop-shadow-gold-glow"
             />
