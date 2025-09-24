@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Zap, Star } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 const FashionSection = () => {
-  const [activeTimeline, setActiveTimeline] = useState(0);
   const seasons = [{
     id: 0,
     title: "AI Genesis Collection",
@@ -43,7 +43,6 @@ const FashionSection = () => {
     badge: "FUTURE",
     tech: "Bio-synthetic materials"
   }];
-  const currentSeason = seasons[activeTimeline];
   return <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -75,97 +74,75 @@ const FashionSection = () => {
           </div>
         </div>
 
-        {/* Timeline Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="relative flex items-center gap-8 px-8 py-4 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
-            {seasons.map((_, index) => <button key={index} onClick={() => setActiveTimeline(index)} className={`relative w-4 h-4 rounded-full transition-all duration-500 ${activeTimeline === index ? 'bg-primary shadow-red-glow scale-150' : 'bg-white/20 hover:bg-white/40'}`}>
-                {activeTimeline === index && <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"></div>}
-              </button>)}
-            
-            {/* Progress line */}
-            <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-white/10 -translate-y-1/2">
-              <div className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500" style={{
-              width: `${activeTimeline / (seasons.length - 1) * 100}%`
-            }}></div>
-            </div>
-          </div>
-        </div>
+        {/* Fashion Collections Carousel */}
+        <Carousel className="w-full max-w-7xl mx-auto">
+          <CarouselContent>
+            {seasons.map((season) => (
+              <CarouselItem key={season.id}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  {/* Collection Image */}
+                  <div className="relative group">
+                    <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
+                      <img src={season.image} alt={season.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      
+                      {/* Badge */}
+                      <div className="absolute top-6 right-6">
+                        <div className="px-4 py-2 bg-gold text-secondary rounded-full font-bold text-sm tracking-wide">
+                          {season.badge}
+                        </div>
+                      </div>
+                      
+                      {/* Bottom info */}
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <div className="text-white/80 text-sm mb-2">{season.season}</div>
+                        <div className="text-white text-2xl font-bold">{season.title}</div>
+                      </div>
+                    </div>
+                  </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Collection Image */}
-          <div className="relative group">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
-              <img src={currentSeason.image} alt={currentSeason.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              
-              {/* Overlay gradient */}
-              
-              
-              {/* Badge */}
-              <div className="absolute top-6 right-6">
-                <div className="px-4 py-2 bg-gold text-secondary rounded-full font-bold text-sm tracking-wide">
-                  {currentSeason.badge}
+                  {/* Collection Details */}
+                  <div className="space-y-8">
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        {season.title}
+                      </h3>
+                      <p className="text-xl text-white/80 leading-relaxed mb-6">
+                        {season.description}
+                      </p>
+                    </div>
+
+                    {/* Tech Integration */}
+                    <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Zap className="w-5 h-5 text-accent" />
+                        <h4 className="text-lg font-semibold text-accent">Technology Integration</h4>
+                      </div>
+                      <p className="text-white/70">
+                        {season.tech}
+                      </p>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button className="flex-1 px-6 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
+                        View Collection
+                      </button>
+                      <button className="flex-1 px-6 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-secondary hover:shadow-cyan-glow transition-all duration-300">
+                        Design Process
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              
-              {/* Bottom info */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="text-white/80 text-sm mb-2">{currentSeason.season}</div>
-                <div className="text-white text-2xl font-bold">{currentSeason.title}</div>
-              </div>
-            </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          {/* Carousel Navigation */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <CarouselPrevious className="relative translate-x-0 translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+            <CarouselNext className="relative translate-x-0 translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
           </div>
-
-          {/* Collection Details */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                {currentSeason.title}
-              </h3>
-              <p className="text-xl text-white/80 leading-relaxed mb-6">
-                {currentSeason.description}
-              </p>
-            </div>
-
-            {/* Tech Integration */}
-            <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <Zap className="w-5 h-5 text-accent" />
-                <h4 className="text-lg font-semibold text-accent">Technology Integration</h4>
-              </div>
-              <p className="text-white/70">
-                {currentSeason.tech}
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 px-6 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
-                View Collection
-              </button>
-              <button className="flex-1 px-6 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-secondary hover:shadow-cyan-glow transition-all duration-300">
-                Design Process
-              </button>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between pt-6">
-              <button onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))} disabled={activeTimeline === 0} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                <ChevronLeft className="w-4 h-4" />
-                Previous
-              </button>
-              
-              <div className="text-white/60 text-sm">
-                {activeTimeline + 1} / {seasons.length}
-              </div>
-              
-              <button onClick={() => setActiveTimeline(Math.min(seasons.length - 1, activeTimeline + 1))} disabled={activeTimeline === seasons.length - 1} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                Next
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
+        </Carousel>
 
         {/* Product Gallery Preview */}
         <div className="mt-24 p-12 bg-primary/5 rounded-3xl border border-primary/30 backdrop-blur-sm relative overflow-hidden shadow-red-glow/20">
