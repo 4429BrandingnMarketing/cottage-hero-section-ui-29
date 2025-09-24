@@ -26,8 +26,8 @@ const Navbar = () => {
           <div className="flex items-center">
             <img 
               src={redVisionLogo} 
-              alt="Red Vision Creative Studio" 
-              className="h-12 w-auto filter drop-shadow-gold-glow"
+              alt="" 
+              className="h-12 w-auto"
             />
           </div>
 
