@@ -1,59 +1,55 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Zap, Star } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import vintageNewsletter from '@/assets/vintage-newsletter.png';
-import page2 from '@/assets/page-2.png';
-import page3 from '@/assets/page-3.png';
-import page4 from '@/assets/page-4.png';
-import page5 from '@/assets/page-5.png';
 const FashionSection = () => {
+  const [activeTimeline, setActiveTimeline] = useState(0);
   const seasons = [{
     id: 0,
-    title: "Harlem Renaissance Edition",
-    season: "Heritage Collection",
-    description: "A cinematic tribute to 1920s Harlem, blending vintage elegance, jazz culture, and the birth of modern Black artistry with luxury streetwear.",
-    image: vintageNewsletter,
-    badge: "HERITAGE",
-    tech: "Cultural storytelling through fashion"
+    title: "AI Genesis Collection",
+    season: "Spring 2024",
+    description: "The birth of AI-human collaborative fashion design, featuring garments that adapt to environmental conditions.",
+    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "PIONEER",
+    tech: "Neural fabric adaptation"
   }, {
     id: 1,
-    title: "Giftd 'n Privlgd",
-    season: "Classic Collection",
-    description: "Made by yours truly - culturally conscious crafted fine clothing that celebrates African American excellence and sophistication.",
-    image: page2,
-    badge: "CLASSIC",
-    tech: "Premium tailoring and heritage"
+    title: "Digital Metamorphosis",
+    season: "Summer 2024",
+    description: "Transformative pieces that blur the line between physical and digital fashion experiences.",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "EVOLUTION",
+    tech: "Holographic textile integration"
   }, {
     id: 2,
-    title: "Burning Fashion",
-    season: "Street Couture",
-    description: "Own that runway with style on a budget. Trends that you should try - modern streetwear meets cultural authenticity.",
-    image: page3,
-    badge: "STREET",
-    tech: "Accessible luxury design"
+    title: "Quantum Couture",
+    season: "Fall 2024",
+    description: "Luxury fashion meets quantum computing, creating patterns that exist in multiple dimensions.",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "LUXURY",
+    tech: "Quantum pattern generation"
   }, {
     id: 3,
-    title: "Industry First",
-    season: "Mission Collection",
-    description: "A forward-thinking fashion house dedicated to reframing the narrative of African American excellence through luxury streetwear and cultural storytelling.",
-    image: page4,
-    badge: "VISION",
-    tech: "Cultural empowerment through design"
+    title: "Cyber Elegance",
+    season: "Winter 2024",
+    description: "Sophisticated cyberpunk aesthetics with embedded smart technology for the modern digital nomad.",
+    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "SMART",
+    tech: "Embedded sensor networks"
   }, {
     id: 4,
-    title: "The Burning Fashion",
-    season: "Legacy Collection",
-    description: "Always dress like you're going to see your worst enemy. Heritage meets innovation in designs that amplify the richness of Black identity.",
-    image: page5,
-    badge: "LEGACY",
-    tech: "Storytelling through premium garments"
+    title: "Bio-Synthetic Fusion",
+    season: "Spring 2025",
+    description: "The future of sustainable fashion through bio-engineered materials and AI-optimized production.",
+    image: "https://images.unsplash.com/photo-1558618047-5c50224d0b55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    badge: "FUTURE",
+    tech: "Bio-synthetic materials"
   }];
+  const currentSeason = seasons[activeTimeline];
   return <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div style={{
+        <div className="absolute inset-0" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-      }} className="absolute inset-0 bg-zinc-950"></div>
+      }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -79,73 +75,97 @@ const FashionSection = () => {
           </div>
         </div>
 
-        {/* Fashion Collections Carousel */}
-        <Carousel className="w-full max-w-7xl mx-auto">
-          <CarouselContent>
-            {seasons.map(season => <CarouselItem key={season.id}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  {/* Collection Image */}
-                  <div className="relative group">
-                    <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
-                      <img src={season.image} alt={season.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                      
-                      {/* Badge */}
-                      <div className="absolute top-6 right-6">
-                        <div className="px-4 py-2 bg-gold text-secondary rounded-full font-bold text-sm tracking-wide">
-                          {season.badge}
-                        </div>
-                      </div>
-                      
-                      {/* Bottom info */}
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <div className="text-white/80 text-sm mb-2">{season.season}</div>
-                        <div className="text-white text-2xl font-bold">{season.title}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Collection Details */}
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        {season.title}
-                      </h3>
-                      <p className="text-xl text-white/80 leading-relaxed mb-6">
-                        {season.description}
-                      </p>
-                    </div>
-
-                    {/* Tech Integration */}
-                    <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 mb-4">
-                        <Zap className="w-5 h-5 text-accent" />
-                        <h4 className="text-lg font-semibold text-accent">Technology Integration</h4>
-                      </div>
-                      <p className="text-white/70">
-                        {season.tech}
-                      </p>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <button className="flex-1 px-6 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
-                        View Collection
-                      </button>
-                      <button className="flex-1 px-6 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-secondary hover:shadow-cyan-glow transition-all duration-300">
-                        Design Process
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>)}
-          </CarouselContent>
-          
-          {/* Carousel Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <CarouselPrevious className="relative translate-x-0 translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
-            <CarouselNext className="relative translate-x-0 translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+        {/* Timeline Navigation */}
+        <div className="flex justify-center mb-12">
+          <div className="relative flex items-center gap-8 px-8 py-4 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
+            {seasons.map((_, index) => <button key={index} onClick={() => setActiveTimeline(index)} className={`relative w-4 h-4 rounded-full transition-all duration-500 ${activeTimeline === index ? 'bg-primary shadow-red-glow scale-150' : 'bg-white/20 hover:bg-white/40'}`}>
+                {activeTimeline === index && <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"></div>}
+              </button>)}
+            
+            {/* Progress line */}
+            <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-white/10 -translate-y-1/2">
+              <div className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500" style={{
+              width: `${activeTimeline / (seasons.length - 1) * 100}%`
+            }}></div>
+            </div>
           </div>
-        </Carousel>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Collection Image */}
+          <div className="relative group">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
+              <img src={currentSeason.image} alt={currentSeason.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              
+              {/* Overlay gradient */}
+              
+              
+              {/* Badge */}
+              <div className="absolute top-6 right-6">
+                <div className="px-4 py-2 bg-gold text-secondary rounded-full font-bold text-sm tracking-wide">
+                  {currentSeason.badge}
+                </div>
+              </div>
+              
+              {/* Bottom info */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="text-white/80 text-sm mb-2">{currentSeason.season}</div>
+                <div className="text-white text-2xl font-bold">{currentSeason.title}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Collection Details */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                {currentSeason.title}
+              </h3>
+              <p className="text-xl text-white/80 leading-relaxed mb-6">
+                {currentSeason.description}
+              </p>
+            </div>
+
+            {/* Tech Integration */}
+            <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <Zap className="w-5 h-5 text-accent" />
+                <h4 className="text-lg font-semibold text-accent">Technology Integration</h4>
+              </div>
+              <p className="text-white/70">
+                {currentSeason.tech}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="flex-1 px-6 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
+                View Collection
+              </button>
+              <button className="flex-1 px-6 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-secondary hover:shadow-cyan-glow transition-all duration-300">
+                Design Process
+              </button>
+            </div>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-between pt-6">
+              <button onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))} disabled={activeTimeline === 0} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                <ChevronLeft className="w-4 h-4" />
+                Previous
+              </button>
+              
+              <div className="text-white/60 text-sm">
+                {activeTimeline + 1} / {seasons.length}
+              </div>
+              
+              <button onClick={() => setActiveTimeline(Math.min(seasons.length - 1, activeTimeline + 1))} disabled={activeTimeline === seasons.length - 1} className="flex items-center gap-2 px-4 py-2 text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                Next
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Product Gallery Preview */}
         <div className="mt-24 p-12 bg-primary/5 rounded-3xl border border-primary/30 backdrop-blur-sm relative overflow-hidden shadow-red-glow/20">

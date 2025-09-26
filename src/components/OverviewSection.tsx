@@ -1,10 +1,20 @@
+
 import { Music, Mic, Brain, Users, Zap, Star } from 'lucide-react';
+
 const OverviewSection = () => {
-  return <div className="w-full py-[200px] px-6 flex flex-col items-center">
+  return (
+    <div className="w-full py-[200px] px-6 flex flex-col items-center">
       <div className="w-full max-w-[1600px] flex flex-col lg:flex-row items-center gap-6">
         {/* Left side - Video with quote */}
         <div className="flex-1 self-stretch p-6 rounded-[40px] flex flex-col justify-end items-start bg-black/5 min-h-[639px] relative overflow-hidden">
-          <video src="https://res.cloudinary.com/da7s1izqw/video/upload/v1751346384/It_shoudl_levitate_202506291707_k7ajz_wxrevo.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover rounded-[40px] bg-red-700" />
+          <video 
+            className="absolute inset-0 w-full h-full object-cover rounded-[40px]"
+            src="https://res.cloudinary.com/da7s1izqw/video/upload/v1751346384/It_shoudl_levitate_202506291707_k7ajz_wxrevo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
           <div className="w-full max-w-[400px] px-6 py-5 bg-glass-gradient backdrop-blur-sm rounded-3xl border border-white/20 shadow-lg flex flex-col gap-6 relative z-10">
             <div className="w-5 h-5 relative">
               <div className="w-[16.25px] h-[11.88px] absolute top-[4.38px] left-[1.88px] bg-white/65"></div>
@@ -27,7 +37,7 @@ const OverviewSection = () => {
             <div className="text-black/50 text-xs font-dm-mono font-medium uppercase tracking-wider-2 leading-[16.32px]">
               Overview
             </div>
-            <div className="max-w-[640px] text-black text-3xl md:text-[48px] font-space-grotesk font-normal uppercase leading-tight md:leading-[51.84px] bg-rose-600">
+            <div className="max-w-[640px] text-black text-3xl md:text-[48px] font-space-grotesk font-normal uppercase leading-tight md:leading-[51.84px]">
               Revolutionary AI-powered entertainment studio amplifying human creativity across music, fashion, and digital experiences
             </div>
           </div>
@@ -80,6 +90,8 @@ const OverviewSection = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default OverviewSection;
