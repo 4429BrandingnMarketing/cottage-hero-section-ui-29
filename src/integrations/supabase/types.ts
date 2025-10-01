@@ -14,7 +14,151 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_agents: {
+        Row: {
+          created_at: string
+          division_id: string | null
+          id: string
+          name: string
+          performance_score: number | null
+          status: string
+          task_description: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          division_id?: string | null
+          id?: string
+          name: string
+          performance_score?: number | null
+          status: string
+          task_description?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          division_id?: string | null
+          id?: string
+          name?: string
+          performance_score?: number | null
+          status?: string
+          task_description?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_agents_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "business_divisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_divisions: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          name: string
+          primary_action: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon: string
+          id?: string
+          name: string
+          primary_action: string
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+          primary_action?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      division_metrics: {
+        Row: {
+          created_at: string
+          division_id: string
+          id: string
+          label: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          division_id: string
+          id?: string
+          label: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          division_id?: string
+          id?: string
+          label?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "division_metrics_division_id_fkey"
+            columns: ["division_id"]
+            isOneToOne: false
+            referencedRelation: "business_divisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      empire_metrics: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          subtitle: string | null
+          title: string
+          trend_is_positive: boolean | null
+          trend_value: number | null
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          icon: string
+          id?: string
+          subtitle?: string | null
+          title: string
+          trend_is_positive?: boolean | null
+          trend_value?: number | null
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          subtitle?: string | null
+          title?: string
+          trend_is_positive?: boolean | null
+          trend_value?: number | null
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
