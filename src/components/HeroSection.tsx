@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 
 const HeroSection = () => {
   return (
-    <div className="relative w-full h-screen min-h-[900px] flex flex-col overflow-hidden">
+    <div className="relative w-full h-screen min-h-[600px] md:min-h-[800px] flex flex-col overflow-hidden">
       {/* Large Video Background */}
       <div className="absolute inset-0 z-0">
         <iframe

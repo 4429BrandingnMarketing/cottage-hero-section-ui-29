@@ -23,11 +23,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <img 
-              src="/src/assets/red-vision-logo.png" 
-              alt="Red Vision Creative Studio" 
-              className="h-12 w-auto filter drop-shadow-gold-glow"
-            />
+            <div className="text-primary text-xl md:text-2xl font-bold tracking-wider">
+              RED VISION
+            </div>
           </div>
 
           {/* Desktop Navigation */}

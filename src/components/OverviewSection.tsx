@@ -3,10 +3,10 @@ import { Music, Mic, Brain, Users, Zap, Star } from 'lucide-react';
 
 const OverviewSection = () => {
   return (
-    <div className="w-full py-[200px] px-6 flex flex-col items-center">
+    <div className="w-full py-12 md:py-24 lg:py-[200px] px-6 flex flex-col items-center">
       <div className="w-full max-w-[1600px] flex flex-col lg:flex-row items-center gap-6">
         {/* Left side - Video with quote */}
-        <div className="flex-1 self-stretch p-6 rounded-[40px] flex flex-col justify-end items-start bg-black/5 min-h-[639px] relative overflow-hidden">
+        <div className="flex-1 self-stretch p-6 rounded-[40px] flex flex-col justify-end items-start bg-black/5 min-h-[400px] md:min-h-[500px] lg:min-h-[639px] relative overflow-hidden">
           <video 
             className="absolute inset-0 w-full h-full object-cover rounded-[40px]"
             src="https://res.cloudinary.com/da7s1izqw/video/upload/v1751346384/It_shoudl_levitate_202506291707_k7ajz_wxrevo.mp4"
