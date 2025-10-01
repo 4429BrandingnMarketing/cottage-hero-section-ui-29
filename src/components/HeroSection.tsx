@@ -7,11 +7,11 @@ const HeroSection = () => {
       {/* Large Video Background */}
       <div className="absolute inset-0 z-0">
         <iframe
-          className="absolute inset-0 w-full h-full object-cover"
-          src="https://www.youtube.com/embed/YpdAMwl8Kls?autoplay=1&mute=1&loop=1&playlist=YpdAMwl8Kls&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&enablejsapi=1"
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          src="https://www.youtube.com/embed/YpdAMwl8Kls?autoplay=1&mute=1&loop=1&playlist=YpdAMwl8Kls&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&enablejsapi=1&start=0"
           title="Red Vision Creative Studio Showcase"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
         
