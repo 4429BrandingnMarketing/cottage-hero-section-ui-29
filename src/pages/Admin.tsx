@@ -299,11 +299,12 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="artists" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="artists">Artists</TabsTrigger>
             <TabsTrigger value="tracks">Tracks</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="submissions">Submissions</TabsTrigger>
+            <TabsTrigger value="ai-core">AI Core</TabsTrigger>
           </TabsList>
 
           <TabsContent value="artists" className="space-y-4">
@@ -773,6 +774,25 @@ const Admin = () => {
                     ))}
                   </TableBody>
                 </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="ai-core" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>AI Core Integration</CardTitle>
+                <CardDescription>Base44 AI Core Application</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="w-full rounded-lg overflow-hidden border border-primary/20" style={{ height: '800px' }}>
+                  <iframe
+                    src="https://app.base44.com/apps/6890bc7ad84c4329f4e66449/editor/preview/AICore"
+                    className="w-full h-full"
+                    frameBorder="0"
+                    title="Base44 AI Core"
+                  ></iframe>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
