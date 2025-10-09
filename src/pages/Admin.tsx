@@ -14,6 +14,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AdminHomepageContent from '@/components/AdminHomepageContent';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -298,14 +299,19 @@ const Admin = () => {
           </Button>
         </div>
 
-        <Tabs defaultValue="artists" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+        <Tabs defaultValue="homepage" className="w-full">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="homepage">Homepage</TabsTrigger>
             <TabsTrigger value="artists">Artists</TabsTrigger>
             <TabsTrigger value="tracks">Tracks</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="submissions">Submissions</TabsTrigger>
             <TabsTrigger value="ai-core">AI Core</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="homepage">
+            <AdminHomepageContent />
+          </TabsContent>
 
           <TabsContent value="artists" className="space-y-4">
             <Card>
