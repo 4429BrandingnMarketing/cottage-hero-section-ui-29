@@ -1,74 +1,96 @@
 import { Play, Pause, Heart, Share2, Download, Music, Mic, Users, Star, Upload, Building2, Headphones } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const RedVisionMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
+  const [artists, setArtists] = useState<any[]>([]);
+  const [tracks, setTracks] = useState<any[]>([]);
+  const [services, setServices] = useState<any[]>([]);
+  const [formData, setFormData] = useState({
+    artist_name: '',
+    genre: '',
+    email: '',
+    description: '',
+    music_links: ''
+  });
+  const { toast } = useToast();
 
-  const artists = [
-    {
-      name: "Nova Flame",
-      genre: "Electronic Pop",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400",
-      streams: "2.5M",
-      verified: true
-    },
-    {
-      name: "Echo Storm",
-      genre: "Hip-Hop",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400",
-      streams: "1.8M", 
-      verified: true
-    },
-    {
-      name: "Crimson Waves",
-      genre: "Alternative Rock",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400",
-      streams: "3.2M",
-      verified: true
-    },
-    {
-      name: "Digital Dreams",
-      genre: "Synthwave",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400",
-      streams: "1.4M",
-      verified: false
+  useEffect(() => {
+    fetchArtists();
+    fetchTracks();
+    fetchServices();
+  }, []);
+
+  const fetchArtists = async () => {
+    const { data, error } = await supabase
+      .from('artists')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (data && !error) setArtists(data);
+  };
+
+  const fetchTracks = async () => {
+    const { data, error } = await supabase
+      .from('tracks')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (data && !error) setTracks(data);
+  };
+
+  const fetchServices = async () => {
+    const { data, error } = await supabase
+      .from('services')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (data && !error) setServices(data);
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.artist_name || !formData.genre || !formData.email || !formData.description || !formData.music_links) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
+      return;
     }
-  ];
 
-  const tracks = [
-    { title: "Red Vision", artist: "Nova Flame", duration: "3:42", streams: "850K" },
-    { title: "Storm Chaser", artist: "Echo Storm", duration: "4:15", streams: "720K" },
-    { title: "Neon Nights", artist: "Digital Dreams", duration: "3:28", streams: "650K" },
-    { title: "Breaking Waves", artist: "Crimson Waves", duration: "4:01", streams: "920K" }
-  ];
+    const { error } = await supabase
+      .from('submissions')
+      .insert([formData]);
 
-  const services = [
-    {
-      title: "Artist Development",
-      description: "Complete artist coaching and career development",
-      price: "Custom",
-      features: ["Brand Development", "Image Consulting", "Career Strategy", "Industry Connections"]
-    },
-    {
-      title: "Studio Recording",
-      description: "Professional recording sessions with top-tier equipment",
-      price: "$150/hr",
-      features: ["Pro Tools Studio", "Live Room", "Mixing & Mastering", "Producer Available"]
-    },
-    {
-      title: "Music Production",
-      description: "Full production services from concept to release",
-      price: "$500/track",
-      features: ["Beat Production", "Arrangement", "Sound Design", "Final Mix"]
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit application",
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Your application has been submitted!"
+      });
+      setFormData({
+        artist_name: '',
+        genre: '',
+        email: '',
+        description: '',
+        music_links: ''
+      });
     }
-  ];
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -121,11 +143,11 @@ const RedVisionMusic = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artists.map((artist, index) => (
-              <Card key={index} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
+            {artists.map((artist) => (
+              <Card key={artist.id} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
                 <CardContent className="p-0">
                   <div className="relative">
-                    <img src={artist.image} alt={artist.name} className="w-full h-64 object-cover rounded-t-lg" />
+                    <img src={artist.image_url} alt={artist.name} className="w-full h-64 object-cover rounded-t-lg" />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent rounded-t-lg"></div>
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="flex items-center gap-2 mb-2">
@@ -161,7 +183,7 @@ const RedVisionMusic = () => {
             <CardContent>
               <div className="space-y-4">
                 {tracks.map((track, index) => (
-                  <div key={index} className={`flex items-center justify-between p-4 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer ${currentTrack === index ? 'bg-primary/10' : ''}`}>
+                  <div key={track.id} className={`flex items-center justify-between p-4 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer ${currentTrack === index ? 'bg-primary/10' : ''}`}>
                     <div className="flex items-center gap-4">
                       <Button
                         variant="ghost"
@@ -205,6 +227,24 @@ const RedVisionMusic = () => {
         </div>
       </section>
 
+      {/* Google Stitch Integration */}
+      <section className="py-20 px-4 bg-secondary/20">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Nemo - Interactive Experience</h2>
+          <p className="text-xl text-muted-foreground mb-12">Explore our interactive music showcase</p>
+
+          <div className="w-full aspect-video rounded-lg overflow-hidden bg-card/50 backdrop-blur-sm border border-primary/20">
+            <iframe
+              src="https://stitch.withgoogle.com/projects/11569583431666638584"
+              className="w-full h-full"
+              frameBorder="0"
+              allowFullScreen
+              title="Google Stitch - Nemo"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       {/* Streaming Integration */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
@@ -245,30 +285,53 @@ const RedVisionMusic = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Artist Name</label>
-                  <Input placeholder="Your artist name" />
+                  <Input
+                    placeholder="Your artist name"
+                    value={formData.artist_name}
+                    onChange={(e) => setFormData({...formData, artist_name: e.target.value})}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Genre</label>
-                  <Input placeholder="e.g., Hip-Hop, Electronic, Rock" />
+                  <Input
+                    placeholder="e.g., Hip-Hop, Electronic, Rock"
+                    value={formData.genre}
+                    onChange={(e) => setFormData({...formData, genre: e.target.value})}
+                  />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Email</label>
-                <Input type="email" placeholder="your@email.com" />
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Tell us about your music</label>
-                <Textarea placeholder="Describe your style, influences, and what makes you unique..." rows={4} />
+                <Textarea
+                  placeholder="Describe your style, influences, and what makes you unique..."
+                  rows={4}
+                  value={formData.description}
+                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Music Links</label>
-                <Textarea placeholder="SoundCloud, YouTube, Spotify links to your best tracks..." rows={3} />
+                <Textarea
+                  placeholder="SoundCloud, YouTube, Spotify links to your best tracks..."
+                  rows={3}
+                  value={formData.music_links}
+                  onChange={(e) => setFormData({...formData, music_links: e.target.value})}
+                />
               </div>
-              
-              <Button className="w-full" size="lg">
+
+              <Button className="w-full" size="lg" onClick={handleSubmit}>
                 Submit Application
               </Button>
             </CardContent>
@@ -285,8 +348,8 @@ const RedVisionMusic = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-primary/20">
+            {services.map((service) => (
+              <Card key={service.id} className="group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-primary/20">
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
                     <Building2 className="w-6 h-6 text-primary" />
@@ -297,7 +360,7 @@ const RedVisionMusic = () => {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
+                    {(service.features as string[]).map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-muted-foreground">
                         <div className="w-2 h-2 bg-primary rounded-full"></div>
                         {feature}
