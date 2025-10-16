@@ -202,11 +202,9 @@ const Admin = () => {
   };
 
   const addService = async () => {
-    const featuresArray = newService.features.split('\n').filter(f => f.trim());
-
     const { error } = await supabase
       .from('services')
-      .insert([{ ...newService, features: featuresArray }]);
+      .insert([{ name: newService.title, description: newService.description }]);
 
     if (error) {
       toast({ title: "Error", description: "Failed to add service", variant: "destructive" });
@@ -249,7 +247,7 @@ const Admin = () => {
   const updateSubmissionStatus = async (id: string, status: string) => {
     const { error } = await supabase
       .from('submissions')
-      .update({ status })
+      .update({ message: `Status: ${status}` })
       .eq('id', id);
 
     if (error) {

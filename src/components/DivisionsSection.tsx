@@ -1,4 +1,5 @@
 import { Music, Video, Radio, Cpu, Shirt, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const DivisionsSection = () => {
   const divisions = [
@@ -7,42 +8,48 @@ const DivisionsSection = () => {
       icon: Music,
       description: "Grammy-affiliated AI record label featuring Diamond-selling producer My Guy Mars, City High's Ryan Toby, and songwriter James Fauntleroy. True artist partnerships with AI-enhanced production.",
       color: "from-primary to-red-600",
-      highlights: ["Grammy-winning artists", "AI-enhanced marketing", "True partnerships"]
+      highlights: ["Grammy-winning artists", "AI-enhanced marketing", "True partnerships"],
+      link: "/divisions/music"
     },
     {
       name: "Red Vision TV",
       icon: Video,
       description: "Premium content creation platform specializing in 4K/8K video production, music videos, documentaries, and exclusive interviews with AI-enhanced post-production.",
       color: "from-accent to-blue-600",
-      highlights: ["4K/8K Production", "Music Videos", "Documentary Projects"]
+      highlights: ["4K/8K Production", "Music Videos", "Documentary Projects"],
+      link: "/divisions/tv"
     },
     {
       name: "Red Vision Radio",
       icon: Radio,
       description: "Podcast and audio content division featuring thought-provoking discussions, industry insights, and cultural commentary with AI-powered editing and distribution.",
       color: "from-gold to-yellow-600",
-      highlights: ["Multi-platform presence", "Real-time transcription", "Community building"]
+      highlights: ["Multi-platform presence", "Real-time transcription", "Community building"],
+      link: "/divisions/radio"
     },
     {
       name: "Red Vision AI",
       icon: Cpu,
       description: "Technology services division offering AI integration consulting, marketing automation, content optimization, and predictive analytics for creative businesses.",
       color: "from-primary to-purple-600",
-      highlights: ["Content strategy automation", "Audience targeting systems", "Creative enhancement tools"]
+      highlights: ["Content strategy automation", "Audience targeting systems", "Creative enhancement tools"],
+      link: "/divisions/ai"
     },
     {
       name: "GiFTD N' PrVLGD",
       icon: Shirt,
       description: "Fashion and lifestyle brand creating tech-integrated apparel and limited edition collections that reflect music culture, technological innovation, and social consciousness.",
       color: "from-accent to-green-600",
-      highlights: ["Limited edition releases", "Tech-integrated apparel", "Sustainable production"]
+      highlights: ["Limited edition releases", "Tech-integrated apparel", "Sustainable production"],
+      link: "/divisions/fashion"
     },
     {
       name: "A Tragic Mulatto",
       icon: FileText,
       description: "Blog and media platform providing cultural commentary, artist spotlights, and storytelling that bridges traditional media with AI-enhanced content creation.",
       color: "from-gold to-orange-600",
-      highlights: ["Cultural analysis", "Artist spotlights", "AI-enhanced content"]
+      highlights: ["Cultural analysis", "Artist spotlights", "AI-enhanced content"],
+      link: "/divisions/blog"
     }
   ];
 
@@ -71,9 +78,10 @@ const DivisionsSection = () => {
           {divisions.map((division, index) => {
             const IconComponent = division.icon;
             return (
-              <div
+              <Link
                 key={division.name}
-                className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-red-glow cursor-pointer"
+                to={division.link}
+                className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-red-glow cursor-pointer block"
                 style={{
                   animationDelay: `${index * 0.1}s`
                 }}
@@ -120,7 +128,7 @@ const DivisionsSection = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

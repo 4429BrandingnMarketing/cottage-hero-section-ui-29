@@ -1,9 +1,9 @@
 import HeroSection from "@/components/HeroSection";
 import DivisionsSection from "@/components/DivisionsSection";
 import FashionSection from "@/components/FashionSection";
-import OverviewSection from "@/components/OverviewSection";
-import GallerySection from "@/components/GallerySection";
-import AboutSection from "@/components/AboutSection";
+import OverviewSectionNew from "@/components/OverviewSectionNew";
+import GallerySectionNew from "@/components/GallerySectionNew";
+import AboutSectionNew from "@/components/AboutSectionNew";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -12,9 +12,9 @@ const Index = () => {
       <HeroSection />
       <DivisionsSection />
       <FashionSection />
-      <OverviewSection />
-      <GallerySection />
-      <AboutSection />
+      <OverviewSectionNew />
+      <GallerySectionNew />
+      <AboutSectionNew />
       <Footer />
     </div>
   );

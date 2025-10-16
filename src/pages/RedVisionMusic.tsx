@@ -69,7 +69,12 @@ const RedVisionMusic = () => {
 
     const { error } = await supabase
       .from('submissions')
-      .insert([formData]);
+      .insert([{
+        artist_name: formData.artist_name,
+        email: formData.email,
+        track_url: formData.music_links,
+        message: `Genre: ${formData.genre}\n\n${formData.description}`
+      }]);
 
     if (error) {
       toast({
