@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      about_accordion: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          order_index: number
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          order_index: number
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          order_index?: number
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       ai_agents: {
         Row: {
           created_at: string
@@ -55,6 +82,39 @@ export type Database = {
           },
         ]
       }
+      artists: {
+        Row: {
+          created_at: string | null
+          genre: string
+          id: string
+          image_url: string | null
+          name: string
+          streams: string | null
+          updated_at: string | null
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          genre: string
+          id?: string
+          image_url?: string | null
+          name: string
+          streams?: string | null
+          updated_at?: string | null
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          genre?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          streams?: string | null
+          updated_at?: string | null
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       business_divisions: {
         Row: {
           created_at: string
@@ -85,6 +145,63 @@ export type Database = {
           primary_action?: string
           status?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      company_features: {
+        Row: {
+          created_at: string | null
+          icon: string
+          id: string
+          order_index: number
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          icon: string
+          id?: string
+          order_index: number
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          icon?: string
+          id?: string
+          order_index?: number
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      company_info: {
+        Row: {
+          created_at: string | null
+          heading: string
+          id: string
+          section: string
+          subheading: string
+          updated_at: string | null
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          heading: string
+          id?: string
+          section: string
+          subheading: string
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          heading?: string
+          id?: string
+          section?: string
+          subheading?: string
+          updated_at?: string | null
+          video_url?: string | null
         }
         Relationships: []
       }
@@ -156,6 +273,150 @@ export type Database = {
           trend_value?: number | null
           updated_at?: string
           value?: string
+        }
+        Relationships: []
+      }
+      founder_profile: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          quote: string
+          title: string
+          updated_at: string | null
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          quote: string
+          title: string
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          quote?: string
+          title?: string
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      gallery_items: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          media_type: string
+          media_url: string
+          order_index: number
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          media_type: string
+          media_url: string
+          order_index: number
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url?: string
+          order_index?: number
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      submissions: {
+        Row: {
+          artist_name: string
+          created_at: string | null
+          email: string
+          id: string
+          message: string | null
+          track_url: string
+          updated_at: string | null
+        }
+        Insert: {
+          artist_name: string
+          created_at?: string | null
+          email: string
+          id?: string
+          message?: string | null
+          track_url: string
+          updated_at?: string | null
+        }
+        Update: {
+          artist_name?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string | null
+          track_url?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      tracks: {
+        Row: {
+          artist: string
+          created_at: string | null
+          id: string
+          plays: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          artist: string
+          created_at?: string | null
+          id?: string
+          plays?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          artist?: string
+          created_at?: string | null
+          id?: string
+          plays?: string | null
+          title?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
