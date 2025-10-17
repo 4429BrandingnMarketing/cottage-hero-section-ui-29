@@ -54,9 +54,9 @@ const DivisionsSection = () => {
   ];
 
   return (
-    <section id="divisions" className="py-24 bg-secondary relative overflow-hidden">
+    <section id="divisions" className="py-24 bg-[hsl(0,70%,15%)] relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-accent/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-accent/10"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
