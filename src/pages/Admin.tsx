@@ -791,10 +791,10 @@ const Admin = () => {
               <CardContent>
                 <div className="w-full rounded-lg overflow-hidden border border-primary/20" style={{ height: '800px' }}>
                   <iframe
-                    src="https://app.base44.com/apps/6890bc7ad84c4329f4e66449/editor/preview/AICore"
+                    src="https://app.base44.com/apps/6890bc7ad84c4329f4e66449/editor/preview/RedVisionMusic"
                     className="w-full h-full"
                     frameBorder="0"
-                    title="Base44 AI Core"
+                    title="Red Vision Music Admin"
                   ></iframe>
                 </div>
               </CardContent>
