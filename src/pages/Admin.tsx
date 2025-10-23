@@ -65,6 +65,20 @@ const Admin = () => {
       return;
     }
 
+    // Check if user has admin role
+    const { data: roleData, error: roleError } = await supabase
+      .rpc('has_role', { _user_id: user.id, _role: 'admin' });
+
+    if (roleError || !roleData) {
+      toast({
+        title: 'Access Denied',
+        description: 'You do not have admin privileges to access this page.',
+        variant: 'destructive'
+      });
+      navigate('/');
+      return;
+    }
+
     setUser(user);
     setLoading(false);
     fetchAllData();
