@@ -1,31 +1,52 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+const authSchema = z.object({
+  email: z.string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  password: z.string()
+    .min(6, { message: "Password must be at least 6 characters" })
+    .max(72, { message: "Password must be less than 72 characters" })
+});
+
+type AuthFormValues = z.infer<typeof authSchema>;
+
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<AuthFormValues>({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  });
+
+  const handleAuth = async (values: AuthFormValues) => {
     setLoading(true);
 
     try {
       if (isLogin) {
         const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password
+          email: values.email,
+          password: values.password
         });
 
         if (error) throw error;
@@ -38,8 +59,8 @@ const Login = () => {
         navigate('/admin');
       } else {
         const { data, error } = await supabase.auth.signUp({
-          email,
-          password
+          email: values.email,
+          password: values.password
         });
 
         if (error) throw error;
@@ -75,42 +96,59 @@ const Login = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleAuth} className="space-y-4">
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleAuth)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="your@email.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="••••••••"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'Loading...' : isLogin ? 'Login' : 'Sign Up'}
-              </Button>
-              <div className="text-center text-sm">
-                <button
-                  type="button"
-                  onClick={() => setIsLogin(!isLogin)}
-                  className="text-primary hover:underline"
-                >
-                  {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Login'}
-                </button>
-              </div>
-            </form>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? 'Loading...' : isLogin ? 'Login' : 'Sign Up'}
+                </Button>
+                <div className="text-center text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsLogin(!isLogin);
+                      form.reset();
+                    }}
+                    className="text-primary hover:underline"
+                  >
+                    {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Login'}
+                  </button>
+                </div>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>

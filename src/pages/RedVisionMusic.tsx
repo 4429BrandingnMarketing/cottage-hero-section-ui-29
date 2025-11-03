@@ -1,13 +1,53 @@
 import { Play, Pause, Heart, Share2, Download, Music, Mic, Users, Star, Upload, Building2, Headphones } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+
+const submissionSchema = z.object({
+  artist_name: z.string()
+    .trim()
+    .min(1, { message: "Artist name is required" })
+    .max(100, { message: "Artist name must be less than 100 characters" }),
+  genre: z.string()
+    .trim()
+    .min(1, { message: "Genre is required" })
+    .max(50, { message: "Genre must be less than 50 characters" }),
+  email: z.string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  description: z.string()
+    .trim()
+    .min(10, { message: "Description must be at least 10 characters" })
+    .max(2000, { message: "Description must be less than 2000 characters" }),
+  music_links: z.string()
+    .trim()
+    .min(1, { message: "Music links are required" })
+    .max(1000, { message: "Music links must be less than 1000 characters" })
+    .refine((val) => {
+      const urls = val.split(/[\s,\n]+/).filter(Boolean);
+      return urls.every(url => {
+        try {
+          new URL(url);
+          return true;
+        } catch {
+          return false;
+        }
+      });
+    }, { message: "Please provide valid URLs (e.g., https://soundcloud.com/...)" })
+});
+
+type SubmissionFormValues = z.infer<typeof submissionSchema>;
 
 const RedVisionMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -15,14 +55,18 @@ const RedVisionMusic = () => {
   const [artists, setArtists] = useState<any[]>([]);
   const [tracks, setTracks] = useState<any[]>([]);
   const [services, setServices] = useState<any[]>([]);
-  const [formData, setFormData] = useState({
-    artist_name: '',
-    genre: '',
-    email: '',
-    description: '',
-    music_links: ''
-  });
   const { toast } = useToast();
+
+  const form = useForm<SubmissionFormValues>({
+    resolver: zodResolver(submissionSchema),
+    defaultValues: {
+      artist_name: '',
+      genre: '',
+      email: '',
+      description: '',
+      music_links: ''
+    }
+  });
 
   useEffect(() => {
     fetchArtists();
@@ -57,23 +101,14 @@ const RedVisionMusic = () => {
     if (data && !error) setServices(data);
   };
 
-  const handleSubmit = async () => {
-    if (!formData.artist_name || !formData.genre || !formData.email || !formData.description || !formData.music_links) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
+  const handleSubmit = async (values: SubmissionFormValues) => {
     const { error } = await supabase
       .from('submissions')
       .insert([{
-        artist_name: formData.artist_name,
-        email: formData.email,
-        track_url: formData.music_links,
-        message: `Genre: ${formData.genre}\n\n${formData.description}`
+        artist_name: values.artist_name,
+        email: values.email,
+        track_url: values.music_links,
+        message: `Genre: ${values.genre}\n\n${values.description}`
       }]);
 
     if (error) {
@@ -87,13 +122,7 @@ const RedVisionMusic = () => {
         title: "Success",
         description: "Your application has been submitted!"
       });
-      setFormData({
-        artist_name: '',
-        genre: '',
-        email: '',
-        description: '',
-        music_links: ''
-      });
+      form.reset();
     }
   };
 
@@ -287,58 +316,92 @@ const RedVisionMusic = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Artist Name</label>
-                  <Input
-                    placeholder="Your artist name"
-                    value={formData.artist_name}
-                    onChange={(e) => setFormData({...formData, artist_name: e.target.value})}
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="artist_name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Artist Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your artist name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="genre"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Genre</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Hip-Hop, Electronic, Rock" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your@email.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Genre</label>
-                  <Input
-                    placeholder="e.g., Hip-Hop, Electronic, Rock"
-                    value={formData.genre}
-                    onChange={(e) => setFormData({...formData, genre: e.target.value})}
+
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tell us about your music</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Describe your style, influences, and what makes you unique..."
+                            rows={4}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Email</label>
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                />
-              </div>
+                  <FormField
+                    control={form.control}
+                    name="music_links"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Music Links</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="SoundCloud, YouTube, Spotify links to your best tracks..."
+                            rows={3}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Tell us about your music</label>
-                <Textarea
-                  placeholder="Describe your style, influences, and what makes you unique..."
-                  rows={4}
-                  value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Music Links</label>
-                <Textarea
-                  placeholder="SoundCloud, YouTube, Spotify links to your best tracks..."
-                  rows={3}
-                  value={formData.music_links}
-                  onChange={(e) => setFormData({...formData, music_links: e.target.value})}
-                />
-              </div>
-
-              <Button className="w-full" size="lg" onClick={handleSubmit}>
-                Submit Application
-              </Button>
+                  <Button type="submit" className="w-full" size="lg">
+                    Submit Application
+                  </Button>
+                </form>
+              </Form>
             </CardContent>
           </Card>
         </div>
