@@ -30,25 +30,25 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#divisions" className="text-white hover:text-primary transition-all duration-300 relative group">
+            <a href="#divisions" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
               Divisions
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
-            <a href="/music" className="text-white hover:text-primary transition-all duration-300 relative group">
+            <a href="/music" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
               Music
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
-            <a href="#fashion" className="text-white hover:text-primary transition-all duration-300 relative group">
+            <a href="#fashion" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
               Fashion
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
-            <a href="#technology" className="text-white hover:text-accent transition-all duration-300 relative group">
+            <a href="#technology" className="text-white hover:text-accent transition-all duration-300 relative group hover:-translate-y-0.5">
               Technology
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(168,85,247,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
-            <a href="#contact" className="text-white hover:text-primary transition-all duration-300 relative group">
+            <a href="#contact" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
               Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
           </div>
 
@@ -72,24 +72,24 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-secondary/95 backdrop-blur-md border-t border-white/10">
+          <div className="md:hidden bg-secondary/95 backdrop-blur-md border-t border-white/10 animate-fade-in">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#divisions" className="block px-3 py-2 text-white hover:text-primary transition-colors">
+              <a href="#divisions" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Divisions
               </a>
-              <a href="/music" className="block px-3 py-2 text-white hover:text-primary transition-colors">
+              <a href="/music" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Music
               </a>
-              <a href="#fashion" className="block px-3 py-2 text-white hover:text-primary transition-colors">
+              <a href="#fashion" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Fashion
               </a>
-              <a href="#technology" className="block px-3 py-2 text-white hover:text-accent transition-colors">
+              <a href="#technology" className="block px-3 py-2 text-white hover:text-accent transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Technology
               </a>
-              <a href="#contact" className="block px-3 py-2 text-white hover:text-primary transition-colors">
+              <a href="#contact" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Contact
               </a>
-              <button className="w-full mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors">
+              <button className="w-full mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-0.5 transition-all duration-300">
                 Get Started
               </button>
             </div>
