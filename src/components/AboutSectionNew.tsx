@@ -101,18 +101,32 @@ const AboutSectionNew = () => {
             </div>
           </div>
 
-          {/* Right side - Video */}
+          {/* Right side - Image/Video */}
           <div className="lg:sticky lg:top-24">
-            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
-                src={companyInfo?.video_url || 'https://res.cloudinary.com/da7s1izqw/video/upload/v1751346710/Aniamte_this_image_202506291716_wj8my_lpgovv.mp4'}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/20 to-accent/20">
+              {companyInfo?.video_url ? (
+                <>
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src={companyInfo.video_url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                </>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/30 flex items-center justify-center">
+                      <span className="text-6xl font-bold text-primary">JS</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">Jason Salvador</p>
+                    <p className="text-xs text-muted-foreground/60 mt-2">Multi-Platinum Producer</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
