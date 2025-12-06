@@ -34,6 +34,8 @@ const AdminHomepageContent = () => {
   const [newFeature, setNewFeature] = useState({ title: '', icon: 'Star', order_index: 0 });
   const [newGallery, setNewGallery] = useState({ title: '', media_url: '', media_type: 'image', description: '', order_index: 0 });
   const [newAbout, setNewAbout] = useState({ title: '', content: '', order_index: 0 });
+  const [newInfo, setNewInfo] = useState({ section: '', heading: '', subheading: '', video_url: '' });
+  const [newFounder, setNewFounder] = useState({ name: '', title: '', quote: '', video_url: '' });
 
   const iconOptions = ['Music', 'Mic', 'Brain', 'Users', 'Zap', 'Star'];
 
@@ -57,6 +59,18 @@ const AdminHomepageContent = () => {
     if (infoRes.data) setCompanyInfo(infoRes.data);
   };
 
+  const createFounderProfile = async () => {
+    const { error } = await supabase.from('founder_profile').insert([newFounder]);
+
+    if (error) {
+      toast({ title: 'Error', description: 'Failed to create profile', variant: 'destructive' });
+    } else {
+      toast({ title: 'Success', description: 'Profile created successfully' });
+      setNewFounder({ name: '', title: '', quote: '', video_url: '' });
+      fetchAllData();
+    }
+  };
+
   const updateFounderProfile = async () => {
     if (!founderProfile) return;
 
@@ -69,6 +83,20 @@ const AdminHomepageContent = () => {
       toast({ title: 'Error', description: 'Failed to update profile', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Profile updated successfully' });
+    }
+  };
+
+  const deleteFounderProfile = async () => {
+    if (!founderProfile) return;
+
+    const { error } = await supabase.from('founder_profile').delete().eq('id', founderProfile.id);
+
+    if (error) {
+      toast({ title: 'Error', description: 'Failed to delete profile', variant: 'destructive' });
+    } else {
+      toast({ title: 'Success', description: 'Profile deleted successfully' });
+      setFounderProfile(null);
+      fetchAllData();
     }
   };
 
@@ -186,6 +214,18 @@ const AdminHomepageContent = () => {
     }
   };
 
+  const addCompanyInfo = async () => {
+    const { error } = await supabase.from('company_info').insert([newInfo]);
+
+    if (error) {
+      toast({ title: 'Error', description: 'Failed to add section info', variant: 'destructive' });
+    } else {
+      toast({ title: 'Success', description: 'Section info added successfully' });
+      setNewInfo({ section: '', heading: '', subheading: '', video_url: '' });
+      fetchAllData();
+    }
+  };
+
   const updateCompanyInfo = async (info: any) => {
     const { error } = await supabase
       .from('company_info')
@@ -201,6 +241,17 @@ const AdminHomepageContent = () => {
     }
   };
 
+  const deleteCompanyInfo = async (id: string) => {
+    const { error } = await supabase.from('company_info').delete().eq('id', id);
+
+    if (error) {
+      toast({ title: 'Error', description: 'Failed to delete section info', variant: 'destructive' });
+    } else {
+      toast({ title: 'Success', description: 'Section info deleted successfully' });
+      fetchAllData();
+    }
+  };
+
   return (
     <Tabs defaultValue="founder" className="w-full">
       <TabsList className="grid w-full grid-cols-5">
@@ -212,63 +263,101 @@ const AdminHomepageContent = () => {
       </TabsList>
 
       <TabsContent value="founder" className="space-y-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Founder Profile</CardTitle>
-            <CardDescription>Manage founder information and bio</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {founderProfile && (
-              <>
-                <div>
-                  <Label>Name</Label>
-                  <Input
-                    value={founderProfile.name}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, name: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Title</Label>
-                  <Input
-                    value={founderProfile.title}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, title: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Quote</Label>
-                  <Textarea
-                    value={founderProfile.quote}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, quote: e.target.value })}
-                    rows={3}
-                  />
-                </div>
-                <div>
-                  <Label>Bio</Label>
-                  <Textarea
-                    value={founderProfile.bio}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, bio: e.target.value })}
-                    rows={5}
-                  />
-                </div>
-                <div>
-                  <Label>Video URL</Label>
-                  <Input
-                    value={founderProfile.video_url || ''}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, video_url: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Image URL</Label>
-                  <Input
-                    value={founderProfile.image_url || ''}
-                    onChange={(e) => setFounderProfile({ ...founderProfile, image_url: e.target.value })}
-                  />
-                </div>
-                <Button onClick={updateFounderProfile}>Update Profile</Button>
-              </>
-            )}
-          </CardContent>
-        </Card>
+        {!founderProfile ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Create Founder Profile</CardTitle>
+              <CardDescription>No profile exists. Create one to get started.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Name</Label>
+                <Input
+                  value={newFounder.name}
+                  onChange={(e) => setNewFounder({ ...newFounder, name: e.target.value })}
+                  placeholder="Enter founder name"
+                />
+              </div>
+              <div>
+                <Label>Title</Label>
+                <Input
+                  value={newFounder.title}
+                  onChange={(e) => setNewFounder({ ...newFounder, title: e.target.value })}
+                  placeholder="Enter title/role"
+                />
+              </div>
+              <div>
+                <Label>Quote</Label>
+                <Textarea
+                  value={newFounder.quote}
+                  onChange={(e) => setNewFounder({ ...newFounder, quote: e.target.value })}
+                  placeholder="Enter a quote or tagline"
+                  rows={3}
+                />
+              </div>
+              <div>
+                <Label>Video URL</Label>
+                <Input
+                  value={newFounder.video_url}
+                  onChange={(e) => setNewFounder({ ...newFounder, video_url: e.target.value })}
+                  placeholder="Enter video URL"
+                />
+              </div>
+              <Button onClick={createFounderProfile}>
+                <Plus className="w-4 h-4 mr-2" />
+                Create Profile
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader>
+              <CardTitle>Founder Profile</CardTitle>
+              <CardDescription>Manage founder information and bio</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label>Name</Label>
+                <Input
+                  value={founderProfile.name}
+                  onChange={(e) => setFounderProfile({ ...founderProfile, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label>Title</Label>
+                <Input
+                  value={founderProfile.title}
+                  onChange={(e) => setFounderProfile({ ...founderProfile, title: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label>Quote</Label>
+                <Textarea
+                  value={founderProfile.quote}
+                  onChange={(e) => setFounderProfile({ ...founderProfile, quote: e.target.value })}
+                  rows={3}
+                />
+              </div>
+              <div>
+                <Label>Video URL</Label>
+                <Input
+                  value={founderProfile.video_url || ''}
+                  onChange={(e) => setFounderProfile({ ...founderProfile, video_url: e.target.value })}
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button onClick={updateFounderProfile}>
+                  <Save className="w-4 h-4 mr-2" />
+                  Update Profile
+                </Button>
+                <Button variant="destructive" onClick={deleteFounderProfile}>
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Delete Profile
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </TabsContent>
 
       <TabsContent value="features" className="space-y-4">
@@ -635,8 +724,55 @@ const AdminHomepageContent = () => {
       <TabsContent value="sections" className="space-y-4">
         <Card>
           <CardHeader>
-            <CardTitle>Section Information</CardTitle>
-            <CardDescription>Manage headings and subheadings for each section</CardDescription>
+            <CardTitle>Add Section Info</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label>Section Name</Label>
+                <Input
+                  value={newInfo.section}
+                  onChange={(e) => setNewInfo({ ...newInfo, section: e.target.value })}
+                  placeholder="e.g., about, hero, gallery"
+                />
+              </div>
+              <div>
+                <Label>Video URL (optional)</Label>
+                <Input
+                  value={newInfo.video_url}
+                  onChange={(e) => setNewInfo({ ...newInfo, video_url: e.target.value })}
+                  placeholder="Enter video URL"
+                />
+              </div>
+            </div>
+            <div>
+              <Label>Heading</Label>
+              <Input
+                value={newInfo.heading}
+                onChange={(e) => setNewInfo({ ...newInfo, heading: e.target.value })}
+                placeholder="Enter section heading"
+              />
+            </div>
+            <div>
+              <Label>Subheading</Label>
+              <Textarea
+                value={newInfo.subheading}
+                onChange={(e) => setNewInfo({ ...newInfo, subheading: e.target.value })}
+                placeholder="Enter section subheading"
+                rows={2}
+              />
+            </div>
+            <Button onClick={addCompanyInfo}>
+              <Plus className="w-4 h-4 mr-2" />
+              Add Section
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Manage Section Information</CardTitle>
+            <CardDescription>Manage headings, subheadings, and media for each section</CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
@@ -645,6 +781,7 @@ const AdminHomepageContent = () => {
                   <TableHead>Section</TableHead>
                   <TableHead>Heading</TableHead>
                   <TableHead>Subheading</TableHead>
+                  <TableHead>Video URL</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -655,16 +792,22 @@ const AdminHomepageContent = () => {
                       <>
                         <TableCell>{info.section}</TableCell>
                         <TableCell>
-                          <Textarea
+                          <Input
                             value={editingInfo.heading}
                             onChange={(e) => setEditingInfo({ ...editingInfo, heading: e.target.value })}
-                            rows={2}
                           />
                         </TableCell>
                         <TableCell>
                           <Input
                             value={editingInfo.subheading}
                             onChange={(e) => setEditingInfo({ ...editingInfo, subheading: e.target.value })}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            value={editingInfo.video_url || ''}
+                            onChange={(e) => setEditingInfo({ ...editingInfo, video_url: e.target.value })}
+                            placeholder="Video URL"
                           />
                         </TableCell>
                         <TableCell>
@@ -681,12 +824,18 @@ const AdminHomepageContent = () => {
                     ) : (
                       <>
                         <TableCell className="font-medium">{info.section}</TableCell>
-                        <TableCell className="max-w-xs">{info.heading}</TableCell>
-                        <TableCell>{info.subheading}</TableCell>
+                        <TableCell className="max-w-xs truncate">{info.heading}</TableCell>
+                        <TableCell className="max-w-xs truncate">{info.subheading}</TableCell>
+                        <TableCell className="max-w-xs truncate">{info.video_url || '-'}</TableCell>
                         <TableCell>
-                          <Button size="sm" variant="outline" onClick={() => setEditingInfo(info)}>
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                          <div className="flex gap-2">
+                            <Button size="sm" variant="outline" onClick={() => setEditingInfo(info)}>
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button size="sm" variant="destructive" onClick={() => deleteCompanyInfo(info.id)}>
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </>
                     )}
