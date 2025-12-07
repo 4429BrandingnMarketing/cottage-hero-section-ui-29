@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Trash2, Edit, Plus, Save, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 import {
   Select,
   SelectContent,
@@ -295,14 +296,12 @@ const AdminHomepageContent = () => {
                   rows={3}
                 />
               </div>
-              <div>
-                <Label>Video URL</Label>
-                <Input
-                  value={newFounder.video_url}
-                  onChange={(e) => setNewFounder({ ...newFounder, video_url: e.target.value })}
-                  placeholder="Enter video URL"
-                />
-              </div>
+              <ImageUpload
+                value={newFounder.video_url}
+                onChange={(url) => setNewFounder({ ...newFounder, video_url: url })}
+                label="Profile Image / Video URL"
+                folder="founder"
+              />
               <Button onClick={createFounderProfile}>
                 <Plus className="w-4 h-4 mr-2" />
                 Create Profile
@@ -338,13 +337,12 @@ const AdminHomepageContent = () => {
                   rows={3}
                 />
               </div>
-              <div>
-                <Label>Video URL</Label>
-                <Input
-                  value={founderProfile.video_url || ''}
-                  onChange={(e) => setFounderProfile({ ...founderProfile, video_url: e.target.value })}
-                />
-              </div>
+              <ImageUpload
+                value={founderProfile.video_url || ''}
+                onChange={(url) => setFounderProfile({ ...founderProfile, video_url: url })}
+                label="Profile Image / Video URL"
+                folder="founder"
+              />
               <div className="flex gap-2">
                 <Button onClick={updateFounderProfile}>
                   <Save className="w-4 h-4 mr-2" />
@@ -510,13 +508,23 @@ const AdminHomepageContent = () => {
                 </Select>
               </div>
             </div>
-            <div>
-              <Label>Media URL</Label>
-              <Input
+            {newGallery.media_type === 'image' ? (
+              <ImageUpload
                 value={newGallery.media_url}
-                onChange={(e) => setNewGallery({ ...newGallery, media_url: e.target.value })}
+                onChange={(url) => setNewGallery({ ...newGallery, media_url: url })}
+                label="Media"
+                folder="gallery"
               />
-            </div>
+            ) : (
+              <div>
+                <Label>Video URL</Label>
+                <Input
+                  value={newGallery.media_url}
+                  onChange={(e) => setNewGallery({ ...newGallery, media_url: e.target.value })}
+                  placeholder="Enter video URL"
+                />
+              </div>
+            )}
             <div>
               <Label>Description</Label>
               <Textarea
