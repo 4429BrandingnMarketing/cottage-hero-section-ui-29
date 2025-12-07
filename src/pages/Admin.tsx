@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Trash2, Edit, Plus, Save, X, LogOut } from 'lucide-react';
+import { ThemeToggle } from '@/components/admin/ThemeToggle';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
@@ -305,10 +306,13 @@ const Admin = () => {
             <h1 className="text-4xl font-bold text-foreground mb-2">Admin Dashboard</h1>
             <p className="text-muted-foreground">Manage Red Vision Music content</p>
           </div>
-          <Button variant="outline" onClick={handleLogout}>
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button variant="outline" onClick={handleLogout}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
 
         <Tabs defaultValue="homepage" className="w-full">
