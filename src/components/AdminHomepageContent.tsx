@@ -6,10 +6,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trash2, Edit, Plus, Save, X } from 'lucide-react';
+import { Trash2, Edit, Plus, Save, X, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { PreviewPanel } from '@/components/admin/PreviewPanel';
 import {
   Select,
   SelectContent,
@@ -31,6 +32,7 @@ const AdminHomepageContent = () => {
   const [editingGallery, setEditingGallery] = useState<any>(null);
   const [editingAbout, setEditingAbout] = useState<any>(null);
   const [editingInfo, setEditingInfo] = useState<any>(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   const [newFeature, setNewFeature] = useState({ title: '', icon: 'Star', order_index: 0 });
   const [newGallery, setNewGallery] = useState({ title: '', media_url: '', media_type: 'image', description: '', order_index: 0 });
@@ -254,14 +256,27 @@ const AdminHomepageContent = () => {
   };
 
   return (
-    <Tabs defaultValue="founder" className="w-full">
-      <TabsList className="grid w-full grid-cols-5">
-        <TabsTrigger value="founder">Founder Profile</TabsTrigger>
-        <TabsTrigger value="features">Features</TabsTrigger>
-        <TabsTrigger value="gallery">Gallery</TabsTrigger>
-        <TabsTrigger value="about">About</TabsTrigger>
-        <TabsTrigger value="sections">Section Info</TabsTrigger>
-      </TabsList>
+    <>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-foreground">Homepage Content</h2>
+        <Button
+          variant={showPreview ? "default" : "outline"}
+          onClick={() => setShowPreview(!showPreview)}
+          className="gap-2"
+        >
+          {showPreview ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          {showPreview ? "Hide Preview" : "Show Preview"}
+        </Button>
+      </div>
+      
+      <Tabs defaultValue="founder" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="founder">Founder Profile</TabsTrigger>
+          <TabsTrigger value="features">Features</TabsTrigger>
+          <TabsTrigger value="gallery">Gallery</TabsTrigger>
+          <TabsTrigger value="about">About</TabsTrigger>
+          <TabsTrigger value="sections">Section Info</TabsTrigger>
+        </TabsList>
 
       <TabsContent value="founder" className="space-y-4">
         {!founderProfile ? (
@@ -855,6 +870,19 @@ const AdminHomepageContent = () => {
         </Card>
       </TabsContent>
     </Tabs>
+
+    <PreviewPanel
+      isOpen={showPreview}
+      onClose={() => setShowPreview(false)}
+      previewData={{
+        founderProfile,
+        features,
+        galleryItems,
+        aboutItems,
+        companyInfo,
+      }}
+    />
+    </>
   );
 };
 
