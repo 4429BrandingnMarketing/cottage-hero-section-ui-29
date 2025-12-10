@@ -11,6 +11,22 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { ImageUpload } from '@/components/admin/ImageUpload';
 import { PreviewPanel } from '@/components/admin/PreviewPanel';
+import { SortableGalleryRow } from '@/components/admin/SortableGalleryRow';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import {
   Select,
   SelectContent,
@@ -41,6 +57,48 @@ const AdminHomepageContent = () => {
   const [newFounder, setNewFounder] = useState({ name: '', title: '', quote: '', video_url: '' });
 
   const iconOptions = ['Music', 'Mic', 'Brain', 'Users', 'Zap', 'Star'];
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = galleryItems.findIndex((item) => item.id === active.id);
+      const newIndex = galleryItems.findIndex((item) => item.id === over.id);
+
+      const newItems = arrayMove(galleryItems, oldIndex, newIndex);
+      
+      // Update local state immediately for optimistic UI
+      setGalleryItems(newItems);
+
+      // Update order_index for all affected items in the database
+      const updates = newItems.map((item, index) => ({
+        id: item.id,
+        order_index: index,
+      }));
+
+      for (const update of updates) {
+        const { error } = await supabase
+          .from('gallery_items')
+          .update({ order_index: update.order_index })
+          .eq('id', update.id);
+
+        if (error) {
+          toast({ title: 'Error', description: 'Failed to update order', variant: 'destructive' });
+          fetchAllData(); // Revert on error
+          return;
+        }
+      }
+
+      toast({ title: 'Success', description: 'Gallery order updated' });
+    }
+  };
 
   useEffect(() => {
     fetchAllData();
@@ -566,78 +624,46 @@ const AdminHomepageContent = () => {
         <Card>
           <CardHeader>
             <CardTitle>Manage Gallery</CardTitle>
+            <CardDescription>Drag items to reorder them</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Order</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {galleryItems.map((item) => (
-                  <TableRow key={item.id}>
-                    {editingGallery?.id === item.id ? (
-                      <>
-                        <TableCell>
-                          <Input
-                            value={editingGallery.title}
-                            onChange={(e) => setEditingGallery({ ...editingGallery, title: e.target.value })}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Select value={editingGallery.media_type} onValueChange={(value) => setEditingGallery({ ...editingGallery, media_type: value })}>
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="image">Image</SelectItem>
-                              <SelectItem value="video">Video</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </TableCell>
-                        <TableCell>
-                          <Input
-                            type="number"
-                            value={editingGallery.order_index}
-                            onChange={(e) => setEditingGallery({ ...editingGallery, order_index: parseInt(e.target.value) })}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button size="sm" onClick={() => updateGalleryItem(editingGallery)}>
-                              <Save className="w-4 h-4" />
-                            </Button>
-                            <Button size="sm" variant="outline" onClick={() => setEditingGallery(null)}>
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </>
-                    ) : (
-                      <>
-                        <TableCell>{item.title}</TableCell>
-                        <TableCell>{item.media_type}</TableCell>
-                        <TableCell>{item.order_index}</TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" onClick={() => setEditingGallery(item)}>
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button size="sm" variant="destructive" onClick={() => deleteGalleryItem(item.id)}>
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </>
-                    )}
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-10"></TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Order</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  <SortableContext
+                    items={galleryItems.map((item) => item.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {galleryItems.map((item) => (
+                      <SortableGalleryRow
+                        key={item.id}
+                        item={item}
+                        isEditing={editingGallery?.id === item.id}
+                        editingGallery={editingGallery}
+                        onEdit={setEditingGallery}
+                        onSave={updateGalleryItem}
+                        onCancel={() => setEditingGallery(null)}
+                        onDelete={deleteGalleryItem}
+                        onEditChange={setEditingGallery}
+                      />
+                    ))}
+                  </SortableContext>
+                </TableBody>
+              </Table>
+            </DndContext>
           </CardContent>
         </Card>
       </TabsContent>
