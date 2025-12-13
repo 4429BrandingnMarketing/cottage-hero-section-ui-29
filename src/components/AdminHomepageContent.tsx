@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ImageUpload } from '@/components/admin/ImageUpload';
 import { PreviewPanel } from '@/components/admin/PreviewPanel';
 import { SortableGalleryRow } from '@/components/admin/SortableGalleryRow';
+import { SortableAboutRow } from '@/components/admin/SortableAboutRow';
 import {
   DndContext,
   closestCenter,
@@ -65,7 +66,7 @@ const AdminHomepageContent = () => {
     })
   );
 
-  const handleDragEnd = async (event: DragEndEvent) => {
+  const handleGalleryDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -74,10 +75,8 @@ const AdminHomepageContent = () => {
 
       const newItems = arrayMove(galleryItems, oldIndex, newIndex);
       
-      // Update local state immediately for optimistic UI
       setGalleryItems(newItems);
 
-      // Update order_index for all affected items in the database
       const updates = newItems.map((item, index) => ({
         id: item.id,
         order_index: index,
@@ -91,12 +90,45 @@ const AdminHomepageContent = () => {
 
         if (error) {
           toast({ title: 'Error', description: 'Failed to update order', variant: 'destructive' });
-          fetchAllData(); // Revert on error
+          fetchAllData();
           return;
         }
       }
 
       toast({ title: 'Success', description: 'Gallery order updated' });
+    }
+  };
+
+  const handleAboutDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = aboutItems.findIndex((item) => item.id === active.id);
+      const newIndex = aboutItems.findIndex((item) => item.id === over.id);
+
+      const newItems = arrayMove(aboutItems, oldIndex, newIndex);
+      
+      setAboutItems(newItems);
+
+      const updates = newItems.map((item, index) => ({
+        id: item.id,
+        order_index: index,
+      }));
+
+      for (const update of updates) {
+        const { error } = await supabase
+          .from('about_accordion')
+          .update({ order_index: update.order_index })
+          .eq('id', update.id);
+
+        if (error) {
+          toast({ title: 'Error', description: 'Failed to update order', variant: 'destructive' });
+          fetchAllData();
+          return;
+        }
+      }
+
+      toast({ title: 'Success', description: 'About order updated' });
     }
   };
 
@@ -630,7 +662,7 @@ const AdminHomepageContent = () => {
             <DndContext
               sensors={sensors}
               collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
+              onDragEnd={handleGalleryDragEnd}
             >
               <Table>
                 <TableHeader>
@@ -709,63 +741,42 @@ const AdminHomepageContent = () => {
             <CardTitle>Manage About Section</CardTitle>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Order</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {aboutItems.map((item) => (
-                  <TableRow key={item.id}>
-                    {editingAbout?.id === item.id ? (
-                      <>
-                        <TableCell>
-                          <Input
-                            value={editingAbout.title}
-                            onChange={(e) => setEditingAbout({ ...editingAbout, title: e.target.value })}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Input
-                            type="number"
-                            value={editingAbout.order_index}
-                            onChange={(e) => setEditingAbout({ ...editingAbout, order_index: parseInt(e.target.value) })}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button size="sm" onClick={() => updateAboutItem(editingAbout)}>
-                              <Save className="w-4 h-4" />
-                            </Button>
-                            <Button size="sm" variant="outline" onClick={() => setEditingAbout(null)}>
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </>
-                    ) : (
-                      <>
-                        <TableCell>{item.title}</TableCell>
-                        <TableCell>{item.order_index}</TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" onClick={() => setEditingAbout(item)}>
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button size="sm" variant="destructive" onClick={() => deleteAboutItem(item.id)}>
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </>
-                    )}
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleAboutDragEnd}
+            >
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-10"></TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Order</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  <SortableContext
+                    items={aboutItems.map((item) => item.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {aboutItems.map((item) => (
+                      <SortableAboutRow
+                        key={item.id}
+                        item={item}
+                        isEditing={editingAbout?.id === item.id}
+                        editingAbout={editingAbout}
+                        onEdit={setEditingAbout}
+                        onSave={updateAboutItem}
+                        onCancel={() => setEditingAbout(null)}
+                        onDelete={deleteAboutItem}
+                        onEditChange={setEditingAbout}
+                      />
+                    ))}
+                  </SortableContext>
+                </TableBody>
+              </Table>
+            </DndContext>
           </CardContent>
         </Card>
       </TabsContent>
