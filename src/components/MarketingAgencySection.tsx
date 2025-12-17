@@ -1,46 +1,59 @@
+import { useEffect, useState } from 'react';
 import { Megaphone, TrendingUp, Target, Users, BarChart3, Globe, ArrowRight, CheckCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+
+const iconMap: Record<string, any> = {
+  Target,
+  TrendingUp,
+  Globe,
+  BarChart3,
+  Megaphone,
+  Users,
+};
+
+interface MarketingService {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  order_index: number;
+}
+
+interface MarketingStat {
+  id: string;
+  value: string;
+  label: string;
+  order_index: number;
+}
+
+interface MarketingBenefit {
+  id: string;
+  benefit: string;
+  order_index: number;
+}
 
 const MarketingAgencySection = () => {
-  const services = [
-    {
-      icon: Target,
-      title: "Brand Strategy",
-      description: "Craft compelling brand narratives that resonate with your audience and drive engagement."
-    },
-    {
-      icon: TrendingUp,
-      title: "Growth Marketing",
-      description: "Data-driven campaigns that scale your reach and maximize ROI across all channels."
-    },
-    {
-      icon: Globe,
-      title: "Digital Presence",
-      description: "Build a powerful online presence with SEO, content marketing, and social media mastery."
-    },
-    {
-      icon: BarChart3,
-      title: "Analytics & Insights",
-      description: "Turn data into actionable insights with advanced tracking and reporting systems."
-    }
-  ];
+  const [services, setServices] = useState<MarketingService[]>([]);
+  const [stats, setStats] = useState<MarketingStat[]>([]);
+  const [benefits, setBenefits] = useState<MarketingBenefit[]>([]);
 
-  const benefits = [
-    "AI-Powered Campaign Optimization",
-    "Multi-Platform Advertising",
-    "Influencer Partnership Network",
-    "Content Creation Studio",
-    "Real-Time Performance Dashboards",
-    "Dedicated Account Management"
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const [servicesRes, statsRes, benefitsRes] = await Promise.all([
+        supabase.from('marketing_services').select('*').order('order_index'),
+        supabase.from('marketing_stats').select('*').order('order_index'),
+        supabase.from('marketing_benefits').select('*').order('order_index'),
+      ]);
 
-  const stats = [
-    { value: "500+", label: "Campaigns Launched" },
-    { value: "$50M+", label: "Ad Spend Managed" },
-    { value: "300%", label: "Avg. ROI Increase" },
-    { value: "150+", label: "Happy Clients" }
-  ];
+      if (servicesRes.data) setServices(servicesRes.data);
+      if (statsRes.data) setStats(statsRes.data);
+      if (benefitsRes.data) setBenefits(benefitsRes.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-background relative overflow-hidden">
@@ -68,47 +81,53 @@ const MarketingAgencySection = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center p-6 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
-              <div className="text-muted-foreground text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+        {stats.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            {stats.map((stat) => (
+              <div key={stat.id} className="text-center p-6 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-muted-foreground text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <Card key={index} className="bg-card border-border hover:border-primary/30 transition-all duration-300 group hover:-translate-y-1">
-                <CardContent className="p-6 text-center">
-                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm">{service.description}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+        {services.length > 0 && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {services.map((service) => {
+              const Icon = iconMap[service.icon] || Target;
+              return (
+                <Card key={service.id} className="bg-card border-border hover:border-primary/30 transition-all duration-300 group hover:-translate-y-1">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-2">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm">{service.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        )}
 
         {/* Features + CTA */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Benefits List */}
-          <div>
-            <h3 className="text-2xl font-bold text-foreground mb-6">What Sets Us Apart</h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">{benefit}</span>
-                </div>
-              ))}
+          {benefits.length > 0 && (
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">What Sets Us Apart</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {benefits.map((item) => (
+                  <div key={item.id} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">{item.benefit}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* CTA Card */}
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
