@@ -474,6 +474,66 @@ export type Database = {
         }
         Relationships: []
       }
+      technology_capabilities: {
+        Row: {
+          created_at: string | null
+          description: string
+          features: string[]
+          icon: string
+          id: string
+          order_index: number
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          features?: string[]
+          icon?: string
+          id?: string
+          order_index?: number
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          features?: string[]
+          icon?: string
+          id?: string
+          order_index?: number
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      technology_stats: {
+        Row: {
+          created_at: string | null
+          id: string
+          label: string
+          order_index: number
+          updated_at: string | null
+          value: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          label: string
+          order_index?: number
+          updated_at?: string | null
+          value: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          label?: string
+          order_index?: number
+          updated_at?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
       tracks: {
         Row: {
           artist: string

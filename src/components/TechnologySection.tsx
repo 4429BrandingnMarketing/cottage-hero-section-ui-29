@@ -1,41 +1,64 @@
+import { useEffect, useState } from 'react';
 import { Cpu, Brain, Zap, Code, Database, Shield, ArrowRight, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+
+const iconMap: { [key: string]: any } = {
+  Brain,
+  Code,
+  Database,
+  Shield,
+  Cpu,
+  Zap,
+  Sparkles
+};
+
+interface TechnologyCapability {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  order_index: number;
+}
+
+interface TechnologyStat {
+  id: string;
+  value: string;
+  label: string;
+  order_index: number;
+}
 
 const TechnologySection = () => {
-  const technologies = [
-    {
-      icon: Brain,
-      title: "AI & Machine Learning",
-      description: "Custom AI models for content creation, audience analysis, and predictive analytics.",
-      features: ["Neural Networks", "NLP Processing", "Computer Vision"]
-    },
-    {
-      icon: Code,
-      title: "Custom Development",
-      description: "Full-stack solutions built with cutting-edge frameworks and cloud infrastructure.",
-      features: ["React & Next.js", "Node.js APIs", "Cloud Native"]
-    },
-    {
-      icon: Database,
-      title: "Data Infrastructure",
-      description: "Scalable data pipelines and real-time analytics for entertainment insights.",
-      features: ["Real-time Analytics", "Big Data", "ETL Pipelines"]
-    },
-    {
-      icon: Shield,
-      title: "Security & Compliance",
-      description: "Enterprise-grade security protecting creative assets and user data.",
-      features: ["Encryption", "GDPR Ready", "SOC 2"]
-    }
-  ];
+  const [capabilities, setCapabilities] = useState<TechnologyCapability[]>([]);
+  const [stats, setStats] = useState<TechnologyStat[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const stats = [
-    { value: "99.9%", label: "Uptime SLA" },
-    { value: "50ms", label: "Avg Response" },
-    { value: "10M+", label: "API Calls/Day" },
-    { value: "24/7", label: "Support" }
-  ];
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const [capabilitiesRes, statsRes] = await Promise.all([
+      supabase.from('technology_capabilities').select('*').order('order_index'),
+      supabase.from('technology_stats').select('*').order('order_index')
+    ]);
+
+    if (capabilitiesRes.data) setCapabilities(capabilitiesRes.data);
+    if (statsRes.data) setStats(statsRes.data);
+    setLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <section id="technology" className="py-24 px-4 bg-secondary">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="animate-pulse">Loading...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="technology" className="py-24 px-4 bg-secondary relative overflow-hidden">
@@ -76,43 +99,47 @@ const TechnologySection = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
-              <div className="text-muted-foreground text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+        {stats.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            {stats.map((stat) => (
+              <div key={stat.id} className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
+                <div className="text-muted-foreground text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Technology Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {technologies.map((tech, index) => {
-            const Icon = tech.icon;
-            return (
-              <Card key={index} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
-                      <Icon className="w-7 h-7 text-accent" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-foreground mb-2">{tech.title}</h3>
-                      <p className="text-muted-foreground mb-4">{tech.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {tech.features.map((feature, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">
-                            {feature}
-                          </span>
-                        ))}
+        {capabilities.length > 0 && (
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {capabilities.map((tech) => {
+              const Icon = iconMap[tech.icon] || Cpu;
+              return (
+                <Card key={tech.id} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group">
+                  <CardContent className="p-8">
+                    <div className="flex items-start gap-6">
+                      <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                        <Icon className="w-7 h-7 text-accent" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-foreground mb-2">{tech.title}</h3>
+                        <p className="text-muted-foreground mb-4">{tech.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {tech.features.map((feature, idx) => (
+                            <span key={idx} className="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 border border-white/10 rounded-3xl p-12">
