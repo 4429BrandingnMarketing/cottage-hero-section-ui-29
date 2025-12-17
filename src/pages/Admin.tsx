@@ -17,6 +17,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdminHomepageContent from '@/components/AdminHomepageContent';
 import AdminMarketingContent from '@/components/admin/AdminMarketingContent';
+import AdminTechnologyContent from '@/components/admin/AdminTechnologyContent';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -317,9 +318,10 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="homepage" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="homepage">Homepage</TabsTrigger>
             <TabsTrigger value="marketing">Marketing</TabsTrigger>
+            <TabsTrigger value="technology">Technology</TabsTrigger>
             <TabsTrigger value="artists">Artists</TabsTrigger>
             <TabsTrigger value="tracks">Tracks</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
@@ -333,6 +335,10 @@ const Admin = () => {
 
           <TabsContent value="marketing">
             <AdminMarketingContent />
+          </TabsContent>
+
+          <TabsContent value="technology">
+            <AdminTechnologyContent />
           </TabsContent>
 
           <TabsContent value="artists" className="space-y-4">
