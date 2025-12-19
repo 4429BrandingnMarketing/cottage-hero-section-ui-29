@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trash2, Edit, Plus, Save, X } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { SortableTechCapabilityRow } from './SortableTechCapabilityRow';
+import { SortableTechStatRow } from './SortableTechStatRow';
 
 interface TechnologyCapability {
   id: string;
@@ -47,6 +51,11 @@ const AdminTechnologyContent = () => {
     label: ''
   });
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -61,7 +70,42 @@ const AdminTechnologyContent = () => {
     if (statsRes.data) setStats(statsRes.data);
   };
 
-  // Capabilities CRUD
+  const handleCapabilityDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = capabilities.findIndex((item) => item.id === active.id);
+    const newIndex = capabilities.findIndex((item) => item.id === over.id);
+    const newOrder = arrayMove(capabilities, oldIndex, newIndex);
+
+    setCapabilities(newOrder);
+
+    const updates = newOrder.map((item, index) => 
+      supabase.from('technology_capabilities').update({ order_index: index }).eq('id', item.id)
+    );
+    
+    await Promise.all(updates);
+    toast({ title: "Order updated" });
+  };
+
+  const handleStatDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = stats.findIndex((item) => item.id === active.id);
+    const newIndex = stats.findIndex((item) => item.id === over.id);
+    const newOrder = arrayMove(stats, oldIndex, newIndex);
+
+    setStats(newOrder);
+
+    const updates = newOrder.map((item, index) => 
+      supabase.from('technology_stats').update({ order_index: index }).eq('id', item.id)
+    );
+    
+    await Promise.all(updates);
+    toast({ title: "Order updated" });
+  };
+
   const addCapability = async () => {
     const featuresArray = newCapability.features.split(',').map(f => f.trim()).filter(f => f);
     const { error } = await supabase
@@ -112,7 +156,6 @@ const AdminTechnologyContent = () => {
     }
   };
 
-  // Stats CRUD
   const addStat = async () => {
     const { error } = await supabase
       .from('technology_stats')
@@ -223,80 +266,40 @@ const AdminTechnologyContent = () => {
           <Card>
             <CardHeader>
               <CardTitle>Manage Capabilities</CardTitle>
+              <CardDescription>Drag and drop to reorder</CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Icon</TableHead>
-                    <TableHead>Features</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {capabilities.map((cap) => (
-                    <TableRow key={cap.id}>
-                      {editingCapability?.id === cap.id ? (
-                        <>
-                          <TableCell>
-                            <Input
-                              value={editingCapability.title}
-                              onChange={(e) => setEditingCapability({ ...editingCapability, title: e.target.value })}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <select
-                              className="h-10 px-3 border rounded-md bg-background"
-                              value={editingCapability.icon}
-                              onChange={(e) => setEditingCapability({ ...editingCapability, icon: e.target.value })}
-                            >
-                              {ICON_OPTIONS.map(icon => (
-                                <option key={icon} value={icon}>{icon}</option>
-                              ))}
-                            </select>
-                          </TableCell>
-                          <TableCell>
-                            <Input
-                              value={editingCapability.features.join(', ')}
-                              onChange={(e) => setEditingCapability({ 
-                                ...editingCapability, 
-                                features: e.target.value.split(',').map(f => f.trim()).filter(f => f) 
-                              })}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={() => updateCapability(editingCapability)}>
-                                <Save className="w-4 h-4" />
-                              </Button>
-                              <Button size="sm" variant="outline" onClick={() => setEditingCapability(null)}>
-                                <X className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableCell className="font-medium">{cap.title}</TableCell>
-                          <TableCell>{cap.icon}</TableCell>
-                          <TableCell className="max-w-xs truncate">{cap.features.join(', ')}</TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => setEditingCapability(cap)}>
-                                <Edit className="w-4 h-4" />
-                              </Button>
-                              <Button size="sm" variant="destructive" onClick={() => deleteCapability(cap.id)}>
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      )}
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleCapabilityDragEnd}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-10"></TableHead>
+                      <TableHead>Title</TableHead>
+                      <TableHead>Icon</TableHead>
+                      <TableHead>Features</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext items={capabilities.map(c => c.id)} strategy={verticalListSortingStrategy}>
+                      {capabilities.map((cap) => (
+                        <SortableTechCapabilityRow
+                          key={cap.id}
+                          item={cap}
+                          isEditing={editingCapability?.id === cap.id}
+                          editingItem={editingCapability}
+                          iconOptions={ICON_OPTIONS}
+                          onEdit={setEditingCapability}
+                          onSave={updateCapability}
+                          onCancel={() => setEditingCapability(null)}
+                          onDelete={deleteCapability}
+                          onEditChange={setEditingCapability}
+                        />
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             </CardContent>
           </Card>
         </TabsContent>
@@ -336,64 +339,38 @@ const AdminTechnologyContent = () => {
           <Card>
             <CardHeader>
               <CardTitle>Manage Stats</CardTitle>
+              <CardDescription>Drag and drop to reorder</CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Value</TableHead>
-                    <TableHead>Label</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {stats.map((stat) => (
-                    <TableRow key={stat.id}>
-                      {editingStat?.id === stat.id ? (
-                        <>
-                          <TableCell>
-                            <Input
-                              value={editingStat.value}
-                              onChange={(e) => setEditingStat({ ...editingStat, value: e.target.value })}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Input
-                              value={editingStat.label}
-                              onChange={(e) => setEditingStat({ ...editingStat, label: e.target.value })}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={() => updateStat(editingStat)}>
-                                <Save className="w-4 h-4" />
-                              </Button>
-                              <Button size="sm" variant="outline" onClick={() => setEditingStat(null)}>
-                                <X className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableCell className="font-medium">{stat.value}</TableCell>
-                          <TableCell>{stat.label}</TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => setEditingStat(stat)}>
-                                <Edit className="w-4 h-4" />
-                              </Button>
-                              <Button size="sm" variant="destructive" onClick={() => deleteStat(stat.id)}>
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      )}
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleStatDragEnd}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-10"></TableHead>
+                      <TableHead>Value</TableHead>
+                      <TableHead>Label</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext items={stats.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                      {stats.map((stat) => (
+                        <SortableTechStatRow
+                          key={stat.id}
+                          item={stat}
+                          isEditing={editingStat?.id === stat.id}
+                          editingItem={editingStat}
+                          onEdit={setEditingStat}
+                          onSave={updateStat}
+                          onCancel={() => setEditingStat(null)}
+                          onDelete={deleteStat}
+                          onEditChange={setEditingStat}
+                        />
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             </CardContent>
           </Card>
         </TabsContent>
