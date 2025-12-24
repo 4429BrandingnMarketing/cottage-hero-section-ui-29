@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trash2, Edit, Plus, Save, X } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -16,23 +16,54 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableMarketingServiceRow } from './SortableMarketingServiceRow';
+import { SortableMarketingStatRow } from './SortableMarketingStatRow';
+import { SortableMarketingBenefitRow } from './SortableMarketingBenefitRow';
 
 const iconOptions = ['Target', 'TrendingUp', 'Globe', 'BarChart3', 'Megaphone', 'Users'];
+
+interface MarketingService {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  order_index: number;
+}
+
+interface MarketingStat {
+  id: string;
+  value: string;
+  label: string;
+  order_index: number;
+}
+
+interface MarketingBenefit {
+  id: string;
+  benefit: string;
+  order_index: number;
+}
 
 const AdminMarketingContent = () => {
   const { toast } = useToast();
 
-  const [services, setServices] = useState<any[]>([]);
-  const [stats, setStats] = useState<any[]>([]);
-  const [benefits, setBenefits] = useState<any[]>([]);
+  const [services, setServices] = useState<MarketingService[]>([]);
+  const [stats, setStats] = useState<MarketingStat[]>([]);
+  const [benefits, setBenefits] = useState<MarketingBenefit[]>([]);
 
-  const [editingService, setEditingService] = useState<any>(null);
-  const [editingStat, setEditingStat] = useState<any>(null);
-  const [editingBenefit, setEditingBenefit] = useState<any>(null);
+  const [editingService, setEditingService] = useState<MarketingService | null>(null);
+  const [editingStat, setEditingStat] = useState<MarketingStat | null>(null);
+  const [editingBenefit, setEditingBenefit] = useState<MarketingBenefit | null>(null);
 
-  const [newService, setNewService] = useState({ title: '', description: '', icon: 'Target', order_index: 0 });
-  const [newStat, setNewStat] = useState({ value: '', label: '', order_index: 0 });
-  const [newBenefit, setNewBenefit] = useState({ benefit: '', order_index: 0 });
+  const [newService, setNewService] = useState({ title: '', description: '', icon: 'Target' });
+  const [newStat, setNewStat] = useState({ value: '', label: '' });
+  const [newBenefit, setNewBenefit] = useState({ benefit: '' });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
 
   useEffect(() => {
     fetchAllData();
@@ -52,17 +83,20 @@ const AdminMarketingContent = () => {
 
   // Services CRUD
   const addService = async () => {
-    const { error } = await supabase.from('marketing_services').insert([newService]);
+    const { error } = await supabase.from('marketing_services').insert([{
+      ...newService,
+      order_index: services.length,
+    }]);
     if (error) {
       toast({ title: 'Error', description: 'Failed to add service', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Service added' });
-      setNewService({ title: '', description: '', icon: 'Target', order_index: 0 });
+      setNewService({ title: '', description: '', icon: 'Target' });
       fetchAllData();
     }
   };
 
-  const updateService = async (service: any) => {
+  const updateService = async (service: MarketingService) => {
     const { error } = await supabase.from('marketing_services').update(service).eq('id', service.id);
     if (error) {
       toast({ title: 'Error', description: 'Failed to update service', variant: 'destructive' });
@@ -85,17 +119,20 @@ const AdminMarketingContent = () => {
 
   // Stats CRUD
   const addStat = async () => {
-    const { error } = await supabase.from('marketing_stats').insert([newStat]);
+    const { error } = await supabase.from('marketing_stats').insert([{
+      ...newStat,
+      order_index: stats.length,
+    }]);
     if (error) {
       toast({ title: 'Error', description: 'Failed to add stat', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Stat added' });
-      setNewStat({ value: '', label: '', order_index: 0 });
+      setNewStat({ value: '', label: '' });
       fetchAllData();
     }
   };
 
-  const updateStat = async (stat: any) => {
+  const updateStat = async (stat: MarketingStat) => {
     const { error } = await supabase.from('marketing_stats').update(stat).eq('id', stat.id);
     if (error) {
       toast({ title: 'Error', description: 'Failed to update stat', variant: 'destructive' });
@@ -118,17 +155,20 @@ const AdminMarketingContent = () => {
 
   // Benefits CRUD
   const addBenefit = async () => {
-    const { error } = await supabase.from('marketing_benefits').insert([newBenefit]);
+    const { error } = await supabase.from('marketing_benefits').insert([{
+      ...newBenefit,
+      order_index: benefits.length,
+    }]);
     if (error) {
       toast({ title: 'Error', description: 'Failed to add benefit', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Benefit added' });
-      setNewBenefit({ benefit: '', order_index: 0 });
+      setNewBenefit({ benefit: '' });
       fetchAllData();
     }
   };
 
-  const updateBenefit = async (benefit: any) => {
+  const updateBenefit = async (benefit: MarketingBenefit) => {
     const { error } = await supabase.from('marketing_benefits').update(benefit).eq('id', benefit.id);
     if (error) {
       toast({ title: 'Error', description: 'Failed to update benefit', variant: 'destructive' });
@@ -147,6 +187,55 @@ const AdminMarketingContent = () => {
       toast({ title: 'Success', description: 'Benefit deleted' });
       fetchAllData();
     }
+  };
+
+  // Drag and drop handlers
+  const handleServiceDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = services.findIndex((s) => s.id === active.id);
+    const newIndex = services.findIndex((s) => s.id === over.id);
+    const newOrder = arrayMove(services, oldIndex, newIndex);
+    setServices(newOrder);
+
+    const updates = newOrder.map((item, index) =>
+      supabase.from('marketing_services').update({ order_index: index }).eq('id', item.id)
+    );
+    await Promise.all(updates);
+    toast({ title: 'Order updated' });
+  };
+
+  const handleStatDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = stats.findIndex((s) => s.id === active.id);
+    const newIndex = stats.findIndex((s) => s.id === over.id);
+    const newOrder = arrayMove(stats, oldIndex, newIndex);
+    setStats(newOrder);
+
+    const updates = newOrder.map((item, index) =>
+      supabase.from('marketing_stats').update({ order_index: index }).eq('id', item.id)
+    );
+    await Promise.all(updates);
+    toast({ title: 'Order updated' });
+  };
+
+  const handleBenefitDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = benefits.findIndex((b) => b.id === active.id);
+    const newIndex = benefits.findIndex((b) => b.id === over.id);
+    const newOrder = arrayMove(benefits, oldIndex, newIndex);
+    setBenefits(newOrder);
+
+    const updates = newOrder.map((item, index) =>
+      supabase.from('marketing_benefits').update({ order_index: index }).eq('id', item.id)
+    );
+    await Promise.all(updates);
+    toast({ title: 'Order updated' });
   };
 
   return (
@@ -202,58 +291,36 @@ const AdminMarketingContent = () => {
           <Card>
             <CardHeader><CardTitle>Services</CardTitle></CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Description</TableHead>
-                    <TableHead>Icon</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {services.map((service) => (
-                    <TableRow key={service.id}>
-                      {editingService?.id === service.id ? (
-                        <>
-                          <TableCell>
-                            <Input value={editingService.title} onChange={(e) => setEditingService({ ...editingService, title: e.target.value })} />
-                          </TableCell>
-                          <TableCell>
-                            <Textarea value={editingService.description} onChange={(e) => setEditingService({ ...editingService, description: e.target.value })} rows={1} />
-                          </TableCell>
-                          <TableCell>
-                            <Select value={editingService.icon} onValueChange={(val) => setEditingService({ ...editingService, icon: val })}>
-                              <SelectTrigger><SelectValue /></SelectTrigger>
-                              <SelectContent>
-                                {iconOptions.map((icon) => (<SelectItem key={icon} value={icon}>{icon}</SelectItem>))}
-                              </SelectContent>
-                            </Select>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={() => updateService(editingService)}><Save className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="outline" onClick={() => setEditingService(null)}><X className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableCell className="font-medium">{service.title}</TableCell>
-                          <TableCell className="max-w-xs truncate">{service.description}</TableCell>
-                          <TableCell>{service.icon}</TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => setEditingService(service)}><Edit className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="destructive" onClick={() => deleteService(service.id)}><Trash2 className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      )}
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleServiceDragEnd}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-12"></TableHead>
+                      <TableHead>Title</TableHead>
+                      <TableHead>Description</TableHead>
+                      <TableHead>Icon</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext items={services.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                      {services.map((service) => (
+                        <SortableMarketingServiceRow
+                          key={service.id}
+                          service={service}
+                          isEditing={editingService?.id === service.id}
+                          editingData={editingService}
+                          onEditStart={() => setEditingService(service)}
+                          onEditChange={setEditingService}
+                          onSave={() => editingService && updateService(editingService)}
+                          onCancel={() => setEditingService(null)}
+                          onDelete={() => deleteService(service.id)}
+                        />
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             </CardContent>
           </Card>
         </TabsContent>
@@ -272,59 +339,45 @@ const AdminMarketingContent = () => {
                   <Label>Label</Label>
                   <Input value={newStat.label} onChange={(e) => setNewStat({ ...newStat, label: e.target.value })} placeholder="e.g. Campaigns Launched" />
                 </div>
-                <div>
-                  <Label>Order</Label>
-                  <Input type="number" value={newStat.order_index} onChange={(e) => setNewStat({ ...newStat, order_index: parseInt(e.target.value) || 0 })} />
+                <div className="flex items-end">
+                  <Button onClick={addStat}><Plus className="w-4 h-4 mr-2" />Add Stat</Button>
                 </div>
               </div>
-              <Button onClick={addStat}><Plus className="w-4 h-4 mr-2" />Add Stat</Button>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader><CardTitle>Stats</CardTitle></CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Value</TableHead>
-                    <TableHead>Label</TableHead>
-                    <TableHead>Order</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {stats.map((stat) => (
-                    <TableRow key={stat.id}>
-                      {editingStat?.id === stat.id ? (
-                        <>
-                          <TableCell><Input value={editingStat.value} onChange={(e) => setEditingStat({ ...editingStat, value: e.target.value })} /></TableCell>
-                          <TableCell><Input value={editingStat.label} onChange={(e) => setEditingStat({ ...editingStat, label: e.target.value })} /></TableCell>
-                          <TableCell><Input type="number" value={editingStat.order_index} onChange={(e) => setEditingStat({ ...editingStat, order_index: parseInt(e.target.value) || 0 })} /></TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={() => updateStat(editingStat)}><Save className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="outline" onClick={() => setEditingStat(null)}><X className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableCell className="font-medium">{stat.value}</TableCell>
-                          <TableCell>{stat.label}</TableCell>
-                          <TableCell>{stat.order_index}</TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => setEditingStat(stat)}><Edit className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="destructive" onClick={() => deleteStat(stat.id)}><Trash2 className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      )}
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleStatDragEnd}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-12"></TableHead>
+                      <TableHead>Value</TableHead>
+                      <TableHead>Label</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext items={stats.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                      {stats.map((stat) => (
+                        <SortableMarketingStatRow
+                          key={stat.id}
+                          stat={stat}
+                          isEditing={editingStat?.id === stat.id}
+                          editingData={editingStat}
+                          onEditStart={() => setEditingStat(stat)}
+                          onEditChange={setEditingStat}
+                          onSave={() => editingStat && updateStat(editingStat)}
+                          onCancel={() => setEditingStat(null)}
+                          onDelete={() => deleteStat(stat.id)}
+                        />
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             </CardContent>
           </Card>
         </TabsContent>
@@ -334,61 +387,49 @@ const AdminMarketingContent = () => {
           <Card>
             <CardHeader><CardTitle>Add Benefit</CardTitle></CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <Label>Benefit</Label>
-                  <Input value={newBenefit.benefit} onChange={(e) => setNewBenefit({ ...newBenefit, benefit: e.target.value })} placeholder="e.g. AI-Powered Campaign Optimization" />
-                </div>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Order</Label>
-                  <Input type="number" value={newBenefit.order_index} onChange={(e) => setNewBenefit({ ...newBenefit, order_index: parseInt(e.target.value) || 0 })} />
+                  <Label>Benefit</Label>
+                  <Input value={newBenefit.benefit} onChange={(e) => setNewBenefit({ benefit: e.target.value })} placeholder="e.g. AI-Powered Campaign Optimization" />
+                </div>
+                <div className="flex items-end">
+                  <Button onClick={addBenefit}><Plus className="w-4 h-4 mr-2" />Add Benefit</Button>
                 </div>
               </div>
-              <Button onClick={addBenefit}><Plus className="w-4 h-4 mr-2" />Add Benefit</Button>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader><CardTitle>Benefits</CardTitle></CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Benefit</TableHead>
-                    <TableHead>Order</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {benefits.map((benefit) => (
-                    <TableRow key={benefit.id}>
-                      {editingBenefit?.id === benefit.id ? (
-                        <>
-                          <TableCell><Input value={editingBenefit.benefit} onChange={(e) => setEditingBenefit({ ...editingBenefit, benefit: e.target.value })} /></TableCell>
-                          <TableCell><Input type="number" value={editingBenefit.order_index} onChange={(e) => setEditingBenefit({ ...editingBenefit, order_index: parseInt(e.target.value) || 0 })} /></TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={() => updateBenefit(editingBenefit)}><Save className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="outline" onClick={() => setEditingBenefit(null)}><X className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      ) : (
-                        <>
-                          <TableCell className="font-medium">{benefit.benefit}</TableCell>
-                          <TableCell>{benefit.order_index}</TableCell>
-                          <TableCell>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => setEditingBenefit(benefit)}><Edit className="w-4 h-4" /></Button>
-                              <Button size="sm" variant="destructive" onClick={() => deleteBenefit(benefit.id)}><Trash2 className="w-4 h-4" /></Button>
-                            </div>
-                          </TableCell>
-                        </>
-                      )}
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleBenefitDragEnd}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-12"></TableHead>
+                      <TableHead>Benefit</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    <SortableContext items={benefits.map(b => b.id)} strategy={verticalListSortingStrategy}>
+                      {benefits.map((benefit) => (
+                        <SortableMarketingBenefitRow
+                          key={benefit.id}
+                          benefit={benefit}
+                          isEditing={editingBenefit?.id === benefit.id}
+                          editingData={editingBenefit}
+                          onEditStart={() => setEditingBenefit(benefit)}
+                          onEditChange={setEditingBenefit}
+                          onSave={() => editingBenefit && updateBenefit(editingBenefit)}
+                          onCancel={() => setEditingBenefit(null)}
+                          onDelete={() => deleteBenefit(benefit.id)}
+                        />
+                      ))}
+                    </SortableContext>
+                  </TableBody>
+                </Table>
+              </DndContext>
             </CardContent>
           </Card>
         </TabsContent>
