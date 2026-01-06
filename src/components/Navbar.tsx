@@ -42,6 +42,10 @@ const Navbar = () => {
               Fashion
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
+            <a href="/divisions/marketing" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
+              Marketing
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
+            </a>
             <a href="#technology" className="text-white hover:text-accent transition-all duration-300 relative group hover:-translate-y-0.5">
               Technology
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(168,85,247,0.5)] opacity-0 group-hover:opacity-100"></span>
@@ -82,6 +86,9 @@ const Navbar = () => {
               </a>
               <a href="#fashion" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Fashion
+              </a>
+              <a href="/divisions/marketing" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
+                Marketing
               </a>
               <a href="#technology" className="block px-3 py-2 text-white hover:text-accent transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Technology
