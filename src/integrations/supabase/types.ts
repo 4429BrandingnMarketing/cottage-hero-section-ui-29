@@ -561,6 +561,63 @@ export type Database = {
         }
         Relationships: []
       }
+      tv_services: {
+        Row: {
+          created_at: string | null
+          description: string
+          icon: string
+          id: string
+          order_index: number
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          icon?: string
+          id?: string
+          order_index?: number
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          order_index?: number
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      tv_stats: {
+        Row: {
+          created_at: string | null
+          id: string
+          label: string
+          order_index: number
+          updated_at: string | null
+          value: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          label: string
+          order_index?: number
+          updated_at?: string | null
+          value: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          label?: string
+          order_index?: number
+          updated_at?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null

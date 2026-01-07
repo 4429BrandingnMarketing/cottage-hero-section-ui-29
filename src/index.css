@@ -1,5 +1,6 @@
-
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @keyframes gradient {
   0%, 100% { background-position: 0% 50%; }
@@ -9,8 +10,6 @@
 .animate-gradient {
   animation: gradient 3s ease infinite;
 }
-@tailwind components;
-@tailwind utilities;
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.

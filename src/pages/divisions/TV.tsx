@@ -1,24 +1,59 @@
-import { Video, Film, Camera, ArrowRight, Play, Sparkles, Monitor, Clapperboard } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Video, Film, Camera, ArrowRight, Play, Sparkles, Monitor, Clapperboard, Radio, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
+
+// Icon mapping for dynamic icon rendering
+const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
+  Video, Film, Camera, Clapperboard, Radio, Share2, Monitor, Sparkles, Play
+};
+
+interface TVService {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  order_index: number;
+}
+
+interface TVStat {
+  id: string;
+  value: string;
+  label: string;
+  order_index: number;
+}
 
 const TV = () => {
-  const services = [
-    { icon: Film, title: "Music Videos", description: "Cinematic storytelling with 4K/8K production quality" },
-    { icon: Camera, title: "Documentary Production", description: "Compelling narratives that inspire and inform" },
-    { icon: Video, title: "Content Creation", description: "Premium video content for all platforms" },
-    { icon: Clapperboard, title: "Commercial Production", description: "Brand-focused visual content that converts" }
-  ];
+  const [services, setServices] = useState<TVService[]>([]);
+  const [stats, setStats] = useState<TVStat[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const stats = [
-    { value: "4K/8K", label: "Production Quality" },
-    { value: "200+", label: "Projects Completed" },
-    { value: "50M+", label: "Total Views" },
-    { value: "24/7", label: "Creative Support" }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const [servicesRes, statsRes] = await Promise.all([
+        supabase.from('tv_services').select('*').order('order_index'),
+        supabase.from('tv_stats').select('*').order('order_index')
+      ]);
+      
+      if (servicesRes.data) setServices(servicesRes.data);
+      if (statsRes.data) setStats(statsRes.data);
+      setLoading(false);
+    };
+    
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -75,64 +110,68 @@ const TV = () => {
       </section>
 
       {/* Stats Section with Glass Effect */}
-      <section className="py-16 px-4 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, idx) => (
-              <div 
-                key={stat.label} 
-                className="text-center p-8 bg-card/50 backdrop-blur-md border border-border/50 rounded-2xl hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 group hover:-translate-y-2"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {stat.value}
-                </div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-24 px-4 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-card/30 to-transparent"></div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-              Our Services
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              End-to-end video production services powered by cutting-edge technology.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, idx) => {
-              const Icon = service.icon;
-              return (
-                <Card 
-                  key={service.title} 
-                  className="bg-card/50 backdrop-blur-md border-border/50 hover:border-accent/40 transition-all duration-500 group hover:-translate-y-3 hover:shadow-2xl hover:shadow-accent/10 overflow-hidden"
+      {stats.length > 0 && (
+        <section className="py-16 px-4 relative">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat, idx) => (
+                <div 
+                  key={stat.id} 
+                  className="text-center p-8 bg-card/50 backdrop-blur-md border border-border/50 rounded-2xl hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 group hover:-translate-y-2"
                   style={{ animationDelay: `${idx * 100}ms` }}
                 >
-                  {/* Glass shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <CardContent className="p-8 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                      <Icon className="w-8 h-8 text-accent" />
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{service.title}</h3>
-                    <p className="text-muted-foreground">{service.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {stat.value}
+                  </div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* Services Section */}
+      {services.length > 0 && (
+        <section className="py-24 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-card/30 to-transparent"></div>
+          
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+                Our Services
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                End-to-end video production services powered by cutting-edge technology.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, idx) => {
+                const Icon = iconMap[service.icon] || Video;
+                return (
+                  <Card 
+                    key={service.id} 
+                    className="bg-card/50 backdrop-blur-md border-border/50 hover:border-accent/40 transition-all duration-500 group hover:-translate-y-3 hover:shadow-2xl hover:shadow-accent/10 overflow-hidden"
+                    style={{ animationDelay: `${idx * 100}ms` }}
+                  >
+                    {/* Glass shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <CardContent className="p-8 relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <Icon className="w-8 h-8 text-accent" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{service.title}</h3>
+                      <p className="text-muted-foreground">{service.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section with Glass Effect */}
       <section className="py-24 px-4">
