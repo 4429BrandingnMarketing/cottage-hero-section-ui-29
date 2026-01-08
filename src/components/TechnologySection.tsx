@@ -3,8 +3,9 @@ import { Cpu, Brain, Zap, Code, Database, Shield, ArrowRight, Sparkles } from 'l
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
-
-const iconMap: { [key: string]: any } = {
+const iconMap: {
+  [key: string]: any;
+} = {
   Brain,
   Code,
   Database,
@@ -13,7 +14,6 @@ const iconMap: { [key: string]: any } = {
   Zap,
   Sparkles
 };
-
 interface TechnologyCapability {
   id: string;
   title: string;
@@ -22,46 +22,33 @@ interface TechnologyCapability {
   features: string[];
   order_index: number;
 }
-
 interface TechnologyStat {
   id: string;
   value: string;
   label: string;
   order_index: number;
 }
-
 const TechnologySection = () => {
   const [capabilities, setCapabilities] = useState<TechnologyCapability[]>([]);
   const [stats, setStats] = useState<TechnologyStat[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
-    const [capabilitiesRes, statsRes] = await Promise.all([
-      supabase.from('technology_capabilities').select('*').order('order_index'),
-      supabase.from('technology_stats').select('*').order('order_index')
-    ]);
-
+    const [capabilitiesRes, statsRes] = await Promise.all([supabase.from('technology_capabilities').select('*').order('order_index'), supabase.from('technology_stats').select('*').order('order_index')]);
     if (capabilitiesRes.data) setCapabilities(capabilitiesRes.data);
     if (statsRes.data) setStats(statsRes.data);
     setLoading(false);
   };
-
   if (loading) {
-    return (
-      <section id="technology" className="py-24 px-4 bg-secondary">
+    return <section id="technology" className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto text-center">
           <div className="animate-pulse">Loading...</div>
         </div>
-      </section>
-    );
+      </section>;
   }
-
-  return (
-    <section id="technology" className="py-24 px-4 bg-secondary relative overflow-hidden">
+  return <section id="technology" className="py-24 px-4 bg-secondary relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
@@ -69,14 +56,13 @@ const TechnologySection = () => {
       </div>
       
       {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" 
-           style={{
-             backgroundImage: `
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+      backgroundImage: `
                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
              `,
-             backgroundSize: '40px 40px'
-           }}>
+      backgroundSize: '40px 40px'
+    }}>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -99,24 +85,18 @@ const TechnologySection = () => {
         </div>
 
         {/* Stats Row */}
-        {stats.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-            {stats.map((stat) => (
-              <div key={stat.id} className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
+        {stats.length > 0 && <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            {stats.map(stat => <div key={stat.id} className="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
                 <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
                 <div className="text-muted-foreground text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        )}
+              </div>)}
+          </div>}
 
         {/* Technology Cards */}
-        {capabilities.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {capabilities.map((tech) => {
-              const Icon = iconMap[tech.icon] || Cpu;
-              return (
-                <Card key={tech.id} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group">
+        {capabilities.length > 0 && <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {capabilities.map(tech => {
+          const Icon = iconMap[tech.icon] || Cpu;
+          return <Card key={tech.id} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group">
                   <CardContent className="p-8">
                     <div className="flex items-start gap-6">
                       <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
@@ -126,25 +106,21 @@ const TechnologySection = () => {
                         <h3 className="text-xl font-bold text-foreground mb-2">{tech.title}</h3>
                         <p className="text-muted-foreground mb-4">{tech.description}</p>
                         <div className="flex flex-wrap gap-2">
-                          {tech.features.map((feature, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">
+                          {tech.features.map((feature, idx) => <span key={idx} className="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">
                               {feature}
-                            </span>
-                          ))}
+                            </span>)}
                         </div>
                       </div>
                     </div>
                   </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        )}
+                </Card>;
+        })}
+          </div>}
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 border border-white/10 rounded-3xl p-12">
           <Sparkles className="w-12 h-12 text-accent mx-auto mb-6" />
-          <h3 className="text-3xl font-bold text-foreground mb-4">Ready to Build Something Amazing?</h3>
+          <h3 className="text-3xl font-bold mb-4 text-destructive-foreground">Ready to Build Something Amazing?</h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Partner with Red Vision to leverage our technology stack for your next project. 
             From concept to deployment, we've got you covered.
@@ -161,8 +137,6 @@ const TechnologySection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TechnologySection;
