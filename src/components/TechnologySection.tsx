@@ -104,7 +104,7 @@ const TechnologySection = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-foreground mb-2">{tech.title}</h3>
-                        <p className="text-muted-foreground mb-4">{tech.description}</p>
+                        <p className="mb-4 text-muted">{tech.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {tech.features.map((feature, idx) => <span key={idx} className="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full">
                               {feature}
