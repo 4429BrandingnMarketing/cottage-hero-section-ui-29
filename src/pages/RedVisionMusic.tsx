@@ -134,7 +134,7 @@ const RedVisionMusic = () => {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/20"></div>
-        <div className="absolute inset-0 bg-primary">
+        <div className="absolute inset-0 bg-stone-700">
           <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1920')] bg-cover bg-center opacity-30"></div>
         </div>
         
