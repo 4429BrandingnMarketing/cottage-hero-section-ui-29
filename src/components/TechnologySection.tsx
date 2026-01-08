@@ -119,18 +119,18 @@ const TechnologySection = () => {
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 border border-white/10 rounded-3xl p-12">
-          <Sparkles className="w-12 h-12 text-accent mx-auto mb-6" />
+          <Sparkles className="w-12 h-12 mx-auto mb-6 text-primary bg-secondary-foreground" />
           <h3 className="text-3xl font-bold mb-4 text-destructive-foreground">Ready to Build Something Amazing?</h3>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="mb-8 max-w-2xl mx-auto text-primary">
             Partner with Red Vision to leverage our technology stack for your next project. 
             From concept to deployment, we've got you covered.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="px-8">
+            <Button size="lg" className="px-8 text-muted">
               <Zap className="w-4 h-4 mr-2" />
               Start a Project
             </Button>
-            <Button variant="outline" size="lg" className="px-8 border-accent text-accent hover:bg-accent hover:text-secondary">
+            <Button variant="outline" size="lg" className="px-8 border-accent hover:bg-accent text-secondary">
               <ArrowRight className="w-4 h-4 mr-2" />
               View Documentation
             </Button>
