@@ -14,51 +14,55 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-
 const submissionSchema = z.object({
-  artist_name: z.string()
-    .trim()
-    .min(1, { message: "Artist name is required" })
-    .max(100, { message: "Artist name must be less than 100 characters" }),
-  genre: z.string()
-    .trim()
-    .min(1, { message: "Genre is required" })
-    .max(50, { message: "Genre must be less than 50 characters" }),
-  email: z.string()
-    .trim()
-    .email({ message: "Invalid email address" })
-    .max(255, { message: "Email must be less than 255 characters" }),
-  description: z.string()
-    .trim()
-    .min(10, { message: "Description must be at least 10 characters" })
-    .max(2000, { message: "Description must be less than 2000 characters" }),
-  music_links: z.string()
-    .trim()
-    .min(1, { message: "Music links are required" })
-    .max(1000, { message: "Music links must be less than 1000 characters" })
-    .refine((val) => {
-      const urls = val.split(/[\s,\n]+/).filter(Boolean);
-      return urls.every(url => {
-        try {
-          new URL(url);
-          return true;
-        } catch {
-          return false;
-        }
-      });
-    }, { message: "Please provide valid URLs (e.g., https://soundcloud.com/...)" })
+  artist_name: z.string().trim().min(1, {
+    message: "Artist name is required"
+  }).max(100, {
+    message: "Artist name must be less than 100 characters"
+  }),
+  genre: z.string().trim().min(1, {
+    message: "Genre is required"
+  }).max(50, {
+    message: "Genre must be less than 50 characters"
+  }),
+  email: z.string().trim().email({
+    message: "Invalid email address"
+  }).max(255, {
+    message: "Email must be less than 255 characters"
+  }),
+  description: z.string().trim().min(10, {
+    message: "Description must be at least 10 characters"
+  }).max(2000, {
+    message: "Description must be less than 2000 characters"
+  }),
+  music_links: z.string().trim().min(1, {
+    message: "Music links are required"
+  }).max(1000, {
+    message: "Music links must be less than 1000 characters"
+  }).refine(val => {
+    const urls = val.split(/[\s,\n]+/).filter(Boolean);
+    return urls.every(url => {
+      try {
+        new URL(url);
+        return true;
+      } catch {
+        return false;
+      }
+    });
+  }, {
+    message: "Please provide valid URLs (e.g., https://soundcloud.com/...)"
+  })
 });
-
 type SubmissionFormValues = z.infer<typeof submissionSchema>;
-
 const RedVisionMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [artists, setArtists] = useState<any[]>([]);
   const [tracks, setTracks] = useState<any[]>([]);
   const [services, setServices] = useState<any[]>([]);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const form = useForm<SubmissionFormValues>({
     resolver: zodResolver(submissionSchema),
     defaultValues: {
@@ -69,50 +73,47 @@ const RedVisionMusic = () => {
       music_links: ''
     }
   });
-
   useEffect(() => {
     fetchArtists();
     fetchTracks();
     fetchServices();
   }, []);
-
   const fetchArtists = async () => {
-    const { data, error } = await supabase
-      .from('artists')
-      .select('*')
-      .order('created_at', { ascending: false });
-
+    const {
+      data,
+      error
+    } = await supabase.from('artists').select('*').order('created_at', {
+      ascending: false
+    });
     if (data && !error) setArtists(data);
   };
-
   const fetchTracks = async () => {
-    const { data, error } = await supabase
-      .from('tracks')
-      .select('*')
-      .order('created_at', { ascending: false });
-
+    const {
+      data,
+      error
+    } = await supabase.from('tracks').select('*').order('created_at', {
+      ascending: false
+    });
     if (data && !error) setTracks(data);
   };
-
   const fetchServices = async () => {
-    const { data, error } = await supabase
-      .from('services')
-      .select('*')
-      .order('created_at', { ascending: false });
-
+    const {
+      data,
+      error
+    } = await supabase.from('services').select('*').order('created_at', {
+      ascending: false
+    });
     if (data && !error) setServices(data);
   };
-
   const handleSubmit = async (values: SubmissionFormValues) => {
-    const { error } = await supabase
-      .from('submissions')
-      .insert([{
-        artist_name: values.artist_name,
-        email: values.email,
-        track_url: values.music_links,
-        message: `Genre: ${values.genre}\n\n${values.description}`
-      }]);
-
+    const {
+      error
+    } = await supabase.from('submissions').insert([{
+      artist_name: values.artist_name,
+      email: values.email,
+      track_url: values.music_links,
+      message: `Genre: ${values.genre}\n\n${values.description}`
+    }]);
     if (error) {
       toast({
         title: "Error",
@@ -127,9 +128,7 @@ const RedVisionMusic = () => {
       form.reset();
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
@@ -171,7 +170,7 @@ const RedVisionMusic = () => {
       </section>
 
       {/* Artist Showcase Section */}
-      <ArtistShowcase />
+      <ArtistShowcase className="text-secondary bg-black" />
 
       {/* Music Catalog Section */}
       <section className="py-20 px-4 bg-secondary/20">
@@ -190,22 +189,13 @@ const RedVisionMusic = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {tracks.map((track, index) => (
-                  <div key={track.id} className={`flex items-center justify-between p-4 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer ${currentTrack === index ? 'bg-primary/10' : ''}`}>
+                {tracks.map((track, index) => <div key={track.id} className={`flex items-center justify-between p-4 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer ${currentTrack === index ? 'bg-primary/10' : ''}`}>
                     <div className="flex items-center gap-4">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => {
-                          setCurrentTrack(index);
-                          setIsPlaying(!isPlaying);
-                        }}
-                        className="hover:bg-primary/20"
-                      >
-                        {isPlaying && currentTrack === index ? 
-                          <Pause className="w-4 h-4" /> : 
-                          <Play className="w-4 h-4" />
-                        }
+                      <Button variant="ghost" size="icon" onClick={() => {
+                    setCurrentTrack(index);
+                    setIsPlaying(!isPlaying);
+                  }} className="hover:bg-primary/20">
+                        {isPlaying && currentTrack === index ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       </Button>
                       <div>
                         <h4 className="font-semibold text-foreground">{track.title}</h4>
@@ -227,8 +217,7 @@ const RedVisionMusic = () => {
                         </Button>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
@@ -242,13 +231,7 @@ const RedVisionMusic = () => {
           <p className="text-xl text-muted-foreground mb-12">Explore our interactive music showcase</p>
 
           <div className="w-full aspect-video rounded-lg overflow-hidden bg-card/50 backdrop-blur-sm border border-primary/20">
-            <iframe
-              src="https://stitch.withgoogle.com/projects/11569583431666638584"
-              className="w-full h-full"
-              frameBorder="0"
-              allowFullScreen
-              title="Google Stitch - Nemo"
-            ></iframe>
+            <iframe src="https://stitch.withgoogle.com/projects/11569583431666638584" className="w-full h-full" frameBorder="0" allowFullScreen title="Google Stitch - Nemo"></iframe>
           </div>
         </div>
       </section>
@@ -260,16 +243,14 @@ const RedVisionMusic = () => {
           <p className="text-xl text-muted-foreground mb-12">Find Red Vision Music on all major platforms</p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {['Spotify', 'Apple Music', 'YouTube Music', 'SoundCloud'].map((platform, index) => (
-              <Card key={index} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
+            {['Spotify', 'Apple Music', 'YouTube Music', 'SoundCloud'].map((platform, index) => <Card key={index} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-colors">
                     <Music className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="font-semibold text-foreground">{platform}</h3>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -296,83 +277,55 @@ const RedVisionMusic = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="artist_name"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="artist_name" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Artist Name</FormLabel>
                           <FormControl>
                             <Input placeholder="Your artist name" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="genre"
-                      render={({ field }) => (
-                        <FormItem>
+                        </FormItem>} />
+                    <FormField control={form.control} name="genre" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Genre</FormLabel>
                           <FormControl>
                             <Input placeholder="e.g., Hip-Hop, Electronic, Rock" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                   </div>
 
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="email" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input type="email" placeholder="your@email.com" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="description" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Tell us about your music</FormLabel>
                         <FormControl>
-                          <Textarea
-                            placeholder="Describe your style, influences, and what makes you unique..."
-                            rows={4}
-                            {...field}
-                          />
+                          <Textarea placeholder="Describe your style, influences, and what makes you unique..." rows={4} {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
-                  <FormField
-                    control={form.control}
-                    name="music_links"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="music_links" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Music Links</FormLabel>
                         <FormControl>
-                          <Textarea
-                            placeholder="SoundCloud, YouTube, Spotify links to your best tracks..."
-                            rows={3}
-                            {...field}
-                          />
+                          <Textarea placeholder="SoundCloud, YouTube, Spotify links to your best tracks..." rows={3} {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
                   <Button type="submit" className="w-full" size="lg">
                     Submit Application
@@ -393,8 +346,7 @@ const RedVisionMusic = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card key={service.id} className="group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-primary/20">
+            {services.map(service => <Card key={service.id} className="group hover:scale-105 transition-all duration-300 bg-card/50 backdrop-blur-sm border-primary/20">
                 <CardHeader>
                   <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
                     <Building2 className="w-6 h-6 text-primary" />
@@ -405,26 +357,21 @@ const RedVisionMusic = () => {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {(service.features as string[]).map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-muted-foreground">
+                    {(service.features as string[]).map((feature, idx) => <li key={idx} className="flex items-center gap-2 text-muted-foreground">
                         <div className="w-2 h-2 bg-primary rounded-full"></div>
                         {feature}
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                   <Button className="w-full mt-6" variant="outline">
                     Learn More
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default RedVisionMusic;
