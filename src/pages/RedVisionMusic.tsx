@@ -6,6 +6,7 @@ import * as z from 'zod';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ArtistShowcase from '@/components/music/ArtistShowcase';
+import MerchSection from '@/components/music/MerchSection';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -272,6 +273,9 @@ const RedVisionMusic = () => {
           </div>
         </div>
       </section>
+
+      {/* Merch Section */}
+      <MerchSection />
 
       {/* Artist Submission */}
       <section className="py-20 px-4 bg-secondary/20">
