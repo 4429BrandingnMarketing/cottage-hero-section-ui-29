@@ -1,5 +1,4 @@
 import { Zap } from 'lucide-react';
-
 const FashionSection = () => {
   const collection = {
     title: "Giftd 'n Privlgd",
@@ -9,14 +8,12 @@ const FashionSection = () => {
     badge: "CLASSIC",
     tech: "Premium tailoring and heritage"
   };
-
-  return (
-    <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
+  return <section id="fashion" className="py-24 bg-gradient-to-br from-secondary via-primary/5 to-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
+        backgroundImage: "url(\"https://www.canva.com/design/DAG6mWCiPws/szRr4BU6q4tVgG7GhiCVTw/edit\")"
+      }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -28,7 +25,7 @@ const FashionSection = () => {
             </span>
           </h2>
           <p className="text-accent font-medium text-lg mb-6">AI × Haute Couture</p>
-          <p className="text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl leading-relaxed max-w-3xl mx-auto text-secondary-foreground">
             Revolutionizing fashion through artificial intelligence, creating garments that adapt, 
             evolve, and respond to the wearer's environment and emotions.
           </p>
@@ -39,11 +36,7 @@ const FashionSection = () => {
           {/* Collection Image */}
           <div className="relative group">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
-              <img 
-                src={collection.image} 
-                alt={collection.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-              />
+              <img src={collection.image} alt={collection.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               
               {/* Badge */}
               <div className="absolute top-6 right-6">
@@ -54,8 +47,8 @@ const FashionSection = () => {
               
               {/* Bottom info */}
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="text-white/80 text-sm mb-2">{collection.collectionName}</div>
-                <div className="text-white text-2xl font-bold">{collection.title}</div>
+                <div className="text-sm mb-2 text-secondary">{collection.collectionName}</div>
+                <div className="text-2xl font-bold text-rose-800">{collection.title}</div>
               </div>
             </div>
           </div>
@@ -63,21 +56,21 @@ const FashionSection = () => {
           {/* Collection Details */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4 text-primary">
                 {collection.title}
               </h3>
-              <p className="text-xl text-white/80 leading-relaxed mb-6">
+              <p className="text-xl leading-relaxed mb-6 text-secondary">
                 {collection.description}
               </p>
             </div>
 
             {/* Tech Integration */}
-            <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="border border-accent/20 rounded-2xl p-6 backdrop-blur-sm bg-sidebar-foreground">
               <div className="flex items-center gap-3 mb-4">
                 <Zap className="w-5 h-5 text-accent" />
-                <h4 className="text-lg font-semibold text-accent">Technology Integration</h4>
+                <h4 className="text-lg font-semibold text-primary">Technology Integration</h4>
               </div>
-              <p className="text-white/70">
+              <p className="text-primary">
                 {collection.tech}
               </p>
             </div>
@@ -94,8 +87,6 @@ const FashionSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default FashionSection;
