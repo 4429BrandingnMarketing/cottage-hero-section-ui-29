@@ -36,7 +36,7 @@ const FashionSection = () => {
           {/* Collection Image */}
           <div className="relative group">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 relative">
-              <img src={collection.image} alt={collection.title} className="w-full h-full transition-transform duration-700 group-hover:scale-110 object-contain" />
+              
               
               {/* Badge */}
               <div className="absolute top-6 right-6">
