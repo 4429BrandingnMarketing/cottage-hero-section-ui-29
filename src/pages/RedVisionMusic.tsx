@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ArtistShowcase from '@/components/music/ArtistShowcase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -168,36 +169,8 @@ const RedVisionMusic = () => {
         </div>
       </section>
 
-      {/* Artist Roster Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Featured Artists</h2>
-            <p className="text-xl text-muted-foreground">Our roster of talented musicians making waves</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artists.map((artist) => (
-              <Card key={artist.id} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img src={artist.image_url} alt={artist.name} className="w-full h-64 object-cover rounded-t-lg" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent rounded-t-lg"></div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-xl font-bold text-foreground">{artist.name}</h3>
-                        {artist.verified && <Star className="w-4 h-4 text-primary fill-current" />}
-                      </div>
-                      <p className="text-muted-foreground text-sm">{artist.genre}</p>
-                      <p className="text-accent text-sm font-medium">{artist.streams} monthly streams</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Artist Showcase Section */}
+      <ArtistShowcase />
 
       {/* Music Catalog Section */}
       <section className="py-20 px-4 bg-secondary/20">
