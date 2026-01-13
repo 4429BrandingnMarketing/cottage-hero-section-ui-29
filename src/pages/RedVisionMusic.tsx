@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ArtistShowcase from '@/components/music/ArtistShowcase';
 import MerchSection from '@/components/music/MerchSection';
+import VisionSection from '@/components/music/VisionSection';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -170,7 +171,10 @@ const RedVisionMusic = () => {
       </section>
 
       {/* Artist Showcase Section */}
-      <ArtistShowcase className="text-secondary bg-black" />
+      <ArtistShowcase />
+
+      {/* Vision Section */}
+      <VisionSection />
 
       {/* Music Catalog Section */}
       <section className="py-20 px-4 bg-secondary/20">
