@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import Navbar from '@/components/Navbar';
+import MusicNavbar from '@/components/music/MusicNavbar';
 import Footer from '@/components/Footer';
 import ArtistShowcase from '@/components/music/ArtistShowcase';
 import MerchSection from '@/components/music/MerchSection';
@@ -130,10 +130,10 @@ const RedVisionMusic = () => {
     }
   };
   return <div className="min-h-screen bg-background">
-      <Navbar />
+      <MusicNavbar />
       
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/20"></div>
         <div className="absolute inset-0 bg-stone-700">
           <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1920')] bg-cover bg-center opacity-30"></div>
@@ -171,13 +171,17 @@ const RedVisionMusic = () => {
       </section>
 
       {/* Artist Showcase Section */}
-      <ArtistShowcase />
+      <div id="artists">
+        <ArtistShowcase />
+      </div>
 
       {/* Vision Section */}
-      <VisionSection />
+      <div id="vision">
+        <VisionSection />
+      </div>
 
       {/* Music Catalog Section */}
-      <section className="py-20 px-4 bg-secondary/20">
+      <section id="releases" className="py-20 px-4 bg-secondary/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Latest Releases</h2>
@@ -229,7 +233,7 @@ const RedVisionMusic = () => {
       </section>
 
       {/* Google Stitch Integration */}
-      <section className="py-20 px-4 bg-secondary/20">
+      <section id="experience" className="py-20 px-4 bg-secondary/20">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Nemo - Interactive Experience</h2>
           <p className="text-xl text-muted-foreground mb-12">Explore our interactive music showcase</p>
@@ -260,10 +264,12 @@ const RedVisionMusic = () => {
       </section>
 
       {/* Merch Section */}
-      <MerchSection />
+      <div id="merch">
+        <MerchSection />
+      </div>
 
       {/* Artist Submission */}
-      <section className="py-20 px-4 bg-secondary/20">
+      <section id="submit" className="py-20 px-4 bg-secondary/20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Submit Your Music</h2>
