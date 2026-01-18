@@ -6,7 +6,6 @@ import * as z from 'zod';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -28,7 +27,6 @@ type AuthFormValues = z.infer<typeof authSchema>;
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<AuthFormValues>({
@@ -39,43 +37,28 @@ const Login = () => {
     }
   });
 
-  const handleAuth = async (values: AuthFormValues) => {
+  const handleLogin = async (values: AuthFormValues) => {
     setLoading(true);
 
     try {
-      if (isLogin) {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: values.email,
-          password: values.password
-        });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password
+      });
 
-        if (error) throw error;
+      if (error) throw error;
 
-        toast({
-          title: "Success",
-          description: "Logged in successfully"
-        });
-
-        navigate('/admin');
-      } else {
-        const { data, error } = await supabase.auth.signUp({
-          email: values.email,
-          password: values.password
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Success",
-          description: "Account created successfully"
-        });
-
-        navigate('/admin');
-      }
-    } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message,
+        title: "Success",
+        description: "Logged in successfully"
+      });
+
+      navigate('/admin');
+    } catch (error: any) {
+      // Generic error message to prevent user enumeration
+      toast({
+        title: "Login Failed",
+        description: "Invalid email or password. Please try again.",
         variant: "destructive"
       });
     } finally {
@@ -90,14 +73,14 @@ const Login = () => {
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>{isLogin ? 'Login' : 'Sign Up'}</CardTitle>
+            <CardTitle>Admin Login</CardTitle>
             <CardDescription>
-              {isLogin ? 'Enter your credentials to access the admin panel' : 'Create an account to manage Red Vision Music'}
+              Enter your credentials to access the admin panel
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handleAuth)} className="space-y-4">
+              <form onSubmit={form.handleSubmit(handleLogin)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -108,6 +91,7 @@ const Login = () => {
                         <Input
                           type="email"
                           placeholder="your@email.com"
+                          autoComplete="email"
                           {...field}
                         />
                       </FormControl>
@@ -125,6 +109,7 @@ const Login = () => {
                         <Input
                           type="password"
                           placeholder="••••••••"
+                          autoComplete="current-password"
                           {...field}
                         />
                       </FormControl>
@@ -133,20 +118,8 @@ const Login = () => {
                   )}
                 />
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? 'Loading...' : isLogin ? 'Login' : 'Sign Up'}
+                  {loading ? 'Logging in...' : 'Login'}
                 </Button>
-                <div className="text-center text-sm">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsLogin(!isLogin);
-                      form.reset();
-                    }}
-                    className="text-primary hover:underline"
-                  >
-                    {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Login'}
-                  </button>
-                </div>
               </form>
             </Form>
           </CardContent>
