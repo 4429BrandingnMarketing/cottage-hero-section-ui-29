@@ -344,6 +344,7 @@ export type Database = {
           benefit: string
           created_at: string | null
           id: string
+          link: string | null
           order_index: number
           updated_at: string | null
         }
@@ -351,6 +352,7 @@ export type Database = {
           benefit: string
           created_at?: string | null
           id?: string
+          link?: string | null
           order_index?: number
           updated_at?: string | null
         }
@@ -358,6 +360,7 @@ export type Database = {
           benefit?: string
           created_at?: string | null
           id?: string
+          link?: string | null
           order_index?: number
           updated_at?: string | null
         }
