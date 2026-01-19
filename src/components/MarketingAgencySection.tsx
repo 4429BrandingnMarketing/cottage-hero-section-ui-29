@@ -32,6 +32,7 @@ interface MarketingBenefit {
   id: string;
   benefit: string;
   order_index: number;
+  link: string | null;
 }
 
 const MarketingAgencySection = () => {
@@ -120,10 +121,24 @@ const MarketingAgencySection = () => {
               <h3 className="text-2xl font-bold text-foreground mb-6">What Sets Us Apart</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{item.benefit}</span>
-                  </div>
+                  item.link ? (
+                    <a 
+                      key={item.id} 
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer"
+                    >
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span className="text-foreground group-hover:text-primary transition-colors">{item.benefit}</span>
+                      <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
+                    </a>
+                  ) : (
+                    <div key={item.id} className="flex items-center gap-3">
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span className="text-foreground">{item.benefit}</span>
+                    </div>
+                  )
                 ))}
               </div>
             </div>

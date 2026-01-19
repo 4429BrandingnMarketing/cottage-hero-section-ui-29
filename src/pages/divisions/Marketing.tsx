@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Megaphone, TrendingUp, Target, Users, BarChart3, Globe, ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
+import { Megaphone, TrendingUp, Target, Users, BarChart3, Globe, ArrowRight, CheckCircle, Sparkles, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
@@ -34,6 +34,7 @@ interface MarketingBenefit {
   id: string;
   benefit: string;
   order_index: number;
+  link: string | null;
 }
 
 const Marketing = () => {
@@ -169,13 +170,27 @@ const Marketing = () => {
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {benefits.map((item) => (
-                    <div 
-                      key={item.id} 
-                      className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:border-primary/30 transition-colors"
-                    >
-                      <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-                      <span className="text-foreground font-medium">{item.benefit}</span>
-                    </div>
+                    item.link ? (
+                      <a 
+                        key={item.id}
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:border-primary/30 hover:bg-primary/5 transition-all group cursor-pointer"
+                      >
+                        <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+                        <span className="text-foreground font-medium group-hover:text-primary transition-colors">{item.benefit}</span>
+                        <ExternalLink className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
+                      </a>
+                    ) : (
+                      <div 
+                        key={item.id} 
+                        className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:border-primary/30 transition-colors"
+                      >
+                        <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+                        <span className="text-foreground font-medium">{item.benefit}</span>
+                      </div>
+                    )
                   ))}
                 </div>
               </div>
