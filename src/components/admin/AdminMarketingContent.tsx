@@ -43,6 +43,7 @@ interface MarketingBenefit {
   id: string;
   benefit: string;
   order_index: number;
+  link: string | null;
 }
 
 const AdminMarketingContent = () => {
@@ -58,7 +59,7 @@ const AdminMarketingContent = () => {
 
   const [newService, setNewService] = useState({ title: '', description: '', icon: 'Target' });
   const [newStat, setNewStat] = useState({ value: '', label: '' });
-  const [newBenefit, setNewBenefit] = useState({ benefit: '' });
+  const [newBenefit, setNewBenefit] = useState({ benefit: '', link: '' });
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -156,14 +157,15 @@ const AdminMarketingContent = () => {
   // Benefits CRUD
   const addBenefit = async () => {
     const { error } = await supabase.from('marketing_benefits').insert([{
-      ...newBenefit,
+      benefit: newBenefit.benefit,
+      link: newBenefit.link || null,
       order_index: benefits.length,
     }]);
     if (error) {
       toast({ title: 'Error', description: 'Failed to add benefit', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Benefit added' });
-      setNewBenefit({ benefit: '' });
+      setNewBenefit({ benefit: '', link: '' });
       fetchAllData();
     }
   };
@@ -387,10 +389,14 @@ const AdminMarketingContent = () => {
           <Card>
             <CardHeader><CardTitle>Add Benefit</CardTitle></CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <Label>Benefit</Label>
-                  <Input value={newBenefit.benefit} onChange={(e) => setNewBenefit({ benefit: e.target.value })} placeholder="e.g. AI-Powered Campaign Optimization" />
+                  <Input value={newBenefit.benefit} onChange={(e) => setNewBenefit({ ...newBenefit, benefit: e.target.value })} placeholder="e.g. AI-Powered Campaign Optimization" />
+                </div>
+                <div>
+                  <Label>Link (optional)</Label>
+                  <Input value={newBenefit.link} onChange={(e) => setNewBenefit({ ...newBenefit, link: e.target.value })} placeholder="https://example.com/page" />
                 </div>
                 <div className="flex items-end">
                   <Button onClick={addBenefit}><Plus className="w-4 h-4 mr-2" />Add Benefit</Button>
@@ -408,6 +414,7 @@ const AdminMarketingContent = () => {
                     <TableRow>
                       <TableHead className="w-12"></TableHead>
                       <TableHead>Benefit</TableHead>
+                      <TableHead>Link</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
