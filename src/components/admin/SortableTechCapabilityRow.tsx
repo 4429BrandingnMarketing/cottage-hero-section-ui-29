@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, Edit, Trash2, Save, X } from 'lucide-react';
+import { GripVertical, Edit, Trash2, Save, X, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { TableRow, TableCell } from '@/components/ui/table';
@@ -12,6 +12,7 @@ interface TechnologyCapability {
   icon: string;
   features: string[];
   order_index: number;
+  link: string | null;
 }
 
 interface SortableTechCapabilityRowProps {
@@ -92,6 +93,13 @@ export function SortableTechCapabilityRow({
             />
           </TableCell>
           <TableCell>
+            <Input
+              value={editingItem.link || ''}
+              onChange={(e) => onEditChange({ ...editingItem, link: e.target.value || null })}
+              placeholder="https://..."
+            />
+          </TableCell>
+          <TableCell>
             <div className="flex gap-2">
               <Button size="sm" onClick={() => onSave(editingItem)}>
                 <Save className="w-4 h-4" />
@@ -107,6 +115,21 @@ export function SortableTechCapabilityRow({
           <TableCell className="font-medium">{item.title}</TableCell>
           <TableCell>{item.icon}</TableCell>
           <TableCell className="max-w-xs truncate">{item.features.join(', ')}</TableCell>
+          <TableCell>
+            {item.link ? (
+              <a 
+                href={item.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-primary hover:underline text-sm"
+              >
+                <ExternalLink className="w-3 h-3" />
+                <span className="max-w-[120px] truncate">{item.link}</span>
+              </a>
+            ) : (
+              <span className="text-muted-foreground text-sm">No link</span>
+            )}
+          </TableCell>
           <TableCell>
             <div className="flex gap-2">
               <Button size="sm" variant="outline" onClick={() => onEdit(item)}>

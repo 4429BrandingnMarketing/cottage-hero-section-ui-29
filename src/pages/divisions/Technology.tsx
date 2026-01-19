@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Cpu, Brain, Zap, Shield, Database, Cloud, ArrowRight, CheckCircle, Sparkles, Code } from 'lucide-react';
+import { Cpu, Brain, Zap, Shield, Database, Cloud, ArrowRight, CheckCircle, Sparkles, Code, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
@@ -23,6 +23,7 @@ interface TechnologyCapability {
   icon: string;
   features: string[];
   order_index: number;
+  link: string | null;
 }
 
 interface TechnologyStat {
@@ -131,29 +132,37 @@ const Technology = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {capabilities.map((capability) => {
                 const Icon = iconMap[capability.icon] || Cpu;
+                const CardWrapper = capability.link ? 'a' : 'div';
+                const cardProps = capability.link ? { href: capability.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+                
                 return (
                   <Card 
                     key={capability.id} 
-                    className="bg-card border-border hover:border-accent/30 transition-all duration-300 group hover:-translate-y-2 hover:shadow-xl"
+                    className="bg-card border-border hover:border-accent/30 transition-all duration-300 group hover:-translate-y-2 hover:shadow-xl cursor-pointer"
                   >
-                    <CardContent className="p-8">
-                      <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-8 h-8 text-accent" />
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-3">{capability.title}</h3>
-                      <p className="text-muted-foreground mb-4">{capability.description}</p>
-                      
-                      {capability.features.length > 0 && (
-                        <div className="space-y-2 mt-4 pt-4 border-t border-border">
-                          {capability.features.slice(0, 3).map((feature, idx) => (
-                            <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                              <span>{feature}</span>
-                            </div>
-                          ))}
+                    <CardWrapper {...cardProps} className="block">
+                      <CardContent className="p-8">
+                        <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                          <Icon className="w-8 h-8 text-accent" />
                         </div>
-                      )}
-                    </CardContent>
+                        <div className="flex items-center gap-2 mb-3">
+                          <h3 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">{capability.title}</h3>
+                          {capability.link && <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />}
+                        </div>
+                        <p className="text-muted-foreground mb-4">{capability.description}</p>
+                        
+                        {capability.features.length > 0 && (
+                          <div className="space-y-2 mt-4 pt-4 border-t border-border">
+                            {capability.features.slice(0, 3).map((feature, idx) => (
+                              <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                                <span>{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </CardWrapper>
                   </Card>
                 );
               })}

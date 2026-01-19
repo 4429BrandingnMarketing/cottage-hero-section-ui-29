@@ -29,6 +29,7 @@ interface RadioService {
   description: string;
   icon: string;
   order_index: number;
+  link: string | null;
 }
 
 interface RadioStat {
@@ -47,7 +48,7 @@ const AdminRadioContent = () => {
   const [editingService, setEditingService] = useState<RadioService | null>(null);
   const [editingStat, setEditingStat] = useState<RadioStat | null>(null);
 
-  const [newService, setNewService] = useState({ title: '', description: '', icon: 'Radio' });
+  const [newService, setNewService] = useState({ title: '', description: '', icon: 'Radio', link: '' });
   const [newStat, setNewStat] = useState({ value: '', label: '' });
 
   const sensors = useSensors(
@@ -72,14 +73,17 @@ const AdminRadioContent = () => {
   // Services CRUD
   const addService = async () => {
     const { error } = await supabase.from('radio_services').insert([{
-      ...newService,
+      title: newService.title,
+      description: newService.description,
+      icon: newService.icon,
+      link: newService.link || null,
       order_index: services.length,
     }]);
     if (error) {
       toast({ title: 'Error', description: 'Failed to add service', variant: 'destructive' });
     } else {
       toast({ title: 'Success', description: 'Service added' });
-      setNewService({ title: '', description: '', icon: 'Radio' });
+      setNewService({ title: '', description: '', icon: 'Radio', link: '' });
       fetchAllData();
     }
   };
@@ -191,7 +195,7 @@ const AdminRadioContent = () => {
               <CardTitle>Add Service</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-5 gap-4">
                 <div>
                   <Label>Title</Label>
                   <Input
@@ -218,6 +222,14 @@ const AdminRadioContent = () => {
                     </SelectContent>
                   </Select>
                 </div>
+                <div>
+                  <Label>Link (optional)</Label>
+                  <Input
+                    value={newService.link}
+                    onChange={(e) => setNewService({ ...newService, link: e.target.value })}
+                    placeholder="https://..."
+                  />
+                </div>
               </div>
               <Button onClick={addService}><Plus className="w-4 h-4 mr-2" />Add Service</Button>
             </CardContent>
@@ -234,6 +246,7 @@ const AdminRadioContent = () => {
                       <TableHead>Title</TableHead>
                       <TableHead>Description</TableHead>
                       <TableHead>Icon</TableHead>
+                      <TableHead>Link</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
