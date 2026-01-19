@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Cpu, Brain, Zap, Code, Database, Shield, ArrowRight, Sparkles } from 'lucide-react';
+import { Cpu, Brain, Zap, Code, Database, Shield, ArrowRight, Sparkles, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+
 const iconMap: {
   [key: string]: any;
 } = {
@@ -14,6 +15,7 @@ const iconMap: {
   Zap,
   Sparkles
 };
+
 interface TechnologyCapability {
   id: string;
   title: string;
@@ -21,7 +23,9 @@ interface TechnologyCapability {
   icon: string;
   features: string[];
   order_index: number;
+  link: string | null;
 }
+
 interface TechnologyStat {
   id: string;
   value: string;
@@ -96,23 +100,31 @@ const TechnologySection = () => {
         {capabilities.length > 0 && <div className="grid md:grid-cols-2 gap-8 mb-16">
             {capabilities.map(tech => {
           const Icon = iconMap[tech.icon] || Cpu;
-          return <Card key={tech.id} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group">
-                  <CardContent className="p-8">
-                    <div className="flex items-start gap-6">
-                      <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
-                        <Icon className="w-7 h-7 text-accent" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground mb-2">{tech.title}</h3>
-                        <p className="mb-4 text-muted">{tech.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {tech.features.map((feature, idx) => <span key={idx} className="px-3 py-1 text-xs rounded-full text-muted bg-primary">
-                              {feature}
-                            </span>)}
+          const CardWrapper = tech.link ? 'a' : 'div';
+          const cardProps = tech.link ? { href: tech.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+          
+          return <Card key={tech.id} className="bg-card/50 backdrop-blur-sm border-accent/20 hover:border-accent/40 transition-all duration-300 group cursor-pointer">
+                  <CardWrapper {...cardProps} className="block">
+                    <CardContent className="p-8">
+                      <div className="flex items-start gap-6">
+                        <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                          <Icon className="w-7 h-7 text-accent" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">{tech.title}</h3>
+                            {tech.link && <ExternalLink className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />}
+                          </div>
+                          <p className="mb-4 text-muted">{tech.description}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {tech.features.map((feature, idx) => <span key={idx} className="px-3 py-1 text-xs rounded-full text-muted bg-primary">
+                                {feature}
+                              </span>)}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
+                    </CardContent>
+                  </CardWrapper>
                 </Card>;
         })}
           </div>}

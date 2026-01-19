@@ -21,6 +21,7 @@ interface TechnologyCapability {
   icon: string;
   features: string[];
   order_index: number;
+  link: string | null;
 }
 
 interface TechnologyStat {
@@ -43,7 +44,8 @@ const AdminTechnologyContent = () => {
     title: '',
     description: '',
     icon: 'Cpu',
-    features: ''
+    features: '',
+    link: ''
   });
 
   const [newStat, setNewStat] = useState({
@@ -115,6 +117,7 @@ const AdminTechnologyContent = () => {
         description: newCapability.description,
         icon: newCapability.icon,
         features: featuresArray,
+        link: newCapability.link || null,
         order_index: capabilities.length
       }]);
 
@@ -122,7 +125,7 @@ const AdminTechnologyContent = () => {
       toast({ title: "Error", description: "Failed to add capability", variant: "destructive" });
     } else {
       toast({ title: "Success", description: "Capability added" });
-      setNewCapability({ title: '', description: '', icon: 'Cpu', features: '' });
+      setNewCapability({ title: '', description: '', icon: 'Cpu', features: '', link: '' });
       fetchData();
     }
   };
@@ -256,6 +259,14 @@ const AdminTechnologyContent = () => {
                   placeholder="e.g., Neural Networks, NLP Processing, Computer Vision"
                 />
               </div>
+              <div>
+                <Label>Link (optional)</Label>
+                <Input
+                  value={newCapability.link}
+                  onChange={(e) => setNewCapability({ ...newCapability, link: e.target.value })}
+                  placeholder="https://example.com/docs"
+                />
+              </div>
               <Button onClick={addCapability} disabled={!newCapability.title || !newCapability.description}>
                 <Plus className="w-4 h-4 mr-2" />
                 Add Capability
@@ -277,6 +288,7 @@ const AdminTechnologyContent = () => {
                       <TableHead>Title</TableHead>
                       <TableHead>Icon</TableHead>
                       <TableHead>Features</TableHead>
+                      <TableHead>Link</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>

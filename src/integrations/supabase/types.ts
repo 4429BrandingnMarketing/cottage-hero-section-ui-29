@@ -429,6 +429,7 @@ export type Database = {
           description: string
           icon: string
           id: string
+          link: string | null
           order_index: number
           title: string
           updated_at: string | null
@@ -438,6 +439,7 @@ export type Database = {
           description: string
           icon?: string
           id?: string
+          link?: string | null
           order_index?: number
           title: string
           updated_at?: string | null
@@ -447,6 +449,7 @@ export type Database = {
           description?: string
           icon?: string
           id?: string
+          link?: string | null
           order_index?: number
           title?: string
           updated_at?: string | null
@@ -541,6 +544,7 @@ export type Database = {
           features: string[]
           icon: string
           id: string
+          link: string | null
           order_index: number
           title: string
           updated_at: string | null
@@ -551,6 +555,7 @@ export type Database = {
           features?: string[]
           icon?: string
           id?: string
+          link?: string | null
           order_index?: number
           title: string
           updated_at?: string | null
@@ -561,6 +566,7 @@ export type Database = {
           features?: string[]
           icon?: string
           id?: string
+          link?: string | null
           order_index?: number
           title?: string
           updated_at?: string | null

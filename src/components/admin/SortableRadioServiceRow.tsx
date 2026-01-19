@@ -4,7 +4,7 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { GripVertical, Edit, Trash2, Save, X } from 'lucide-react';
+import { GripVertical, Edit, Trash2, Save, X, ExternalLink } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -21,6 +21,7 @@ interface RadioService {
   description: string;
   icon: string;
   order_index: number;
+  link: string | null;
 }
 
 interface Props {
@@ -77,6 +78,13 @@ export const SortableRadioServiceRow = ({
             </Select>
           </TableCell>
           <TableCell>
+            <Input 
+              value={editingData.link || ''} 
+              onChange={(e) => onEditChange({ ...editingData, link: e.target.value || null })} 
+              placeholder="https://..."
+            />
+          </TableCell>
+          <TableCell>
             <div className="flex gap-2">
               <Button size="sm" onClick={onSave}><Save className="w-4 h-4" /></Button>
               <Button size="sm" variant="outline" onClick={onCancel}><X className="w-4 h-4" /></Button>
@@ -88,6 +96,21 @@ export const SortableRadioServiceRow = ({
           <TableCell>{service.title}</TableCell>
           <TableCell className="max-w-xs truncate">{service.description}</TableCell>
           <TableCell>{service.icon}</TableCell>
+          <TableCell>
+            {service.link ? (
+              <a 
+                href={service.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-primary hover:underline text-sm"
+              >
+                <ExternalLink className="w-3 h-3" />
+                <span className="max-w-[120px] truncate">{service.link}</span>
+              </a>
+            ) : (
+              <span className="text-muted-foreground text-sm">No link</span>
+            )}
+          </TableCell>
           <TableCell>
             <div className="flex gap-2">
               <Button size="sm" variant="outline" onClick={onEditStart}><Edit className="w-4 h-4" /></Button>
