@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
  import { Video, Film, Camera, ArrowRight, Play, Sparkles, Monitor, Clapperboard, Radio, Share2, Star, Zap, Heart } from 'lucide-react';
+ import { Layers, Eye, Palette, Cloud, Diamond, Glasses } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -157,16 +158,41 @@ const TV = () => {
                icon={<Zap className="w-6 h-6" />}
                title="Lightning Fast"
                description="Optimized animations that run at 60fps for smooth, butter-like transitions."
+               variant="default"
              />
              <GlassCard
                icon={<Heart className="w-6 h-6" />}
                title="Beautiful Design"
                description="Carefully crafted visuals that delight users and create memorable experiences."
+               variant="gradient"
              />
              <GlassCard
                icon={<Sparkles className="w-6 h-6" />}
                title="Modern Stack"
                description="Built with the latest technologies for maximum performance and flexibility."
+               variant="neon"
+             />
+           </div>
+           
+           {/* Second row - more variants */}
+           <div className="grid md:grid-cols-3 gap-6 mt-6">
+             <GlassCard
+               icon={<Cloud className="w-6 h-6" />}
+               title="Light Blur"
+               description="Subtle frosted effect with minimal blur for a softer, airy appearance."
+               variant="light"
+             />
+             <GlassCard
+               icon={<Layers className="w-6 h-6" />}
+               title="Heavy Blur"
+               description="Maximum blur intensity for a bold, frosted glass statement piece."
+               variant="heavy"
+             />
+             <GlassCard
+               icon={<Eye className="w-6 h-6" />}
+               title="Subtle Glass"
+               description="Nearly transparent with ultra-fine borders for minimal interference."
+               variant="subtle"
              />
            </div>
          </div>

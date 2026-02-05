@@ -6,15 +6,61 @@
    description: string;
    icon?: ReactNode;
    className?: string;
+   variant?: 'default' | 'light' | 'heavy' | 'gradient' | 'neon' | 'subtle';
  }
  
- const GlassCard = ({ title, description, icon, className }: GlassCardProps) => {
+  const variantStyles = {
+   default: {
+     bg: "bg-white/10 backdrop-blur-xl",
+     border: "border-white/20",
+     hoverBg: "hover:bg-white/20",
+     hoverBorder: "hover:border-white/40",
+   },
+   light: {
+     bg: "bg-white/5 backdrop-blur-sm",
+     border: "border-white/10",
+     hoverBg: "hover:bg-white/10",
+     hoverBorder: "hover:border-white/20",
+   },
+   heavy: {
+     bg: "bg-white/20 backdrop-blur-2xl",
+     border: "border-white/30",
+     hoverBg: "hover:bg-white/30",
+     hoverBorder: "hover:border-white/50",
+   },
+   gradient: {
+     bg: "bg-gradient-to-br from-white/15 via-white/5 to-transparent backdrop-blur-xl",
+     border: "border-white/25",
+     hoverBg: "hover:from-white/25 hover:via-white/10",
+     hoverBorder: "hover:border-white/50",
+   },
+   neon: {
+     bg: "bg-white/10 backdrop-blur-xl",
+     border: "border-purple-500/30",
+     hoverBg: "hover:bg-white/15",
+     hoverBorder: "hover:border-purple-400/60 hover:shadow-purple-500/25",
+   },
+   subtle: {
+     bg: "bg-white/[0.03] backdrop-blur-md",
+     border: "border-white/[0.08]",
+     hoverBg: "hover:bg-white/[0.08]",
+     hoverBorder: "hover:border-white/20",
+   },
+ };
+ 
+ const GlassCard = ({ title, description, icon, className, variant = 'default' }: GlassCardProps) => {
+   const styles = variantStyles[variant];
+ 
    return (
      <div
        className={cn(
          "group relative overflow-hidden rounded-2xl p-6 transition-all duration-500",
-         "bg-white/10 backdrop-blur-xl border border-white/20",
-         "hover:bg-white/20 hover:border-white/40 hover:shadow-2xl",
+         styles.bg,
+         "border",
+         styles.border,
+         styles.hoverBg,
+         styles.hoverBorder,
+         "hover:shadow-2xl",
          "hover:scale-[1.02] hover:-translate-y-1",
          className
        )}
