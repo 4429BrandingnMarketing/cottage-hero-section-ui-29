@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Video, Film, Camera, ArrowRight, Play, Sparkles, Monitor, Clapperboard, Radio, Share2 } from 'lucide-react';
+ import { Video, Film, Camera, ArrowRight, Play, Sparkles, Monitor, Clapperboard, Radio, Share2, Star, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
+ import AnimationShowcase from '@/components/AnimationShowcase';
+ import GlassCard from '@/components/ui/GlassCard';
 
 // Icon mapping for dynamic icon rendering
 const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
@@ -109,6 +111,136 @@ const TV = () => {
         </div>
       </section>
 
+       {/* Animation Showcase Section */}
+       <section className="py-24 px-4 bg-gradient-to-b from-background via-muted/30 to-background">
+         <div className="max-w-7xl mx-auto">
+           <div className="text-center mb-16">
+             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-6">
+               <Sparkles className="w-4 h-4 text-primary" />
+               <span className="text-primary text-sm font-medium">Interactive Demo</span>
+             </div>
+             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+               Animations & Effects
+             </h2>
+             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+               Click on any animation to see it in action. Our design system includes smooth, performant animations.
+             </p>
+           </div>
+           
+           <AnimationShowcase />
+         </div>
+       </section>
+ 
+       {/* Glass Effects Section */}
+       <section className="py-24 px-4 relative overflow-hidden">
+         {/* Dark gradient background for glass effect visibility */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" />
+         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.3),transparent_50%)]" />
+         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(59,130,246,0.2),transparent_50%)]" />
+         
+         <div className="max-w-7xl mx-auto relative z-10">
+           <div className="text-center mb-16">
+             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6 backdrop-blur-sm">
+               <Star className="w-4 h-4 text-white" />
+               <span className="text-white text-sm font-medium">Glassmorphism</span>
+             </div>
+             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+               Glass Effects
+             </h2>
+             <p className="text-xl text-white/70 max-w-2xl mx-auto">
+               Modern frosted glass components with blur effects and subtle borders.
+             </p>
+           </div>
+           
+           <div className="grid md:grid-cols-3 gap-6">
+             <GlassCard
+               icon={<Zap className="w-6 h-6" />}
+               title="Lightning Fast"
+               description="Optimized animations that run at 60fps for smooth, butter-like transitions."
+             />
+             <GlassCard
+               icon={<Heart className="w-6 h-6" />}
+               title="Beautiful Design"
+               description="Carefully crafted visuals that delight users and create memorable experiences."
+             />
+             <GlassCard
+               icon={<Sparkles className="w-6 h-6" />}
+               title="Modern Stack"
+               description="Built with the latest technologies for maximum performance and flexibility."
+             />
+           </div>
+         </div>
+       </section>
+ 
+       {/* Typography Section */}
+       <section className="py-24 px-4 bg-muted/30">
+         <div className="max-w-7xl mx-auto">
+           <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+               Typography
+             </h2>
+             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+               A carefully curated type scale for optimal readability and visual hierarchy.
+             </p>
+           </div>
+           
+           <Card className="p-8 md:p-12 bg-card/50 backdrop-blur-sm border-border/50">
+             <div className="space-y-8">
+               <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight">
+                 Heading H1 - Display
+               </h1>
+               <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+                 Heading H2 - Large Title
+               </h2>
+               <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+                 Heading H3 - Section Title
+               </h3>
+               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+                 Body text with optimized line height and letter spacing for improved readability. 
+                 The typography system supports responsive sizing and maintains proper proportions 
+                 across all device sizes.
+               </p>
+               <p className="text-sm text-muted-foreground">
+                 Small text for captions, labels, and secondary information.
+               </p>
+             </div>
+           </Card>
+         </div>
+       </section>
+ 
+       {/* Color Palette Section */}
+       <section className="py-24 px-4">
+         <div className="max-w-7xl mx-auto">
+           <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+               Color Palette
+             </h2>
+             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+               A harmonious color system designed for accessibility and visual appeal.
+             </p>
+           </div>
+           
+           <div className="grid md:grid-cols-3 gap-6">
+             {[
+               { name: 'Primary', color: 'bg-primary', hex: 'hsl(var(--primary))' },
+               { name: 'Accent', color: 'bg-accent', hex: 'hsl(var(--accent))' },
+               { name: 'Secondary', color: 'bg-secondary', hex: 'hsl(var(--secondary))' },
+             ].map((item) => (
+               <Card 
+                 key={item.name}
+                 className="overflow-hidden group hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
+               >
+                 <div className={`h-32 ${item.color} group-hover:scale-105 transition-transform duration-500`} />
+                 <CardContent className="p-6 text-center">
+                   <h3 className="font-semibold text-foreground mb-1">{item.name}</h3>
+                   <p className="text-sm text-muted-foreground font-mono">{item.hex}</p>
+                 </CardContent>
+               </Card>
+             ))}
+           </div>
+         </div>
+       </section>
+ 
       {/* Stats Section with Glass Effect */}
       {stats.length > 0 && (
         <section className="py-16 px-4 relative">
