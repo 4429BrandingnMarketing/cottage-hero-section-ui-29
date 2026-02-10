@@ -1,41 +1,47 @@
 import { Play } from 'lucide-react';
+import portfolioUrbanPulse from '@/assets/portfolio-urban-pulse.jpg';
+import portfolioJourneyWithin from '@/assets/portfolio-journey-within.jpg';
+import portfolioNeonNights from '@/assets/portfolio-neon-nights.jpg';
+import portfolioBreakingGround from '@/assets/portfolio-breaking-ground.jpg';
+import portfolioVelocity from '@/assets/portfolio-velocity.jpg';
+import portfolioEchoes from '@/assets/portfolio-echoes.jpg';
 
 const portfolioItems = [
   {
     title: 'Urban Pulse',
     category: 'Music Video',
     aspect: 'col-span-2 row-span-2',
-    gradient: 'from-primary/80 to-primary/40',
+    image: portfolioUrbanPulse,
   },
   {
     title: 'The Journey Within',
     category: 'Documentary',
     aspect: 'col-span-1 row-span-1',
-    gradient: 'from-accent/60 to-accent/30',
+    image: portfolioJourneyWithin,
   },
   {
     title: 'Neon Nights',
     category: 'Commercial',
     aspect: 'col-span-1 row-span-1',
-    gradient: 'from-secondary to-secondary/60',
+    image: portfolioNeonNights,
   },
   {
     title: 'Breaking Ground',
     category: 'Interview Series',
     aspect: 'col-span-1 row-span-1',
-    gradient: 'from-primary/60 to-accent/40',
+    image: portfolioBreakingGround,
   },
   {
     title: 'Velocity',
     category: 'Brand Film',
     aspect: 'col-span-1 row-span-1',
-    gradient: 'from-accent/70 to-primary/50',
+    image: portfolioVelocity,
   },
   {
     title: 'Echoes',
     category: 'Short Film',
     aspect: 'col-span-2 row-span-1',
-    gradient: 'from-secondary/80 to-primary/30',
+    image: portfolioEchoes,
   },
 ];
 
@@ -58,11 +64,15 @@ const TVPortfolio = () => {
               key={item.title}
               className={`${item.aspect} group relative rounded-2xl overflow-hidden cursor-pointer`}
             >
-              {/* Gradient placeholder (replace with real thumbnails) */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`} />
+              <img
+                src={item.image}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
               
               {/* Dark overlay on hover */}
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
+              <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/50 transition-all duration-500" />
 
               {/* Play icon */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
