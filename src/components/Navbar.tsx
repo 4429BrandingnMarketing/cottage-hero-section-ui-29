@@ -31,7 +31,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#divisions" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
-              Divisions
+              Content
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
             <a href="/music" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
@@ -79,7 +79,7 @@ const Navbar = () => {
           <div className="md:hidden bg-secondary/95 backdrop-blur-md border-t border-white/10 animate-fade-in">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <a href="#divisions" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
-                Divisions
+                Content
               </a>
               <a href="/music" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Music
