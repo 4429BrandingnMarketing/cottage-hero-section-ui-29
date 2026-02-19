@@ -12,10 +12,10 @@ const TV = () => {
       <TVHero />
       <TVPortfolio />
       <TVServices />
-      <TVContact />
+      <TVContact className="text-slate-200" />
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default TV;
