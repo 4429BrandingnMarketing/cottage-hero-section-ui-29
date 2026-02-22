@@ -30,9 +30,9 @@ const DivisionsSection = () => {
     {
       name: "Red Vision Artist Hub",
       icon: Cpu,
-      description: "Visionary A.I. powered platform for independent artists featuring professional dashboards, AI content generation, and global streaming analytics.",
+      description: "The AI Operating System for Independent Music. Full-stack infrastructure featuring embedded fintech, automated royalty splits, and proprietary AI growth models.",
       color: "from-primary to-purple-600",
-      highlights: ["AI Content Generation", "Streaming Analytics", "Project Management"],
+      highlights: ["Embedded Fintech", "AI Growth Automation", "White-label Platform"],
       link: "/divisions/ai"
     },
     {
