@@ -71,27 +71,24 @@ const TragicMulattoSection = () => {
 
         {/* Book Cover Image */}
         <motion.div
-          className="max-w-md mx-auto mb-20"
+          className="max-w-md mx-auto mb-20 group"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="aspect-[3/4] rounded-2xl overflow-hidden border-4 border-[#d4a574] shadow-2xl">
-            <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="text-sm text-[#d4a574] mb-4">GiFTD & PrVLGD</div>
-                <h3 className="text-4xl text-[#d4a574] mb-8" style={{ fontFamily: 'Didot, serif' }}>
-                  A TRAGIC<br />MULATTO
-                </h3>
-                <p className="text-sm text-[#d4a574]/80 leading-relaxed">
-                  A COLLECTION OF HEART BREAKING JOURNAL ENTRIES THAT GIVE INSIGHT OF FROM A YOUNG MULATTO MAN WHO WASNT LIGHT ENOUGH TO GAIN ACCEPTANCE FROM AND NOT DARK ENOUGH TO BE CONSIDER BLACK. A MAN WITH NO HOME. A TRAGIC MULATTO.
-                </p>
-                <div className="mt-8 text-xl italic text-[#d4a574]" style={{ fontFamily: 'Didot, serif' }}>
-                  by Yours Truly, #4429
-                </div>
-              </div>
-            </div>
+          <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-4 border-[#d4a574] shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
+            <img
+              src="/tragic_mulatto_book_cover_1771779727465.png"
+              alt="A Tragic Mulatto Book Cover"
+              className="w-full h-full object-cover"
+            />
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/5 pointer-events-none" />
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-[#d4a574]/60 text-sm tracking-widest uppercase">Available in Select Boutiques</p>
           </div>
         </motion.div>
 
