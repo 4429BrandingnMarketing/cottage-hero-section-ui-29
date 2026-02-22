@@ -20,7 +20,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-const AI = () => {
+const VisionaryOS = () => {
   const pillars = [
     {
       icon: Network,
@@ -98,21 +98,18 @@ const AI = () => {
             </motion.div>
 
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-[0.9]">
-              THE AI <span className="text-primary italic">OPERATING</span> SYSTEM
+              VISIONARY <span className="text-primary italic">OS</span>
             </h1>
 
             <p className="text-2xl md:text-4xl font-light text-white/80 leading-tight mb-12 max-w-4xl mx-auto">
-              Red Vision AI is the full-stack infrastructure for the <span className="text-white font-bold underline decoration-primary/50 underline-offset-8">Independent Music Economy.</span>
+              The staple product of Red Vision AI. A complete autonomous business operating system for the <span className="text-white font-bold underline decoration-primary/50 underline-offset-8">Modern Music Industry Entrepreneur.</span>
             </p>
 
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
               <Button size="lg" className="h-20 px-12 text-2xl font-black bg-primary hover:bg-primary/90 rounded-none shadow-[20px_20px_0px_0px_rgba(239,68,68,0.2)] hover:shadow-none transition-all duration-300 transform hover:-translate-x-1 hover:-translate-y-1">
-                FOR SERIOUS OPERATORS
+                RUN YOUR EMPIRE
                 <ChevronRight className="ml-3 w-8 h-8" />
               </Button>
-              <div className="text-white/40 font-mono text-sm tracking-widest hidden md:block">
-                // BUILT FOR VALUATION LEVERAGE
-              </div>
             </div>
           </motion.div>
         </div>
@@ -123,21 +120,21 @@ const AI = () => {
         <div className="max-w-7xl mx-auto px-4 container">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-10">
-                WHILE OTHERS FOCUS ON UPLOADS, WE DELIVER <span className="text-primary">INFRASTRUCTURE.</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-10 text-primary">
+                REIMAGINING THE MUSIC BUSINESS.
               </h2>
-              <p className="text-2xl text-black/70 leading-relaxed font-medium">
-                DistroKid and CD Baby are delivery services. Red Vision AI is an enterprise-grade ecosystem.
-                We combine DSP delivery, Red Vision Music Distro, predictive intelligence, and modular multi-tenant dashboards into a single scalable platform.
-              </p>
-              <div className="grid grid-cols-2 gap-6 pt-10">
-                <div className="p-6 bg-black text-white">
-                  <div className="text-4xl font-black mb-2">$100M+</div>
-                  <div className="text-xs uppercase tracking-widest opacity-60">Valuation Target</div>
+              <div className="space-y-6">
+                <div className="border-l-4 border-primary pl-6 py-2">
+                  <h3 className="text-2xl font-black uppercase italic mb-2 tracking-tight">Music is your Marketing</h3>
+                  <p className="text-black/60 font-medium">It builds your brand and audience. We don't just sell music; we lead generation.</p>
                 </div>
-                <div className="p-6 bg-gray-100 border border-black/10">
-                  <div className="text-4xl font-black mb-2">100%</div>
-                  <div className="text-xs uppercase tracking-widest opacity-60">Data Ownership</div>
+                <div className="border-l-4 border-primary pl-6 py-2">
+                  <h3 className="text-2xl font-black uppercase mb-2 tracking-tight italic">Your Brand is your Business</h3>
+                  <p className="text-black/60 font-medium">Monetize through multiple streams. Control your destiny and your bottom line.</p>
+                </div>
+                <div className="border-l-4 border-primary pl-6 py-2">
+                  <h3 className="text-2xl font-black uppercase mb-2 tracking-tight italic">AI is your Workforce</h3>
+                  <p className="text-black/60 font-medium">Autonomous agents work 24/7. High execution, zero overhead, absolute scale.</p>
                 </div>
               </div>
             </div>
@@ -246,4 +243,4 @@ const AI = () => {
   );
 };
 
-export default AI;
+export default VisionaryOS;

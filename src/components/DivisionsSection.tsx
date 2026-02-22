@@ -36,11 +36,11 @@ const DivisionsSection = () => {
       link: "/divisions/radio"
     },
     {
-      name: "Red Vision AI",
+      name: "Visionary OS",
       icon: Cpu,
-      description: "The AI Operating System for Independent Music. Full-stack infrastructure featuring Red Vision Music Distro, automated royalty splits, and proprietary AI growth models.",
+      description: "Red Vision AI's staple product. A complete autonomous business operating system allowing music entrepreneurs to scale via AI workforce and intelligent distribution.",
       color: "from-primary to-purple-600",
-      highlights: ["Red Vision Music Distro", "AI Growth Automation", "White-label Platform"],
+      highlights: ["Autonomous AI Workforce", "Red Vision Music Distro", "Strategic Intelligence"],
       link: "/divisions/ai"
     },
     {

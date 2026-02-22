@@ -77,7 +77,7 @@ const Pivot = () => {
                         <div className="flex flex-col items-center gap-4 mb-8">
                             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full backdrop-blur-md">
                                 <Cpu className="w-4 h-4 text-primary" />
-                                <span className="text-primary text-xs font-black uppercase tracking-[0.2em]">A Product of Red Vision AI</span>
+                                <span className="text-primary text-xs font-black uppercase tracking-[0.2em]">A Product of Visionary OS</span>
                             </div>
                             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full">
                                 <Navigation className="w-4 h-4 text-green-500" />
