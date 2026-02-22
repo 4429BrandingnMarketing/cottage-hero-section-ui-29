@@ -28,11 +28,11 @@ const DivisionsSection = () => {
       link: "/divisions/radio"
     },
     {
-      name: "Red Vision AI",
+      name: "Red Vision Artist Hub",
       icon: Cpu,
-      description: "Technology services division offering AI integration consulting, marketing automation, content optimization, and predictive analytics for creative businesses.",
+      description: "Visionary A.I. powered platform for independent artists featuring professional dashboards, AI content generation, and global streaming analytics.",
       color: "from-primary to-purple-600",
-      highlights: ["Content strategy automation", "Audience targeting systems", "Creative enhancement tools"],
+      highlights: ["AI Content Generation", "Streaming Analytics", "Project Management"],
       link: "/divisions/ai"
     },
     {
