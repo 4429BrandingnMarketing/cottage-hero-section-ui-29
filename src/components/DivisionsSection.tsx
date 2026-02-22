@@ -1,8 +1,16 @@
-import { Music, Video, Radio, Cpu, Shirt, FileText } from 'lucide-react';
+import { Music, Video, Radio, Cpu, Shirt, FileText, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const DivisionsSection = () => {
   const divisions = [
+    {
+      name: "The Pivot",
+      icon: Navigation,
+      description: "Operational tour management system, application, and instruction manual designed for scaling artists and professional production teams.",
+      color: "from-green-600 to-emerald-600",
+      highlights: ["Tour Management System", "Digital Command App", "Industry Methodology"],
+      link: "/the-pivot"
+    },
     {
       name: "Red Vision Music",
       icon: Music,
@@ -66,7 +74,7 @@ const DivisionsSection = () => {
             </span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Six integrated divisions leveraging AI to amplify human creativity across music, fashion, technology,
+            Seven integrated divisions leveraging AI to amplify human creativity across music, fashion, technology,
             and cultural storytelling while maintaining authentic artist partnerships and industry-leading quality.
           </p>
         </div>

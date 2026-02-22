@@ -17,6 +17,7 @@ import Fashion from "./pages/divisions/Fashion";
 import Blog from "./pages/divisions/Blog";
 import Marketing from "./pages/divisions/Marketing";
 import Technology from "./pages/divisions/Technology";
+import Pivot from "./pages/Pivot";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/divisions/blog" element={<Blog />} />
             <Route path="/divisions/marketing" element={<Marketing />} />
             <Route path="/divisions/technology" element={<Technology />} />
+            <Route path="/the-pivot" element={<Pivot />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
