@@ -1,4 +1,4 @@
-import { Music, Video, Radio, Cpu, Shirt, FileText, Navigation } from 'lucide-react';
+import { Music, Video, Radio, Cpu, Shirt, FileText, Navigation, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const DivisionsSection = () => {
@@ -34,6 +34,14 @@ const DivisionsSection = () => {
       color: "from-gold to-yellow-600",
       highlights: ["Multi-platform presence", "Real-time transcription", "Community building"],
       link: "/divisions/radio"
+    },
+    {
+      name: "#4429 Lifestyle",
+      icon: Megaphone,
+      description: "Lifestyle + Marketing Agency AI Agent Hub. Deploy autonomous agents 24/7 for content creation, promotion, and business growth.",
+      color: "from-primary to-accent",
+      highlights: ["AI Agent Workforce", "Revenue Monitoring", "Content Studio"],
+      link: "/divisions/marketing"
     },
     {
       name: "Visionary OS",
