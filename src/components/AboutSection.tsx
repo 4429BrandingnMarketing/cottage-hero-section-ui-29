@@ -44,23 +44,24 @@ const AboutSection = () => {
           <p className="text-sm text-muted-foreground uppercase tracking-wider mb-4">
             Industry Legend
           </p>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Meet <span className="text-primary">Jason Salvador</span>
+          <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+            Meet <span className="text-primary italic">Jason Salvador</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-8">
-            The mastermind behind Red Vision Creative Studios (formerly Red Vision Music). Get direct access to the producer behind hits for Kanye West, Jay-Z, Beyoncé, Bruno Mars, Justin Bieber, and countless other superstars.
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-5xl mx-auto mb-10 leading-relaxed font-light">
+            Founded by <span className="text-foreground font-bold">Jason Salvador</span>—a multi-platinum producer and veteran tour manager with <span className="text-primary font-bold">15 years in the industry</span>.
+            Having been on the front lines of global tours for Kanye West, Jay-Z, and Beyoncé, Jason built the <span className="text-foreground font-bold">Red Vision Artist Hub</span> to be exactly what he knew independent artists actually needed but couldn't find in one place.
           </p>
 
           {/* Credentials Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="bg-primary/10 border border-primary/20 rounded-full px-6 py-3">
-              <span className="font-semibold text-primary">1500 or Nothin' Alumni</span>
+          <div className="flex flex-wrap justify-center gap-4 mb-14">
+            <div className="bg-primary/10 border border-primary/20 rounded-full px-8 py-4 shadow-sm hover:shadow-md transition-shadow">
+              <span className="font-bold text-primary uppercase tracking-widest text-xs">15-Year Industry Veteran</span>
             </div>
-            <div className="bg-primary/10 border border-primary/20 rounded-full px-6 py-3">
-              <span className="font-semibold text-primary">Multi-Platinum Producer</span>
+            <div className="bg-primary/10 border border-primary/20 rounded-full px-8 py-4 shadow-sm hover:shadow-md transition-shadow">
+              <span className="font-bold text-primary uppercase tracking-widest text-xs">Platinum Tour Manager</span>
             </div>
-            <div className="bg-primary/10 border border-primary/20 rounded-full px-6 py-3">
-              <span className="font-semibold text-primary">Red Vision Creative Studios</span>
+            <div className="bg-primary/10 border border-primary/20 rounded-full px-8 py-4 shadow-sm hover:shadow-md transition-shadow">
+              <span className="font-bold text-primary uppercase tracking-widest text-xs">Red Vision Artist Hub Founder</span>
             </div>
           </div>
         </div>

@@ -106,9 +106,14 @@ const ArtistHub = () => {
               ARTIST <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient-x">HUB</span>
             </h1>
 
-            <p className="text-xl md:text-3xl font-light text-white/70 max-w-4xl mx-auto leading-relaxed mb-12">
-              The All-In-One Platform for Independent Artists.
-              Powered by <span className="text-primary font-semibold">Visionary A.I.</span>
+            <p className="text-xl md:text-3xl font-bold text-white max-w-5xl mx-auto leading-tight mb-8">
+              Everything an independent artist needs in one place.
+            </p>
+
+            <p className="text-lg md:text-xl font-light text-white/70 max-w-4xl mx-auto leading-relaxed mb-12">
+              Manage your releases, track analytics across <span className="text-white font-bold">ALL platforms</span>, generate professional content with AI, and build your landing page.
+              <br /><br />
+              <span className="italic">"Built by a tour manager with <span className="text-primary font-bold">15 years in the industry</span> who knows what you actually need."</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
