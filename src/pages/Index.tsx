@@ -4,9 +4,9 @@ import DivisionsSection from "@/components/DivisionsSection";
 import FashionSection from "@/components/FashionSection";
 import TragicMulattoSection from "@/components/TragicMulattoSection";
 import TechnologySection from "@/components/TechnologySection";
-import OverviewSectionNew from "@/components/OverviewSectionNew";
-import GallerySectionNew from "@/components/GallerySectionNew";
-import AboutSectionNew from "@/components/AboutSectionNew";
+import OverviewSection from "@/components/OverviewSection";
+import GallerySection from "@/components/GallerySection";
+import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -18,9 +18,9 @@ const Index = () => {
       <FashionSection />
       <TragicMulattoSection />
       <TechnologySection />
-      <OverviewSectionNew />
-      <GallerySectionNew />
-      <AboutSectionNew />
+      <OverviewSection />
+      <GallerySection />
+      <AboutSection />
       <Footer />
     </div>
   );
