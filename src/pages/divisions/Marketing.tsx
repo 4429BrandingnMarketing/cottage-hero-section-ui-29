@@ -91,7 +91,14 @@ const Marketing = () => {
 
       {/* Hero Section */}
       <section className="relative pt-48 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.05)_1px,transparent_1px)] bg-[length:40px_40px]" />
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-[#050505] z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80"
+            alt="Futuristic Tech Background"
+            className="w-full h-full object-cover opacity-30"
+          />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
           <motion.div
@@ -99,7 +106,7 @@ const Marketing = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8 backdrop-blur-md">
               <Bot className="w-5 h-5 text-primary" />
               <span className="text-primary text-sm font-black tracking-widest uppercase">AI Agent Hub</span>
             </div>
@@ -211,7 +218,13 @@ const Marketing = () => {
 
       {/* Revenue Streams */}
       <section className="py-32 bg-primary group relative overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-5 transition-opacity" />
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80"
+            alt="Revenue Background"
+            className="w-full h-full object-cover opacity-10 mix-blend-overlay"
+          />
+        </div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h2 className="text-6xl md:text-9xl font-black mb-20 tracking-tighter italic uppercase text-center md:text-left">
             REVENUE STREAMS
@@ -228,8 +241,11 @@ const Marketing = () => {
       </section>
 
       {/* AI Integrations / Parallel Development */}
-      <section className="py-32 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-32 bg-[#050505] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 blur-[120px] rounded-full" />
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-24">
             <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase italic tracking-tighter">AI <span className="text-primary">INTEGRATIONS</span></h2>
             <p className="text-2xl text-white/40 max-w-3xl mx-auto">
