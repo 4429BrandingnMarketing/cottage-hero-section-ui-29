@@ -89,13 +89,14 @@ const FashionSection = () => {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] relative group">
-              <img
-                src="/images/fashion-hero.png"
-                alt="GiFTD N' PrVLGD Luxury Fashion"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] relative group flex items-center justify-center">
+              <div className="text-[#d4a574] opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+                <Sparkles className="w-48 h-48" />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-9xl filter grayscale opacity-40 group-hover:scale-110 transition-transform duration-700">🎩</span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
 
             {/* Collections */}

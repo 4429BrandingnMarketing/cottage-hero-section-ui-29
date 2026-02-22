@@ -1,289 +1,184 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Video, Mic2, Film, Image as ImageIcon, Book, Camera, Brain, ExternalLink } from 'lucide-react';
+import { Sparkles, Video, Mic2, Film, Image as ImageIcon, Book, Camera, Brain, ExternalLink, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const AI_PROJECTS = [
-    {
-        icon: Film,
-        title: 'AI Scriptwriter + Comedic Director',
-        description: 'Auto-writes comedic skits, scenes, and fake interviews. Built-in tone: satire, parody, absurd humor. Auto-direct scenes, shot lists, and angles. One-click YouTube voice-over & character swap.',
-        status: 'Coming Soon',
-        color: 'from-purple-500 to-pink-500'
-    },
-    {
-        icon: Video,
-        title: 'Pixelated Snitch Interviews Generator',
-        description: "Fake 'mafia snitch' interview generator. Pixelated faces, altered voices, anonymized characters. Generates 30-90 sec clips. Created for viral comedy content.",
-        status: 'Coming Soon',
-        color: 'from-blue-500 to-cyan-500'
-    },
-    {
-        icon: Mic2,
-        title: 'Studio Trailer Maker',
-        description: 'Parody versions of major studio intros (Universal/MGM/etc). RVM-branded cinematic logos. Turns any idea into cinematic trailers. 1080p + 4K export.',
-        status: 'Coming Soon',
-        color: 'from-orange-500 to-red-500'
-    },
-    {
-        icon: ImageIcon,
-        title: 'Garbage Pail-Style AI Card Creator',
-        description: 'Upload selfie → AI generates 80s Garbage Pail-style card. Auto-creates funny name + stats. Optional NFT minting. RVM collectible series.',
-        status: 'Coming Soon',
-        color: 'from-green-500 to-emerald-500'
-    }
-];
-
-const FEATURED_PROJECTS = [
-    {
-        title: 'The Pivot Book',
-        subtitle: 'Complete Survival Guide with AI-Powered App Assistant for Tour Managers',
-        image: '/images/pivot-book.png',
-        link: 'https://redvisioncreativestudio.com/pivot-book',
-        description: "All hacks, advice, contacts, do's and dont's from yours truly, Jason Salvador"
-    },
-    {
-        title: 'A Tragic Mulatto',
-        subtitle: 'A Satirical Journal of Identity, Absurdity, and Beige Confusion',
-        image: '/images/tragic-mulatto.png',
-        link: 'https://redvisioncreativestudio.com/tragic-mulatto',
-        description: 'Letters to the Editor, The Beige Manifesto, and Fake Ads. By Yours Truly, #4429'
-    },
-    {
-        title: 'Red Valley Mall Portrait Studio',
-        subtitle: 'Studio Coming Soon',
-        image: '/images/red-valley-portrait.jpg',
-        link: '#',
-        description: 'Professional portrait photography meets vintage mall aesthetics'
-    }
-];
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.1 }
-    }
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5 }
-    }
-};
-
 const VisionSection = () => {
+    const accolades = [
+        {
+            title: "1500 or Nothin' Alumni",
+            desc: "Bridging the gap between legendary production and future innovation.",
+            icon: Sparkles,
+            color: "text-red-500"
+        },
+        {
+            title: "Multi-Platinum Producer",
+            desc: "20 years of delivering diamond-selling results for the world's biggest artists.",
+            icon: Mic2,
+            color: "text-black"
+        },
+        {
+            title: "Direct Access Promise",
+            desc: "Strategic creative direction that moves the needle on culture.",
+            icon: ShieldCheck,
+            color: "text-red-500"
+        }
+    ];
+
+    const collaborations = [
+        "Kanye West", "Jay-Z", "Beyoncé", "Virgil Abloh", "Don C", "Hardy Blechman", "Nigo", "James Fauntleroy", "My Guy Mars", "Ryan Toby"
+    ];
+
     return (
-        <>
-            {/* Main Vision Section */}
-            <section id="vision" className="py-24 px-4 bg-gradient-to-b from-background via-secondary/10 to-background relative overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-
-                <div className="max-w-7xl mx-auto relative z-10">
+        <section id="vision" className="py-24 px-4 bg-[#F9FAFB] relative overflow-hidden">
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    {/* Left: Authority Card (Collage) */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
+                        transition={{ duration: 0.8 }}
+                        className="relative"
                     >
-                        <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm font-medium mb-4">
-                            THE VISION
-                        </span>
-                        <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                            Meet <span className="text-primary">Jason Salvador</span>
-                        </h2>
-                        <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-                            Cultural architect. 20 years dominating music, fashion, and AI innovation.
-                        </p>
-                    </motion.div>
+                        <div className="bg-white p-4 rounded-[2rem] shadow-2xl relative overflow-hidden flex">
+                            {/* Vertical Name Accent */}
+                            <div className="hidden md:flex flex-col items-center justify-center pr-6 py-8">
+                                <span className="[writing-mode:vertical-lr] rotate-180 text-4xl font-black text-red-600/20 tracking-[0.2em] select-none">
+                                    JASON SALVADOR
+                                </span>
+                            </div>
 
-                    {/* Mocha App Embed */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-4xl mx-auto mb-20"
-                    >
-                        <div className="aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl shadow-primary/10 bg-card">
-                            <iframe
-                                src="https://getmocha.com/apps/0199e288-befc-7ee6-b6bf-a33753f2a638"
-                                title="Jason Salvador - Interactive Bio"
-                                className="w-full h-full"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-                                style={{ border: 'none' }}
-                            />
+                            <div className="flex-1 relative">
+                                <div className="aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-gray-100 border border-gray-100">
+                                    <img
+                                        src="/images/jason-salvador-actual.png"
+                                        alt="Jason Salvador Bio Collage"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                {/* Legend Badge */}
+                                <div className="absolute bottom-6 left-6 right-6">
+                                    <div className="bg-red-600 text-white px-6 py-2 rounded-full inline-flex items-center gap-2 shadow-lg">
+                                        <Sparkles className="w-4 h-4" />
+                                        <span className="font-bold text-sm tracking-widest uppercase">Industry Legend</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* Abstract Background Accents */}
+                        <div className="absolute -top-10 -left-10 w-40 h-40 bg-red-600/5 rounded-full blur-3xl" />
+                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-black/5 rounded-full blur-3xl" />
                     </motion.div>
 
-                    {/* The Visionary Branding */}
+                    {/* Right: Visionary Info */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-20"
+                        transition={{ duration: 0.8 }}
+                        className="space-y-12"
                     >
-                        <div className="max-w-2xl mx-auto p-12 bg-gradient-to-br from-purple-900/20 via-red-900/20 to-pink-900/20 rounded-3xl border border-primary/20">
-                            <img
-                                src="/images/visionary-logo.png"
-                                alt="The Visionary - Red Vision AI Assistant"
-                                className="w-full max-w-md mx-auto"
-                            />
-                            <p className="text-muted-foreground mt-6 text-lg">
-                                Red Vision Creative Studio A.I. Assistant
+                        <div>
+                            <span className="inline-block px-4 py-2 bg-red-100 text-red-600 rounded-full text-sm font-bold tracking-widest uppercase mb-6">
+                                The Visionary
+                            </span>
+                            <h2 className="text-5xl md:text-7xl font-black text-[#1F2937] leading-tight mb-6">
+                                Meet <span className="text-red-600">Jason Salvador</span>
+                            </h2>
+                            <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
+                                Cultural architect and strategic consultant. Over two decades of dominating the intersection of music, high-fashion, and disruptive technology.
                             </p>
                         </div>
-                    </motion.div>
-                </div>
-            </section>
 
-            {/* AI Projects Section */}
-            <section className="py-24 px-4 bg-secondary/20 relative overflow-hidden">
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
-                </div>
-
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
-                            <Brain className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium text-primary">Red Vision AI</span>
-                        </div>
-                        <h2 className="text-4xl md:text-6xl font-bold mb-4">
-                            <span className="text-foreground">Upcoming </span>
-                            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI Projects</span>
-                        </h2>
-                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                            Revolutionary AI tools for content creators, comedians, and digital artists
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
-                    >
-                        {AI_PROJECTS.map((project) => {
-                            const Icon = project.icon;
-                            return (
+                        {/* Accolades List */}
+                        <div className="space-y-8">
+                            {accolades.map((item, index) => (
                                 <motion.div
-                                    key={project.title}
-                                    variants={itemVariants}
-                                    className="group relative p-8 rounded-2xl bg-card/50 backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all duration-300 overflow-hidden"
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="flex gap-6 items-start"
                                 >
-                                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.color} opacity-10 rounded-full blur-2xl`} />
-
-                                    <div className="relative">
-                                        <div className={`w-16 h-16 bg-gradient-to-br ${project.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                            <Icon className="w-8 h-8 text-white" />
-                                        </div>
-
-                                        <div className="flex items-start justify-between mb-3">
-                                            <h4 className="text-xl font-bold text-foreground pr-4">{project.title}</h4>
-                                            <span className="px-3 py-1 text-xs font-bold bg-primary/20 text-primary rounded-full whitespace-nowrap">
-                                                {project.status}
-                                            </span>
-                                        </div>
-
-                                        <p className="text-muted-foreground leading-relaxed">
-                                            {project.description}
-                                        </p>
+                                    <div className={`w-14 h-14 rounded-full border-2 border-gray-100 flex items-center justify-center flex-shrink-0 ${item.color}`}>
+                                        <item.icon className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-xl font-bold text-[#1F2937] mb-1">{item.title}</h4>
+                                        <p className="text-gray-500">{item.desc}</p>
                                     </div>
                                 </motion.div>
-                            );
-                        })}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Featured Projects */}
-            <section className="py-24 px-4 bg-background relative overflow-hidden">
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
-                            <Sparkles className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-medium text-primary">Featured Projects</span>
+                            ))}
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-bold mb-4">
-                            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">More from Red Vision</span>
-                        </h2>
-                    </motion.div>
 
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
-                    >
-                        {FEATURED_PROJECTS.map((project) => (
-                            <motion.div
-                                key={project.title}
-                                variants={itemVariants}
-                                className="group relative rounded-2xl overflow-hidden bg-card border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
+                        {/* Collaborations Grid */}
+                        <div className="pt-8 border-t border-gray-200">
+                            <h5 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">Notable Collaborations</h5>
+                            <div className="flex flex-wrap gap-2">
+                                {collaborations.map((name) => (
+                                    <span
+                                        key={name}
+                                        className="px-4 py-2 bg-white border border-gray-100 rounded-full text-sm font-medium text-gray-600 shadow-sm"
+                                    >
+                                        {name}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <Button
+                                size="lg"
+                                className="bg-black hover:bg-red-600 text-white px-8 h-14 rounded-full text-lg font-bold transition-all"
                             >
-                                <div className="aspect-[4/5] relative overflow-hidden bg-secondary/50">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-                                    {project.image ? (
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-6xl text-primary/20">
-                                            {project.title.includes('Pivot') ? <Book className="w-24 h-24" /> :
-                                                project.title.includes('Tragic') ? <ImageIcon className="w-24 h-24" /> :
-                                                    <Camera className="w-24 h-24" />}
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-sm text-primary mb-2">{project.subtitle}</p>
-                                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-
-                                    {project.link !== '#' && (
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="w-full"
-                                            onClick={() => window.open(project.link, '_blank')}
-                                        >
-                                            <ExternalLink className="w-4 h-4 mr-2" />
-                                            Learn More
-                                        </Button>
-                                    )}
-                                </div>
-                            </motion.div>
-                        ))}
+                                Get in Touch
+                            </Button>
+                            <a
+                                href="https://getmocha.com/apps/0199e288-befc-7ee6-b6bf-a33753f2a638"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-red-600 transition-colors"
+                            >
+                                <ExternalLink className="w-6 h-6" />
+                            </a>
+                        </div>
                     </motion.div>
                 </div>
-            </section>
-        </>
+
+                {/* AI Projects Teaser - Refined */}
+                <div className="mt-32 pt-24 border-t border-gray-200">
+                    <div className="text-center mb-16">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full mb-6">
+                            <Brain className="w-4 h-4" />
+                            <span className="text-sm font-bold tracking-widest uppercase">Red Vision AI</span>
+                        </div>
+                        <h3 className="text-4xl md:text-5xl font-black text-[#1F2937] mb-4">Upcoming AI Projects</h3>
+                        <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                            Revolutionary AI tools for content creators, comedians, and digital artists.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { icon: Film, title: "AI Scriptwriter", desc: "Auto-writes comedic skits and scenes with satirical tone.", color: "bg-purple-50" },
+                            { icon: Video, title: "Snitch Generator", desc: "Pixelated 'mafia snitch' viral video interview generator.", color: "bg-blue-50" },
+                            { icon: Mic2, title: "Trailer Maker", desc: "Parody studio intros and cinematic RVM-branded logos.", color: "bg-orange-50" },
+                            { icon: ImageIcon, title: "AI Card Creator", desc: "80s Garbage Pail-style card generator from selfies.", color: "bg-green-50" }
+                        ].map((project, index) => (
+                            <div key={index} className={`${project.color} p-8 rounded-3xl border border-white hover:shadow-xl transition-all duration-300 group`}>
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                                    <project.icon className="w-6 h-6 text-gray-900" />
+                                </div>
+                                <h4 className="text-lg font-bold text-gray-900 mb-2">{project.title}</h4>
+                                <p className="text-sm text-gray-600 leading-relaxed">{project.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 
