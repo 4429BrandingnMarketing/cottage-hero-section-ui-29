@@ -106,14 +106,14 @@ const MerchSection = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6"
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -123,7 +123,7 @@ const MerchSection = () => {
             <ShoppingBag className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Official Merchandise</span>
           </motion.div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
             <span className="text-foreground">Rep the </span>
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Vision</span>
@@ -134,7 +134,7 @@ const MerchSection = () => {
         </motion.div>
 
         {/* Product Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
           variants={containerVariants}
           initial="hidden"
@@ -162,16 +162,16 @@ const MerchSection = () => {
 
                 {/* Image */}
                 <div className="relative aspect-square overflow-hidden bg-secondary/50">
-                  <img 
-                    src={item.image} 
+                  <img
+                    src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  
+
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="gap-2"
                     >
                       <ShoppingBag className="w-4 h-4" />
@@ -198,17 +198,19 @@ const MerchSection = () => {
         </motion.div>
 
         {/* CTA */}
-        <motion.div 
+        <motion.div
           className="text-center mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <Button size="lg" className="gap-2 px-8">
-            <ExternalLink className="w-4 h-4" />
-            Visit Full Merch Store
-          </Button>
+          <a href="https://shop.redvisioncreativestudio.com" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="gap-2 px-8">
+              <ExternalLink className="w-4 h-4" />
+              Visit Full Merch Store
+            </Button>
+          </a>
           <p className="text-sm text-muted-foreground mt-4">
             Free shipping on orders over $75
           </p>

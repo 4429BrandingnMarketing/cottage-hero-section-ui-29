@@ -15,7 +15,9 @@ interface Artist {
     cover: string;
   }[];
   spotifyEmbedUrl?: string;
+  profileUrl: string;
 }
+
 const LINEUP: Artist[] = [{
   id: '1',
   name: 'Dat Boi H.O.P',
@@ -30,7 +32,7 @@ const LINEUP: Artist[] = [{
     title: 'Southern Flow',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/7zC7C0Q0J0D9J9L0X0X0X0?utm_source=generator'
+  profileUrl: 'https://open.spotify.com/search/Dat%20Boi%20H.O.P'
 }, {
   id: '2',
   name: 'My Guy Mars',
@@ -45,7 +47,8 @@ const LINEUP: Artist[] = [{
     title: 'Future Soundscapes',
     cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/3KdGFQsNhXcHGQRjLBKNKz?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/3KdGFQsNhXcHGQRjLBKNKz?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/3KdGFQsNhXcHGQRjLBKNKz'
 }, {
   id: '3',
   name: 'Oscar Lee',
@@ -60,7 +63,8 @@ const LINEUP: Artist[] = [{
     title: 'Poetic Justice',
     cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/5EKlA6ylecmqkGLMJCCtck?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/5EKlA6ylecmqkGLMJCCtck?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/5EKlA6ylecmqkGLMJCCtck'
 }, {
   id: '4',
   name: 'Mya',
@@ -75,7 +79,8 @@ const LINEUP: Artist[] = [{
     title: 'Digital Soul',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6lHL3ubAMgSasKjNqKb8HF?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6lHL3ubAMgSasKjNqKb8HF?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/6lHL3ubAMgSasKjNqKb8HF'
 }, {
   id: '5',
   name: 'King Fatz',
@@ -89,7 +94,8 @@ const LINEUP: Artist[] = [{
   }, {
     title: 'The Crown',
     cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
-  }]
+  }],
+  profileUrl: 'https://open.spotify.com/search/King%20Fatz'
 }, {
   id: '6',
   name: 'Xcel',
@@ -103,7 +109,8 @@ const LINEUP: Artist[] = [{
   }, {
     title: 'The Producer\'s Touch',
     cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
-  }]
+  }],
+  profileUrl: 'https://open.spotify.com/search/Xcel%20Beats%20Producer'
 }, {
   id: '7',
   name: 'James Fauntleroy',
@@ -118,7 +125,8 @@ const LINEUP: Artist[] = [{
     title: 'The Dreamer\'s EP',
     cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/4W6JxFwlNdPJRNf9B5156w?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/4W6JxFwlNdPJRNf9B5156w?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/4W6JxFwlNdPJRNf9B5156w'
 }, {
   id: '8',
   name: 'Wiz Buchanan',
@@ -132,7 +140,8 @@ const LINEUP: Artist[] = [{
   }, {
     title: 'NY State of Mind',
     cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
-  }]
+  }],
+  profileUrl: 'https://open.spotify.com/search/Wiz%20Buchanan'
 }, {
   id: '9',
   name: 'TRUZY',
@@ -147,7 +156,8 @@ const LINEUP: Artist[] = [{
     title: 'Cloth Talk',
     cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/26KbkMxDWYyxzNWu2N5maX?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/26KbkMxDWYyxzNWu2N5maX?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/26KbkMxDWYyxzNWu2N5maX'
 }, {
   id: '10',
   name: '1500 or Nothin',
@@ -162,7 +172,8 @@ const LINEUP: Artist[] = [{
     title: 'Sounds of L.A.',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6cJJCGZS0v24IF476QbbJh?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6cJJCGZS0v24IF476QbbJh?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/6cJJCGZS0v24IF476QbbJh'
 }, {
   id: '11',
   name: 'Dave Young',
@@ -176,7 +187,8 @@ const LINEUP: Artist[] = [{
   }, {
     title: 'City Lights EP',
     cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
-  }]
+  }],
+  profileUrl: 'https://open.spotify.com/search/Dave%20Young%20Neo%20Soul'
 }, {
   id: '12',
   name: 'Ryan ToBy',
@@ -190,7 +202,8 @@ const LINEUP: Artist[] = [{
   }, {
     cover: 'https://res.cloudinary.com/da7s1izqw/image/upload/v1740232468/Art_of_A_tragic_Mulatto_uaw0y1.jpg'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/2UazAtjfzqBF0Nho2awK4z?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/2UazAtjfzqBF0Nho2awK4z?utm_source=generator',
+  profileUrl: 'https://open.spotify.com/artist/2UazAtjfzqBF0Nho2awK4z'
 }];
 const containerVariants = {
   hidden: {
@@ -293,29 +306,44 @@ const ArtistShowcase = () => {
                 {artist.label}
               </span>
             </div>
-            {/* Play Button on Hover */}
+            {/* Play/Profile Buttons on Hover */}
             <AnimatePresence>
-              {hoveredId === artist.id && <motion.div className="absolute inset-0 flex items-center justify-center" initial={{
-                opacity: 0
-              }} animate={{
-                opacity: 1
-              }} exit={{
-                opacity: 0
-              }}>
-                <motion.div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-2xl" initial={{
-                  scale: 0
-                }} animate={{
-                  scale: 1
-                }} exit={{
-                  scale: 0
-                }} transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20
-                }}>
-                  <Play className="w-7 h-7 text-primary-foreground ml-1" />
+              {hoveredId === artist.id && (
+                <motion.div
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/40 backdrop-blur-[2px]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <motion.div
+                    className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedArtist(artist);
+                    }}
+                  >
+                    <Play className="w-7 h-7 text-primary-foreground ml-1" />
+                  </motion.div>
+
+                  <motion.a
+                    href={artist.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ delay: 0.1 }}
+                    className="px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2 text-white text-sm font-medium transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Spotify Profile
+                  </motion.a>
                 </motion.div>
-              </motion.div>}
+              )}
             </AnimatePresence>
             {/* Artist Info */}
             <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -441,14 +469,24 @@ const ArtistShowcase = () => {
             </div>}
             {/* CTA */}
             <div className="flex gap-3 pt-4">
-              <Button className="flex-1">
+              <Button
+                className="flex-1"
+                onClick={() => window.open(selectedArtist.profileUrl, '_blank')}
+              >
                 <Play className="w-4 h-4 mr-2" />
                 Play All
               </Button>
-              <Button variant="outline" className="flex-1">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Full Profile
-              </Button>
+              <a
+                href={selectedArtist.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1"
+              >
+                <Button variant="outline" className="w-full">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Full Profile
+                </Button>
+              </a>
             </div>
           </div>
         </div>}
