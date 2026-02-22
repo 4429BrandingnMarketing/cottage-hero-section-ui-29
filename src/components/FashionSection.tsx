@@ -5,41 +5,102 @@ import { Button } from '@/components/ui/button';
 const FashionSection = () => {
   return (
     <section id="fashion" className="relative overflow-hidden selection:bg-[#d4a574] selection:text-[#3a3330]">
-      {/* Hero-style Header for the Section */}
-      <div className="bg-[#3a3330] py-32 px-4 relative">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#d4a574]/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#8b7355]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      {/* Premium Boutique Header Component */}
+      <div className="bg-[#3a3330] pt-40 pb-32 px-4 relative flex items-center justify-center overflow-hidden">
+        {/* Cinematic Background Atmosphere */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#d4a574]/10 via-transparent to-transparent" />
+          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#d4a574]/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#8b7355]/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '3s' }} />
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
+        {/* The Branding Suite */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative z-10 flex flex-col items-center"
+        >
+          {/* Top Arched Text */}
+          <div className="w-full max-w-[500px] mb-[-40px]">
+            <svg viewBox="0 0 500 150" className="w-full">
+              <path id="curve-top" d="M50,120 Q250,20 450,120" fill="transparent" />
+              <text className="fill-[#d4a574] text-[18px] uppercase tracking-[0.6em]" style={{ fontFamily: 'serif' }}>
+                <textPath href="#curve-top" startOffset="50%" textAnchor="middle">
+                  BOUTIQUE STORE
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          {/* Main Logo Text */}
+          <div className="text-center relative py-8">
+            <h1
+              className="text-8xl md:text-[11rem] leading-[0.85] text-white/95 drop-shadow-2xl"
+              style={{ fontFamily: "'Pinyon Script', cursive" }}
+            >
+              Giftd & 'Prvlgd
+            </h1>
+            <h2
+              className="text-7xl md:text-9xl text-white/90 mt-4"
+              style={{ fontFamily: "'Pinyon Script', cursive" }}
+            >
+              Co.
+            </h2>
+          </div>
+
+          {/* Bottom Arched URL */}
+          <div className="w-full max-w-[600px] mt-[-60px]">
+            <svg viewBox="0 0 600 150" className="w-full">
+              <path id="curve-bottom" d="M100,20 Q300,100 500,20" fill="transparent" />
+              <text className="fill-[#d4a574] text-[14px] uppercase tracking-[0.4em]" style={{ fontFamily: 'serif' }}>
+                <textPath href="#curve-bottom" startOffset="50%" textAnchor="middle">
+                  WWW.GIFTDNPRVLGD.COM
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          {/* Content Teaser */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-20"
           >
-            <h1 className="text-6xl md:text-8xl font-light mb-4 text-[#d4a574]" style={{ fontFamily: 'Didot, serif', letterSpacing: '0.15em' }}>
-              GiFTD N' PrVLGD Co.
-            </h1>
-            <div className="text-2xl md:text-3xl italic text-[#d4c5b0] mb-8 tracking-widest" style={{ fontFamily: 'Didot, serif' }}>
+            <div className="text-2xl italic text-[#d4c5b0] mb-8 tracking-widest uppercase" style={{ fontFamily: 'Didot, serif' }}>
               Harlem Renaissance Edition
             </div>
-            <p className="text-xl text-[#c4b5a0] max-w-3xl mx-auto leading-relaxed mb-12" style={{ fontFamily: 'Garamond, serif' }}>
+            <p className="text-xl text-[#c4b5a0] max-w-2xl mx-auto leading-relaxed mb-12" style={{ fontFamily: 'Garamond, serif' }}>
               A forward-thinking fashion house dedicated to reframing the narrative of African American excellence.
-              More than clothing, it is a cultural statement — a blend of history, artistry, and innovation.
             </p>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-8 text-xl border-2 border-[#d4a574] rounded-none transition-all duration-300 transform hover:-translate-y-1 shadow-xl"
+              className="bg-transparent hover:bg-[#d4a574] text-[#d4a574] hover:text-[#3a3330] px-12 py-8 text-xl border-2 border-[#d4a574] rounded-none transition-all duration-500 overflow-hidden relative group"
               style={{ fontFamily: 'Didot, serif', letterSpacing: '0.2em' }}
             >
-              SHOP NOW
-              <ArrowRight className="ml-3 w-6 h-6" />
+              <span className="relative z-10 flex items-center">
+                ENTER STUDIO
+                <ArrowRight className="ml-3 w-6 h-6 transform group-hover:translate-x-2 transition-transform" />
+              </span>
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
+
+        {/* Decorative corner elements */}
+        <div className="absolute top-10 left-10 w-24 h-24 border-l border-t border-[#d4a574]/30" />
+        <div className="absolute top-10 right-10 w-24 h-24 border-r border-t border-[#d4a574]/30" />
+        <div className="absolute bottom-10 left-10 w-24 h-24 border-l border-b border-[#d4a574]/30" />
+        <div className="absolute bottom-10 right-10 w-24 h-24 border-r border-b border-[#d4a574]/30" />
       </div>
+
+      {/* Font imports for the premium look */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+      `}</style>
 
       {/* About Segment */}
       <div className="bg-[#4a403a] py-24 px-4 border-y border-[#8b7355]/30">
