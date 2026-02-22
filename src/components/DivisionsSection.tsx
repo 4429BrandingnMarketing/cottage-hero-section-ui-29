@@ -17,7 +17,7 @@ const DivisionsSection = () => {
       description: "Premium content creation platform specializing in 4K/8K video production, music videos, documentaries, and exclusive interviews with AI-enhanced post-production.",
       color: "from-accent to-blue-600",
       highlights: ["4K/8K Production", "Music Videos", "Documentary Projects"],
-      link: "/divisions/tv"
+      link: "https://lovable.dev/projects/530a5e02-ed78-4b07-aea9-ef8883ee33ea"
     },
     {
       name: "Red Vision Radio",
@@ -56,7 +56,7 @@ const DivisionsSection = () => {
   return (
     <section id="divisions" className="py-24 bg-black relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -66,7 +66,7 @@ const DivisionsSection = () => {
             </span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Six integrated divisions leveraging AI to amplify human creativity across music, fashion, technology, 
+            Six integrated divisions leveraging AI to amplify human creativity across music, fashion, technology,
             and cultural storytelling while maintaining authentic artist partnerships and industry-leading quality.
           </p>
         </div>
@@ -75,10 +75,16 @@ const DivisionsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {divisions.map((division, index) => {
             const IconComponent = division.icon;
+            const isExternal = division.link.startsWith('http');
+            const DivisionWrapper = isExternal ? 'a' as any : Link;
+            const wrapperProps = isExternal
+              ? { href: division.link, target: "_blank", rel: "noopener noreferrer" }
+              : { to: division.link };
+
             return (
-              <Link
+              <DivisionWrapper
                 key={division.name}
-                to={division.link}
+                {...wrapperProps}
                 className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-red-glow cursor-pointer block"
                 style={{
                   animationDelay: `${index * 0.1}s`
@@ -86,7 +92,7 @@ const DivisionsSection = () => {
               >
                 {/* Gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${division.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}></div>
-                
+
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Icon */}
@@ -95,17 +101,17 @@ const DivisionsSection = () => {
                       <IconComponent className="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" />
                     </div>
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
                     {division.name}
                   </h3>
-                  
+
                   {/* Description */}
                   <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300 mb-4">
                     {division.description}
                   </p>
-                  
+
                   {/* Highlights */}
                   <div className="space-y-2 mb-4">
                     {division.highlights.map((highlight, highlightIndex) => (
@@ -115,7 +121,7 @@ const DivisionsSection = () => {
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* Hover arrow */}
                   <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="inline-flex items-center text-accent font-medium">
@@ -126,7 +132,7 @@ const DivisionsSection = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </DivisionWrapper>
             );
           })}
         </div>

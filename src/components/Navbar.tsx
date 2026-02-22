@@ -14,11 +14,10 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
-      isScrolled 
-        ? "bg-black backdrop-blur-md shadow-red-glow scale-100" 
+    <nav className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${isScrolled
+        ? "bg-black backdrop-blur-md shadow-red-glow scale-100"
         : "bg-black/50 backdrop-blur-sm scale-[0.99]"
-    }`}>
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -30,7 +29,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#divisions" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
+            <a href="https://lovable.dev/projects/530a5e02-ed78-4b07-aea9-ef8883ee33ea" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-all duration-300 relative group hover:-translate-y-0.5">
               Content
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/50 transition-all duration-300 ease-out group-hover:w-full shadow-[0_0_8px_rgba(239,68,68,0.5)] opacity-0 group-hover:opacity-100"></span>
             </a>
