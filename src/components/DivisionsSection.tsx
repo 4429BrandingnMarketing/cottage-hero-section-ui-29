@@ -6,7 +6,7 @@ const DivisionsSection = () => {
     {
       name: "The Pivot",
       icon: Navigation,
-      description: "Operational tour management system, application, and instruction manual designed for scaling artists and professional production teams.",
+      description: "A product of Red Vision AI. An operational tour management system, application, and instruction manual designed for scaling artists.",
       color: "from-green-600 to-emerald-600",
       highlights: ["Tour Management System", "Digital Command App", "Industry Methodology"],
       link: "/the-pivot"
