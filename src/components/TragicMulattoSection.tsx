@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Book, Quote, Laugh } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -208,13 +209,15 @@ const TragicMulattoSection = () => {
             </p>
           </div>
 
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574]"
-            style={{ fontFamily: 'Didot, serif', letterSpacing: '0.1em' }}
-          >
-            READ MORE
-          </Button>
+          <Link to="/divisions/blog">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574] transition-all duration-300 hover:scale-110 active:scale-95 shadow-xl"
+              style={{ fontFamily: 'Didot, serif', letterSpacing: '0.1em' }}
+            >
+              READ FULL JOURNAL
+            </Button>
+          </Link>
 
           <p className="text-sm text-white/60 mt-6">
             A GiFTD N' PrVLGD Publication
