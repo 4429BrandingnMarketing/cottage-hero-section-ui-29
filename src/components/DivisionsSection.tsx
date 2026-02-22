@@ -71,19 +71,20 @@ const DivisionsSection = () => {
 
   return (
     <section id="divisions" className="py-24 bg-black relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+      {/* Dynamic Cinematic Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-red-vision-gradient animate-gradient-shift opacity-5" />
+        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[160px] opacity-20 animate-pulse" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent drop-shadow-red-glow">
-              Our Creative Divisions
-            </span>
+          <h2 className="text-5xl md:text-7xl font-black mb-6 italic tracking-tighter uppercase">
+            Strategic <span className="text-primary">Divisions</span>
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Seven integrated divisions leveraging AI to amplify human creativity across music, fashion, technology,
-            and cultural storytelling while maintaining authentic artist partnerships and industry-leading quality.
+          <p className="text-xl text-white/60 max-w-3xl mx-auto font-light leading-relaxed">
+            Seven high-execution ecosystems leveraging AI to amplify human creativity across music, fashion, and tech.
           </p>
         </div>
 
@@ -101,49 +102,46 @@ const DivisionsSection = () => {
               <DivisionWrapper
                 key={division.name}
                 {...wrapperProps}
-                className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-red-glow cursor-pointer block"
-                style={{
-                  animationDelay: `${index * 0.1}s`
-                }}
+                className="group h-full glass-card p-10 relative overflow-hidden cursor-pointer block"
               >
-                {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${division.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}></div>
+                {/* Individual Gradient Glow */}
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${division.color} opacity-10 blur-3xl group-hover:opacity-30 transition-opacity duration-500 rounded-2xl`}></div>
 
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Icon */}
-                  <div className="mb-6">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors duration-300">
-                      <IconComponent className="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" />
+                  <div className="mb-8">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${division.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                      <IconComponent className="w-8 h-8 text-white" />
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">
+                  <h3 className="text-3xl font-black text-white mb-4 uppercase tracking-tighter italic group-hover:text-primary transition-colors duration-300">
                     {division.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300 mb-4">
+                  <p className="text-white/60 leading-relaxed font-light mb-6 line-clamp-3 group-hover:text-white transition-colors duration-300">
                     {division.description}
                   </p>
 
                   {/* Highlights */}
-                  <div className="space-y-2 mb-4">
+                  <div className="space-y-3 mb-8">
                     {division.highlights.map((highlight, highlightIndex) => (
-                      <div key={highlightIndex} className="flex items-center gap-2">
+                      <div key={highlightIndex} className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-red-glow"></div>
-                        <span className="text-sm text-white/70">{highlight}</span>
+                        <span>{highlight}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Hover arrow */}
-                  <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="inline-flex items-center text-accent font-medium">
-                      <span>Explore Division</span>
-                      <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  {/* Hover indicator */}
+                  <div className="pt-6 border-t border-white/10 opacity-60 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black uppercase tracking-widest">EXPLORE HUB</span>
+                      <svg className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5-5 5M6 7l5 5-5 5" />
                       </svg>
                     </div>
                   </div>

@@ -58,9 +58,12 @@ const MarketingAgencySection = () => {
 
   return (
     <section className="py-24 px-4 bg-background relative overflow-hidden">
-      {/* Background accents */}
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-primary/5 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-accent/5 to-transparent"></div>
+      {/* Dynamic Background Accents */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-primary/10 to-transparent blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-accent/10 to-transparent blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-red-vision-gradient animate-gradient-shift opacity-5" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -69,14 +72,14 @@ const MarketingAgencySection = () => {
             <Megaphone className="w-4 h-4 text-primary" />
             <span className="text-primary text-sm font-medium">Marketing Division</span>
           </div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">4429</span>
             {" "}Marketing Agency
           </h2>
-          
+
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Full-service digital marketing agency combining creative excellence with data-driven strategies 
+            Full-service digital marketing agency combining creative excellence with data-driven strategies
             to amplify brands and drive measurable results.
           </p>
         </div>
@@ -85,9 +88,9 @@ const MarketingAgencySection = () => {
         {stats.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat) => (
-              <div key={stat.id} className="text-center p-6 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                <div className="text-muted-foreground text-sm">{stat.label}</div>
+              <div key={stat.id} className="glass-card text-center p-8 rounded-2xl">
+                <div className="text-3xl md:text-5xl font-black text-primary mb-2 italic tracking-tighter">{stat.value}</div>
+                <div className="text-white/40 text-[10px] font-black uppercase tracking-widest">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -99,15 +102,13 @@ const MarketingAgencySection = () => {
             {services.map((service) => {
               const Icon = iconMap[service.icon] || Target;
               return (
-                <Card key={service.id} className="bg-card border-border hover:border-primary/30 transition-all duration-300 group hover:-translate-y-1">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">{service.title}</h3>
-                    <p className="text-muted-foreground text-sm">{service.description}</p>
-                  </CardContent>
-                </Card>
+                <div key={service.id} className="glass-card p-10 group cursor-pointer rounded-3xl">
+                  <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-primary/30 transition-all duration-500 shadow-lg shadow-primary/10">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter italic group-hover:text-primary transition-colors text-center">{service.title}</h3>
+                  <p className="text-white/60 text-sm font-light leading-relaxed group-hover:text-white transition-colors text-center">{service.description}</p>
+                </div>
               );
             })}
           </div>
@@ -122,8 +123,8 @@ const MarketingAgencySection = () => {
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((item) => (
                   item.link ? (
-                    <a 
-                      key={item.id} 
+                    <a
+                      key={item.id}
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -152,7 +153,7 @@ const MarketingAgencySection = () => {
                 <h3 className="text-2xl font-bold text-foreground">Let's Grow Together</h3>
               </div>
               <p className="text-muted-foreground mb-6">
-                Schedule a free consultation to discover how 4429 Marketing can transform 
+                Schedule a free consultation to discover how 4429 Marketing can transform
                 your brand's digital presence and drive sustainable growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">

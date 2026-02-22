@@ -102,11 +102,52 @@ All colors MUST be HSL.
   }
 }
 
-@keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+  
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/5 shadow-2xl;
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 hover:bg-white/10 transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.1)];
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  }
+
+  .bg-red-vision-gradient {
+    background: linear-gradient(-45deg, #ef4444, #1e1b4b, #0c0a09, #ef4444);
+    background-size: 400% 400%;
+  }
 }
 
-.animate-gradient {
-  animation: gradient 3s ease infinite;
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.shadow-red-glow {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.shadow-cyan-glow {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 }
