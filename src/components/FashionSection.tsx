@@ -40,7 +40,7 @@ const FashionSection = () => {
             Harlem Renaissance Edition
           </p>
           <p className="text-xl text-[#c4b5a0] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Garamond, serif' }}>
-            A forward-thinking fashion house dedicated to reframing the narrative of African American excellence. 
+            A forward-thinking fashion house dedicated to reframing the narrative of African American excellence.
             More than clothing, it is a cultural statement — a blend of history, artistry, and innovation.
           </p>
         </motion.div>
@@ -89,8 +89,13 @@ const FashionSection = () => {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] flex items-center justify-center">
-              <span className="text-8xl">👔</span>
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] relative group">
+              <img
+                src="/images/fashion-hero.png"
+                alt="GiFTD N' PrVLGD Luxury Fashion"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
             </div>
 
             {/* Collections */}
@@ -127,7 +132,7 @@ const FashionSection = () => {
           <h3 className="text-4xl font-light text-center text-[#d4a574] mb-12" style={{ fontFamily: 'Didot, serif' }}>
             Core Values
           </h3>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { title: 'Heritage', desc: 'Every season draws inspiration from pivotal eras in African American history.' },
@@ -164,8 +169,8 @@ const FashionSection = () => {
           transition={{ delay: 0.4 }}
           className="text-center"
         >
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574] rounded-none"
             style={{ fontFamily: 'Didot, serif', letterSpacing: '0.15em' }}
           >
