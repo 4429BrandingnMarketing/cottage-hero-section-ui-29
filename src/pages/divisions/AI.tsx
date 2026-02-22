@@ -20,7 +20,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-const ArtistHub = () => {
+const AI = () => {
   const pillars = [
     {
       icon: Network,
@@ -30,8 +30,8 @@ const ArtistHub = () => {
     },
     {
       icon: CreditCard,
-      title: "Embedded Fintech",
-      description: "Automated royalty splits with transparent ledgers. No pooled accounts—every collaborator is paid directly and instantly.",
+      title: "Red Vision Music Distro",
+      description: "Premier music distribution with automated royalty splits and transparent ledgers. No pooled accounts—every collaborator is paid directly and instantly.",
       color: "from-green-600 to-emerald-500"
     },
     {
@@ -128,7 +128,7 @@ const ArtistHub = () => {
               </h2>
               <p className="text-2xl text-black/70 leading-relaxed font-medium">
                 DistroKid and CD Baby are delivery services. Red Vision AI is an enterprise-grade ecosystem.
-                We combine DSP delivery, embedded fintech, predictive intelligence, and modular multi-tenant dashboards into a single scalable platform.
+                We combine DSP delivery, Red Vision Music Distro, predictive intelligence, and modular multi-tenant dashboards into a single scalable platform.
               </p>
               <div className="grid grid-cols-2 gap-6 pt-10">
                 <div className="p-6 bg-black text-white">
@@ -212,7 +212,7 @@ const ArtistHub = () => {
             READY TO SCALE TO $100M+?
           </h2>
           <p className="text-2xl md:text-3xl font-light mb-16 opacity-90 leading-tight italic">
-            Build on the OS that understands infrastructure, fintech, and growth. White-label now.
+            Build on the OS that understands infrastructure, distribution, and growth. White-label now.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button size="lg" className="h-20 px-16 text-3xl font-black bg-black text-white hover:bg-black/90 rounded-none shadow-2xl transition-all transform hover:scale-110 active:scale-95">
@@ -246,4 +246,4 @@ const ArtistHub = () => {
   );
 };
 
-export default ArtistHub;
+export default AI;

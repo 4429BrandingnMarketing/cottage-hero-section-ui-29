@@ -36,11 +36,11 @@ const DivisionsSection = () => {
       link: "/divisions/radio"
     },
     {
-      name: "Red Vision Artist Hub",
+      name: "Red Vision AI",
       icon: Cpu,
-      description: "The AI Operating System for Independent Music. Full-stack infrastructure featuring embedded fintech, automated royalty splits, and proprietary AI growth models.",
+      description: "The AI Operating System for Independent Music. Full-stack infrastructure featuring Red Vision Music Distro, automated royalty splits, and proprietary AI growth models.",
       color: "from-primary to-purple-600",
-      highlights: ["Embedded Fintech", "AI Growth Automation", "White-label Platform"],
+      highlights: ["Red Vision Music Distro", "AI Growth Automation", "White-label Platform"],
       link: "/divisions/ai"
     },
     {
