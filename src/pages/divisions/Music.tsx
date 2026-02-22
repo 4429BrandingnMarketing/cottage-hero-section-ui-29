@@ -5,9 +5,9 @@ import Footer from '@/components/Footer';
 
 const Music = () => {
   const artists = [
-    { name: "My Guy Mars", role: "Diamond-selling Producer", achievements: "Multiple Grammy nominations" },
-    { name: "Ryan Toby", role: "City High Legend", achievements: "Multi-platinum artist" },
-    { name: "James Fauntleroy", role: "Award-winning Songwriter", achievements: "Grammy winner" }
+    { name: "My Guy Mars", role: "Diamond-selling Producer", achievements: "Multiple Grammy nominations", spotifyUrl: "https://open.spotify.com/artist/3KdGFQsNhXcHGQRjLBKNKz" },
+    { name: "Ryan Toby", role: "City High Legend", achievements: "Multi-platinum artist", spotifyUrl: "https://open.spotify.com/artist/2UazAtjfzqBF0Nho2awK4z" },
+    { name: "James Fauntleroy", role: "Award-winning Songwriter", achievements: "Grammy winner", spotifyUrl: "https://open.spotify.com/artist/4W6JxFwlNdPJRNf9B5156w" }
   ];
 
   const services = [
@@ -71,14 +71,20 @@ const Music = () => {
           <h2 className="text-4xl font-bold mb-12 text-center">Featured Artists</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {artists.map((artist) => (
-              <div key={artist.name} className="bg-card rounded-2xl p-8 hover:shadow-xl transition-all">
+              <a 
+                key={artist.name} 
+                href={artist.spotifyUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-card rounded-2xl p-8 hover:shadow-xl transition-all cursor-pointer block"
+              >
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                   <Mic2 className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">{artist.name}</h3>
                 <p className="text-muted-foreground mb-2">{artist.role}</p>
                 <p className="text-sm text-primary">{artist.achievements}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
