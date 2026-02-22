@@ -244,11 +244,19 @@ const VisionSection = () => {
                             >
                                 <div className="aspect-[4/5] relative overflow-hidden bg-secondary/50">
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-                                    <div className="w-full h-full flex items-center justify-center text-6xl text-primary/20">
-                                        {project.title.includes('Pivot') ? <Book className="w-24 h-24" /> :
-                                            project.title.includes('Tragic') ? <ImageIcon className="w-24 h-24" /> :
-                                                <Camera className="w-24 h-24" />}
-                                    </div>
+                                    {project.image ? (
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-6xl text-primary/20">
+                                            {project.title.includes('Pivot') ? <Book className="w-24 h-24" /> :
+                                                project.title.includes('Tragic') ? <ImageIcon className="w-24 h-24" /> :
+                                                    <Camera className="w-24 h-24" />}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="p-6">
