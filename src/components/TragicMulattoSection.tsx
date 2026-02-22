@@ -32,9 +32,14 @@ const TragicMulattoSection = () => {
   ];
 
   return (
-    <section id="tragic-mulatto" className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
-      <div className="max-w-5xl mx-auto relative z-10">
-        {/* Section Header */}
+    <section id="tragic-mulatto" className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black">
+      {/* Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,165,116,0.1),transparent_50%)]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +48,7 @@ const TragicMulattoSection = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#d4a574]/10 border border-white/20 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#d4a574]/10 border border-[#d4a574]/30 rounded-full mb-6"
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -77,7 +82,7 @@ const TragicMulattoSection = () => {
               <div className="text-center p-8">
                 <div className="text-sm text-[#d4a574] mb-4">GiFTD & PrVLGD</div>
                 <h3 className="text-4xl text-[#d4a574] mb-8" style={{ fontFamily: 'Didot, serif' }}>
-                  A TRAGIC<br/>MULATTO
+                  A TRAGIC<br />MULATTO
                 </h3>
                 <p className="text-sm text-[#d4a574]/80 leading-relaxed">
                   A COLLECTION OF HEART BREAKING JOURNAL ENTRIES THAT GIVE INSIGHT OF FROM A YOUNG MULATTO MAN WHO WASNT LIGHT ENOUGH TO GAIN ACCEPTANCE FROM AND NOT DARK ENOUGH TO BE CONSIDER BLACK. A MAN WITH NO HOME. A TRAGIC MULATTO.
@@ -147,8 +152,8 @@ const TragicMulattoSection = () => {
           </h3>
           <div className="max-w-3xl mx-auto bg-gradient-to-br from-[#d4a574]/10 to-[#8b7355]/10 border-l-4 border-[#d4a574] rounded-r-2xl p-12">
             <p className="text-2xl text-white/90 italic leading-relaxed text-center">
-              We, the culturally conflicted, pledge allegiance to no box checked. 
-              We will not dim for clarity nor tan for credibility. 
+              We, the culturally conflicted, pledge allegiance to no box checked.
+              We will not dim for clarity nor tan for credibility.
               We exist in grayscale — and we look damn good doing it.
             </p>
           </div>
@@ -200,20 +205,20 @@ const TragicMulattoSection = () => {
         >
           <div className="inline-block p-8 bg-white/5 backdrop-blur-sm border border-[#d4a574]/30 rounded-2xl mb-8">
             <p className="text-xl text-white/80 italic">
-              If you've read this far, congratulations.<br/>
-              You, too, are now lost.<br/>
+              If you've read this far, congratulations.<br />
+              You, too, are now lost.<br />
               <span className="text-[#d4a574] font-bold">Welcome to the club.</span>
             </p>
           </div>
 
-          <Button 
+          <Button
             size="lg"
             className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574]"
             style={{ fontFamily: 'Didot, serif', letterSpacing: '0.1em' }}
           >
             READ MORE
           </Button>
-          
+
           <p className="text-sm text-white/60 mt-6">
             A GiFTD N' PrVLGD Publication
           </p>
