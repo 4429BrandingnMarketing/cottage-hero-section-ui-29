@@ -237,7 +237,6 @@ const ArtistShowcase = () => {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
     </div>
-
     <div className="max-w-7xl mx-auto relative z-10">
       {/* Section Header */}
       <motion.div className="text-center mb-16" initial={{
@@ -265,7 +264,6 @@ const ArtistShowcase = () => {
           <Award className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-primary">Grammy-Affiliated Label</span>
         </motion.div>
-
         <h2 className="text-4xl md:text-6xl font-bold mb-4">
           <span className="text-foreground">Our </span>
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Artists</span>
@@ -274,7 +272,6 @@ const ArtistShowcase = () => {
           Discover the groundbreaking talent shaping the future of sound
         </p>
       </motion.div>
-
       {/* Artists Grid */}
       <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{
         once: true,
@@ -288,17 +285,14 @@ const ArtistShowcase = () => {
           <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-card border border-border/50 shadow-lg">
             {/* Image */}
             <img src={artist.image} alt={artist.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
             {/* Label Badge */}
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 text-xs font-bold bg-primary/90 text-primary-foreground rounded-full">
                 {artist.label}
               </span>
             </div>
-
             {/* Play Button on Hover */}
             <AnimatePresence>
               {hoveredId === artist.id && <motion.div className="absolute inset-0 flex items-center justify-center" initial={{
@@ -323,7 +317,6 @@ const ArtistShowcase = () => {
                 </motion.div>
               </motion.div>}
             </AnimatePresence>
-
             {/* Artist Info */}
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <h3 className="text-lg md:text-xl font-bold text-white mb-1 line-clamp-1">
@@ -334,7 +327,6 @@ const ArtistShowcase = () => {
           </div>
         </motion.div>)}
       </motion.div>
-
       {/* Stats Bar */}
       <motion.div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4" initial={{
         opacity: 0,
@@ -365,7 +357,6 @@ const ArtistShowcase = () => {
         </div>)}
       </motion.div>
     </div>
-
     {/* Artist Detail Modal */}
     <Dialog open={!!selectedArtist} onOpenChange={() => setSelectedArtist(null)}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-card border-border">
@@ -391,12 +382,10 @@ const ArtistShowcase = () => {
           >
             <ChevronRight className="w-5 h-5" />
           </button>
-
           {/* Hero Image */}
           <div className="relative h-64 md:h-80">
             <img src={selectedArtist.image} alt={selectedArtist.name} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-
             <div className="absolute bottom-6 left-6 right-6">
               <span className="inline-block px-3 py-1 text-xs font-bold bg-primary text-primary-foreground rounded-full mb-3">
                 {selectedArtist.label}
@@ -410,13 +399,11 @@ const ArtistShowcase = () => {
               </div>
             </div>
           </div>
-
           {/* Content */}
           <div className="p-6 space-y-6">
             <p className="text-muted-foreground leading-relaxed">
               {selectedArtist.description}
             </p>
-
             {/* Releases */}
             <div>
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -435,7 +422,6 @@ const ArtistShowcase = () => {
                 </div>)}
               </div>
             </div>
-
             {/* Spotify Embed */}
             {selectedArtist.spotifyEmbedUrl && <div>
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -453,7 +439,6 @@ const ArtistShowcase = () => {
                 title={`${selectedArtist.name} Spotify Player`}
               />
             </div>}
-
             {/* CTA */}
             <div className="flex gap-3 pt-4">
               <Button className="flex-1">
