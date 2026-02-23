@@ -1,246 +1,85 @@
-import { motion } from 'framer-motion';
-import {
-  Cpu,
-  Sparkles,
-  Zap,
-  Globe,
-  Database,
-  ShieldCheck,
-  TrendingUp,
-  CreditCard,
-  Layers,
-  ArrowRight,
-  ChevronRight,
-  LineChart,
-  Network
-} from 'lucide-react';
+import { Cpu, Brain, Sparkles, ArrowRight, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 
-const VisionaryOS = () => {
-  const pillars = [
-    {
-      icon: Network,
-      title: "Distribution Infrastructure",
-      description: "Enterprise-grade DSP delivery system built for scale. We handle the technical heavy lifting of getting your music to every corner of the globe.",
-      color: "from-blue-600 to-cyan-500"
-    },
-    {
-      icon: CreditCard,
-      title: "Red Vision Music Distro",
-      description: "Premier music distribution with automated royalty splits and transparent ledgers. No pooled accounts—every collaborator is paid directly and instantly.",
-      color: "from-green-600 to-emerald-500"
-    },
-    {
-      icon: Sparkles,
-      title: "Growth Automation",
-      description: "AI-driven release strategies and campaign optimization. Proprietary models trained on internal performance data for maximum impact.",
-      color: "from-purple-600 to-pink-500"
-    },
-    {
-      icon: Layers,
-      title: "White-Label Solution",
-      description: "Full multi-tenant dashboards for labels and creative collectives. Maintain your brand while leveraging our world-class infrastructure.",
-      color: "from-orange-600 to-red-500"
-    }
-  ];
-
-  const valueProps = [
-    {
-      title: "No Pooled Royalty Accounts",
-      description: "Every collaborator is paid directly. Transparency is a feature, not an afterthought."
-    },
-    {
-      title: "AI-Driven Strategy",
-      description: "Predictive marketing intelligence that evolves with every release."
-    },
-    {
-      title: "True Data Ownership",
-      description: "Your data compounds over time into a permanent competitive advantage."
-    },
-    {
-      title: "Switching Cost Leverage",
-      description: "Professional infrastructure designed for long-term valuation growth ($100M+)."
-    }
+const AI = () => {
+  const services = [
+    { icon: Brain, title: "AI Integration", description: "Seamless AI implementation for creative workflows" },
+    { icon: Sparkles, title: "Content Optimization", description: "AI-powered content enhancement and strategy" },
+    { icon: Zap, title: "Marketing Automation", description: "Intelligent campaign management and analytics" }
   ];
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white selection:bg-primary/30">
+    <div className="min-h-screen bg-background">
       <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative pt-48 pb-32 px-4 overflow-hidden">
-        {/* Cinematic Backdrop */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[160px] opacity-20 animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[140px] opacity-10 animate-pulse" style={{ animationDelay: '4s' }} />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-max-7xl mx-auto relative z-10 container">
-          <motion.div
-            className="max-w-5xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-3 px-6 py-2 bg-white/5 border border-white/10 rounded-full mb-10 backdrop-blur-xl"
-            >
-              <div className="w-2 h-2 bg-primary rounded-full animate-ping" />
-              <span className="text-sm font-black uppercase tracking-[0.2em] text-white/60">Not just another distributor</span>
-            </motion.div>
-
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-[0.9]">
-              VISIONARY <span className="text-primary italic">OS</span>
-            </h1>
-
-            <p className="text-2xl md:text-4xl font-light text-white/80 leading-tight mb-12 max-w-4xl mx-auto">
-              The staple product of Red Vision AI. A complete autonomous business operating system for the <span className="text-white font-bold underline decoration-primary/50 underline-offset-8">Modern Music Industry Entrepreneur.</span>
-            </p>
-
-            <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-              <Button size="lg" className="h-20 px-12 text-2xl font-black bg-primary hover:bg-primary/90 rounded-none shadow-[20px_20px_0px_0px_rgba(239,68,68,0.2)] hover:shadow-none transition-all duration-300 transform hover:-translate-x-1 hover:-translate-y-1">
-                RUN YOUR EMPIRE
-                <ChevronRight className="ml-3 w-8 h-8" />
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Infrastructure Section */}
-      <section className="py-32 bg-white text-black relative">
-        <div className="max-w-7xl mx-auto px-4 container">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="space-y-8">
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-10 text-primary">
-                REIMAGINING THE MUSIC BUSINESS.
-              </h2>
-              <div className="space-y-6">
-                <div className="border-l-4 border-primary pl-6 py-2">
-                  <h3 className="text-2xl font-black uppercase italic mb-2 tracking-tight">Music is your Marketing</h3>
-                  <p className="text-black/60 font-medium">It builds your brand and audience. We don't just sell music; we lead generation.</p>
-                </div>
-                <div className="border-l-4 border-primary pl-6 py-2">
-                  <h3 className="text-2xl font-black uppercase mb-2 tracking-tight italic">Your Brand is your Business</h3>
-                  <p className="text-black/60 font-medium">Monetize through multiple streams. Control your destiny and your bottom line.</p>
-                </div>
-                <div className="border-l-4 border-primary pl-6 py-2">
-                  <h3 className="text-2xl font-black uppercase mb-2 tracking-tight italic">AI is your Workforce</h3>
-                  <p className="text-black/60 font-medium">Autonomous agents work 24/7. High execution, zero overhead, absolute scale.</p>
-                </div>
+      
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
+            <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
+            Back to home
+          </Link>
+          
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                <Cpu className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-primary">AI Technology</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
+                Red Vision <span className="text-primary">AI</span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                Technology services division offering AI integration consulting, marketing automation, 
+                content optimization, and predictive analytics for creative businesses.
+              </p>
+              
+              <div className="flex gap-4">
+                <button className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
+                  Get Started
+                </button>
+                <button className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all">
+                  Learn More
+                </button>
               </div>
             </div>
-
-            <div className="grid gap-6">
-              {pillars.map((pillar, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="group flex gap-6 p-8 bg-gray-50 border border-black/5 hover:border-black/20 hover:bg-white hover:shadow-2xl transition-all duration-500"
-                >
-                  <div className={`w-16 h-16 shrink-0 rounded-xl bg-gradient-to-br ${pillar.color} flex items-center justify-center text-white shadow-lg`}>
-                    <pillar.icon className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-black mb-2 group-hover:text-primary transition-colors">{pillar.title}</h3>
-                    <p className="text-black/60 leading-relaxed">{pillar.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+            
+            <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Cpu className="w-32 h-32 text-primary/30" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Detailed Value Prop Grid */}
-      <section className="py-32 px-4 relative bg-[#0a0a0a] overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-        <div className="max-w-7xl mx-auto container relative z-10">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 italic">PROPRIETARY PERFORMANCE MODELS</h2>
-            <p className="text-xl text-white/50 max-w-3xl mx-auto leading-relaxed">
-              Our hybrid AI model uses best-in-class APIs while progressively replacing growth components with internal proprietary models. This creates defensibility, high switching costs, and true valuation leverage.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {valueProps.map((prop, i) => (
-              <motion.div
-                key={i}
-                className="p-10 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div>
-                  <h4 className="text-2xl font-bold mb-6 text-primary">{prop.title}</h4>
-                  <p className="text-white/60 leading-relaxed">{prop.description}</p>
+      <section className="py-20 px-4 bg-secondary">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center">Our Services</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <div key={service.title} className="bg-card rounded-2xl p-8 hover:shadow-xl transition-all">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                  <p className="text-muted-foreground">{service.description}</p>
                 </div>
-                <div className="mt-12 pt-6 border-t border-white/10">
-                  <Zap className="w-6 h-6 text-white/20" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-40 bg-primary text-white text-center relative overflow-hidden">
-        {/* Animated elements */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,255,255,0.1)_20px,rgba(255,255,255,0.1)_40px)]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 relative z-10 container">
-          <h2 className="text-5xl md:text-8xl font-black mb-10 leading-none tracking-tighter italic">
-            READY TO SCALE TO $100M+?
-          </h2>
-          <p className="text-2xl md:text-3xl font-light mb-16 opacity-90 leading-tight italic">
-            Build on the OS that understands infrastructure, distribution, and growth. White-label now.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="h-20 px-16 text-3xl font-black bg-black text-white hover:bg-black/90 rounded-none shadow-2xl transition-all transform hover:scale-110 active:scale-95">
-              REQUEST ACCESS
-            </Button>
-          </div>
-          <div className="mt-12 flex items-center justify-center gap-8 grayscale opacity-50">
-            <ShieldCheck className="w-12 h-12" />
-            <TrendingUp className="w-12 h-12" />
-            <Network className="w-12 h-12" />
-            <LineChart className="w-12 h-12" />
+              );
+            })}
           </div>
         </div>
       </section>
 
       <Footer />
-
-      {/* Theme specific styles */}
-      <style>{`
-        @font-face {
-          font-family: 'Integral CF';
-          src: url('https://fonts.cdnfonts.com/css/integral-cf');
-        }
-        h1, h2, h3, h4, .font-black {
-          font-family: 'Inter', sans-serif;
-          font-weight: 900;
-          text-transform: uppercase;
-        }
-      `}</style>
     </div>
   );
 };
 
-export default VisionaryOS;
+export default AI;

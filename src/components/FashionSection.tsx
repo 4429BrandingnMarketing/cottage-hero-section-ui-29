@@ -1,118 +1,67 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Quote } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const FashionSection = () => {
   return (
-    <section id="fashion" className="relative overflow-hidden selection:bg-[#d4a574] selection:text-[#3a3330]">
-      {/* Premium Boutique Header Component */}
-      <div className="bg-[#3a3330] pt-40 pb-32 px-4 relative flex items-center justify-center overflow-hidden">
-        {/* Cinematic Background Atmosphere */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#d4a574]/10 via-transparent to-transparent" />
-          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#d4a574]/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#8b7355]/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '3s' }} />
-        </div>
-
-        {/* The Branding Suite */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="relative z-10 flex flex-col items-center"
-        >
-          {/* Top Arched Text */}
-          <div className="w-full max-w-[500px] mb-[-40px]">
-            <svg viewBox="0 0 500 150" className="w-full">
-              <path id="curve-top" d="M50,120 Q250,20 450,120" fill="transparent" />
-              <text className="fill-[#d4a574] text-[18px] uppercase tracking-[0.6em]" style={{ fontFamily: 'serif' }}>
-                <textPath href="#curve-top" startOffset="50%" textAnchor="middle">
-                  BOUTIQUE STORE
-                </textPath>
-              </text>
-            </svg>
-          </div>
-
-          {/* Main Logo Text */}
-          <div className="text-center relative py-8">
-            <h1
-              className="text-8xl md:text-[11rem] leading-[0.85] text-white/95 drop-shadow-2xl"
-              style={{ fontFamily: "'Pinyon Script', cursive" }}
-            >
-              Giftd & 'Prvlgd
-            </h1>
-            <h2
-              className="text-7xl md:text-9xl text-white/90 mt-4"
-              style={{ fontFamily: "'Pinyon Script', cursive" }}
-            >
-              Co.
-            </h2>
-          </div>
-
-          {/* Bottom Arched URL */}
-          <div className="w-full max-w-[600px] mt-[-60px]">
-            <svg viewBox="0 0 600 150" className="w-full">
-              <path id="curve-bottom" d="M100,20 Q300,100 500,20" fill="transparent" />
-              <text className="fill-[#d4a574] text-[14px] uppercase tracking-[0.4em]" style={{ fontFamily: 'serif' }}>
-                <textPath href="#curve-bottom" startOffset="50%" textAnchor="middle">
-                  WWW.GIFTDNPRVLGD.COM
-                </textPath>
-              </text>
-            </svg>
-          </div>
-
-          {/* Content Teaser */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-            className="text-center mt-20"
-          >
-            <div className="text-2xl italic text-[#d4c5b0] mb-8 tracking-widest uppercase" style={{ fontFamily: 'Didot, serif' }}>
-              Harlem Renaissance Edition
-            </div>
-            <p className="text-xl text-[#c4b5a0] max-w-2xl mx-auto leading-relaxed mb-12" style={{ fontFamily: 'Garamond, serif' }}>
-              A forward-thinking fashion house dedicated to reframing the narrative of African American excellence.
-            </p>
-            <Button
-              size="lg"
-              className="bg-transparent hover:bg-[#d4a574] text-[#d4a574] hover:text-[#3a3330] px-12 py-8 text-xl border-2 border-[#d4a574] rounded-none transition-all duration-500 overflow-hidden relative group"
-              style={{ fontFamily: 'Didot, serif', letterSpacing: '0.2em' }}
-            >
-              <span className="relative z-10 flex items-center">
-                ENTER STUDIO
-                <ArrowRight className="ml-3 w-6 h-6 transform group-hover:translate-x-2 transition-transform" />
-              </span>
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Decorative corner elements */}
-        <div className="absolute top-10 left-10 w-24 h-24 border-l border-t border-[#d4a574]/30" />
-        <div className="absolute top-10 right-10 w-24 h-24 border-r border-t border-[#d4a574]/30" />
-        <div className="absolute bottom-10 left-10 w-24 h-24 border-l border-b border-[#d4a574]/30" />
-        <div className="absolute bottom-10 right-10 w-24 h-24 border-r border-b border-[#d4a574]/30" />
+    <section id="fashion" className="py-24 px-4 relative overflow-hidden bg-gradient-to-b from-[#3a3330] via-[#4a403a] to-[#3a3330]">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#d4a574]/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#8b7355]/20 rounded-full blur-3xl" />
       </div>
 
-      {/* Font imports for the premium look */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
-      `}</style>
-
-      {/* About Segment */}
-      <div className="bg-[#4a403a] py-24 px-4 border-y border-[#8b7355]/30">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#d4a574]/10 border border-[#8b7355] rounded-full mb-6"
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <Sparkles className="w-4 h-4 text-[#d4a574]" />
+            <span className="text-sm font-medium text-[#d4a574]" style={{ fontFamily: 'Didot, Bodoni MT, Garamond, serif' }}>
+              Luxury Fashion House
+            </span>
+          </motion.div>
+
+          <h2 className="text-5xl md:text-7xl font-light mb-4 text-[#d4a574]" style={{ fontFamily: 'Didot, Bodoni MT, Garamond, serif', letterSpacing: '0.1em' }}>
+            GiFTD N' PrVLGD Co.
+          </h2>
+          <p className="text-2xl italic text-[#d4c5b0] mb-6" style={{ fontFamily: 'Didot, Bodoni MT, Garamond, serif' }}>
+            Harlem Renaissance Edition
+          </p>
+          <p className="text-xl text-[#c4b5a0] max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Garamond, serif' }}>
+            A forward-thinking fashion house dedicated to reframing the narrative of African American excellence. 
+            More than clothing, it is a cultural statement — a blend of history, artistry, and innovation.
+          </p>
+        </motion.div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          {/* Left: Tagline + Description */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            <h2 className="text-5xl font-light text-[#d4a574] mb-8 italic" style={{ fontFamily: 'Didot, serif' }}>about</h2>
-            <div className="space-y-6 text-[#d4c5b0] text-lg leading-relaxed" style={{ fontFamily: 'Garamond, serif' }}>
+            <div className="border-l-4 border-[#d4a574] pl-8">
+              <p className="text-3xl italic text-[#d4a574] mb-6" style={{ fontFamily: 'Didot, serif' }}>
+                "Always dress like you're going to see your worst enemy."
+              </p>
+            </div>
+
+            <div className="space-y-6 text-[#d4c5b0]" style={{ fontFamily: 'Garamond, serif', fontSize: '1.125rem', lineHeight: '1.8' }}>
               <p>
                 <strong className="text-[#d4a574]">Jason Salvador</strong> is a cultural architect whose career has seamlessly bridged music, fashion, and global storytelling.
               </p>
@@ -123,119 +72,63 @@ const FashionSection = () => {
                 Jason's reach extends far beyond collaborations — he's cultivated lasting relationships with pioneers like Hardy Blechman of Maharishi in London, Don C of Air Jordan and Nigo of A Bathing Ape.
               </p>
               <p>
-                With <strong>GiFTD N' PrVLGD</strong>, Salvador channels decades of experience into a fashion house rooted in heritage and elevated by innovation.
+                With <strong className="text-[#d4a574]">GiFTD N' PrVLGD</strong>, Salvador channels decades of experience into a fashion house rooted in heritage and elevated by innovation.
               </p>
             </div>
-            <div className="text-4xl italic text-[#d4a574] mt-12" style={{ fontFamily: 'Didot, serif' }}>
+
+            <div className="text-3xl italic text-[#d4a574] mt-8" style={{ fontFamily: 'Didot, serif' }}>
               Jason Salvador
             </div>
           </motion.div>
 
+          {/* Right: Fashion Image/Collections */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="aspect-[4/5] rounded-[2rem] overflow-hidden border-8 border-[#3a3330] shadow-2xl relative group"
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#d4a574]/20 to-transparent z-10 pointer-events-none" />
-            <div className="w-full h-full bg-[#3a3330] flex items-center justify-center">
-              <span className="text-9xl filter grayscale opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700">🎩</span>
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] flex items-center justify-center">
+              <span className="text-8xl">👔</span>
             </div>
-            {/* Glossy overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-white/10 pointer-events-none" />
-          </motion.div>
-        </div>
-      </div>
 
-      {/* The Burning Fashion - Collection Segment */}
-      <div className="bg-[#3a3330] py-32 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-7xl font-light text-[#d4a574] mb-4 tracking-[0.1em]" style={{ fontFamily: 'Didot, serif' }}>
-              THE BURNING FASHION
-            </h2>
-            <p className="text-xl italic text-[#c4b5a0]" style={{ fontFamily: 'Didot, serif' }}>
-              "Always dress like you're going to see your worst enemy."
-            </p>
-          </motion.div>
+            {/* Collections */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 rounded-2xl bg-[#4a403a] border-2 border-[#8b7355] hover:border-[#d4a574] transition-all duration-300">
+                <h4 className="text-xl font-bold text-[#d4a574] mb-2" style={{ fontFamily: 'Didot, serif' }}>
+                  Season I
+                </h4>
+                <p className="text-sm text-[#d4c5b0]" style={{ fontFamily: 'Garamond, serif' }}>
+                  Harlem Renaissance — A cinematic tribute to 1920s Harlem, blending vintage elegance and modern Black artistry.
+                </p>
+              </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-20">
-            {[
-              {
-                season: "Season I",
-                title: "Harlem Renaissance",
-                desc: "A cinematic tribute to 1920s Harlem, blending vintage elegance, jazz culture, and the birth of modern Black artistry."
-              },
-              {
-                season: "Season II",
-                title: "Greenwood",
-                desc: "Inspired by Tulsa's Black Wall Street, embodying entrepreneurship, wealth, and resilience through bold elevated designs."
-              }
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.2 }}
-                className="bg-[#4a403a] border-2 border-[#8b7355] p-12 transition-all duration-300 hover:border-[#d4a574] hover:-translate-y-2 group"
-              >
-                <div className="text-[#d4a574] text-sm uppercase tracking-widest mb-4 font-bold">{item.season}</div>
-                <h3 className="text-3xl text-[#d4a574] mb-6 font-light" style={{ fontFamily: 'Didot, serif' }}>{item.title}</h3>
-                <p className="text-[#d4c5b0] leading-relaxed text-lg" style={{ fontFamily: 'Garamond, serif' }}>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-[#3a3330] px-12 py-8 text-xl rounded-none transition-all"
-              style={{ fontFamily: 'Didot, serif', letterSpacing: '0.15em' }}
-            >
-              EXPLORE COLLECTIONS
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Philosophy Segment */}
-      <div className="bg-[#2a2522] py-32 px-4 border-t border-[#d4a574]/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl font-light text-[#d4a574] mb-12 tracking-widest" style={{ fontFamily: 'Didot, serif' }}>OWN THAT RUNWAY</h2>
-            <div className="relative py-12 px-8 border-x-4 border-[#d4a574] mb-12">
-              <Quote className="absolute top-0 left-4 w-12 h-12 text-[#d4a574] opacity-20 -translate-y-1/2" />
-              <p className="text-3xl md:text-4xl italic text-[#d4c5b0] leading-tight" style={{ fontFamily: 'Didot, serif' }}>
-                "Always dress like you're going to see your worst enemy."
-              </p>
-              <Quote className="absolute bottom-0 right-4 w-12 h-12 text-[#d4a574] opacity-20 translate-y-1/2 rotate-180" />
+              <div className="p-6 rounded-2xl bg-[#4a403a] border-2 border-[#8b7355] hover:border-[#d4a574] transition-all duration-300">
+                <h4 className="text-xl font-bold text-[#d4a574] mb-2" style={{ fontFamily: 'Didot, serif' }}>
+                  Season II
+                </h4>
+                <p className="text-sm text-[#d4c5b0]" style={{ fontFamily: 'Garamond, serif' }}>
+                  Greenwood — Inspired by Tulsa's Black Wall Street, embodying entrepreneurship and resilience.
+                </p>
+              </div>
             </div>
-            <p className="text-xl text-[#c4b5a0] leading-relaxed" style={{ fontFamily: 'Garamond, serif' }}>
-              GiFTD N' PrVLGD isn't just a fashion label — it's a cultural archive. Each garment carries history forward.
-            </p>
           </motion.div>
         </div>
-      </div>
 
-      {/* Core Values Segment */}
-      <div className="bg-[#4a403a] py-32 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-light text-center text-[#d4a574] mb-20 tracking-wider" style={{ fontFamily: 'Didot, serif' }}>
+        {/* Core Values */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <h3 className="text-4xl font-light text-center text-[#d4a574] mb-12" style={{ fontFamily: 'Didot, serif' }}>
             Core Values
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-12 text-center">
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
               { title: 'Heritage', desc: 'Every season draws inspiration from pivotal eras in African American history.' },
               { title: 'Excellence', desc: 'From design to execution, the brand upholds a luxury standard.' },
@@ -250,19 +143,39 @@ const FashionSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="space-y-4"
+                className="text-center"
               >
-                <div className="w-12 h-1px bg-[#d4a574] mx-auto mb-6 opacity-50" />
-                <h4 className="text-2xl font-bold text-[#d4a574]" style={{ fontFamily: 'Didot, serif' }}>
+                <h4 className="text-xl font-bold text-[#d4a574] mb-3" style={{ fontFamily: 'Didot, serif' }}>
                   {value.title}
                 </h4>
-                <p className="text-[#d4c5b0] max-w-[250px] mx-auto leading-relaxed" style={{ fontFamily: 'Garamond, serif' }}>
+                <p className="text-sm text-[#d4c5b0]" style={{ fontFamily: 'Garamond, serif' }}>
                   {value.desc}
                 </p>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center"
+        >
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574] rounded-none"
+            style={{ fontFamily: 'Didot, serif', letterSpacing: '0.15em' }}
+          >
+            EXPLORE COLLECTIONS
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <p className="text-sm text-[#c4b5a0] mt-6" style={{ fontFamily: 'Garamond, serif' }}>
+            Red Vision Creative Studio Presents
+          </p>
+        </motion.div>
       </div>
     </section>
   );

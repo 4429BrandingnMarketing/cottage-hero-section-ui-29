@@ -3,7 +3,6 @@ import MarketingAgencySection from "@/components/MarketingAgencySection";
 import DivisionsSection from "@/components/DivisionsSection";
 import FashionSection from "@/components/FashionSection";
 import TragicMulattoSection from "@/components/TragicMulattoSection";
-import VisionSection from "@/components/VisionSection";
 import TechnologySection from "@/components/TechnologySection";
 import OverviewSection from "@/components/OverviewSection";
 import GallerySection from "@/components/GallerySection";
@@ -18,7 +17,6 @@ const Index = () => {
       <DivisionsSection />
       <FashionSection />
       <TragicMulattoSection />
-      <VisionSection />
       <TechnologySection />
       <OverviewSection />
       <GallerySection />

@@ -19,7 +19,7 @@ const Music = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
@@ -28,23 +28,23 @@ const Music = () => {
             <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
             Back to home
           </Link>
-
+          
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
                 <MusicIcon className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-primary">Grammy-Affiliated Label</span>
               </div>
-
+              
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
                 Red Vision <span className="text-primary">Music</span>
               </h1>
-
+              
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Grammy-affiliated AI record label featuring Diamond-selling producer My Guy Mars, City High's Ryan Toby,
+                Grammy-affiliated AI record label featuring Diamond-selling producer My Guy Mars, City High's Ryan Toby, 
                 and songwriter James Fauntleroy. True artist partnerships with AI-enhanced production.
               </p>
-
+              
               <div className="flex gap-4">
                 <button className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
                   Submit Your Music
@@ -55,7 +55,7 @@ const Music = () => {
                 </button>
               </div>
             </div>
-
+            
             <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
               <div className="absolute inset-0 flex items-center justify-center">
                 <MusicIcon className="w-32 h-32 text-primary/30" />
@@ -71,30 +71,20 @@ const Music = () => {
           <h2 className="text-4xl font-bold mb-12 text-center">Featured Artists</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {artists.map((artist) => (
-              <div
-                key={artist.name}
-                className="bg-card rounded-2xl p-8 hover:shadow-xl transition-all flex flex-col h-full"
+              <a 
+                key={artist.name} 
+                href={artist.spotifyUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-card rounded-2xl p-8 hover:shadow-xl transition-all cursor-pointer block"
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                   <Mic2 className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">{artist.name}</h3>
-                <p className="text-muted-foreground mb-4">{artist.role}</p>
-
-                <div className="mt-auto">
-                  <iframe
-                    src={artist.spotifyUrl.replace('artist/', 'embed/artist/')}
-                    width="100%"
-                    height="80"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    className="rounded-xl mb-4"
-                    title={`${artist.name} Spotify Player`}
-                  />
-                  <p className="text-sm text-primary font-medium">{artist.achievements}</p>
-                </div>
-              </div>
+                <p className="text-muted-foreground mb-2">{artist.role}</p>
+                <p className="text-sm text-primary">{artist.achievements}</p>
+              </a>
             ))}
           </div>
         </div>

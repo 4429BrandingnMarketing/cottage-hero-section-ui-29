@@ -50,37 +50,33 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-24 px-4 bg-background relative overflow-hidden">
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-red-vision-gradient animate-gradient-shift opacity-5" />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="py-24 px-4 bg-background">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-24">
-          <p className="text-xs font-black text-primary uppercase tracking-[0.3em] mb-4">
+        <div className="text-center mb-16">
+          <p className="text-sm text-muted-foreground uppercase tracking-wider mb-4">
             {companyInfo?.subheading || 'Who We Are'}
           </p>
-          <h2 className="text-5xl md:text-8xl font-black mb-8 italic tracking-tighter uppercase">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             {companyInfo?.heading || 'About Our Company'}
           </h2>
-          <p className="text-2xl text-white/40 max-w-4xl mx-auto font-light leading-relaxed italic">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Red Vision Creative Studios is a multi-disciplinary entertainment powerhouse spanning music, technology, marketing, fashion, TV, and radio — driven by innovation and creative excellence.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+        {/* Pillars Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className="glass-card p-10 text-center rounded-[2rem]"
+              className="bg-card border border-border rounded-2xl p-8 text-center hover:shadow-lg hover:border-primary/30 transition-all duration-300"
             >
-              <div className="w-16 h-16 mx-auto mb-8 rounded-2xl bg-primary/10 flex items-center justify-center shadow-lg shadow-primary/5">
-                <pillar.icon className="w-8 h-8 text-primary shadow-red-glow" />
+              <div className="w-14 h-14 mx-auto mb-5 rounded-xl bg-primary/10 flex items-center justify-center">
+                <pillar.icon className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-2xl font-black mb-4 uppercase italic tracking-tighter">{pillar.title}</h3>
-              <p className="text-white/60 font-light leading-relaxed group-hover:text-white transition-colors">{pillar.description}</p>
+              <h3 className="text-lg font-bold mb-3">{pillar.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{pillar.description}</p>
             </div>
           ))}
         </div>
