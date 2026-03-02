@@ -15,10 +15,195 @@ interface Artist {
     cover: string;
   }[];
   spotifyEmbedUrl?: string;
+  spotifyUrl?: string;
 }
 const LINEUP: Artist[] = [{
   id: '1',
   name: 'Dat Boi H.O.P',
+  genre: 'Lyrical Rap',
+  label: 'RV001',
+  image: 'https://images.unsplash.com/photo-1594943260841-45f8f8f8b8e0?auto=format&fit=crop&q=80&w=600',
+  description: 'A lyrical rap sensation from the heart of South Carolina, symbolizing the potential of unexplored territories. Dat Boi H.O.P and Block Burna Entertainment are integral components of Red Vision Music\'s evolving landscape.',
+  releases: [{
+    title: 'The Block Burna Anthem',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Southern Flow',
+    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/Dat%20Boi%20HOP%20rapper'
+}, {
+  id: '2',
+  name: 'My Guy Mars',
+  genre: 'Experimental Production',
+  label: 'RV002',
+  image: 'https://images.unsplash.com/photo-1517404215381-1c0e7698f1f5?auto=format&fit=crop&q=80&w=600',
+  description: 'A Los Angeles native and member of the renowned 1500 or Nothin production team, My Guy Mars effortlessly collaborates with AI algorithms to produce beats that defy conventional categorization.',
+  releases: [{
+    title: 'AI Driven Rhythms',
+    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Future Soundscapes',
+    cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/0oH03sDsnxkWo7jFl6nZQ6?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/0oH03sDsnxkWo7jFl6nZQ6'
+}, {
+  id: '3',
+  name: 'Oscar Lee',
+  genre: 'Poetic Lyrical Rap',
+  label: 'RV003',
+  image: 'https://images.unsplash.com/photo-1510915228340-d926af981b29?auto=format&fit=crop&q=80&w=600',
+  description: 'Hailing from South Carolina, Oscar Lee redefines lyrical rap with his intricate verses that weave together the wisdom of the streets and the artistry of a poet.',
+  releases: [{
+    title: 'Street Wisdom',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Poetic Justice',
+    cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/5EKlA6ylecmqkGLMJCCtck?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/5EKlA6ylecmqkGLMJCCtck'
+}, {
+  id: '4',
+  name: 'Mya',
+  genre: 'Soulful Vocals',
+  label: 'RV004',
+  image: 'https://images.unsplash.com/photo-1593642531955-b62e17bbd959?auto=format&fit=crop&q=80&w=600',
+  description: 'A soulful vocalist who finds herself in a harmonious dance with AI-generated harmonies that elevate her melodies to ethereal heights.',
+  releases: [{
+    title: 'Ethereal Harmonies',
+    cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Digital Soul',
+    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6lHL3ubAMgSasKjNqKb8HF?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/6lHL3ubAMgSasKjNqKb8HF'
+}, {
+  id: '5',
+  name: 'King Fatz',
+  genre: 'Hip-Hop',
+  label: 'RV005',
+  image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=600',
+  description: 'The next hip-hop superstar. King Fatz\'s infectious rhymes are charting a course for the future of music.',
+  releases: [{
+    title: 'Royal Rhymes',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'The Crown',
+    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/King%20Fatz%20rapper'
+}, {
+  id: '6',
+  name: 'Xcel',
+  genre: 'Grammy-Winning Production',
+  label: 'RV006',
+  image: 'https://images.unsplash.com/photo-1541701494587-d4645228c2e6?auto=format&fit=crop&q=80&w=600',
+  description: 'A Grammy Award-winning producer and one of Kanye West\'s personal favorite collaborative producers. Xcel\'s masterful production completes the picture of a label at the forefront of innovation.',
+  releases: [{
+    title: 'Masterful Beats Vol. 1',
+    cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'The Producer\'s Touch',
+    cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/Xcel%20producer'
+}, {
+  id: '7',
+  name: 'James Fauntleroy',
+  genre: 'R&B / Songwriter',
+  label: 'RV007',
+  image: 'https://images.unsplash.com/photo-1518013322197-0092c10b7b13?auto=format&fit=crop&q=80&w=600',
+  description: 'A Grammy-winning songwriter and vocalist, known for his distinctive voice and prolific contributions to contemporary R&B and pop. 4x Grammy winner behind Bruno Mars, Justin Timberlake, Beyoncé and more.',
+  releases: [{
+    title: 'Electric Soul',
+    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'The Dreamer\'s EP',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/5ooSG9S0glqP5ZrqqaHBvT?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/5ooSG9S0glqP5ZrqqaHBvT'
+}, {
+  id: '8',
+  name: 'Wiz Buchanan',
+  genre: 'Hip-Hop Producer / Rapper',
+  label: 'RV008',
+  image: 'https://images.unsplash.com/photo-1594943260841-45f8f8f8b8e0?auto=format&fit=crop&q=80&w=600',
+  description: "A hip-hop producer and rapper from NY, known for working with Lupe Fiasco and producing Jay-Z's 'What More Can I Say'.",
+  releases: [{
+    title: 'What More Can I Say (Prod.)',
+    cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'NY State of Mind',
+    cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/Wiz%20Buchanan%20rapper'
+}, {
+  id: '9',
+  name: 'TRUZY',
+  genre: 'Electronic Pop / Hip-Hop',
+  label: 'RV009',
+  image: 'https://images.unsplash.com/photo-1502899576140-ed873650226e?auto=format&fit=crop&q=80&w=600',
+  description: 'The enigmatic artist TRUZY, known for pushing the boundaries of electronic pop with futuristic sounds and captivating vocals.',
+  releases: [{
+    title: 'YoursTruuly, TRUZY',
+    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Cloth Talk',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/26KbkMxDWYyxzNWu2N5maX?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/26KbkMxDWYyxzNWu2N5maX'
+}, {
+  id: '10',
+  name: '1500 or Nothin',
+  genre: 'Hip-Hop Production',
+  label: 'RV010',
+  image: 'https://images.unsplash.com/photo-1533174072545-ea6b1622ed02?auto=format&fit=crop&q=80&w=600',
+  description: 'A renowned Grammy-winning production and songwriting collective, instrumental in shaping the sound of modern hip-hop and R&B.',
+  releases: [{
+    title: 'The Hit Factory',
+    cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Sounds of L.A.',
+    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/6cJJCGZS0v24IF476QbbJh?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/6cJJCGZS0v24IF476QbbJh'
+}, {
+  id: '11',
+  name: 'Dave Young',
+  genre: 'Neo-Soul / R&B',
+  label: 'RV011',
+  image: 'https://images.unsplash.com/photo-1518013322197-0092c10b7b13?auto=format&fit=crop&q=80&w=600',
+  description: 'A smooth neo-soul artist known for his captivating vocals and heartfelt lyrics that blend traditional R&B with modern sensibilities.',
+  releases: [{
+    title: 'Midnight Groove',
+    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'City Lights EP',
+    cover: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/Dave%20Young%20neo%20soul'
+}, {
+  id: '12',
+  name: 'Ryan ToBy',
+  genre: 'Alternative Pop',
+  label: 'RV012',
+  image: 'https://images.unsplash.com/photo-1514337651-78939c394c5e?auto=format&fit=crop&q=80&w=600',
+  description: 'An innovative alternative pop artist whose music is characterized by catchy melodies, introspective lyrics, and experimental soundscapes.',
+  releases: [{
+    title: 'Echoes in the Dark',
+    cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=300'
+  }, {
+    title: 'Synthetic Dreams',
+    cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
+  }],
+  spotifyUrl: 'https://open.spotify.com/search/Ryan%20ToBy%20artist'
+}];
   genre: 'Lyrical Rap',
   label: 'RV001',
   image: 'https://images.unsplash.com/photo-1594943260841-45f8f8f8b8e0?auto=format&fit=crop&q=80&w=600',
@@ -428,14 +613,28 @@ const ArtistShowcase = () => {
                   </div>
                 </div>
 
-                {/* Spotify Embed */}
-                {selectedArtist.spotifyEmbedUrl && <div>
+                {/* Spotify Embed or Link */}
+                {selectedArtist.spotifyEmbedUrl ? (
+                  <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <ExternalLink className="w-5 h-5 text-primary" />
                       Listen on Spotify
                     </h3>
                     <iframe src={selectedArtist.spotifyEmbedUrl} width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
-                  </div>}
+                  </div>
+                ) : selectedArtist.spotifyUrl ? (
+                  <a href={selectedArtist.spotifyUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-[#1DB954]/10 border border-[#1DB954]/30 hover:bg-[#1DB954]/20 transition-all group">
+                    <div className="w-10 h-10 rounded-full bg-[#1DB954] flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Listen on Spotify</p>
+                      <p className="text-xs text-muted-foreground">Search {selectedArtist.name} on Spotify</p>
+                    </div>
+                    <ExternalLink className="w-4 h-4 text-muted-foreground ml-auto group-hover:text-[#1DB954] transition-colors" />
+                  </a>
+                ) : null}
 
                 {/* CTA */}
                 <div className="flex gap-3 pt-4">
@@ -443,10 +642,19 @@ const ArtistShowcase = () => {
                     <Play className="w-4 h-4 mr-2" />
                     Play All
                   </Button>
-                  <Button variant="outline" className="flex-1">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Full Profile
-                  </Button>
+                  {(selectedArtist.spotifyUrl || selectedArtist.spotifyEmbedUrl) && (
+                    <a
+                      href={selectedArtist.spotifyUrl || selectedArtist.spotifyEmbedUrl?.replace('/embed/', '/').split('?')[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
+                    >
+                      <Button variant="outline" className="w-full gap-2">
+                        <ExternalLink className="w-4 h-4" />
+                        Open on Spotify
+                      </Button>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>}

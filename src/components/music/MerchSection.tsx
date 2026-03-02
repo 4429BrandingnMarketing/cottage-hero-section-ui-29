@@ -9,12 +9,79 @@ interface MerchItem {
   price: string;
   category: string;
   featured?: boolean;
+  storeUrl?: string;
 }
+
+const PRINTFUL_STORE = 'https://redvisioncreativestudio.myshopify.com';
 
 const MERCH_ITEMS: MerchItem[] = [
   {
     id: 'm1',
     name: 'Red Vision Hoodie',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600',
+    price: '$59.99',
+    category: 'Apparel',
+    featured: true,
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm2',
+    name: 'LUMI AI T-Shirt',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600',
+    price: '$29.99',
+    category: 'Apparel',
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm3',
+    name: 'RVM Snapback Cap',
+    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=600',
+    price: '$24.99',
+    category: 'Accessories',
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm4',
+    name: 'Cosmic Mug',
+    image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&q=80&w=600',
+    price: '$19.99',
+    category: 'Accessories',
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm5',
+    name: 'Artist Series Poster',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600',
+    price: '$14.99',
+    category: 'Art',
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm6',
+    name: 'Limited Edition Vinyl',
+    image: 'https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?auto=format&fit=crop&q=80&w=600',
+    price: '$34.99',
+    category: 'Music',
+    featured: true,
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm7',
+    name: 'RVM Tote Bag',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600',
+    price: '$22.99',
+    category: 'Accessories',
+    storeUrl: PRINTFUL_STORE
+  },
+  {
+    id: 'm8',
+    name: 'Signature Beanie',
+    image: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&q=80&w=600',
+    price: '$27.99',
+    category: 'Apparel',
+    storeUrl: PRINTFUL_STORE
+  }
+];
     image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600',
     price: '$59.99',
     category: 'Apparel',
@@ -170,13 +237,12 @@ const MerchSection = () => {
                   
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button 
-                      size="sm" 
-                      className="gap-2"
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                      View Item
-                    </Button>
+                    <a href={item.storeUrl || PRINTFUL_STORE} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="gap-2">
+                        <ShoppingBag className="w-4 h-4" />
+                        Shop Now
+                      </Button>
+                    </a>
                   </div>
                 </div>
 
@@ -205,12 +271,14 @@ const MerchSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <Button size="lg" className="gap-2 px-8">
-            <ExternalLink className="w-4 h-4" />
-            Visit Full Merch Store
-          </Button>
+          <a href={PRINTFUL_STORE} target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="gap-2 px-8">
+              <ExternalLink className="w-4 h-4" />
+              Visit Full Merch Store
+            </Button>
+          </a>
           <p className="text-sm text-muted-foreground mt-4">
-            Free shipping on orders over $75
+            Free shipping on orders over $75 · Powered by Printful
           </p>
         </motion.div>
       </div>
