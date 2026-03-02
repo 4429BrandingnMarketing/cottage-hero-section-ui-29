@@ -1,6 +1,9 @@
 import { Play, ArrowUpRight, X } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+
+// Fallback images for local assets
 import portfolioUrbanPulse from '@/assets/portfolio-urban-pulse.jpg';
 import portfolioJourneyWithin from '@/assets/portfolio-journey-within.jpg';
 import portfolioNeonNights from '@/assets/portfolio-neon-nights.jpg';
@@ -8,61 +11,32 @@ import portfolioBreakingGround from '@/assets/portfolio-breaking-ground.jpg';
 import portfolioVelocity from '@/assets/portfolio-velocity.jpg';
 import portfolioEchoes from '@/assets/portfolio-echoes.jpg';
 
-const portfolioItems = [
-  {
-    title: 'Urban Pulse',
-    category: 'Music Video',
-    year: '2025',
-    aspect: 'col-span-2 row-span-2',
-    image: portfolioUrbanPulse,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-  {
-    title: 'The Journey Within',
-    category: 'Documentary',
-    year: '2025',
-    aspect: 'col-span-1 row-span-1',
-    image: portfolioJourneyWithin,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-  {
-    title: 'Neon Nights',
-    category: 'Commercial',
-    year: '2024',
-    aspect: 'col-span-1 row-span-1',
-    image: portfolioNeonNights,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-  {
-    title: 'Breaking Ground',
-    category: 'Interview Series',
-    year: '2024',
-    aspect: 'col-span-1 row-span-1',
-    image: portfolioBreakingGround,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-  {
-    title: 'Velocity',
-    category: 'Brand Film',
-    year: '2024',
-    aspect: 'col-span-1 row-span-1',
-    image: portfolioVelocity,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-  {
-    title: 'Echoes',
-    category: 'Short Film',
-    year: '2023',
-    aspect: 'col-span-2 row-span-1',
-    image: portfolioEchoes,
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
-  },
-];
+const localImageMap: Record<string, string> = {
+  '/assets/portfolio-urban-pulse.jpg': portfolioUrbanPulse,
+  '/assets/portfolio-journey-within.jpg': portfolioJourneyWithin,
+  '/assets/portfolio-neon-nights.jpg': portfolioNeonNights,
+  '/assets/portfolio-breaking-ground.jpg': portfolioBreakingGround,
+  '/assets/portfolio-velocity.jpg': portfolioVelocity,
+  '/assets/portfolio-echoes.jpg': portfolioEchoes,
+};
+
+interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  year: string;
+  image_url: string;
+  video_url: string | null;
+  aspect: string;
+  order_index: number;
+}
+
+const resolveImage = (url: string) => localImageMap[url] || url;
 
 interface ParallaxCardProps {
-  item: typeof portfolioItems[0];
+  item: PortfolioItem;
   index: number;
-  onPlay: (item: typeof portfolioItems[0]) => void;
+  onPlay: (item: PortfolioItem) => void;
 }
 
 const ParallaxCard = ({ item, index, onPlay }: ParallaxCardProps) => {
@@ -81,34 +55,31 @@ const ParallaxCard = ({ item, index, onPlay }: ParallaxCardProps) => {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`${item.aspect} group relative rounded-2xl overflow-hidden cursor-pointer`}
-      onClick={() => onPlay(item)}
+      onClick={() => item.video_url && onPlay(item)}
     >
-      {/* Parallax image */}
       <motion.div className="absolute inset-[-20%] w-[140%] h-[140%]" style={{ y }}>
         <img
-          src={item.image}
+          src={resolveImage(item.image_url)}
           alt={item.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
           loading="lazy"
         />
       </motion.div>
 
-      {/* Cinematic letterbox bars */}
       <div className="absolute inset-x-0 top-0 h-0 group-hover:h-[8%] bg-secondary transition-all duration-700 z-10" />
       <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-[8%] bg-secondary transition-all duration-700 z-10" />
 
-      {/* Multi-layer vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/30 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500 z-10" />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
 
-      {/* Play icon with glow pulse */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100 z-20">
-        <div className="w-20 h-20 rounded-full bg-primary/90 backdrop-blur-md flex items-center justify-center shadow-[0_0_60px_hsl(var(--primary)/0.5),0_0_120px_hsl(var(--primary)/0.2)]">
-          <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+      {item.video_url && (
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100 z-20">
+          <div className="w-20 h-20 rounded-full bg-primary/90 backdrop-blur-md flex items-center justify-center shadow-[0_0_60px_hsl(var(--primary)/0.5),0_0_120px_hsl(var(--primary)/0.2)]">
+            <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Title + meta */}
       <div className="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
         <div className="flex items-center gap-2 mb-2">
           <p className="text-[9px] font-black tracking-[0.4em] uppercase text-primary">
@@ -125,7 +96,6 @@ const ParallaxCard = ({ item, index, onPlay }: ParallaxCardProps) => {
         </div>
       </div>
 
-      {/* Corner accent on hover */}
       <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-primary/0 group-hover:border-primary/40 transition-all duration-500 z-20" />
       <div className="absolute bottom-4 right-4 w-6 h-6 border-r border-b border-primary/0 group-hover:border-primary/40 transition-all duration-500 z-20" />
     </motion.div>
@@ -133,12 +103,25 @@ const ParallaxCard = ({ item, index, onPlay }: ParallaxCardProps) => {
 };
 
 const TVPortfolio = () => {
-  const [lightbox, setLightbox] = useState<typeof portfolioItems[0] | null>(null);
+  const [lightbox, setLightbox] = useState<PortfolioItem | null>(null);
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
+
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      const { data } = await supabase
+        .from('tv_portfolio')
+        .select('*')
+        .order('order_index');
+      if (data) setPortfolioItems(data);
+    };
+    fetchPortfolio();
+  }, []);
+
+  if (portfolioItems.length === 0) return null;
 
   return (
     <>
       <section className="py-40 px-6 bg-secondary relative overflow-hidden">
-        {/* Background glows */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[200px]" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-accent/3 blur-[150px]" />
 
@@ -168,15 +151,14 @@ const TVPortfolio = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[280px]">
             {portfolioItems.map((item, i) => (
-              <ParallaxCard key={item.title} item={item} index={i} onPlay={setLightbox} />
+              <ParallaxCard key={item.id} item={item} index={i} onPlay={setLightbox} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Video Lightbox */}
       <AnimatePresence>
-        {lightbox && (
+        {lightbox && lightbox.video_url && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -206,7 +188,7 @@ const TVPortfolio = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
-                src={lightbox.videoUrl}
+                src={lightbox.video_url}
                 title={lightbox.title}
                 className="w-full h-full"
                 allow="autoplay; fullscreen; encrypted-media"

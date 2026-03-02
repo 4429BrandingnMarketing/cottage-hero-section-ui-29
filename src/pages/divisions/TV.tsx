@@ -12,7 +12,7 @@ const TV = () => {
       <TVHero />
       <TVPortfolio />
       <TVServices />
-      <TVContact className="text-slate-200" />
+      <TVContact />
       <Footer />
     </div>);
 

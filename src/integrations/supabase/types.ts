@@ -627,6 +627,45 @@ export type Database = {
         }
         Relationships: []
       }
+      tv_portfolio: {
+        Row: {
+          aspect: string
+          category: string
+          created_at: string | null
+          id: string
+          image_url: string
+          order_index: number
+          title: string
+          updated_at: string | null
+          video_url: string | null
+          year: string
+        }
+        Insert: {
+          aspect?: string
+          category: string
+          created_at?: string | null
+          id?: string
+          image_url: string
+          order_index?: number
+          title: string
+          updated_at?: string | null
+          video_url?: string | null
+          year: string
+        }
+        Update: {
+          aspect?: string
+          category?: string
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          order_index?: number
+          title?: string
+          updated_at?: string | null
+          video_url?: string | null
+          year?: string
+        }
+        Relationships: []
+      }
       tv_services: {
         Row: {
           created_at: string | null
