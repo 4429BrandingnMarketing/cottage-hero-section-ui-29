@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button';
 // Replace PRINTFUL_TOKEN with your new OAuth2 token from
 // developers.printful.com → Generate Token
 // ============================================================
-const PRINTFUL_TOKEN = 'PASTE_NEW_TOKEN_HERE';
-const FALLBACK_STORE_URL = 'https://www.printful.com/a/redvision'; // update if you have a custom domain
+const PRINTFUL_TOKEN = ''; // Set when new token is generated
+const FALLBACK_STORE_URL = 'https://redvisioncreativestudio.myshopify.com';
 
 interface MerchItem {
   id: string;
