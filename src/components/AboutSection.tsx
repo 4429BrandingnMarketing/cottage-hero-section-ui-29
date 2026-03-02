@@ -274,13 +274,62 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* RIGHT: Collaborations + Quote */}
+          {/* RIGHT: Photo + Collaborations + Quote */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
+            {/* Jason Photo */}
+            <div style={{
+              position: 'relative',
+              marginBottom: '60px',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              border: '1px solid rgba(212,165,116,0.2)',
+            }}>
+              <img
+                src="/images/jason-salvador.jpeg"
+                alt="Jason Salvador — Founder, Red Vision Creative Studio"
+                style={{
+                  width: '100%',
+                  height: '420px',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  display: 'block',
+                  filter: 'contrast(1.05) saturate(0.9)',
+                }}
+              />
+              {/* Gold overlay gradient at bottom */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0, left: 0, right: 0,
+                height: '120px',
+                background: 'linear-gradient(to top, rgba(10,8,5,0.85) 0%, transparent 100%)',
+              }} />
+              {/* Name overlay */}
+              <div style={{
+                position: 'absolute',
+                bottom: '20px', left: '24px',
+              }}>
+                <p style={{
+                  fontFamily: 'Didot, Garamond, serif',
+                  fontSize: '1.1rem',
+                  color: '#d4a574',
+                  fontWeight: 300,
+                  letterSpacing: '0.1em',
+                }}>Jason Salvador</p>
+                <p style={{
+                  fontFamily: 'Garamond, serif',
+                  fontSize: '0.65rem',
+                  color: '#8b7355',
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                }}>Founder · Red Vision Creative Studio</p>
+              </div>
+            </div>
+
             <p style={{
               fontFamily: 'Garamond, serif',
               fontSize: '0.65rem',
