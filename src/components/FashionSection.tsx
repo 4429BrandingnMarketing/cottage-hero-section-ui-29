@@ -89,8 +89,135 @@ const FashionSection = () => {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] bg-gradient-to-br from-[#3a3330] to-[#2a2522] flex items-center justify-center">
-              <span className="text-8xl">👔</span>
+            {/* Brand Hero Card — Harlem Renaissance Aesthetic */}
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] relative group cursor-pointer">
+              {/* Dark vintage base */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(160deg, #0d0a07 0%, #1e1610 35%, #2d2218 65%, #0d0a07 100%)',
+                }}
+              />
+              {/* Grain/film noise texture */}
+              <div
+                className="absolute inset-0 opacity-40 mix-blend-overlay"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+                  backgroundSize: '150px',
+                }}
+              />
+              {/* Warm amber light from center */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(ellipse 70% 50% at 50% 45%, rgba(180,120,40,0.15) 0%, transparent 70%)',
+                }}
+              />
+              {/* Deep vignette */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.85) 100%)',
+                }}
+              />
+
+              {/* Top label */}
+              <div className="absolute top-8 left-0 right-0 text-center z-20">
+                <p
+                  className="text-[#a88c5a] tracking-[0.5em] uppercase"
+                  style={{ fontFamily: 'Garamond, "Times New Roman", serif', fontSize: '0.7rem' }}
+                >
+                  Welcome To
+                </p>
+              </div>
+
+              {/* Horizontal rule lines */}
+              <div className="absolute top-16 left-8 right-8 z-20 flex items-center gap-2">
+                <div className="flex-1 h-px bg-[#8b7355]/40" />
+                <div className="w-1 h-1 rounded-full bg-[#c8962a]/60" />
+                <div className="flex-1 h-px bg-[#8b7355]/40" />
+              </div>
+
+              {/* Center brand overlay */}
+              <div className="absolute inset-0 flex items-center justify-center z-20 px-6">
+                <div
+                  className="w-full py-8 px-6 text-center"
+                  style={{
+                    background: 'rgba(5,3,1,0.72)',
+                    border: '1px solid rgba(200,150,42,0.35)',
+                    boxShadow: 'inset 0 0 40px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.6)',
+                  }}
+                >
+                  {/* Decorative top line */}
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="h-px w-8 bg-[#c8962a]/60" />
+                    <div className="w-1.5 h-1.5 rotate-45 bg-[#c8962a]/60" />
+                    <div className="h-px w-8 bg-[#c8962a]/60" />
+                  </div>
+
+                  {/* Brand script name */}
+                  <h3
+                    className="text-[#c8962a] leading-none mb-5"
+                    style={{
+                      fontFamily: '"Dancing Script", "Brush Script MT", "Segoe Script", cursive',
+                      fontSize: 'clamp(2.2rem, 5.5vw, 3.8rem)',
+                      fontWeight: 700,
+                      textShadow: '0 0 20px rgba(200,150,42,0.4), 0 2px 4px rgba(0,0,0,0.8)',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    Giftd n' Privlgd
+                  </h3>
+
+                  {/* Divider */}
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="h-px w-12 bg-[#8b7355]/50" />
+                    <div className="h-px w-12 bg-[#8b7355]/50" />
+                  </div>
+
+                  {/* Taglines */}
+                  <div
+                    className="space-y-1.5 text-[#b89a6a]"
+                    style={{
+                      fontFamily: 'Garamond, "Times New Roman", serif',
+                      letterSpacing: '0.22em',
+                      fontSize: '0.62rem',
+                    }}
+                  >
+                    <p>MADE BY, YOURS TRULY</p>
+                    <p>CULTURALLY CONSCIOUS CRAFTED</p>
+                    <p>FINE CLOTHING</p>
+                  </div>
+
+                  {/* Hash tag */}
+                  <p
+                    className="mt-4 text-[#c8962a] font-bold tracking-widest"
+                    style={{
+                      fontFamily: 'Garamond, serif',
+                      fontSize: '0.75rem',
+                      letterSpacing: '0.3em',
+                      textShadow: '0 0 10px rgba(200,150,42,0.3)',
+                    }}
+                  >
+                    #4429
+                  </p>
+
+                  {/* Decorative bottom line */}
+                  <div className="flex items-center justify-center gap-3 mt-4">
+                    <div className="h-px w-8 bg-[#c8962a]/60" />
+                    <div className="w-1.5 h-1.5 rotate-45 bg-[#c8962a]/60" />
+                    <div className="h-px w-8 bg-[#c8962a]/60" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Hover shimmer */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"
+                style={{
+                  background: 'radial-gradient(ellipse at 50% 50%, rgba(200,150,42,0.06) 0%, transparent 65%)',
+                }}
+              />
             </div>
 
             {/* Collections */}
