@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 const stats = [
-  { value: '15+', label: 'Years in the Industry' },
+  { value: '25+', label: 'Years in the Industry' },
   { value: '100+', label: 'Artists Worked With' },
   { value: '6', label: 'Business Divisions' },
   { value: 'Grammy', label: 'Affiliated Label' },
@@ -15,9 +15,9 @@ const collaborators = [
 
 const timeline = [
   {
-    year: '2008',
+    year: '1999',
     title: 'The Beginning',
-    desc: 'Entered the music industry, cutting his teeth in tour management and production — learning the business from the ground up.',
+    desc: 'Entered the music industry at the ground level — learning the business from the inside out across touring, production, and artist development.',
   },
   {
     year: '2012',
@@ -132,7 +132,7 @@ const AboutSection = () => {
             maxWidth: '680px',
             margin: '0 auto',
           }}>
-            Fifteen years deep in the music and entertainment industry. Tour manager. Producer. 
+            Twenty-five years deep in the music and entertainment industry. Tour manager. Producer. 
             Label founder. Fashion house architect. A man who moves at the intersection of culture, 
             commerce, and creativity — and built an empire doing it.
           </p>
