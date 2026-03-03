@@ -32,7 +32,7 @@ const timeline = [
   {
     year: '2000',
     title: 'Red Vision Music Founded',
-    desc: 'Founded Red Vision Music with his close friend Rashad Liston. Rashad later passed away from AIDS — his memory and vision live on in everything Red Vision represents.',
+    desc: 'Founded Red Vision Music with his close friend Rashad "RED" Liston — the name Red Vision is a direct tribute to him. Rashad later passed away from AIDS. His memory and vision live on in everything Red Vision represents.',
   },
   {
     year: '2024',
