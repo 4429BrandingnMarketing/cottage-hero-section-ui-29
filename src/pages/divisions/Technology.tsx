@@ -192,9 +192,9 @@ const Technology = () => {
                     <Button size="lg" onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=Technology Consultation Request'}>
                       Schedule Consultation
                     </Button>
-                    <Button variant="outline" size="lg" onClick={() => window.open('https://redvisioncreativestudio.com', '_blank')}>
+                    <Button variant="outline" size="lg" onClick={() => window.location.href = '/divisions/ai'}>
                       <ArrowRight className="w-4 h-4 mr-2" />
-                      View Documentation
+                      Red Vision AI
                     </Button>
                   </div>
                 </div>
