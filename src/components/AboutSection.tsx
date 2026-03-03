@@ -22,7 +22,7 @@ const timeline = [
   {
     year: '2012',
     title: 'Breaking Through',
-    desc: 'Connected with Virgil Abloh (before Louis Vuitton), Don C, and Nigo. Built relationships with Hardy Blechman of Maharishi in London.',
+    desc: 'Running with Virgil Abloh and Lupe Fiasco since 2005 — before Louis Vuitton, before the world knew. Also built with Don C and Nigo. Connected with Hardy Blechman of Maharishi in London.',
   },
   {
     year: '2016',

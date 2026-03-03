@@ -66,7 +66,7 @@ const FashionSection = () => {
                 <strong className="text-[#d4a574]">Jason Salvador</strong> is a cultural architect whose career has seamlessly bridged music, fashion, and global storytelling.
               </p>
               <p>
-                Early in his journey, Jason worked with a then-unknown Virgil Abloh, who would later rise to helm Louis Vuitton and redefine contemporary design.
+                Jason has been running with Virgil Abloh and Lupe Fiasco since 2005 — long before Louis Vuitton, long before the world caught on. That relationship shaped everything GiFTD N' PrVLGD stands for.
               </p>
               <p>
                 Jason's reach extends far beyond collaborations — he's cultivated lasting relationships with pioneers like Hardy Blechman of Maharishi in London, Don C of Air Jordan and Nigo of A Bathing Ape.
