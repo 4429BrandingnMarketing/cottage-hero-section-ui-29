@@ -117,11 +117,11 @@ const TVHero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-5 justify-center"
         >
-          <Button size="lg" className="text-xs px-14 py-8 rounded-full group tracking-[0.3em] uppercase font-black shadow-[0_0_60px_hsl(var(--primary)/0.3)]">
+          <Button size="lg" onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=Red Vision TV - Project Inquiry'} className="text-xs px-14 py-8 rounded-full group tracking-[0.3em] uppercase font-black shadow-[0_0_60px_hsl(var(--primary)/0.3)]">
             Start a Project
             <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="outline" size="lg" className="text-xs px-14 py-8 rounded-full border-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/5 group tracking-[0.3em] uppercase font-black backdrop-blur-sm">
+          <Button variant="outline" size="lg" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })} className="text-xs px-14 py-8 rounded-full border-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/5 group tracking-[0.3em] uppercase font-black backdrop-blur-sm">
             <Play className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform" />
             Showreel
           </Button>

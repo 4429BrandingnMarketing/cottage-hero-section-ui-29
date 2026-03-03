@@ -46,10 +46,10 @@ const Music = () => {
               </p>
               
               <div className="flex gap-4">
-                <button className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
+                <button onClick={() => window.location.href = '/music#submit'} className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
                   Submit Your Music
                 </button>
-                <button className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all flex items-center gap-2">
+                <button onClick={() => window.location.href = '/music#artists'} className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all flex items-center gap-2">
                   <Play className="w-4 h-4" />
                   Listen Now
                 </button>

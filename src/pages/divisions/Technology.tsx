@@ -189,10 +189,10 @@ const Technology = () => {
                     AI-powered solutions and enterprise-grade infrastructure.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button size="lg">
+                    <Button size="lg" onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=Technology Consultation Request'}>
                       Schedule Consultation
                     </Button>
-                    <Button variant="outline" size="lg">
+                    <Button variant="outline" size="lg" onClick={() => window.open('https://redvisioncreativestudio.com', '_blank')}>
                       <ArrowRight className="w-4 h-4 mr-2" />
                       View Documentation
                     </Button>

@@ -31,7 +31,7 @@ const LINEUP: Artist[] = [{
     title: 'Southern Flow',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyUrl: 'https://open.spotify.com/search/Dat%20Boi%20HOP%20rapper'
+  spotifyUrl: 'https://open.spotify.com/artist/0vbDro2arv5i6ubKMHs6Fc'
 }, {
   id: '2',
   name: 'My Guy Mars',
@@ -202,7 +202,8 @@ const LINEUP: Artist[] = [{
     title: 'Synthetic Dreams',
     cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyUrl: 'https://open.spotify.com/search/Ryan%20ToBy%20artist'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/1OspneDlIRw6yPOFzMsUGn?utm_source=generator',
+  spotifyUrl: 'https://open.spotify.com/artist/1OspneDlIRw6yPOFzMsUGn'
 }];
   genre: 'Lyrical Rap',
   label: 'RV001',

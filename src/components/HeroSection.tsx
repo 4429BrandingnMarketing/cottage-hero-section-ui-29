@@ -72,12 +72,12 @@ const HeroSection = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button className="px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+            <button onClick={() => document.getElementById('divisions')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-primary text-white rounded-full font-semibold text-lg hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
               <span className="relative z-10">Explore Our Universe</span>
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             
-            <button className="px-8 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold text-lg hover:bg-accent hover:text-secondary hover:shadow-cyan-glow hover:-translate-y-1 transition-all duration-300">
+            <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-transparent border-2 border-accent text-accent rounded-full font-semibold text-lg hover:bg-accent hover:text-secondary hover:shadow-cyan-glow hover:-translate-y-1 transition-all duration-300">
               Watch Our Story
             </button>
           </div>

@@ -156,10 +156,10 @@ const MarketingAgencySection = () => {
                 your brand's digital presence and drive sustainable growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="flex-1">
+                <Button size="lg" className="flex-1" onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=Free Consultation Request'}>
                   Get Free Consultation
                 </Button>
-                <Button variant="outline" size="lg" className="flex-1">
+                <Button variant="outline" size="lg" className="flex-1" onClick={() => window.location.href = '/divisions/marketing'}>
                   <ArrowRight className="w-4 h-4 mr-2" />
                   View Case Studies
                 </Button>

@@ -58,9 +58,9 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <button className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-0.5 transition-all duration-300">
+            <a href="/#contact" className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-0.5 transition-all duration-300">
               Get Started
-            </button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -96,9 +96,9 @@ const Navbar = () => {
               <a href="#contact" className="block px-3 py-2 text-white hover:text-primary transition-all duration-300 hover:translate-x-2 hover:bg-white/5 rounded-lg">
                 Contact
               </a>
-              <button className="w-full mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-0.5 transition-all duration-300">
+              <a href="/#contact" onClick={() => setIsMenuOpen(false)} className="block w-full mt-4 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 hover:shadow-red-glow hover:-translate-y-0.5 transition-all duration-300 text-center">
                 Get Started
-              </button>
+              </a>
             </div>
           </div>
         )}

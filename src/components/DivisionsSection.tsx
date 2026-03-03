@@ -134,7 +134,7 @@ const DivisionsSection = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <p className="text-white/60 mb-6">Ready to collaborate with the future?</p>
-          <button className="px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
+          <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold hover:shadow-red-glow hover:-translate-y-1 transition-all duration-300">
             Start Your Project
           </button>
         </div>
