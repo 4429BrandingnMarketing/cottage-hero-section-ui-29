@@ -30,9 +30,9 @@ const timeline = [
     desc: 'Joined the legendary collective behind hits for Kanye, Jay-Z, Beyoncé, Bruno Mars, and Justin Bieber. A pivotal moment in the journey.',
   },
   {
-    year: '2020',
-    title: 'Red Vision Music',
-    desc: 'Founded Red Vision Music — a Grammy-affiliated independent label built to champion emerging artists with major-label resources.',
+    year: '2000',
+    title: 'Red Vision Music Founded',
+    desc: 'Founded Red Vision Music with his close friend Rashad Liston. Rashad later passed away from AIDS — his memory and vision live on in everything Red Vision represents.',
   },
   {
     year: '2024',
