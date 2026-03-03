@@ -204,19 +204,6 @@ const LINEUP: Artist[] = [{
   }],
   spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/1OspneDlIRw6yPOFzMsUGn?utm_source=generator',
   spotifyUrl: 'https://open.spotify.com/artist/1OspneDlIRw6yPOFzMsUGn'
-}];
-  genre: 'Lyrical Rap',
-  label: 'RV001',
-  image: 'https://images.unsplash.com/photo-1594943260841-45f8f8f8b8e0?auto=format&fit=crop&q=80&w=600',
-  description: 'A lyrical rap sensation from the heart of South Carolina, symbolizing the potential of unexplored territories. Dat Boi H.O.P and Block Burna Entertainment are integral components of Red Vision Music\'s evolving landscape.',
-  releases: [{
-    title: 'The Block Burna Anthem',
-    cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=300'
-  }, {
-    title: 'Southern Flow',
-    cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
-  }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/0vbDro2arv5i6ubKMHs6Fc?utm_source=generator'
 }, {
   id: '2',
   name: 'My Guy Mars',
