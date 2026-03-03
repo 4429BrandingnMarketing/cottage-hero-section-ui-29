@@ -215,7 +215,7 @@ const LINEUP: Artist[] = [{
     title: 'Southern Flow',
     cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=300'
   }],
-  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/7zC7C0Q0J0D9J9L0X0X0X0?utm_source=generator'
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/artist/0vbDro2arv5i6ubKMHs6Fc?utm_source=generator'
 }, {
   id: '2',
   name: 'My Guy Mars',
