@@ -132,7 +132,7 @@ const AboutSection = () => {
             maxWidth: '680px',
             margin: '0 auto',
           }}>
-            Twenty-five years deep in the music and entertainment industry. Tour manager. Producer. 
+            1500 or Nothin' since 2004. Tour manager. Producer. 
             Label founder. Fashion house architect. A man who moves at the intersection of culture, 
             commerce, and creativity — and built an empire doing it.
           </p>

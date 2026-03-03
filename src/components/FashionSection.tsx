@@ -72,7 +72,7 @@ const FashionSection = () => {
                 Jason's reach extends far beyond collaborations — he's cultivated lasting relationships with pioneers like Hardy Blechman of Maharishi in London, Don C of Air Jordan and Nigo of A Bathing Ape.
               </p>
               <p>
-                With <strong className="text-[#d4a574]">GiFTD N' PrVLGD</strong>, Salvador channels decades of experience into a fashion house rooted in heritage and elevated by innovation.
+                With <strong className="text-[#d4a574]">GiFTD N' PrVLGD</strong>, Salvador channels 1500 or Nothin' energy — in the game since 2004 — into a fashion house rooted in heritage and elevated by innovation.
               </p>
             </div>
 
