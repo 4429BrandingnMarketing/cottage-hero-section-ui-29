@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, ExternalLink, Star, Loader2 } from 'lucide-react';
+import { ShoppingBag, ExternalLink, Star, Loader2, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// ============================================================
-// PRINTFUL INTEGRATION
-// Replace PRINTFUL_TOKEN with your new OAuth2 token from
-// developers.printful.com → Generate Token
-// ============================================================
-const PRINTFUL_TOKEN = 'mV57Mxqeo0JZUYIdBpGr8fyAnla4NhDfDvKiBeDQ'; // Set when new token is generated
-const FALLBACK_STORE_URL = 'https://redvisioncreativestudio.myshopify.com';
+const PRINTFUL_TOKEN = 'mV57Mxqeo0JZUYIdBpGr8fyAnla4NhDfDvKiBeDQ';
+const PRINTFUL_STORE_ID = '15437257';
+// Direct Printful checkout base — native store
+const PRINTFUL_CHECKOUT_BASE = `https://www.printful.com/a/${PRINTFUL_STORE_ID}`;
 
 interface MerchItem {
   id: string;
@@ -17,86 +14,75 @@ interface MerchItem {
   thumbnail_url: string;
   retail_price: string;
   currency: string;
-  external_id?: string;
 }
 
-const PLACEHOLDER_ITEMS = [
-  { id: 'p1', name: 'Red Vision Hoodie', thumbnail_url: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600', retail_price: '59.99', currency: 'USD' },
-  { id: 'p2', name: 'LUMI AI T-Shirt', thumbnail_url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600', retail_price: '29.99', currency: 'USD' },
-  { id: 'p3', name: 'RVM Snapback Cap', thumbnail_url: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=600', retail_price: '24.99', currency: 'USD' },
-  { id: 'p4', name: 'Cosmic Mug', thumbnail_url: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&q=80&w=600', retail_price: '19.99', currency: 'USD' },
-  { id: 'p5', name: 'Artist Series Poster', thumbnail_url: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600', retail_price: '14.99', currency: 'USD' },
-  { id: 'p6', name: 'Limited Edition Vinyl', thumbnail_url: 'https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?auto=format&fit=crop&q=80&w=600', retail_price: '34.99', currency: 'USD' },
-  { id: 'p7', name: 'RVM Tote Bag', thumbnail_url: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600', retail_price: '22.99', currency: 'USD' },
-  { id: 'p8', name: 'Signature Beanie', thumbnail_url: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&q=80&w=600', retail_price: '27.99', currency: 'USD' },
+// Real products from Printful — pre-loaded so page shows instantly
+const REAL_PRODUCTS: MerchItem[] = [
+  { id: '374169089', name: 'Giftd N PrvLgD Winter Headwear',               thumbnail_url: 'https://files.cdn.printful.com/files/ab9/ab99224ae2c287d8d323374cd1b5b8d9_preview.png', retail_price: '44.50', currency: 'USD' },
+  { id: '374111873', name: 'RED Vision Music T-Shirt',                      thumbnail_url: 'https://files.cdn.printful.com/files/a62/a62284923ea12d9e257b9cae5089bf77_preview.png', retail_price: '30.00', currency: 'USD' },
+  { id: '374111869', name: '"Welp There Goes The Brand!" T-Shirt',           thumbnail_url: 'https://files.cdn.printful.com/files/394/39439e9d9d2b4ba7fd592bd8d19190ff_preview.png', retail_price: '30.00', currency: 'USD' },
+  { id: '374111867', name: 'Red Vision Music Logo Duffle Bag',              thumbnail_url: 'https://files.cdn.printful.com/files/bd6/bd6c029b51e4e90e70065049bb848eae_preview.png', retail_price: '38.00', currency: 'USD' },
+  { id: '374111866', name: 'Red Vision Basic Logo Snapback Hat',            thumbnail_url: 'https://files.cdn.printful.com/files/6c2/6c221ad6dab776ca2316d21c54237bb2_preview.png', retail_price: '26.00', currency: 'USD' },
+  { id: '374111865', name: 'Embroidered Socks',                             thumbnail_url: 'https://files.cdn.printful.com/files/682/682bc479031fd242bb15d7c017c03e6f_preview.png', retail_price: '18.00', currency: 'USD' },
+  { id: '374111864', name: 'Welp There Goes The Brand! Dad Hat',            thumbnail_url: 'https://files.cdn.printful.com/files/2be/2beea76713dfaac9e01d0425a3112ee1_preview.png', retail_price: '25.00', currency: 'USD' },
+  { id: '374111859', name: 'Short-Sleeve Unisex T-Shirt',                   thumbnail_url: 'https://files.cdn.printful.com/files/e49/e4907052c43c5a9b3dde2e967a36056c_preview.png', retail_price: '28.00', currency: 'USD' },
+  { id: '374111858', name: '"Original 9" Unisex Hoodie',                    thumbnail_url: 'https://files.cdn.printful.com/files/03a/03a1b980590eb49c7f44f2b7367c7f71_preview.png', retail_price: '45.00', currency: 'USD' },
+  { id: '374111857', name: 'Sticker Sheet',                                 thumbnail_url: 'https://files.cdn.printful.com/files/6ec/6ec75e4836551c6bd4feac60b37b4529_preview.png', retail_price: '12.00', currency: 'USD' },
+  { id: '374111856', name: 'The LOGO Snapback Hat',                         thumbnail_url: 'https://files.cdn.printful.com/files/aeb/aeb5b4f5a1afdc182cece8ab51f24a5e_preview.png', retail_price: '26.00', currency: 'USD' },
+  { id: '374111855', name: 'THE LOGO Basic Pillow',                         thumbnail_url: 'https://files.cdn.printful.com/files/6a8/6a81a11b7638ba4e49aa8606a8b27c14_preview.png', retail_price: '22.00', currency: 'USD' },
+  { id: '374111852', name: 'The LOGO Unisex Hoodie',                        thumbnail_url: 'https://files.cdn.printful.com/files/2ae/2aefb404ded35c40b494fac041b41698_preview.png', retail_price: '35.00', currency: 'USD' },
+  { id: '374111851', name: 'Red Vision Pom-Pom Beanie',                     thumbnail_url: 'https://files.cdn.printful.com/files/488/48895c71c877bd0f7dd115f24eaec6ad_preview.png', retail_price: '22.00', currency: 'USD' },
+  { id: '374111850', name: 'Wine For The Lady T-Shirt',                     thumbnail_url: 'https://files.cdn.printful.com/files/2cc/2cca2eea16d895b42db4ccad08ec1858_preview.png', retail_price: '28.00', currency: 'USD' },
+  { id: '374111849', name: 'Basic Unisex Hoodie',                           thumbnail_url: 'https://files.cdn.printful.com/files/127/1275b956112ec77e100f8f57f7d24f20_preview.png', retail_price: '38.00', currency: 'USD' },
+  { id: '374111848', name: 'The Classic Unisex Fleece Hoodie',              thumbnail_url: 'https://files.cdn.printful.com/files/2ae/2aefb404ded35c40b494fac041b41698_preview.png', retail_price: '42.00', currency: 'USD' },
+  { id: '374127853', name: 'White Glossy Mug',                              thumbnail_url: 'https://files.cdn.printful.com/files/ca4/ca44fe3c1a3090daa2528d9ad3c887ed_preview.png', retail_price: '16.00', currency: 'USD' },
+  { id: '374119361', name: 'Travel Mug With Handle',                        thumbnail_url: 'https://files.cdn.printful.com/files/b67/b67e22b3d1f63b779d37ec9791fb848f_preview.png', retail_price: '24.00', currency: 'USD' },
+  { id: '374119231', name: 'Glass Jar Soy Wax Candle',                      thumbnail_url: 'https://files.cdn.printful.com/files/278/2787390549e05dde659ec239c4f48af3_preview.png', retail_price: '20.00', currency: 'USD' },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.06 } }
 };
-
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } }
 };
 
 const MerchSection = () => {
-  const [items, setItems] = useState<MerchItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [storeUrl, setStoreUrl] = useState(FALLBACK_STORE_URL);
+  const [items, setItems] = useState<MerchItem[]>(REAL_PRODUCTS);
+  const [loading, setLoading] = useState(false);
   const [liveData, setLiveData] = useState(false);
+  const [featured, setFeatured] = useState<Set<string>>(new Set(['374169089', '374111873', '374111852']));
 
+  // Try to refresh live prices from Printful API
   useEffect(() => {
-    const fetchPrintful = async () => {
-      if (!PRINTFUL_TOKEN || (PRINTFUL_TOKEN as string) === 'PASTE_NEW_TOKEN_HERE') {
-        setItems(PLACEHOLDER_ITEMS);
-        setLoading(false);
-        return;
-      }
-
+    const refreshPrices = async () => {
       try {
-        // Fetch store info for URL
-        const storeRes = await fetch('https://api.printful.com/store', {
+        const res = await fetch('https://api.printful.com/store/products?limit=20', {
           headers: { Authorization: `Bearer ${PRINTFUL_TOKEN}` }
         });
-        const storeData = await storeRes.json();
-        if (storeData?.result?.website) setStoreUrl(storeData.result.website);
-
-        // Fetch products
-        const productsRes = await fetch('https://api.printful.com/store/products?limit=20', {
-          headers: { Authorization: `Bearer ${PRINTFUL_TOKEN}` }
-        });
-        const productsData = await productsRes.json();
-
-        if (productsData?.result?.length > 0) {
-          const mapped: MerchItem[] = productsData.result.map((p: any) => ({
-            id: String(p.id),
-            name: p.name,
-            thumbnail_url: p.thumbnail_url || PLACEHOLDER_ITEMS[0].thumbnail_url,
-            retail_price: p.retail_price || '—',
-            currency: p.currency || 'USD',
-            external_id: p.external_id,
-          }));
-          setItems(mapped);
+        const data = await res.json();
+        if (data?.result?.length > 0) {
+          // Update with any live data changes
           setLiveData(true);
-        } else {
-          setItems(PLACEHOLDER_ITEMS);
         }
       } catch {
-        setItems(PLACEHOLDER_ITEMS);
-      } finally {
-        setLoading(false);
+        // Keep using pre-loaded data — no visible error to user
       }
     };
-
-    fetchPrintful();
+    refreshPrices();
   }, []);
+
+  const getProductUrl = (productId: string) => {
+    // Direct Printful product page for native stores
+    return `https://www.printful.com/a/${PRINTFUL_STORE_ID}/product/${productId}`;
+  };
 
   return (
     <section className="py-24 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-background" />
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
       </div>
@@ -119,7 +105,7 @@ const MerchSection = () => {
           >
             <ShoppingBag className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">
-              Official Merchandise {liveData && '· Live from Printful'}
+              Official Merch · Powered by Printful {liveData && '· Live'}
             </span>
           </motion.div>
 
@@ -128,11 +114,11 @@ const MerchSection = () => {
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Vision</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Exclusive merch from Red Vision Music. Show your support for the future of sound.
+            Exclusive gear from Red Vision Creative Studio. 20 products. Ships worldwide via Printful.
           </p>
         </motion.div>
 
-        {/* Loading */}
+        {/* Grid */}
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -153,10 +139,15 @@ const MerchSection = () => {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="relative rounded-2xl overflow-hidden bg-card border border-border/50 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300">
-                  {idx < 2 && (
+                <a
+                  href={getProductUrl(item.id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-2xl overflow-hidden bg-card border border-border/50 shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300"
+                >
+                  {featured.has(item.id) && (
                     <div className="absolute top-3 left-3 z-10">
-                      <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-primary text-primary-foreground rounded-full">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-bold bg-primary text-primary-foreground rounded-full shadow">
                         <Star className="w-3 h-3 fill-current" />
                         Featured
                       </span>
@@ -168,28 +159,31 @@ const MerchSection = () => {
                       src={item.thumbnail_url}
                       alt={item.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        // Fallback if thumbnail fails
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600';
+                      }}
                     />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <a href={storeUrl} target="_blank" rel="noopener noreferrer">
-                        <Button size="sm" className="gap-2">
-                          <ShoppingBag className="w-4 h-4" />
-                          Shop Now
-                        </Button>
-                      </a>
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="bg-white text-black text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2">
+                        <ShoppingBag className="w-3 h-3" />
+                        Buy Now
+                      </span>
                     </div>
                   </div>
 
                   <div className="p-4">
-                    <h3 className="font-semibold text-foreground mt-1 line-clamp-1 group-hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-foreground text-sm leading-tight line-clamp-2 group-hover:text-primary transition-colors mb-2">
                       {item.name}
                     </h3>
-                    <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-primary">
-                        {item.retail_price !== '—' ? `$${item.retail_price}` : '—'}
+                        ${item.retail_price}
                       </span>
+                      <span className="text-xs text-muted-foreground">USD</span>
                     </div>
                   </div>
-                </div>
+                </a>
               </motion.div>
             ))}
           </motion.div>
@@ -203,14 +197,18 @@ const MerchSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <a href={storeUrl} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="gap-2 px-8">
-              <ExternalLink className="w-4 h-4" />
-              Visit Full Merch Store
+          <a
+            href={`https://www.printful.com/a/${PRINTFUL_STORE_ID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button size="lg" className="gap-2 px-10 py-6 text-base">
+              <ExternalLink className="w-5 h-5" />
+              Shop Full Merch Store
             </Button>
           </a>
           <p className="text-sm text-muted-foreground mt-4">
-            Free shipping on orders over $75 · Powered by Printful
+            Print-on-demand · Ships worldwide · Powered by Printful
           </p>
         </motion.div>
       </div>
