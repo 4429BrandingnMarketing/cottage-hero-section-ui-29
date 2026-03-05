@@ -66,13 +66,13 @@ const FashionSection = () => {
                 <strong className="text-[#d4a574]">Jason Salvador</strong> is a cultural architect whose career has seamlessly bridged music, fashion, and global storytelling.
               </p>
               <p>
-                Early in his journey, Jason worked with a then-unknown Virgil Abloh, who would later rise to helm Louis Vuitton and redefine contemporary design.
+                Jason has been running with Virgil Abloh and Lupe Fiasco since 2005 — long before Louis Vuitton, long before the world caught on. That relationship shaped everything GiFTD N' PrVLGD stands for.
               </p>
               <p>
                 Jason's reach extends far beyond collaborations — he's cultivated lasting relationships with pioneers like Hardy Blechman of Maharishi in London, Don C of Air Jordan and Nigo of A Bathing Ape.
               </p>
               <p>
-                With <strong className="text-[#d4a574]">GiFTD N' PrVLGD</strong>, Salvador channels decades of experience into a fashion house rooted in heritage and elevated by innovation.
+                With <strong className="text-[#d4a574]">GiFTD N' PrVLGD</strong>, Salvador channels 1500 or Nothin' energy — in the game since 2004 — into a fashion house rooted in heritage and elevated by innovation.
               </p>
             </div>
 
@@ -293,6 +293,7 @@ const FashionSection = () => {
         >
           <Button 
             size="lg" 
+            onClick={() => window.location.href = '/divisions/fashion'}
             className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574] rounded-none"
             style={{ fontFamily: 'Didot, serif', letterSpacing: '0.15em' }}
           >

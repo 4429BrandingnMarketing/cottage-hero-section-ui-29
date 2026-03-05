@@ -79,8 +79,9 @@ const VisionSection = () => {
             Harmonizing <span className="text-primary">Futures</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Red Vision Music is more than a label; it's a launchpad for auditory pioneers. 
-            We cultivate groundbreaking talent, pushing the boundaries of sound and artistry.
+            Red Vision Music was born in 2000 — co-founded by Jason Salvador and his friend Rashad "RED" Liston. 
+            The name Red Vision is a direct tribute to RED. Rashad passed away from AIDS, but his spirit 
+            is the foundation this label is built on.
           </p>
         </motion.div>
 

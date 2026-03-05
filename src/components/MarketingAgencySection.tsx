@@ -50,7 +50,27 @@ const MarketingAgencySection = () => {
 
       if (servicesRes.data) setServices(servicesRes.data);
       if (statsRes.data) setStats(statsRes.data);
-      if (benefitsRes.data) setBenefits(benefitsRes.data);
+
+      // Sanitize benefit links — replace any external competitor URLs with Red Vision pages
+      const EXTERNAL_LINK_OVERRIDES: Record<string, string> = {
+        'hubspot': '/divisions/marketing',
+        'business.google': '/divisions/marketing',
+        'google-ads': '/divisions/marketing',
+        'influencermarketinghub': '/divisions/marketing',
+        'canva.com': '/divisions/ai',
+        'analytics.google': '/divisions/ai',
+        'salesforce': '/#contact',
+      };
+      if (benefitsRes.data) {
+        const sanitized = benefitsRes.data.map(b => {
+          if (b.link) {
+            const override = Object.entries(EXTERNAL_LINK_OVERRIDES).find(([key]) => b.link!.includes(key));
+            if (override) return { ...b, link: override[1] };
+          }
+          return b;
+        });
+        setBenefits(sanitized);
+      }
     };
 
     fetchData();
@@ -125,8 +145,6 @@ const MarketingAgencySection = () => {
                     <a 
                       key={item.id} 
                       href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors group cursor-pointer"
                     >
                       <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
@@ -156,10 +174,10 @@ const MarketingAgencySection = () => {
                 your brand's digital presence and drive sustainable growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="flex-1">
+                <Button size="lg" className="flex-1" onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=Free Consultation Request'}>
                   Get Free Consultation
                 </Button>
-                <Button variant="outline" size="lg" className="flex-1">
+                <Button variant="outline" size="lg" className="flex-1" onClick={() => window.location.href = '/divisions/marketing'}>
                   <ArrowRight className="w-4 h-4 mr-2" />
                   View Case Studies
                 </Button>

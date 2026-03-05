@@ -158,11 +158,11 @@ const RedVisionMusic = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="px-8 py-4 text-lg">
+            <Button size="lg" className="px-8 py-4 text-lg" onClick={() => document.getElementById('artists')?.scrollIntoView({ behavior: 'smooth' })}>
               <Play className="w-5 h-5 mr-2" />
               Listen Now
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
+            <Button variant="outline" size="lg" className="px-8 py-4 text-lg" onClick={() => document.getElementById('submit')?.scrollIntoView({ behavior: 'smooth' })}>
               <Upload className="w-5 h-5 mr-2" />
               Submit Music
             </Button>
@@ -232,14 +232,34 @@ const RedVisionMusic = () => {
         </div>
       </section>
 
-      {/* Google Stitch Integration */}
-      <section id="experience" className="py-20 px-4 bg-secondary/20">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Nemo - Interactive Experience</h2>
-          <p className="text-xl text-muted-foreground mb-12">Explore our interactive music showcase</p>
+      {/* The Red Vision Experience */}
+      <section id="experience" className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">The Red Vision Experience</h2>
+            <p className="text-xl text-muted-foreground">More than a label — a movement</p>
+          </div>
 
-          <div className="w-full aspect-video rounded-lg overflow-hidden bg-card/50 backdrop-blur-sm border border-primary/20">
-            <iframe src="https://stitch.withgoogle.com/projects/11569583431666638584" className="w-full h-full" frameBorder="0" allowFullScreen title="Google Stitch - Nemo"></iframe>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: Mic, title: "Studio Sessions", desc: "World-class recording facilities with Grammy-winning engineers and AI-enhanced production tools.", stat: "50+ Albums Produced" },
+              { icon: Users, title: "Artist Community", desc: "A collaborative network of producers, songwriters, and performers pushing creative boundaries together.", stat: "200+ Artists" },
+              { icon: Star, title: "Industry Impact", desc: "From underground to mainstream — our artists have collectively earned billions of streams worldwide.", stat: "5B+ Total Streams" },
+            ].map((item, i) => (
+              <Card key={i} className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <CardHeader>
+                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <item.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <CardTitle className="text-foreground text-xl">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{item.desc}</p>
+                  <span className="text-sm font-semibold text-primary">{item.stat}</span>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

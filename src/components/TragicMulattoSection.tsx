@@ -208,6 +208,7 @@ const TragicMulattoSection = () => {
 
           <Button 
             size="lg"
+            onClick={() => window.location.href = '/divisions/blog'}
             className="bg-gradient-to-r from-[#8b7355] to-[#6b5345] hover:from-[#d4a574] hover:to-[#b48a5a] text-white px-12 py-6 text-lg border-2 border-[#d4a574]"
             style={{ fontFamily: 'Didot, serif', letterSpacing: '0.1em' }}
           >

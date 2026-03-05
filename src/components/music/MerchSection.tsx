@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 // Replace PRINTFUL_TOKEN with your new OAuth2 token from
 // developers.printful.com → Generate Token
 // ============================================================
-const PRINTFUL_TOKEN = ''; // Set when new token is generated
+const PRINTFUL_TOKEN = 'mV57Mxqeo0JZUYIdBpGr8fyAnla4NhDfDvKiBeDQ'; // Set when new token is generated
 const FALLBACK_STORE_URL = 'https://redvisioncreativestudio.myshopify.com';
 
 interface MerchItem {
@@ -49,7 +49,7 @@ const MerchSection = () => {
 
   useEffect(() => {
     const fetchPrintful = async () => {
-      if (PRINTFUL_TOKEN === 'PASTE_NEW_TOKEN_HERE') {
+      if (!PRINTFUL_TOKEN || (PRINTFUL_TOKEN as string) === 'PASTE_NEW_TOKEN_HERE') {
         setItems(PLACEHOLDER_ITEMS);
         setLoading(false);
         return;

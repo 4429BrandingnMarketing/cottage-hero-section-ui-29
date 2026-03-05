@@ -39,10 +39,10 @@ const AI = () => {
               </p>
               
               <div className="flex gap-4">
-                <button className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
+                <button onClick={() => window.location.href = 'mailto:redvisionmusic@gmail.com?subject=AI Services Inquiry'} className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg transition-all">
                   Get Started
                 </button>
-                <button className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all">
+                <button onClick={() => window.location.href = '/#technology'} className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all">
                   Learn More
                 </button>
               </div>

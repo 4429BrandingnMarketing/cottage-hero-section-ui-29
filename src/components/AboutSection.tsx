@@ -22,7 +22,7 @@ const timeline = [
   {
     year: '2012',
     title: 'Breaking Through',
-    desc: 'Connected with Virgil Abloh (before Louis Vuitton), Don C, and Nigo. Built relationships with Hardy Blechman of Maharishi in London.',
+    desc: 'Running with Virgil Abloh and Lupe Fiasco since 2005 — before Louis Vuitton, before the world knew. Also built with Don C and Nigo. Connected with Hardy Blechman of Maharishi in London.',
   },
   {
     year: '2016',
@@ -30,9 +30,9 @@ const timeline = [
     desc: 'Joined the legendary collective behind hits for Kanye, Jay-Z, Beyoncé, Bruno Mars, and Justin Bieber. A pivotal moment in the journey.',
   },
   {
-    year: '2020',
-    title: 'Red Vision Music',
-    desc: 'Founded Red Vision Music — a Grammy-affiliated independent label built to champion emerging artists with major-label resources.',
+    year: '2000',
+    title: 'Red Vision Music Founded',
+    desc: 'Founded Red Vision Music with his close friend Rashad "RED" Liston — the name Red Vision is a direct tribute to him. Rashad later passed away from AIDS. His memory and vision live on in everything Red Vision represents.',
   },
   {
     year: '2024',
@@ -132,7 +132,7 @@ const AboutSection = () => {
             maxWidth: '680px',
             margin: '0 auto',
           }}>
-            Twenty-five years deep in the music and entertainment industry. Tour manager. Producer. 
+            1500 or Nothin' since 2004. Tour manager. Producer. 
             Label founder. Fashion house architect. A man who moves at the intersection of culture, 
             commerce, and creativity — and built an empire doing it.
           </p>
