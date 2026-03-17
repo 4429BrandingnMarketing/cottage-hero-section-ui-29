@@ -7,6 +7,7 @@ import TechnologySection from "@/components/TechnologySection";
 import OverviewSection from "@/components/OverviewSection";
 import GallerySection from "@/components/GallerySection";
 import AboutSection from "@/components/AboutSection";
+import EcosystemSection from "@/components/EcosystemSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
       <OverviewSection />
       <GallerySection />
       <AboutSection />
+      <EcosystemSection />
       <Footer />
     </div>
   );

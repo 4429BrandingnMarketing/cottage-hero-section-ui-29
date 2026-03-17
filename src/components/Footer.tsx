@@ -68,13 +68,26 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Properties */}
+          <div>
+            <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Our Properties</h4>
+            <ul className="space-y-2">
+              <li><a href="https://redvisionmusic-official.netlify.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">Red Vision Music Label</a></li>
+              <li><a href="https://rv-ai-agency.netlify.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">Red Vision AI Agency</a></li>
+              <li><a href="https://pivot-tour-app.netlify.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">PIVOT Tour System</a></li>
+              <li><a href="https://mindfulvision-wellness.netlify.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">Mindful Vision Wellness</a></li>
+              <li><a href="https://cosmicvision-astrology.netlify.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">Cosmic Vision Astrology</a></li>
+              <li><a href="https://wd6ype73psnk2.mocha.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary text-sm transition-colors">Jason Salvador Consulting</a></li>
+            </ul>
+          </div>
+
           {/* Contact */}
           <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Get In Touch</h4>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:redvisionmusic@gmail.com" className="text-white/50 hover:text-primary text-sm transition-colors">
-                  redvisionmusic@gmail.com
+                <a href="mailto:redvision.ai@gmail.com" className="text-white/50 hover:text-primary text-sm transition-colors">
+                  redvision.ai@gmail.com
                 </a>
               </li>
               <li>
