@@ -339,6 +339,144 @@ export type Database = {
         }
         Relationships: []
       }
+      hq_agent_memory: {
+        Row: {
+          agent_id: string
+          created_at: string | null
+          id: string
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          agent_id: string
+          created_at?: string | null
+          id?: string
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          agent_id?: string
+          created_at?: string | null
+          id?: string
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      hq_conversations: {
+        Row: {
+          agent_id: string
+          content: string
+          created_at: string | null
+          device: string | null
+          id: string
+          role: string
+        }
+        Insert: {
+          agent_id: string
+          content: string
+          created_at?: string | null
+          device?: string | null
+          id?: string
+          role: string
+        }
+        Update: {
+          agent_id?: string
+          content?: string
+          created_at?: string | null
+          device?: string | null
+          id?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      hq_notes: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          division: string | null
+          id: string
+          tags: string[] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          division?: string | null
+          id?: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          division?: string | null
+          id?: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      hq_store: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      hq_tasks: {
+        Row: {
+          assigned_agent: string | null
+          created_at: string | null
+          description: string | null
+          division: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_agent?: string | null
+          created_at?: string | null
+          description?: string | null
+          division?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_agent?: string | null
+          created_at?: string | null
+          description?: string | null
+          division?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       marketing_benefits: {
         Row: {
           benefit: string
