@@ -292,18 +292,40 @@ const RedVisionMusic = () => {
       {/* Streaming Integration */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Stream Everywhere</h2>
-          <p className="text-xl text-muted-foreground mb-12">Find Red Vision Music on all major platforms</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Stream Everywhere</h2>
+            <p className="text-xl text-muted-foreground mb-12">Find Red Vision Music on all major platforms</p>
+          </motion.div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {['Spotify', 'Apple Music', 'YouTube Music', 'SoundCloud'].map((platform, index) => <Card key={index} className="group hover:scale-105 transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20">
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-colors">
-                    <Music className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground">{platform}</h3>
-                </CardContent>
-              </Card>)}
+            {['Spotify', 'Apple Music', 'YouTube Music', 'SoundCloud'].map((platform, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 25, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ y: -10, scale: 1.08 }}
+              >
+                <Card className="group cursor-pointer bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-colors duration-300 hover:shadow-xl hover:shadow-primary/15">
+                  <CardContent className="p-8">
+                    <motion.div
+                      className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/30 transition-colors"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                    >
+                      <Music className="w-8 h-8 text-primary" />
+                    </motion.div>
+                    <h3 className="font-semibold text-foreground">{platform}</h3>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
