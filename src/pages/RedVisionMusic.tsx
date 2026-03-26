@@ -1,4 +1,5 @@
 import { Play, Pause, Heart, Share2, Download, Music, Mic, Users, Star, Upload, Building2, Headphones } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -236,10 +237,16 @@ const RedVisionMusic = () => {
       <section id="experience" className="py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">The Red Vision Experience</h2>
             <p className="text-xl text-muted-foreground">More than a label — a movement</p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -247,18 +254,36 @@ const RedVisionMusic = () => {
               { icon: Users, title: "Artist Community", desc: "A collaborative network of producers, songwriters, and performers pushing creative boundaries together.", stat: "200+ Artists" },
               { icon: Star, title: "Industry Impact", desc: "From underground to mainstream — our artists have collectively earned billions of streams worldwide.", stat: "5B+ Total Streams" },
             ].map((item, i) => (
-              <Card key={i} className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                <CardHeader>
-                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <CardTitle className="text-foreground text-xl">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{item.desc}</p>
-                  <span className="text-sm font-semibold text-primary">{item.stat}</span>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+              >
+                <Card className="group h-full bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-colors duration-300 hover:shadow-xl hover:shadow-primary/15">
+                  <CardHeader>
+                    <motion.div
+                      className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors"
+                      whileHover={{ rotate: [0, -10, 10, 0] }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <item.icon className="w-7 h-7 text-primary" />
+                    </motion.div>
+                    <CardTitle className="text-foreground text-xl">{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{item.desc}</p>
+                    <motion.span
+                      className="text-sm font-semibold text-primary inline-block"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      {item.stat}
+                    </motion.span>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
