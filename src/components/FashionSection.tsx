@@ -91,36 +91,12 @@ const FashionSection = () => {
           >
             {/* Brand Hero Card — Harlem Renaissance Aesthetic */}
             <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] relative group cursor-pointer">
-              {/* Dark vintage base */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(160deg, #0d0a07 0%, #1e1610 35%, #2d2218 65%, #0d0a07 100%)',
-                }}
+              <img
+                src="/giftd-placeholder.svg" // Using the generated SVG placeholder
+                alt="GiFTD N' PrVLGD Fashion"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Grain/film noise texture */}
-              <div
-                className="absolute inset-0 opacity-40 mix-blend-overlay"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-                  backgroundSize: '150px',
-                }}
-              />
-              {/* Warm amber light from center */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: 'radial-gradient(ellipse 70% 50% at 50% 45%, rgba(180,120,40,0.15) 0%, transparent 70%)',
-                }}
-              />
-              {/* Deep vignette */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: 'radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.85) 100%)',
-                }}
-              />
-
+              {/* The existing overlay content remains */}
               {/* Top label */}
               <div className="absolute top-8 left-0 right-0 text-center z-20">
                 <p
