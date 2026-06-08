@@ -43,9 +43,19 @@ const Fashion = () => {
               </div>
             </div>
             
-            <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-accent/20 to-primary/20">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Shirt className="w-32 h-32 text-accent/30" />
+            <div className="relative h-[500px] rounded-3xl overflow-hidden">
+              {/* Fashion Editorial Visual */}
+              <img
+                src="/assets/fashion/lookbook-hero.jpg"
+                alt="GiFTD N' PrVLGD fashion editorial"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 flex items-end p-8">
+                <div className="text-white">
+                  <p className="text-sm font-medium tracking-wider uppercase mb-2">Harlem Renaissance Edition</p>
+                  <p className="text-2xl font-bold">Limited Drops</p>
+                </div>
               </div>
             </div>
           </div>
