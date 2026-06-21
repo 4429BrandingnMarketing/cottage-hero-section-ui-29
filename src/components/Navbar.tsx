@@ -58,6 +58,15 @@ const Navbar = () => {
             <button onClick={() => scrollTo('fashion')} className={linkClass}>
               Fashion{underline}
             </button>
+            <Link to="/divisions/university" className={linkClass}>
+              University{underline}
+            </Link>
+            <Link to="/divisions/merch" className={linkClass}>
+              Merch{underline}
+            </Link>
+            <Link to="/divisions/scripts" className={linkClass}>
+              Books{underline}
+            </Link>
             <Link to="/divisions/marketing" className={linkClass}>
               Marketing{underline}
             </Link>

@@ -46,9 +46,9 @@ const Fashion = () => {
             <div className="relative h-[500px] rounded-3xl overflow-hidden">
               {/* Fashion Editorial Visual */}
               <img
-                src="/assets/fashion/lookbook-hero.jpg"
-                alt="GiFTD N' PrVLGD fashion editorial"
-                className="absolute inset-0 w-full h-full object-cover"
+                src="/images/fashion/hero-main.jpg"
+                alt="GiFTD N' PrVLGD fashion editorial — Harlem Renaissance Edition"
+                className="absolute inset-0 w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute inset-0 flex items-end p-8">

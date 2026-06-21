@@ -87,14 +87,13 @@ const FashionSection = () => {
 
             <div>
               <p className="text-[#c4b5a0] leading-relaxed text-sm" style={{ fontFamily: 'Garamond, serif' }}>
-                Jason has been running with Virgil Abloh and Lupe Fiasco since 2005 — long before
-                Louis Vuitton, long before the world caught on. That relationship shaped everything
-                GiFTD N&apos; PrVLGD stands for.
+                Born from two decades inside the music industry, GiFTD N&apos; PrVLGD channels the
+                elegance and confidence of the Harlem Renaissance into a modern luxury line —
+                fashion as a statement of Black excellence and self-possession.
               </p>
               <p className="text-[#c4b5a0] leading-relaxed text-sm mt-3" style={{ fontFamily: 'Garamond, serif' }}>
-                Jason&apos;s reach extends far beyond collaborations — he&apos;s cultivated lasting
-                relationships with pioneers like Hardy Blechman of Maharishi in London,
-                Don C of Air Jordan and Nigo of A Bathing Ape.
+                Every piece is designed to make a statement: that craft, culture, and confidence
+                belong together.
               </p>
             </div>
 

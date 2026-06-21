@@ -1,362 +1,219 @@
-import { useState } from 'react';
-import { Brain, Sparkles, Zap, ArrowRight, Bot, Code2, BarChart3, Target,
-         ShoppingCart, Star, CheckCircle, ExternalLink, Play, Globe,
-         Cpu, Lock, TrendingUp, MessageSquare, Wand2, Music2, Package } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { ArrowRight, Code2, Globe, Music2, Share2, Search, Youtube, Shirt, Bot, Play, ChevronRight, ExternalLink, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-// ── MARKETPLACE PRODUCTS ──────────────────────────────────────────────────────
-const PRODUCTS = [
-  {
-    id: 1, category: 'Free', badge: 'FREE LEAD MAGNET',
-    name: 'Spotify + YouTube Player',
-    tagline: 'The ultimate music discovery tool',
-    desc: 'A fully configured Spotify + YouTube dual player. Drop your email, get instant access. Built on Qwen 3 — showcases the future of AI-powered music UX.',
-    price: 'Free', priceNote: 'Email required',
-    color: '#1db954', icon: Music2,
-    features: ['Dual Spotify + YouTube embed', 'Playlist sync', 'Mobile optimized', 'Powered by Qwen 3'],
-    cta: 'Get Free Access', href: '#funnel',
-    highlight: false,
-  },
-  {
-    id: 2, category: 'Starter', badge: 'BEST VALUE',
-    name: 'AI Starter Kit — Basic',
-    tagline: 'Your first AI toolkit',
-    desc: 'The Spotify+YouTube player plus 3 pre-configured AI tools, a setup guide, and step-by-step walkthrough. Everything a creator needs to start using AI today.',
-    price: '$27', priceNote: 'One-time',
-    color: '#b89144', icon: Package,
-    features: ['Spotify + YouTube Player', '3 pre-configured AI tools', 'Setup guide (PDF)', 'Video walkthrough', 'Email support'],
-    cta: 'Buy Now — $27', href: 'https://paypal.com',
-    highlight: false,
-  },
-  {
-    id: 3, category: 'Pro', badge: 'MOST POPULAR',
-    name: 'AI Starter Kit — Pro',
-    tagline: 'Full AI creative suite',
-    desc: 'The complete AI Marketplace — 10+ tools, Qwen 3 model access walkthrough, music production AI, content automation, and audience targeting systems.',
-    price: '$97', priceNote: 'One-time',
-    color: '#7c3aed', icon: Wand2,
-    features: ['Everything in Basic', 'Full AI marketplace (10+ tools)', 'Qwen 3 model walkthrough', 'Music production AI tools', 'Content automation suite', 'Audience targeting system', 'Priority email support'],
-    cta: 'Buy Now — $97', href: 'https://paypal.com',
-    highlight: true,
-  },
-  {
-    id: 4, category: 'Agency', badge: 'WHITE LABEL',
-    name: 'AI Starter Kit — Agency',
-    tagline: 'Resell as your own product',
-    desc: 'White-label rights to the entire AI Starter Kit. Remove Red Vision branding, add yours, sell it to your own clients. Your product, your revenue.',
-    price: '$297', priceNote: 'One-time + resell rights',
-    color: '#06b6d4', icon: Globe,
-    features: ['Everything in Pro', 'Full white-label rights', 'Remove RV branding', 'Resell to your clients', 'Agency license', 'Onboarding call (30 min)', 'Ongoing updates included'],
-    cta: 'Buy Now — $297', href: 'https://paypal.com',
-    highlight: false,
-  },
-  {
-    id: 5, category: 'Service', badge: 'DONE FOR YOU',
-    name: 'RV AI Agency — Starter',
-    tagline: 'We build it for you',
-    desc: 'Our team integrates AI into your creative business. Strategy, setup, and a custom automation pipeline — all done for you in 2 weeks.',
-    price: '$297', priceNote: '/mo',
-    color: '#f59e0b', icon: Bot,
-    features: ['AI strategy session', 'Custom automation pipeline', 'Tool setup & configuration', 'Monthly optimization call', '2-week delivery'],
-    cta: 'Get Started', href: 'https://rv-ai-agency.netlify.app',
-    highlight: false,
-  },
-  {
-    id: 6, category: 'Service', badge: 'FULL SERVICE',
-    name: 'RV AI Agency — Pro',
-    tagline: 'Full AI transformation',
-    desc: 'End-to-end AI implementation for labels, managers, and creative agencies. Custom agents, marketing automation, analytics dashboards, and ongoing management.',
-    price: '$997', priceNote: '/mo',
-    color: '#ef4444', icon: Cpu,
-    features: ['Everything in Starter', 'Custom AI agents built', 'Marketing automation', 'Analytics dashboard', 'Content generation pipeline', 'Weekly strategy calls', 'Priority support'],
-    cta: 'Apply Now', href: 'https://rv-ai-agency.netlify.app',
-    highlight: false,
-  },
-  {
-    id: 7, category: 'Tool', badge: 'LIVE',
-    name: 'PIVOT Tour System',
-    tagline: 'AI-powered tour management',
-    desc: 'The professional tour management platform for independent artists. Routing, budgeting, scheduling, and settlement — all in one AI-enhanced system.',
-    price: '$49', priceNote: '/mo',
-    color: '#10b981', icon: TrendingUp,
-    features: ['Route optimization', 'Budget tracking', 'Venue database', 'Settlement reports', 'Artist portal', 'Mobile app'],
-    cta: 'Start Free Trial', href: 'https://pivot-tour-app.netlify.app',
-    highlight: false,
-  },
-  {
-    id: 8, category: 'Tool', badge: 'NEW',
-    name: 'AI Content Engine',
-    tagline: 'Content on autopilot',
-    desc: 'Generate 30 days of social content in 10 minutes. Captions, hashtags, video scripts, email sequences — all tailored to your brand voice using Qwen 3.',
-    price: '$47', priceNote: '/mo',
-    color: '#8b5cf6', icon: MessageSquare,
-    features: ['30-day content calendar', 'Caption generator', 'Hashtag optimizer', 'Email sequences', 'Brand voice training', 'Qwen 3 powered'],
-    cta: 'Coming Soon', href: '#',
-    highlight: false,
-  },
+const services = [
+  { icon: Globe, title: "Web Design & Development", desc: "Premium glassmorphic 3D sites that stop scrollers cold. React, Next.js, Wix, Framer.", tag: "DESIGN", color: "#E5192A" },
+  { icon: Search, title: "SEO Domination", desc: "AI-powered keyword strategy, technical SEO, and content that ranks and converts.", tag: "SEO", color: "#06B6D4" },
+  { icon: Share2, title: "Social Media Marketing", desc: "Full management across all platforms. Content, community, paid campaigns — automated.", tag: "SOCIAL", color: "#8B5CF6" },
+  { icon: Youtube, title: "YouTube Marketing", desc: "Channel buildout, SEO, thumbnails, community posts — grow from zero to monetized.", tag: "VIDEO", color: "#FF0000" },
+  { icon: Music2, title: "Music Distribution", desc: "Get on every major DSP. Playlist pitching, royalty tracking, release strategy.", tag: "MUSIC", color: "#10B981" },
+  { icon: Code2, title: "Software & App Dev", desc: "Web apps, mobile apps, AI tools, automation. MVP to full scale.", tag: "DEV", color: "#F59E0B" },
+  { icon: Shirt, title: "Fashion & Merch Design", desc: "Brand apparel, luxury drops, merch lines — designed by AI, fulfilled by Printful.", tag: "FASHION", color: "#C9A84C" },
+  { icon: Bot, title: "AI Agent Creation", desc: "Custom agents for sales, support, content, and research. Built and deployed for you.", tag: "AI", color: "#E5192A" },
+  { icon: Share2, title: "Sales & Marketing Campaigns", desc: "Full funnel strategy. Email, ads, landing pages, copy — built to convert.", tag: "CAMPAIGNS", color: "#8B5CF6" },
 ];
 
-const SERVICES = [
-  { icon: Brain, title: 'AI Integration Consulting', desc: 'We audit your current workflow and map exactly where AI saves you time and money. Then we build it.' },
-  { icon: Code2, title: 'Custom Agent Development', desc: 'Bespoke AI agents for your specific business — A&R analysis, content creation, customer service, or operations.' },
-  { icon: BarChart3, title: 'Predictive Analytics', desc: 'Turn your streaming, social, and sales data into actionable forecasts. Know what\'s working before your competition.' },
-  { icon: Target, title: 'Marketing Automation', desc: 'AI-powered campaigns that run themselves. Audience targeting, A/B testing, and optimization on autopilot.' },
-  { icon: Lock, title: 'AI Security & Compliance', desc: 'Protect your creative assets. CIPHER ensures your AI systems are secure, compliant, and audit-ready.' },
-  { icon: Zap, title: 'Rapid Prototyping', desc: 'Go from idea to working AI demo in 48 hours. We build proof-of-concepts that win clients and close deals.' },
+const products = [
+  { name: "The Visionary", tag: "AI ASSISTANT", desc: "The proprietary AI powering every Red Vision division. Built for entertainment workflows.", link: "https://aistudio.google.com/apps/e182b0fd-9585-4aa5-ba1c-94e753c678ff?showPreview=true", color: "#E5192A", grad: "from-red-600/20 to-orange-600/5" },
+  { name: "PIVOT Tour System", tag: "TOUR MANAGEMENT", desc: "AI-powered tour management. Advance shows, manage budgets, run tours like a major label.", link: "https://aistudio.google.com/apps/6ff86395-d125-4068-a96a-5c2e4b7cdb4a?showPreview=true", color: "#06B6D4", grad: "from-cyan-600/20 to-blue-600/5" },
+  { name: "Red Vision Radio", tag: "MEDIA PLATFORM", desc: "24/7 independent music and culture radio, built on Readdy AI.", link: "https://readdy.ai/cooperation-invite?token=xAnjNolTPOO79Q36Sd1pzSQFzu8EwsXW&ref=link", color: "#10B981", grad: "from-emerald-600/20 to-green-600/5" },
+  { name: "BLACKSIDE TV", tag: "STREAMING", desc: "AI-powered creative studio and streaming platform. Original content for the culture.", link: "https://blackside-tv-ai-creative-studio.rork.app", color: "#8B5CF6", grad: "from-violet-600/20 to-purple-600/5" },
+  { name: "4429 Marketing Suite", tag: "MARKETING AI", desc: "Full AI marketing agency platform — social, SEO, web design, YouTube — all automated.", link: "https://app.base44.com/apps/6a1afa13ed2e0533fc0e8c23/editor/preview444", color: "#F59E0B", grad: "from-amber-600/20 to-yellow-600/5" },
+  { name: "Red Vision Mall Portraits", tag: "AI CREATIVE", desc: "Studio-quality AI portrait photography. Custom styles, professional finishes.", link: "https://wd6ype73psnk2.mocha.app", color: "#C9A84C", grad: "from-yellow-600/20 to-amber-600/5" },
 ];
 
-const CATEGORIES = ['All', 'Free', 'Starter', 'Pro', 'Agency', 'Service', 'Tool'];
+export default function AIPage() {
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const [visible, setVisible] = useState<Set<string>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-export default function AI() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [email, setEmail] = useState('');
-  const [funnelStatus, setFunnelStatus] = useState<'idle'|'sending'|'done'>('idle');
+  useEffect(() => {
+    const h = (e: MouseEvent) => setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    window.addEventListener('mousemove', h);
+    return () => window.removeEventListener('mousemove', h);
+  }, []);
 
-  const filtered = activeCategory === 'All'
-    ? PRODUCTS
-    : PRODUCTS.filter(p => p.category === activeCategory);
-
-  const handleFunnelSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFunnelStatus('sending');
-    setTimeout(() => setFunnelStatus('done'), 1400);
-  };
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) setVisible(prev => new Set([...prev, e.target.id])); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-observe]').forEach(el => observerRef.current?.observe(el));
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden">
+      <style>{`
+        @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(1deg)} }
+        @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+        @keyframes border-run { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        @keyframes fade-up { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+        .orb { position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; }
+        .glass { background:rgba(255,255,255,0.03); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.08); }
+        .glass-card { background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.02) 100%); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border:1px solid rgba(255,255,255,0.1); transition:all 0.5s cubic-bezier(0.23,1,0.32,1); }
+        .glass-card:hover { background:linear-gradient(135deg,rgba(255,255,255,0.09),rgba(229,25,42,0.04)); border-color:rgba(229,25,42,0.35); transform:translateY(-10px) scale(1.01); box-shadow:0 40px 80px rgba(229,25,42,0.12); }
+        .product-card { background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(0,0,0,0.4)); backdrop-filter:blur(30px); -webkit-backdrop-filter:blur(30px); border:1px solid rgba(255,255,255,0.08); transition:all 0.5s cubic-bezier(0.23,1,0.32,1); }
+        .product-card:hover { transform:translateY(-14px) rotateX(3deg); box-shadow:0 50px 100px rgba(0,0,0,0.6); }
+        .tag { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; }
+        .shimmer-red { background:linear-gradient(90deg,#fff 25%,#E5192A 50%,#fff 75%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s linear infinite; }
+        .grid-overlay { background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px); background-size:60px 60px; }
+        .running-border { position:relative; }
+        .running-border::before { content:''; position:absolute; inset:-1px; border-radius:24px; background:linear-gradient(135deg,#E5192A,#8B5CF6,#06B6D4,#E5192A); background-size:300% 300%; animation:border-run 4s linear infinite; -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; padding:1px; }
+        .fade-up { animation:fade-up 0.8s cubic-bezier(0.23,1,0.32,1) forwards; }
+        .hidden-anim { opacity:0; transform:translateY(40px); }
+        .visible-anim { opacity:1; transform:translateY(0); transition:all 0.7s cubic-bezier(0.23,1,0.32,1); }
+      `}</style>
+
       <Navbar />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-purple-500/5 pointer-events-none" />
-        <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors text-sm">
-            <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> Back to home
+      {/* HERO */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div className="orb w-[700px] h-[700px] bg-red-700/12 -top-40 -left-40" style={{animation:'float 8s ease-in-out infinite'}} />
+        <div className="orb w-[500px] h-[500px] bg-purple-700/10 top-1/2 right-0" style={{animation:'float 10s ease-in-out infinite 2s'}} />
+        <div className="orb w-[400px] h-[400px] bg-cyan-700/8 bottom-0 left-1/3" style={{animation:'float 7s ease-in-out infinite 4s'}} />
+        <div className="absolute inset-0 grid-overlay" />
+        <div className="absolute inset-0 pointer-events-none" style={{background:`radial-gradient(700px circle at ${mousePos.x*100}% ${mousePos.y*100}%, rgba(229,25,42,0.07), transparent 50%)`}} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+          <Link to="/" className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 mb-12 transition-colors text-sm">
+            <ArrowRight className="w-3 h-3 rotate-180" /> Back to home
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
-                <Cpu className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">AI Technology Division</span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-none">
-                Red Vision <span className="text-primary">AI</span>
-              </h1>
-              <p className="text-xl text-muted-foreground mb-4 leading-relaxed">
-                The engine behind the entire Red Vision ecosystem. We build, deploy, and sell
-                AI tools — and now you can access them too.
-              </p>
-              <p className="text-base text-muted-foreground/70 mb-8">
-                From a free Spotify+YouTube player to white-label agency kits — every product 
-                is battle-tested inside our own operation before it reaches you.
-              </p>
-              <div className="flex gap-4 flex-wrap">
-                <a href="#marketplace" className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all">
-                  Browse Marketplace
-                </a>
-                <a href="https://rv-ai-agency.netlify.app" target="_blank" rel="noopener noreferrer"
-                  className="px-8 py-4 border-2 border-border rounded-full font-semibold hover:bg-secondary transition-all flex items-center gap-2">
-                  AI Agency <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-            {/* Animated grid visual */}
-            <div className="relative h-[480px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 to-purple-900/20 border border-primary/10">
-              <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-2 p-6 opacity-40">
-                {Array.from({length:16}).map((_,i) => (
-                  <div key={i} className="rounded-xl bg-primary/20 border border-primary/10 flex items-center justify-center"
-                    style={{animationDelay:`${i*0.1}s`}}>
-                    {i % 4 === 0 && <Brain className="w-5 h-5 text-primary/60" />}
-                    {i % 4 === 1 && <Zap className="w-5 h-5 text-purple-400/60" />}
-                    {i % 4 === 2 && <Bot className="w-5 h-5 text-cyan-400/60" />}
-                    {i % 4 === 3 && <Sparkles className="w-5 h-5 text-amber-400/60" />}
-                  </div>
-                ))}
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-6xl font-bold text-primary/80 mb-2">119</div>
-                  <div className="text-sm text-muted-foreground tracking-widest uppercase">AI Agents Active</div>
-                  <div className="mt-3 flex items-center justify-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-xs text-green-400">All systems live</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="inline-flex items-center gap-3 glass rounded-full px-5 py-2.5 mb-8">
+            <div className="w-2 h-2 bg-red-500 rounded-full" style={{animation:'pulse 1.5s ease-in-out infinite',boxShadow:'0 0 10px #E5192A'}} />
+            <span className="tag text-red-400">Red Vision AI — Software & Technology Division</span>
           </div>
-        </div>
-      </section>
 
-      {/* ── FREE LEAD MAGNET FUNNEL ───────────────────────────────────────── */}
-      <section id="funnel" className="py-16 px-4 bg-gradient-to-r from-[#1db954]/8 via-primary/5 to-purple-900/8 border-y border-border">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1db954]/15 border border-[#1db954]/25 rounded-full mb-4">
-            <Music2 className="w-3.5 h-3.5 text-[#1db954]" />
-            <span className="text-xs text-[#1db954] tracking-wider uppercase font-medium">Free Download</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Get the Spotify + YouTube Player <span className="text-primary">Free</span>
-          </h2>
-          <p className="text-muted-foreground mb-8">
-            Drop your email. Get instant access to the AI-powered dual music player — the same one built into the Red Vision ecosystem. Built on Qwen 3.
+          <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black leading-none mb-6 tracking-tighter">
+            <span className="block text-white">WE BUILD</span>
+            <span className="block shimmer-red">EMPIRES.</span>
+            <span className="block text-white/15 text-3xl md:text-4xl font-light mt-4 tracking-[0.5em]">WITH ARTIFICIAL INTELLIGENCE</span>
+          </h1>
+
+          <p className="text-xl text-white/40 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+            Custom software, AI agents, web platforms, and digital infrastructure — built by a team that lives and breathes the entertainment industry.
           </p>
-          {funnelStatus === 'done' ? (
-            <div className="flex items-center justify-center gap-3 text-[#1db954] py-6">
-              <CheckCircle className="w-6 h-6" />
-              <span className="text-lg font-medium">Check your inbox — your player is on the way.</span>
-            </div>
-          ) : (
-            <form onSubmit={handleFunnelSubmit} className="flex gap-3 max-w-md mx-auto flex-wrap sm:flex-nowrap">
-              <input
-                type="email" value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="your@email.com" required
-                className="flex-1 px-4 py-3 bg-card border border-border rounded-full text-sm outline-none focus:border-primary transition-colors"
-              />
-              <button type="submit" disabled={funnelStatus === 'sending'}
-                className="px-6 py-3 bg-[#1db954] hover:bg-green-400 text-black font-semibold rounded-full text-sm transition-all whitespace-nowrap disabled:opacity-60">
-                {funnelStatus === 'sending' ? 'Sending...' : 'Get Free Access →'}
-              </button>
-            </form>
-          )}
-          <p className="text-xs text-muted-foreground/50 mt-3">No spam. Unsubscribe anytime. Your info stays with Red Vision.</p>
-        </div>
-      </section>
 
-      {/* ── MARKETPLACE ──────────────────────────────────────────────────── */}
-      <section id="marketplace" className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-4">
-              <ShoppingCart className="w-3.5 h-3.5 text-primary" />
-              <span className="text-xs text-primary tracking-wider uppercase font-medium">AI Marketplace</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Products & Tools</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Every product is built and battle-tested inside Red Vision's own operation. 
-              From a free player to full agency kits — built with Qwen 3 and the best models available.
-            </p>
-          </div>
-
-          {/* Category filter */}
-          <div className="flex gap-2 flex-wrap justify-center mb-12">
-            {CATEGORIES.map(cat => (
-              <button key={cat} onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25' : 'bg-secondary text-muted-foreground hover:text-foreground border border-border'}`}>
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Product grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filtered.map(product => {
-              const Icon = product.icon;
-              return (
-                <div key={product.id}
-                  className={`relative bg-card border rounded-2xl p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${product.highlight ? 'border-primary shadow-lg shadow-primary/15' : 'border-border hover:border-primary/30'}`}>
-                  {product.highlight && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full tracking-wide">
-                      MOST POPULAR
-                    </div>
-                  )}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center border"
-                      style={{ background: `${product.color}18`, borderColor: `${product.color}30` }}>
-                      <Icon className="w-6 h-6" style={{ color: product.color }} />
-                    </div>
-                    <span className="text-[10px] font-bold tracking-wider px-2 py-1 rounded-full border"
-                      style={{ color: product.color, borderColor: `${product.color}30`, background: `${product.color}12` }}>
-                      {product.badge}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-lg mb-1">{product.name}</h3>
-                  <p className="text-xs text-muted-foreground/70 mb-2 tracking-wide">{product.tagline}</p>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">{product.desc}</p>
-                  <ul className="space-y-1.5 mb-5">
-                    {product.features.map(f => (
-                      <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <CheckCircle className="w-3.5 h-3.5 shrink-0" style={{ color: product.color }} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto">
-                    <div className="flex items-baseline gap-1 mb-3">
-                      <span className="text-2xl font-bold">{product.price}</span>
-                      <span className="text-xs text-muted-foreground">{product.priceNote}</span>
-                    </div>
-                    <a href={product.href} target={product.href.startsWith('http') ? '_blank' : undefined}
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 rounded-xl text-sm font-semibold text-center block transition-all hover:opacity-90"
-                      style={{ background: product.color, color: '#fff' }}>
-                      {product.cta}
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── AI SERVICES ──────────────────────────────────────────────────── */}
-      <section className="py-24 px-4 bg-secondary/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Consulting Services</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Done-for-you AI implementation. We've spent 3 years building our own AI infrastructure — now we build yours.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <div key={i} className="bg-card border border-border hover:border-primary/30 rounded-2xl p-8 transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl">
-                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors">{s.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-          <div className="text-center mt-12">
-            <a href="https://rv-ai-agency.netlify.app" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all">
-              View Full Agency Services <ExternalLink className="w-4 h-4" />
+          <div className="flex gap-4 justify-center flex-wrap mb-20">
+            <a href="https://wd6ype73psnk2.mocha.app" target="_blank" rel="noreferrer"
+              className="group px-8 py-4 bg-red-600 text-white rounded-full font-black text-lg hover:bg-red-500 hover:scale-105 hover:shadow-[0_0_50px_rgba(229,25,42,0.4)] transition-all flex items-center gap-3">
+              Start a Project <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a href="#products" className="px-8 py-4 glass rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-2">
+              <Play className="w-4 h-4" /> See Our Work
             </a>
           </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            {[{n:"6",l:"AI Agents"},{n:"15+",l:"Years Industry"},{n:"8",l:"Divisions"},{n:"24/7",l:"Always On"}].map((s,i) => (
+              <div key={s.l} className="glass-card rounded-2xl p-5 text-center" style={{animation:`float ${5+i}s ease-in-out infinite`,animationDelay:`${i*0.5}s`}}>
+                <div className="text-3xl font-black text-red-500 mb-1">{s.n}</div>
+                <div className="text-xs text-white/30 uppercase tracking-widest font-mono">{s.l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── QWEN SHOWCASE ────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 border-t border-border">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full mb-6">
-            <Star className="w-3.5 h-3.5 text-purple-400" />
-            <span className="text-xs text-purple-400 tracking-wider uppercase font-medium">Powered by Qwen 3</span>
+      {/* PRODUCTS */}
+      <section id="products" className="py-32 px-6 relative">
+        <div className="orb w-[500px] h-[500px] bg-purple-700/8 top-0 right-0" />
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <span className="tag text-red-400 block mb-4">What We've Built</span>
+            <h2 className="text-5xl md:text-7xl font-black mb-6">Live <span className="text-red-500">Products.</span></h2>
+            <p className="text-white/30 text-xl max-w-xl mx-auto font-light">Every tool below is live and being used right now. This is what we build for clients.</p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Built with the <span className="text-primary">Most Powerful</span> Models Available
-          </h2>
-          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-            We don't use one AI — we route every task to the best model for the job. 
-            Qwen 3, Claude, GPT-4, Gemini, DeepSeek. The AI Starter Kit gives you access to the same infrastructure.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {['Qwen 3', 'Claude', 'GPT-4', 'Gemini', 'DeepSeek'].map(m => (
-              <div key={m} className="bg-card border border-border rounded-xl py-3 text-center">
-                <div className="text-sm font-semibold text-foreground">{m}</div>
-                <div className="text-[10px] text-muted-foreground mt-0.5">Integrated</div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((p, i) => (
+              <div key={p.name} id={`p${i}`} data-observe
+                className={`product-card rounded-3xl p-8 flex flex-col relative overflow-hidden ${visible.has(`p${i}`) ? 'visible-anim' : 'hidden-anim'}`}
+                style={{transitionDelay:`${i*0.08}s`,border:`1px solid ${p.color}18`}}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${p.grad}`} />
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="tag text-xs px-3 py-1.5 rounded-full" style={{background:`${p.color}18`,color:p.color,border:`1px solid ${p.color}28`}}>{p.tag}</span>
+                    <div className="w-2 h-2 rounded-full animate-pulse" style={{background:p.color,boxShadow:`0 0 8px ${p.color}`}} />
+                  </div>
+                  <h3 className="text-2xl font-black mb-3" style={{color:p.color}}>{p.name}</h3>
+                  <p className="text-white/40 text-sm leading-relaxed flex-1 mb-8 font-light">{p.desc}</p>
+                  <a href={p.link} target="_blank" rel="noreferrer"
+                    className="group flex items-center justify-between p-4 rounded-2xl transition-all"
+                    style={{background:`${p.color}12`,border:`1px solid ${p.color}22`}}
+                    onMouseEnter={e=>(e.currentTarget.style.background=`${p.color}22`)}
+                    onMouseLeave={e=>(e.currentTarget.style.background=`${p.color}12`)}>
+                    <span className="text-sm font-bold" style={{color:p.color}}>Launch App</span>
+                    <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" style={{color:p.color}} />
+                  </a>
+                </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-32 px-6 relative" style={{background:'linear-gradient(180deg,#050505 0%,#080208 50%,#050505 100%)'}}>
+        <div className="orb w-[400px] h-[400px] bg-red-700/8 bottom-0 left-0" />
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <span className="tag text-red-400 block mb-4">Services</span>
+            <h2 className="text-5xl md:text-7xl font-black mb-6">Every Service. <span className="text-white/15">One Team.</span></h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((svc, i) => {
+              const Icon = svc.icon;
+              return (
+                <div key={svc.title} id={`s${i}`} data-observe
+                  className={`glass-card rounded-2xl p-6 group ${visible.has(`s${i}`) ? 'visible-anim' : 'hidden-anim'}`}
+                  style={{transitionDelay:`${i*0.06}s`}}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-110"
+                      style={{background:`${svc.color}12`,border:`1px solid ${svc.color}28`}}>
+                      <Icon className="w-5 h-5" style={{color:svc.color}} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="tag text-xs" style={{color:svc.color}}>{svc.tag}</span>
+                      </div>
+                      <h3 className="font-bold text-base mb-2">{svc.title}</h3>
+                      <p className="text-white/35 text-sm leading-relaxed font-light">{svc.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-32 px-6 relative overflow-hidden">
+        <div className="orb w-[800px] h-[400px] bg-red-700/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="relative max-w-4xl mx-auto">
+          <div className="running-border rounded-3xl">
+            <div className="glass rounded-3xl p-16 text-center" style={{background:'rgba(5,5,5,0.95)'}}>
+              <Zap className="w-10 h-10 text-red-500 mx-auto mb-6" />
+              <span className="tag text-red-400 block mb-6">Ready to Build?</span>
+              <h2 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
+                Your Vision.<br /><span className="shimmer-red">Our Technology.</span>
+              </h2>
+              <p className="text-white/35 text-lg mb-10 max-w-xl mx-auto font-light">Tell us what you're building. We'll tell you exactly how AI and custom software can make it real.</p>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <a href="https://wd6ype73psnk2.mocha.app" target="_blank" rel="noreferrer"
+                  className="px-10 py-5 bg-red-600 text-white rounded-full font-black text-lg hover:bg-red-500 hover:scale-105 hover:shadow-[0_0_60px_rgba(229,25,42,0.4)] transition-all flex items-center gap-3">
+                  Book a Call with Jason <ArrowRight className="w-5 h-5" />
+                </a>
+                <a href="https://rv-ai-agency.netlify.app" target="_blank" rel="noreferrer"
+                  className="px-10 py-5 glass rounded-full font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-3">
+                  See Agency Plans <ChevronRight className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

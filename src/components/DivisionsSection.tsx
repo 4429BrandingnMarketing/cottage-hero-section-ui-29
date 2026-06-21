@@ -1,4 +1,4 @@
-import { Music, Video, Radio, Cpu, Shirt, FileText } from 'lucide-react';
+import { Music, Video, Radio, Cpu, Shirt, FileText, GraduationCap, PenTool, ShoppingBag, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const DivisionsSection = () => {
@@ -50,6 +50,38 @@ const DivisionsSection = () => {
       color: "from-gold to-orange-600",
       highlights: ["Cultural analysis", "Artist spotlights", "AI-enhanced content"],
       link: "/divisions/blog"
+    },
+    {
+      name: "Red Vision University",
+      icon: GraduationCap,
+      description: "Music industry education built on 15+ years of real experience. Tour management, AI for music, label operations, and music business. Learn from someone who's actually done it.",
+      color: "from-purple-500 to-indigo-600",
+      highlights: ["Tour Management (PIVOT)", "AI for Music", "Label Operations"],
+      link: "/divisions/university"
+    },
+    {
+      name: "Scripts N Scribbles",
+      icon: PenTool,
+      description: "Books, guides, and written works from the Red Vision family. From the PIVOT tour management bible to the AI Playbook — real knowledge from real experience.",
+      color: "from-yellow-500 to-amber-600",
+      highlights: ["PIVOT Book ($27)", "AI Playbook", "Cultural Writing"],
+      link: "/divisions/scripts"
+    },
+    {
+      name: "Red Vision Merch",
+      icon: ShoppingBag,
+      description: "Official merchandise from every Red Vision division. Powered by Printful — premium print-on-demand apparel and accessories shipped worldwide.",
+      color: "from-pink-500 to-rose-600",
+      highlights: ["All divisions represented", "Printful powered", "Ships worldwide"],
+      link: "/divisions/merch"
+    },
+    {
+      name: "4429 Lifestyle + Marketing",
+      icon: Megaphone,
+      description: "AI-powered full-service marketing agency. Social media, SEO, campaigns, website design, YouTube, music production, merch design, app development — all run by specialized AI agents.",
+      color: "from-orange-500 to-red-500",
+      highlights: ["6 AI Agents On Staff", "Full service marketing", "Lease our agents"],
+      link: "/divisions/agency"
     }
   ];
 

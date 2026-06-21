@@ -1,43 +1,58 @@
 import { motion } from 'framer-motion';
 
 const stats = [
-  { value: '25+', label: 'Years in the Industry' },
-  { value: '100+', label: 'Artists Worked With' },
-  { value: '6', label: 'Business Divisions' },
+  { value: '27+', label: 'Years in the Industry' },
   { value: 'Grammy', label: 'Affiliated Label' },
+  { value: '9', label: 'Business Divisions' },
+  { value: '1999', label: 'Started With Will Smith' },
 ];
 
 const collaborators = [
-  'Kanye West', 'Jay-Z', 'Beyoncé', 'Bruno Mars',
-  'Justin Bieber', 'Ne-Yo', 'Keyshia Cole', 'Lupe Fiasco',
-  'James Fauntleroy', 'Virgil Abloh', 'Don C', 'Nigo',
+  'Will Smith', 'Jay-Z', 'Keyshia Cole', 'Lupe Fiasco',
+  'Kanye West', 'Pharrell', 'Rihanna', 'Justin Bieber',
+  'Scooter Braun', 'James Fauntleroy', 'Ne-Yo', 'Luke Christopher',
 ];
 
 const timeline = [
   {
     year: '1999',
     title: 'The Beginning',
-    desc: 'Entered the music industry at the ground level — learning the business from the inside out across touring, production, and artist development.',
+    desc: "Entered the music industry as an intern, brought in by his close friend Rashad \"RED\" Liston who worked at Will Smith's company. Promoted to executive within 3 months.",
+  },
+  {
+    year: 'In Memoriam',
+    title: 'Rashad "RED" Liston',
+    desc: "Rashad passed away from AIDS at 24, when Jason was 20. His mother asked Jason to keep their company and his legacy alive. Red Vision carries his name and his vision forward.",
+  },
+  {
+    year: '2003',
+    title: 'Keyshia Cole & Groove Theory',
+    desc: "Discovered Keyshia Cole, began working with Bryce Wilson of Groove Theory, and consulted with producer Brandon Howard on Ne-Yo's first album.",
+  },
+  {
+    year: '2005',
+    title: 'Jay-Z & Lupe Fiasco',
+    desc: "Partnered with Jay-Z to co-executive produce Lupe Fiasco's debut album. Formed 1500 or Nothin', Lupe's band, which went on to tour with Kanye West, Pharrell, and Rihanna.",
+  },
+  {
+    year: '2008',
+    title: 'Bieber & Scooter Braun',
+    desc: "Cara Lewis introduced him to Scooter Braun. The two partnered together on Justin Bieber and Asher Roth.",
   },
   {
     year: '2012',
-    title: 'Breaking Through',
-    desc: 'Running with Virgil Abloh and Lupe Fiasco since 2005 — before Louis Vuitton, before the world knew. Also built with Don C and Nigo. Connected with Hardy Blechman of Maharishi in London.',
+    title: 'Luke Christopher & James Fauntleroy',
+    desc: "Began managing RCA artist Luke Christopher, signed to Mark Pitts' ByStorm, and started working with James Fauntleroy.",
   },
   {
-    year: '2016',
-    title: '1500 or Nothin\'',
-    desc: 'Joined the legendary collective behind hits for Kanye, Jay-Z, Beyoncé, Bruno Mars, and Justin Bieber. A pivotal moment in the journey.',
-  },
-  {
-    year: '2000',
-    title: 'Red Vision Music Founded',
-    desc: 'Founded Red Vision Music with his close friend Rashad "RED" Liston — the name Red Vision is a direct tribute to him. Rashad later passed away from AIDS. His memory and vision live on in everything Red Vision represents.',
+    year: '2020',
+    title: 'Beat Bangers & AI',
+    desc: "During COVID, partnered with Chicago music legend Shorty Capone and his Beat Bangers imprint, bringing in rapper King Fatz and Grammy producer Xcellence. Began building an AI-powered label and lifestyle agency together.",
   },
   {
     year: '2024',
     title: 'Red Vision Creative Studio',
-    desc: 'Expanded into a full multi-division entertainment company: music, luxury fashion, satirical media, AI, podcast, radio, and merchandise.',
+    desc: "Expanded into a full multi-division entertainment and technology company: music, AI, radio, TV, luxury fashion, satirical media, education, and merchandise.",
   },
 ];
 
@@ -394,7 +409,7 @@ const AboutSection = () => {
                 lineHeight: 1.5,
                 marginBottom: '24px',
               }}>
-                "I didn't just want to work in the industry. I wanted to build something that outlasts it."
+                From intern to executive in three months. From major label rooms to building his own.
               </p>
               <p style={{
                 fontFamily: 'Garamond, serif',
@@ -403,7 +418,7 @@ const AboutSection = () => {
                 color: '#8b7355',
                 textTransform: 'uppercase',
               }}>
-                — Jason Salvador, Founder
+                Jason Salvador, Founder
               </p>
             </div>
 
