@@ -26,11 +26,13 @@ import PivotTourSystem from "./pages/PivotTourSystem";
 import AIServices from "./pages/divisions/AIServices";
 import AIPricing from "./pages/divisions/AIPricing";
 import AIConsulting from "./pages/divisions/AIConsulting";
+import TragicMulatto from "./pages/divisions/TragicMulatto";
+import ScriptsPage from "./pages/divisions/Scripts";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -58,6 +60,7 @@ const App = () => (
             <Route path="/divisions/merch" element={<Merch />} />
             <Route path="/pivot-book" element={<PivotBook />} />
             <Route path="/pivot-tour" element={<PivotTourSystem />} />
+            <Route path="/divisions/tragic-mulatto" element={<TragicMulatto />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
