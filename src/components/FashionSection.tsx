@@ -46,7 +46,7 @@ const FashionSection = () => {
           {/* Image / Visual */}
           <div className="aspect-[4/5] rounded-3xl overflow-hidden border-4 border-[#8b7355] relative group">
             <img
-              src="/images/fashion/hero-main.jpg"
+              src="/images/fashion/collection-1.jpg"
               alt="GiFTD N' PrVLGD - Luxury Fashion"
               className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
