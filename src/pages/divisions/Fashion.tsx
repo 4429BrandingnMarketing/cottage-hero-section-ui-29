@@ -62,24 +62,8 @@ export default function FashionPage() {
               </div>
             </div>
             <div className="fa-up" style={{animationDelay:'0.2s',position:'relative'}}>
-              <div style={{position:'absolute',inset:-24,background:'radial-gradient(ellipse,rgba(212,175,112,0.16) 0%,transparent 70%)',borderRadius:40,filter:'blur(20px)',pointerEvents:'none'}} />
-              <div className="fa-glass-warm fa-float" style={{borderRadius:32,padding:40,position:'relative',overflow:'hidden'}}>
-                <div style={{position:'absolute',top:0,left:0,right:0,height:1,background:'linear-gradient(90deg,transparent,rgba(212,175,112,0.3),transparent)'}} />
-                <div style={{position:'absolute',top:0,left:0,bottom:0,width:1,background:'linear-gradient(180deg,rgba(212,175,112,0.15),transparent)'}} />
-                <div style={{textAlign:'center',marginBottom:28}}>
-                  <div className="fa-display" style={{fontSize:52,lineHeight:0.9,marginBottom:8}}>
-                    <span style={{background:'linear-gradient(135deg,#D4AF70,#F5D98B)',WebkitBackgroundClip:'text',backgroundClip:'text',WebkitTextFillColor:'transparent'}}>GN'P</span>
-                  </div>
-                  <div className="fa-tag" style={{color:'rgba(212,175,112,0.5)',fontSize:9,letterSpacing:'0.3em'}}>HARLEM RENAISSANCE EDITION</div>
+                    <img src="/images/fashion/hero-main.jpg" alt="GiFTD N' PrVLGD - Hero Image" style={{width:'100%',borderRadius:'20px'}} />
                 </div>
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:24}}>
-                  {['Luxury','Limited','Heritage','Culture'].map(l=>(<div key={l} style={{background:'rgba(212,175,112,0.07)',border:'1px solid rgba(212,175,112,0.14)',borderRadius:12,padding:'14px',textAlign:'center'}}><div className="fa-tag" style={{color:'rgba(212,175,112,0.6)',fontSize:8}}>{l}</div></div>))}
-                </div>
-                <div style={{borderTop:'1px solid rgba(212,175,112,0.1)',paddingTop:20,textAlign:'center'}}>
-                  <div className="fa-serif" style={{color:'rgba(212,175,112,0.5)',fontSize:14,fontStyle:'italic',letterSpacing:'0.04em'}}>"Not for everyone. For the right ones."</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
