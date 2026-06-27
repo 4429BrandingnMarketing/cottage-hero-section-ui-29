@@ -2,19 +2,35 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-const PIECES = [
-  { name:'The Harlem Coat', desc:'Limited edition structured overcoat. Inspired by the power and elegance of the Harlem Renaissance.', tag:'OUTERWEAR · LIMITED' },
-  { name:'Renaissance Blazer', desc:'Tailored perfection. Every stitch a tribute to the artists, thinkers, and visionaries of the movement.', tag:'TAILORING · SIGNATURE' },
-  { name:'GiFTD Tee Series', desc:'The foundation of the line. Clean, premium, unmistakably intentional. For those who move different.', tag:'ESSENTIALS · ONGOING' },
-  { name:'PrVLGD Accessories', desc:'Statement pieces that speak before you do. Handcrafted with the same attention the Renaissance demanded.', tag:'ACCESSORIES · SEASONAL' },
+
+interface FashionPiece {
+  name: string;
+  desc: string;
+  tag: string;
+  image: string;
+}
+
+const PIECES: FashionPiece[] = [
+  { name: 'The Harlem Coat', desc: 'Limited edition structured overcoat. Inspired by the power and elegance of the Harlem Renaissance.', tag: 'OUTERWEAR · LIMITED', image: '/images/fashion/collection-1.jpg' },
+  { name: 'Renaissance Blazer', desc: 'Tailored perfection. Every stitch a tribute to the artists, thinkers, and visionaries of the movement.', tag: 'TAILORING · SIGNATURE', image: '/images/fashion/collection-2.jpg' },
+  { name: 'GiFTD Tee Series', desc: 'The foundation of the line. Clean, premium, unmistakably intentional. For those who move different.', tag: 'ESSENTIALS · ONGOING', image: '/images/fashion/collection-1.jpg' },
+  { name: 'PrVLGD Accessories', desc: 'Statement pieces that speak before you do. Handcrafted with the same attention the Renaissance demanded.', tag: 'ACCESSORIES · SEASONAL', image: '/images/fashion/collection-2.jpg' },
 ];
+
 export default function FashionPage() {
-  const [mouse, setMouse] = useState({ x:0.5, y:0.5 });
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
   const [tick, setTick] = useState(0);
-  useEffect(()=>{const h=(e:MouseEvent)=>setMouse({x:e.clientX/window.innerWidth,y:e.clientY/window.innerHeight});window.addEventListener('mousemove',h);return()=>window.removeEventListener('mousemove',h);},[]);
-  useEffect(()=>{const id=setInterval(()=>setTick(t=>t+1),50);return()=>clearInterval(id);},[]);
+  useEffect(() => {
+    const h = (e: MouseEvent) => setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    window.addEventListener('mousemove', h);
+    return () => window.removeEventListener('mousemove', h);
+  }, []);
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 50);
+    return () => clearInterval(id);
+  }, []);
   return (
-    <div style={{minHeight:'100vh',background:'#020202',color:'#fff',overflowX:'hidden',fontFamily:"'DM Sans',sans-serif"}}>
+    <div style={{ minHeight: '100vh', background: '#020202', color: '#fff', overflowX: 'hidden', fontFamily: "'DM Sans',sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700;900&family=DM+Mono:wght@400;500&family=Cormorant+Garamond:wght@300;400;600&display=swap');
         *{box-sizing:border-box}
@@ -37,50 +53,53 @@ export default function FashionPage() {
         .fa-float{animation:fa-float 7s ease-in-out infinite}
       `}</style>
       <Navbar />
-      <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'center',overflow:'hidden',paddingTop:80}}>
-        <div className="fa-orb" style={{width:700,height:700,background:'radial-gradient(circle,rgba(212,175,112,0.12) 0%,transparent 70%)',top:-200,right:-100,animation:'fa-o1 20s ease-in-out infinite'}} />
-        <div className="fa-orb" style={{width:500,height:500,background:'radial-gradient(circle,rgba(139,69,19,0.08) 0%,transparent 70%)',bottom:-100,left:-200,animation:'fa-o2 16s ease-in-out infinite'}} />
-        <div className="fa-grid" style={{position:'absolute',inset:0}} />
-        <div style={{position:'absolute',inset:0,pointerEvents:'none',background:`radial-gradient(700px circle at ${mouse.x*100}% ${mouse.y*100}%, rgba(212,175,112,0.06), transparent 60%)`}} />
-        <div style={{position:'relative',zIndex:10,maxWidth:1200,width:'100%',margin:'0 auto',padding:'0 32px'}}>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 400px',gap:60,alignItems:'center'}}>
+      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: 80 }}>
+        <div className="fa-orb" style={{ width: 700, height: 700, background: 'radial-gradient(circle,rgba(212,175,112,0.12) 0%,transparent 70%)', top: -200, right: -100, animation: 'fa-o1 20s ease-in-out infinite' }} />
+        <div className="fa-orb" style={{ width: 500, height: 500, background: 'radial-gradient(circle,rgba(139,69,19,0.08) 0%,transparent 70%)', bottom: -100, left: -200, animation: 'fa-o2 16s ease-in-out infinite' }} />
+        <div className="fa-grid" style={{ position: 'absolute', inset: 0 }} />
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `radial-gradient(700px circle at ${mouse.x * 100}% ${mouse.y * 100}%, rgba(212,175,112,0.06), transparent 60%)` }} />
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: 1200, width: '100%', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 60, alignItems: 'center' }}>
             <div className="fa-up">
-              <Link to="/" style={{display:'inline-flex',alignItems:'center',gap:8,color:'rgba(255,255,255,0.28)',textDecoration:'none',marginBottom:40,fontSize:13}}>← Back to Red Vision</Link>
-              <div className="fa-glass" style={{display:'inline-flex',alignItems:'center',gap:10,borderRadius:100,padding:'9px 20px',marginBottom:28}}>
-                <div style={{width:6,height:6,borderRadius:'50%',background:'#D4AF70'}} />
-                <span className="fa-tag" style={{color:'#D4AF70'}}>Luxury Fashion · Harlem Renaissance Edition</span>
+              <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.28)', textDecoration: 'none', marginBottom: 40, fontSize: 13 }}>← Back to Red Vision</Link>
+              <div className="fa-glass" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, borderRadius: 100, padding: '9px 20px', marginBottom: 28 }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF70' }} />
+                <span className="fa-tag" style={{ color: '#D4AF70' }}>Luxury Fashion · Harlem Renaissance Edition</span>
               </div>
-              <h1 className="fa-display" style={{lineHeight:0.85,marginBottom:10}}>
-                <span className="fa-shimmer" style={{display:'block',fontSize:'clamp(52px,8vw,96px)'}}>GiFTD N'</span>
-                <span className="fa-shimmer" style={{display:'block',fontSize:'clamp(52px,8vw,96px)'}}>PrVLGD</span>
+              <h1 className="fa-display" style={{ lineHeight: 0.85, marginBottom: 10 }}>
+                <span className="fa-shimmer" style={{ display: 'block', fontSize: 'clamp(52px,8vw,96px)' }}>GiFTD N'</span>
+                <span className="fa-shimmer" style={{ display: 'block', fontSize: 'clamp(52px,8vw,96px)' }}>PrVLGD</span>
               </h1>
-              <p className="fa-serif" style={{color:'rgba(212,175,112,0.7)',fontSize:20,fontStyle:'italic',marginBottom:14,letterSpacing:'0.02em'}}>Harlem Renaissance Edition</p>
-              <p style={{color:'rgba(255,255,255,0.38)',fontSize:15,lineHeight:1.85,maxWidth:460,marginBottom:40,fontWeight:300}}>A luxury fashion label born from the spirit of the Harlem Renaissance — where art, culture, and identity became the most powerful statement anyone could make. GiFTD N' PrVLGD is for those who carry that same fire.</p>
-              <div style={{display:'flex',gap:14,flexWrap:'wrap'}}>
-                <button style={{display:'inline-flex',alignItems:'center',gap:10,padding:'14px 32px',borderRadius:100,background:'linear-gradient(135deg,#D4AF70,#A07D40)',color:'#000',fontWeight:900,fontSize:14,border:'none',cursor:'pointer',boxShadow:'0 6px 36px rgba(212,175,112,0.35)',fontFamily:"'DM Sans',sans-serif"}}>Shop the Collection</button>
-                <button style={{display:'inline-flex',alignItems:'center',gap:10,padding:'14px 32px',borderRadius:100,background:'rgba(212,175,112,0.07)',color:'#D4AF70',fontWeight:700,fontSize:14,border:'1px solid rgba(212,175,112,0.22)',cursor:'pointer',fontFamily:"'DM Sans',sans-serif"}}>Our Story</button>
+              <p className="fa-serif" style={{ color: 'rgba(212,175,112,0.7)', fontSize: 20, fontStyle: 'italic', marginBottom: 14, letterSpacing: '0.02em' }}>Harlem Renaissance Edition</p>
+              <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: 15, lineHeight: 1.85, maxWidth: 460, marginBottom: 40, fontWeight: 300 }}>A luxury fashion label born from the spirit of the Harlem Renaissance — where art, culture, and identity became the most powerful statement anyone could make. GiFTD N' PrVLGD is for those who carry that same fire.</p>
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <button style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 32px', borderRadius: 100, background: 'linear-gradient(135deg,#D4AF70,#A07D40)', color: '#000', fontWeight: 900, fontSize: 14, border: 'none', cursor: 'pointer', boxShadow: '0 6px 36px rgba(212,175,112,0.35)', fontFamily: "'DM Sans',sans-serif" }}>Shop the Collection</button>
+                <button style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 32px', borderRadius: 100, background: 'rgba(212,175,112,0.07)', color: '#D4AF70', fontWeight: 700, fontSize: 14, border: '1px solid rgba(212,175,112,0.22)', cursor: 'pointer', fontFamily: "'DM Sans',sans-serif" }}>Our Story</button>
               </div>
             </div>
-            <div className="fa-up" style={{animationDelay:'0.2s',position:'relative'}}>
-                    <img src="/images/fashion/hero-main.jpg" alt="GiFTD N' PrVLGD - Hero Image" style={{width:'100%',borderRadius:'20px'}} />
-                </div>
+            <div className="fa-up" style={{ animationDelay: '0.2s', position: 'relative' }}>
+              <img src="/images/fashion/hero-main.jpg" alt="GiFTD N' PrVLGD - Hero Image" style={{ width: '100%', borderRadius: '20px' }} />
+            </div>
           </div>
         </div>
       </section>
-      <section style={{padding:'110px 32px 130px',position:'relative'}}>
-        <div style={{maxWidth:1200,margin:'0 auto'}}>
-          <div style={{textAlign:'center',marginBottom:56}}>
-            <span className="fa-tag" style={{color:'#D4AF70',display:'block',marginBottom:14}}>The Collection</span>
-            <h2 className="fa-display" style={{fontSize:'clamp(48px,7vw,76px)',lineHeight:0.9}}>THE <span style={{color:'#D4AF70'}}>PIECES.</span></h2>
-            <div style={{width:60,height:1,background:'linear-gradient(90deg,transparent,#D4AF70,transparent)',margin:'20px auto 0'}} />
+      <section style={{ padding: '110px 32px 130px', position: 'relative' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <span className="fa-tag" style={{ color: '#D4AF70', display: 'block', marginBottom: 14 }}>The Collection</span>
+            <h2 className="fa-display" style={{ fontSize: 'clamp(48px,7vw,76px)', lineHeight: 0.9 }}>THE <span style={{ color: '#D4AF70' }}>PIECES.</span></h2>
+            <div style={{ width: 60, height: 1, background: 'linear-gradient(90deg,transparent,#D4AF70,transparent)', margin: '20px auto 0' }} />
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18}}>
-            {PIECES.map(p=>(<div key={p.name} className="fa-card" style={{borderRadius:22,padding:28}}>
-              <div style={{height:2,background:'linear-gradient(90deg,#D4AF70,transparent)',borderRadius:100,marginBottom:20}} />
-              <span className="fa-tag" style={{color:'rgba(212,175,112,0.5)',fontSize:9,display:'block',marginBottom:12}}>{p.tag}</span>
-              <h3 style={{fontWeight:900,fontSize:20,marginBottom:10,lineHeight:1.2}}>{p.name}</h3>
-              <p style={{color:'rgba(255,255,255,0.38)',fontSize:13,lineHeight:1.7,fontWeight:300}}>{p.desc}</p>
-            </div>))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 18 }}>
+            {PIECES.map(p => (
+              <div key={p.name} className="fa-card" style={{ borderRadius: 22, padding: 28 }}>
+                <img src={p.image} alt={p.name} style={{ width: '100%', borderRadius: 12, marginBottom: 16 }} />
+                <div style={{ height: 2, background: 'linear-gradient(90deg,#D4AF70,transparent)', borderRadius: 100, marginBottom: 20 }} />
+                <span className="fa-tag" style={{ color: 'rgba(212,175,112,0.5)', fontSize: 9, display: 'block', marginBottom: 12 }}>{p.tag}</span>
+                <h3 style={{ fontWeight: 900, fontSize: 20, marginBottom: 10, lineHeight: 1.2 }}>{p.name}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: 13, lineHeight: 1.7, fontWeight: 300 }}>{p.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
