@@ -1,4 +1,3 @@
-redirectsOrigin = "config"
 plugins = []
 headers = []
 
@@ -7,10 +6,10 @@ headers = []
 [functions."*"]
 
 [build]
-publish = "/Users/redvisioncreativestudioimac/Desktop/cottage-hero-section-ui-29/dist"
-publishOrigin = "ui"
-commandOrigin = "ui"
-command = "pnpm run build"
+publish = "/Users/redvisioncreativestudioimac/RedVision-HQ/cottage-hero-section-ui-29/public"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "echo \"No build step\""
 
 [build.environment]
 
