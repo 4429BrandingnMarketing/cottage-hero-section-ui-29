@@ -78,7 +78,7 @@ export default function FashionPage() {
               </div>
             </div>
             <div className="fa-up" style={{ animationDelay: '0.2s', position: 'relative' }}>
-              <img src="/images/fashion/hero-main.jpg" alt="GiFTD N' PrVLGD - Hero Image" style={{ width: '100%', borderRadius: '20px' }} />
+              <img src="/images/fashion/harlem-women.png" alt="GiFTD N' PrVLGD - Harlem Renaissance Women" style={{ width: '100%', borderRadius: '20px' }} />
             </div>
           </div>
         </div>
