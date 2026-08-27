@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+
 
 const SERVICES = [
   { icon: Target, title: 'AI-Powered Campaigns', desc: 'Data-driven ad campaigns that target your ideal audience with precision across every platform.', color: '#b89144' },
@@ -361,7 +363,11 @@ export default function Marketing() {
                   <Send className="w-4 h-4" />
                   {submitStatus === 'sending' ? 'Booking...' : 'Book Free Strategy Call →'}
                 </button>
+                {submitError && (
+                  <p className="text-center text-sm text-destructive">{submitError}</p>
+                )}
                 <p className="text-center text-xs text-muted-foreground/50">
+
                   By submitting you agree to receive communications from #4429 Agency. Unsubscribe anytime.
                 </p>
               </form>
