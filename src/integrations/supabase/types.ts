@@ -504,6 +504,36 @@ export type Database = {
         }
         Relationships: []
       }
+      marketing_leads: {
+        Row: {
+          budget: string | null
+          company: string | null
+          created_at: string
+          email: string
+          goals: string
+          id: string
+          name: string
+        }
+        Insert: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          goals: string
+          id?: string
+          name: string
+        }
+        Update: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          goals?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       marketing_services: {
         Row: {
           created_at: string | null
