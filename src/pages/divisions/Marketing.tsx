@@ -63,12 +63,27 @@ export default function Marketing() {
   const [activeTab, setActiveTab] = useState('Overview');
   const [formData, setFormData] = useState({ name:'', email:'', company:'', budget:'$500–$1,000', goals:'' });
   const [submitStatus, setSubmitStatus] = useState<'idle'|'sending'|'done'>('idle');
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('sending');
-    setTimeout(() => setSubmitStatus('done'), 1500);
+    setSubmitError('');
+    const { error } = await supabase.from('marketing_leads').insert({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      company: formData.company.trim() || null,
+      budget: formData.budget,
+      goals: formData.goals.trim(),
+    });
+    if (error) {
+      setSubmitError("We couldn't send that. Please try again or email us directly.");
+      setSubmitStatus('idle');
+      return;
+    }
+    setSubmitStatus('done');
   };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
