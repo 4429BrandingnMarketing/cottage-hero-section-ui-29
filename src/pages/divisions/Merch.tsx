@@ -20,18 +20,26 @@ const STORE_COLORS: Record<string, string> = {
 
 const PRINTFUL_BASE = "https://www.printful.com";
 
+// Live product feed endpoint. Set VITE_MERCH_API_URL to your deployed HQ API
+// (e.g. https://api.redvisioncreativestudio.com) to enable the live catalog.
+const MERCH_API = import.meta.env.VITE_MERCH_API_URL ?? "";
+
 const Merch = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(MERCH_API));
   const [filter, setFilter] = useState("all");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(
+    MERCH_API ? "" : "Our live catalog is being restocked — shop the full range on Printful.",
+  );
 
   useEffect(() => {
-    fetch("http://localhost:3030/api/merch?store=all")
+    if (!MERCH_API) return;
+    fetch(`${MERCH_API}/api/merch?store=all`)
       .then(r => r.json())
       .then(d => { setProducts(d.products || []); setLoading(false); })
       .catch(() => { setError("Could not load live products."); setLoading(false); });
   }, []);
+
 
   const stores = ["all", ...Array.from(new Set(products.map(p => p.store)))];
   const filtered = filter === "all" ? products : products.filter(p => p.store === filter);

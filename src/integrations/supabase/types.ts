@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.5"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
@@ -339,6 +339,144 @@ export type Database = {
         }
         Relationships: []
       }
+      hq_agent_memory: {
+        Row: {
+          agent_id: string
+          created_at: string | null
+          id: string
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          agent_id: string
+          created_at?: string | null
+          id?: string
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          agent_id?: string
+          created_at?: string | null
+          id?: string
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      hq_conversations: {
+        Row: {
+          agent_id: string
+          content: string
+          created_at: string | null
+          device: string | null
+          id: string
+          role: string
+        }
+        Insert: {
+          agent_id: string
+          content: string
+          created_at?: string | null
+          device?: string | null
+          id?: string
+          role: string
+        }
+        Update: {
+          agent_id?: string
+          content?: string
+          created_at?: string | null
+          device?: string | null
+          id?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      hq_notes: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          division: string | null
+          id: string
+          tags: string[] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          division?: string | null
+          id?: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          division?: string | null
+          id?: string
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      hq_store: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      hq_tasks: {
+        Row: {
+          assigned_agent: string | null
+          created_at: string | null
+          description: string | null
+          division: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_agent?: string | null
+          created_at?: string | null
+          description?: string | null
+          division?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_agent?: string | null
+          created_at?: string | null
+          description?: string | null
+          division?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       marketing_benefits: {
         Row: {
           benefit: string
@@ -363,6 +501,36 @@ export type Database = {
           link?: string | null
           order_index?: number
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      marketing_leads: {
+        Row: {
+          budget: string | null
+          company: string | null
+          created_at: string
+          email: string
+          goals: string
+          id: string
+          name: string
+        }
+        Insert: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          goals: string
+          id?: string
+          name: string
+        }
+        Update: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          goals?: string
+          id?: string
+          name?: string
         }
         Relationships: []
       }
@@ -750,6 +918,14 @@ export type Database = {
     }
     Functions: {
       check_my_admin_role: { Args: never; Returns: boolean }
+      check_my_staff_role: { Args: never; Returns: boolean }
+      grant_admin_access: {
+        Args: {
+          p_email: string
+          p_role: Database["public"]["Enums"]["app_role"]
+        }
+        Returns: Json
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -757,6 +933,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      list_admin_access: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }[]
+      }
+      revoke_admin_access: { Args: { p_email: string }; Returns: Json }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"

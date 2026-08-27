@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+
 
 const SERVICES = [
   { icon: Target, title: 'AI-Powered Campaigns', desc: 'Data-driven ad campaigns that target your ideal audience with precision across every platform.', color: '#b89144' },
@@ -63,12 +65,27 @@ export default function Marketing() {
   const [activeTab, setActiveTab] = useState('Overview');
   const [formData, setFormData] = useState({ name:'', email:'', company:'', budget:'$500–$1,000', goals:'' });
   const [submitStatus, setSubmitStatus] = useState<'idle'|'sending'|'done'>('idle');
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('sending');
-    setTimeout(() => setSubmitStatus('done'), 1500);
+    setSubmitError('');
+    const { error } = await supabase.from('marketing_leads').insert({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      company: formData.company.trim() || null,
+      budget: formData.budget,
+      goals: formData.goals.trim(),
+    });
+    if (error) {
+      setSubmitError("We couldn't send that. Please try again or email us directly.");
+      setSubmitStatus('idle');
+      return;
+    }
+    setSubmitStatus('done');
   };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -346,7 +363,11 @@ export default function Marketing() {
                   <Send className="w-4 h-4" />
                   {submitStatus === 'sending' ? 'Booking...' : 'Book Free Strategy Call →'}
                 </button>
+                {submitError && (
+                  <p className="text-center text-sm text-destructive">{submitError}</p>
+                )}
                 <p className="text-center text-xs text-muted-foreground/50">
+
                   By submitting you agree to receive communications from #4429 Agency. Unsubscribe anytime.
                 </p>
               </form>
