@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import Seo from "./components/Seo";
 import Index from "./pages/Index";
 import RedVisionMusic from "./pages/RedVisionMusic";
 import Admin from "./pages/Admin";
@@ -38,6 +39,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <Seo />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/music" element={<RedVisionMusic />} />
