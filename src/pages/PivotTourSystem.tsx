@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle, Shield, Users, BarChart3, Calendar, CreditCard, Download, Zap, Crown, Lock, HelpCircle, ExternalLink } from 'lucide-react';
+import { ArrowRight, CheckCircle, Shield, Users, BarChart3, Calendar, CreditCard, Download, Zap, Crown, Lock, HelpCircle, ExternalLink, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
