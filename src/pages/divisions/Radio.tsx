@@ -4,8 +4,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 // ─── STREAM URL ──────────────────────────────────────────────────────────────
-// Replace this with your actual Zeno.fm / Radio.co / IceCast stream URL
-const STREAM_URL = '';
+// Set VITE_RADIO_STREAM_URL (Zeno.fm / Radio.co / IceCast) to go live.
+// Until then the player shows the schedule instead of a broken play button.
+const STREAM_URL = import.meta.env.VITE_RADIO_STREAM_URL ?? '';
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SHOWS = [
