@@ -58,8 +58,9 @@ export default function ScriptsPage() {
 
   // Poll job status
   useEffect(() => {
-    if (!jobId) return;
+    if (!jobId || !HQ) return;
     const iv = setInterval(async () => {
+
       try {
         const r = await fetch(`${HQ}/api/book/pipeline/status/${jobId}`);
         const d = await r.json();
@@ -75,12 +76,14 @@ export default function ScriptsPage() {
   }, [jobId]);
 
   const loadJobs = async () => {
+    if (!HQ) return;
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/jobs`);
       const d = await r.json();
       setAllJobs(d.jobs || []);
     } catch(e) {}
   };
+
 
   const startPipeline = async () => {
     if (!topic.trim()) return;
