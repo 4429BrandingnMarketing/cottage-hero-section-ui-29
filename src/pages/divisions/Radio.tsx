@@ -194,7 +194,7 @@ export default function RadioPage() {
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
               <div className="glass" style={{ display: 'flex', alignItems: 'center', gap: 10, borderRadius: 100, padding: '10px 20px' }}>
                 <div className="live-pulse" style={{ width: 8, height: 8, borderRadius: '50%', background: '#C0392B', flexShrink: 0 }} />
-                <span className="tag" style={{ color: '#C0392B' }}>Broadcasting 24/7 · Los Angeles</span>
+                <span className="tag" style={{ color: '#C0392B' }}>{STREAM_URL ? 'Broadcasting 24/7 · Los Angeles' : 'Launching soon · Los Angeles'}</span>
               </div>
             </div>
 
@@ -234,7 +234,7 @@ export default function RadioPage() {
               }}
               onMouseEnter={e => { if (!playing) (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.04)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; }}>
-              {loading ? '⏳ Connecting...' : playing ? '⏸ Pause Stream' : '▶ Tune In Live'}
+              {!STREAM_URL ? '📅 See the Show Schedule' : loading ? '⏳ Connecting...' : playing ? '⏸ Pause Stream' : '▶ Tune In Live'}
             </button>
           </div>
 
@@ -260,7 +260,7 @@ export default function RadioPage() {
                   </div>
                 </div>
                 <div className="tag" style={{ background: 'rgba(192,57,43,0.15)', color: '#C0392B', border: '1px solid rgba(192,57,43,0.3)', padding: '6px 14px', borderRadius: 100 }}>
-                  {playing ? '● ON AIR' : '○ OFFLINE'}
+                  {playing ? '● ON AIR' : STREAM_URL ? '○ OFFLINE' : '○ LAUNCHING SOON'}
                 </div>
               </div>
 
@@ -291,7 +291,7 @@ export default function RadioPage() {
                 color: playing ? '#C0392B' : '#fff', transition: 'all 0.3s', fontFamily: "'DM Sans', sans-serif",
                 boxShadow: playing ? 'inset 0 0 30px rgba(192,57,43,0.1)' : '0 4px 30px rgba(192,57,43,0.35)'
               }}>
-                {loading ? 'CONNECTING TO SIGNAL...' : playing ? '⏸  PAUSE STREAM' : '▶  LISTEN LIVE'}
+                {!STREAM_URL ? 'SEE THE SHOW SCHEDULE' : loading ? 'CONNECTING TO SIGNAL...' : playing ? '⏸  PAUSE STREAM' : '▶  LISTEN LIVE'}
               </button>
 
               {/* Frequency display */}
@@ -356,7 +356,7 @@ export default function RadioPage() {
               }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.04)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; }}>
-              {playing ? '⏸ Pause' : '▶ Tune In Now'}
+              {!STREAM_URL ? '📅 See the Schedule' : playing ? '⏸ Pause' : '▶ Tune In Now'}
             </button>
           </div>
         </div>
