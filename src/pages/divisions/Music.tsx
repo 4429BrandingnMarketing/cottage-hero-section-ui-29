@@ -68,7 +68,7 @@ export default function MusicPage() {
               </h1>
               <p style={{color:'rgba(255,255,255,0.38)',fontSize:16,lineHeight:1.8,maxWidth:480,marginBottom:40,fontWeight:300}}>Founded by Jason Salvador — who discovered Keyshia Cole at 19, co-founded 1500 or Nothin' with Jay-Z, and partnered with Scooter Braun on Justin Bieber. Now reimagining the independent label with AI at its core.</p>
               <div style={{display:'flex',gap:14,flexWrap:'wrap'}}>
-                <a href="https://open.spotify.com" target="_blank" rel="noreferrer" style={{display:'inline-flex',alignItems:'center',gap:10,padding:'14px 32px',borderRadius:100,background:'linear-gradient(135deg,#C9A84C,#9A7A2E)',color:'#000',fontWeight:900,fontSize:14,textDecoration:'none',boxShadow:'0 6px 36px rgba(201,168,76,0.4)',fontFamily:"'DM Sans',sans-serif"}}>♫ Stream Our Artists</a>
+                <a href="https://open.spotify.com/search/Red%20Vision%20Music" target="_blank" rel="noreferrer" style={{display:'inline-flex',alignItems:'center',gap:10,padding:'14px 32px',borderRadius:100,background:'linear-gradient(135deg,#C9A84C,#9A7A2E)',color:'#000',fontWeight:900,fontSize:14,textDecoration:'none',boxShadow:'0 6px 36px rgba(201,168,76,0.4)',fontFamily:"'DM Sans',sans-serif"}}>♫ Stream Our Artists</a>
               </div>
             </div>
             <div className="mu-up" style={{animationDelay:'0.2s',display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
