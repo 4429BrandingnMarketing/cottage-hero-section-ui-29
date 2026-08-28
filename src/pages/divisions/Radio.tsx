@@ -4,8 +4,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 // ─── STREAM URL ──────────────────────────────────────────────────────────────
-// Replace this with your actual Zeno.fm / Radio.co / IceCast stream URL
-const STREAM_URL = '';
+// Set VITE_RADIO_STREAM_URL (Zeno.fm / Radio.co / IceCast) to go live.
+// Until then the player shows the schedule instead of a broken play button.
+const STREAM_URL = import.meta.env.VITE_RADIO_STREAM_URL ?? '';
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SHOWS = [
@@ -93,9 +95,11 @@ export default function RadioPage() {
 
   const handlePlay = async () => {
     if (!STREAM_URL) {
-      alert('Stream URL not configured yet. Check back soon!');
+      // No live stream configured yet — send listeners to the show schedule.
+      document.getElementById('shows')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
+
     setLoading(true);
     await initAudio();
     if (playing) {
@@ -302,7 +306,7 @@ export default function RadioPage() {
       </section>
 
       {/* ════════════ SHOW SCHEDULE ════════════ */}
-      <section style={{ padding: '120px 32px', position: 'relative' }}>
+      <section id="shows" style={{ padding: '120px 32px', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent, rgba(192,57,43,0.03) 50%, transparent)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 

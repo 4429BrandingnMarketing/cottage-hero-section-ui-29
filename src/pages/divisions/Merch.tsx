@@ -20,9 +20,10 @@ const STORE_COLORS: Record<string, string> = {
 
 const PRINTFUL_BASE = "https://www.printful.com";
 
-// Live product feed endpoint. Set VITE_MERCH_API_URL to your deployed HQ API
-// (e.g. https://api.redvisioncreativestudio.com) to enable the live catalog.
-const MERCH_API = import.meta.env.VITE_MERCH_API_URL ?? "";
+// Live product feed endpoint. Override with VITE_MERCH_API_URL if the HQ API
+// moves; defaults to the production Red Vision domain.
+const MERCH_API = import.meta.env.VITE_MERCH_API_URL ?? "https://redvisioncreativestudio.com";
+
 
 const Merch = () => {
   const [products, setProducts] = useState<Product[]>([]);
