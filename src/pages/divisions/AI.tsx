@@ -268,7 +268,7 @@ export default function AIPage() {
                     </div>
                   ))}
                 </div>
-                <button style={{ width:'100%', padding:'14px', borderRadius:14, border:'none', cursor:'pointer', fontWeight:900, fontSize:14, fontFamily:"'DM Sans',sans-serif", background: t.featured ? 'linear-gradient(135deg,#7C3AED,#4F46E5)' : 'rgba(124,58,237,0.1)', color: t.featured ? '#fff' : '#A78BFA', border: t.featured ? 'none' : '1px solid rgba(124,58,237,0.3)', boxShadow: t.featured ? '0 4px 24px rgba(124,58,237,0.4)' : 'none', transition:'all 0.3s' }}>
+                <button style={{ width:'100%', padding:'14px', borderRadius:14, cursor:'pointer', fontWeight:900, fontSize:14, fontFamily:"'DM Sans',sans-serif", background: t.featured ? 'linear-gradient(135deg,#7C3AED,#4F46E5)' : 'rgba(124,58,237,0.1)', color: t.featured ? '#fff' : '#A78BFA', border: t.featured ? 'none' : '1px solid rgba(124,58,237,0.3)', boxShadow: t.featured ? '0 4px 24px rgba(124,58,237,0.4)' : 'none', transition:'all 0.3s' }}>
                   Get Started
                 </button>
               </div>

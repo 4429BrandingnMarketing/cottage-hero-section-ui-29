@@ -58,8 +58,9 @@ export default function ScriptsPage() {
 
   // Poll job status
   useEffect(() => {
-    if (!jobId) return;
+    if (!jobId || !HQ) return;
     const iv = setInterval(async () => {
+
       try {
         const r = await fetch(`${HQ}/api/book/pipeline/status/${jobId}`);
         const d = await r.json();
@@ -75,6 +76,7 @@ export default function ScriptsPage() {
   }, [jobId]);
 
   const loadJobs = async () => {
+    if (!HQ) return;
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/jobs`);
       const d = await r.json();
@@ -82,9 +84,12 @@ export default function ScriptsPage() {
     } catch(e) {}
   };
 
+
   const startPipeline = async () => {
     if (!topic.trim()) return;
+    if (!HQ) { alert('The writing pipeline is not configured for this environment.'); return; }
     setLaunching(true);
+
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/start`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -99,7 +104,9 @@ export default function ScriptsPage() {
 
   const writeChapter = async () => {
     if (!chTitle.trim()) return;
+    if (!HQ) { setChResult('The writing pipeline is not configured for this environment.'); return; }
     setChLoading(true); setChResult('');
+
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/quick-chapter`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },

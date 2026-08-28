@@ -181,7 +181,8 @@ const Admin = () => {
   const addTrack = async () => {
     const { error } = await supabase
       .from('tracks')
-      .insert([newTrack]);
+      .insert([{ title: newTrack.title, artist: newTrack.artist, plays: newTrack.streams }]);
+
 
     if (error) {
       toast({ title: "Error", description: "Failed to add track", variant: "destructive" });

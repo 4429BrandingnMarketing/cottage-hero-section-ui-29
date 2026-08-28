@@ -146,7 +146,7 @@ const AIPricing = () => {
 
           <div className="mt-10">
             <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-6 py-2">
-              {['monthly', 'annual'].map((period) => (
+              {(['monthly', 'annual'] as const).map((period) => (
                 <button
                   key={period}
                   onClick={() => setBilling(period)}
