@@ -95,9 +95,11 @@ export default function RadioPage() {
 
   const handlePlay = async () => {
     if (!STREAM_URL) {
-      alert('Stream URL not configured yet. Check back soon!');
+      // No live stream configured yet — send listeners to the show schedule.
+      document.getElementById('shows')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
+
     setLoading(true);
     await initAudio();
     if (playing) {
