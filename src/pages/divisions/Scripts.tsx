@@ -87,7 +87,9 @@ export default function ScriptsPage() {
 
   const startPipeline = async () => {
     if (!topic.trim()) return;
+    if (!HQ) { alert('The writing pipeline is not configured for this environment.'); return; }
     setLaunching(true);
+
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/start`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -102,7 +104,9 @@ export default function ScriptsPage() {
 
   const writeChapter = async () => {
     if (!chTitle.trim()) return;
+    if (!HQ) { setChResult('The writing pipeline is not configured for this environment.'); return; }
     setChLoading(true); setChResult('');
+
     try {
       const r = await fetch(`${HQ}/api/book/pipeline/quick-chapter`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
