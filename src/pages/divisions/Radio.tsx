@@ -306,7 +306,7 @@ export default function RadioPage() {
       </section>
 
       {/* ════════════ SHOW SCHEDULE ════════════ */}
-      <section style={{ padding: '120px 32px', position: 'relative' }}>
+      <section id="shows" style={{ padding: '120px 32px', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent, rgba(192,57,43,0.03) 50%, transparent)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 

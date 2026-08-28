@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-// Book pipeline API. Set VITE_HQ_API_URL to your deployed HQ endpoint to
-// enable the writing tools; the public store works without it.
-const HQ = import.meta.env.VITE_HQ_API_URL ?? '';
+// Book pipeline API. Override with VITE_HQ_API_URL if the HQ API moves;
+// defaults to the production Red Vision domain.
+const HQ = import.meta.env.VITE_HQ_API_URL ?? 'https://redvisioncreativestudio.com';
+
 
 
 const BOOKS = [
